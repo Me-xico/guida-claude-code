@@ -48,6 +48,7 @@ nav:
   - Riferimento:
       - 14 · Must-have e costi: 14-must-have-e-costi.md
       - 15 · Risparmiare token: 15-risparmiare-token.md
+      - 16 · Un setup reale: 16-setup-a-tre-livelli.md
 
 plugins:
   - search
@@ -82,6 +83,7 @@ plugins:
             10 · Workflow frontend: 10 · Frontend workflow
             14 · Must-have e costi: 14 · Must-haves and costs
             15 · Risparmiare token: 15 · Saving tokens
+            16 · Un setup reale: 16 · A real-world setup
 
 markdown_extensions:
   - admonition

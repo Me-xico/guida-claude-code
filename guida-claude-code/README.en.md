@@ -42,6 +42,7 @@ look once this guide starts to age.
 
 14. [Must-haves and costs](14-must-have-e-costi.md) - the first 30 minutes of setup, the plans, the money-saving habits
 15. [Saving tokens](15-risparmiare-token.md) - the tools for longer work windows on the Pro plan
+16. [A real setup: global, per client, per repo](16-setup-a-tre-livelli.md) - how the author actually organizes it, three levels at a time
 
 ## What you need to follow along
 

@@ -41,6 +41,7 @@ fonte da consultare quando questa guida invecchierà.
 
 14. [Must-have e costi](14-must-have-e-costi.md) - il setup dei primi 30 minuti, i piani, le abitudini di risparmio
 15. [Risparmiare token](15-risparmiare-token.md) - gli strumenti per finestre di lavoro più lunghe sul piano Pro
+16. [Un setup reale](16-setup-a-tre-livelli.md) - globale, per cliente, per repo: dove si può arrivare
 
 ## Cosa ti serve per seguirla
 
