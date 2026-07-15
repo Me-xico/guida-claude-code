@@ -40,6 +40,10 @@ home della guida. Se hai solo trenta secondi, leggi il capitolo
 [Verifica](https://me-xico.github.io/guida-claude-code/11-verifica.html): se
 ne leggi uno solo, è quello.
 
+### Licenza
+
+[CC BY 4.0](LICENSE): riusa, traduci, adatta — citando la fonte.
+
 ---
 
 ## English
@@ -78,3 +82,7 @@ The [reading path](https://me-xico.github.io/guida-claude-code/en/) is on the
 guide's home page. Got thirty seconds? Read the
 [Verification](https://me-xico.github.io/guida-claude-code/en/11-verifica.html)
 chapter — if you only read one, make it that one.
+
+### License
+
+[CC BY 4.0](LICENSE): reuse, translate, adapt — with attribution.

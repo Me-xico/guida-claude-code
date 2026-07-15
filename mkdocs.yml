@@ -1,5 +1,6 @@
 site_name: Guida a Claude Code
 site_description: Da zero a produttivo — verificato luglio 2026, v2.1.210
+copyright: '© 2026 Me-xico · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>'
 docs_dir: guida-claude-code
 site_dir: guida-claude-code-sito
 use_directory_urls: false

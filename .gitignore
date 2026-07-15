@@ -3,6 +3,7 @@
 !/mkdocs.yml
 !/.gitignore
 !/README.md
+!/LICENSE
 guida-claude-code/slides.html
 guida-claude-code/build-slides.py
 guida-claude-code/SANITIZE.md
