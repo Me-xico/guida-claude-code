@@ -1,7 +1,7 @@
 # 02 — Setup e configurazione
 
 > Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
-> Esempio vivo: la cartella [`demo/`](demo/) di questa guida contiene un
+> Esempio vivo: il progetto d'esempio `demo/` di questa guida contiene un
 > progetto React/TS con `CLAUDE.md` e `.claude/settings.json` reali.
 
 La configurazione di Claude Code ruota attorno a tre cose: **dove** stanno i
@@ -52,7 +52,7 @@ usare, quali hook eseguire. Lo crei tu a mano (o lo fa `/permissions` quando
 salvi una regola dal pannello); non esiste finché qualcuno non lo scrive.
 
 **Come si scrive.** Questo è il file **completo** del progetto demo,
-[`demo/.claude/settings.json`](demo/.claude/settings.json):
+`demo/.claude/settings.json`:
 
 ```json
 {
@@ -168,7 +168,7 @@ va qui, così non devi ripeterlo a ogni sessione.
   lì dentro (utile nei monorepo)
 
 **Come si scrive.** È markdown libero: niente schema, niente campi
-obbligatori. Questo è il [`demo/CLAUDE.md`](demo/CLAUDE.md) completo, un
+obbligatori. Questo è il `demo/CLAUDE.md` completo, un
 esempio realistico da progetto frontend:
 
 ```markdown
