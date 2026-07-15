@@ -17,7 +17,6 @@ fatto è controllato sulla documentazione ufficiale.
 |---|---|
 | [`guida-claude-code/`](guida-claude-code/) | i capitoli (it + en), gli screenshot SVG, il progetto demo |
 | [`mkdocs.yml`](mkdocs.yml) | configurazione del sito (MkDocs Material, bilingue) |
-| [`.gitlab-ci.yml`](.gitlab-ci.yml) | CI pronta per un eventuale mirror GitLab Pages privato |
 
 ## Costruire il sito in locale
 
