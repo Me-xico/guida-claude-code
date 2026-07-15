@@ -3,6 +3,7 @@
 !/mkdocs.yml
 !/.gitlab-ci.yml
 !/.gitignore
+!/README.md
 guida-claude-code/SANITIZE.md
 guida-claude-code/demo/.playwright-mcp/
 guida-claude-code/demo/.claude/settings.local.json
