@@ -45,14 +45,16 @@ ne leggi uno solo, è quello.
 ## English
 
 A hands-on guide to [Claude Code](https://code.claude.com/docs) for
-developers starting from scratch: 15 chapters that go from installation to a
-frontend workflow with a real browser, covering the method along the way
-(verification, prompt engineering, common mistakes) and how to extend the
-tool (skills, agents, hooks, MCP, plugins).
+developers who have never touched it. Fifteen chapters take you from
+installation to driving a real browser in your frontend workflow. Along the
+way you get the part that actually matters — how to verify Claude's work,
+how to ask for things so they get done, which mistakes everyone makes — and
+the machinery to shape the tool around your own habits: skills, agents,
+hooks, MCP, plugins.
 
-Written and verified in **July 2026 (Claude Code 2.1.210)**: every command
-was actually run, every screen is a real TUI capture, every fact was checked
-against the official documentation.
+Everything was written and checked in **July 2026 against Claude Code
+2.1.210**. The commands were run for real, the screenshots come straight
+from the TUI, and the facts were verified against the official docs.
 
 ### Repo layout
 

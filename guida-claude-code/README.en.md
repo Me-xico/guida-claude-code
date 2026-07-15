@@ -8,10 +8,11 @@ every action that matters. It's not a chat you copy code from, nor an
 autocomplete: it's a collaborator working in your repo, and this guide
 teaches you how to make it work **well**.
 
-Written and verified in **July 2026 (Claude Code 2.1.210)**: every command
-was actually run, every screenshot is real, and every fact is checked
-against the [official documentation](https://code.claude.com/docs), which
-remains the source to consult once this guide starts aging.
+Everything was written and checked in **July 2026 against Claude Code
+2.1.210**. The commands were run for real, the screenshots come straight
+from the TUI, and the facts were verified against the
+[official documentation](https://code.claude.com/docs) — still the place to
+look once this guide starts to age.
 
 ## How to read it
 
