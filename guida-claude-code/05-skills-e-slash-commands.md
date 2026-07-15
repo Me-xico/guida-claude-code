@@ -1,11 +1,11 @@
-# 05 — Skill e slash command
+# 05 - Skill e slash command
 
 > Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
 
 ## Cos'è una skill, a che serve
 
 Una skill è una **procedura confezionata**: una directory con dentro un file
-`SKILL.md` che spiega a Claude, passo passo, come si fa una cosa specifica —
+`SKILL.md` che spiega a Claude, passo passo, come si fa una cosa specifica:
 il check pre-release, il fix di una issue GitHub, qualunque routine che oggi
 rispiegate a voce.
 
@@ -34,9 +34,9 @@ Una skill è una directory che contiene almeno un `SKILL.md`:
 | Plugin | dentro il plugin (cap. 09) | distribuita con un plugin |
 | Monorepo | `apps/web/.claude/skills/…` | si attiva lavorando lì, o con `/apps/web:deploy` |
 
-La crei tu: a mano (è solo markdown) oppure — più comodo — chiedendo a Claude
+La crei tu: a mano (è solo markdown) oppure, più comodo, chiedendo a Claude
 di scrivertela (ci torniamo in fondo al capitolo). Non serve riavviare nulla:
-**le modifiche sono live** — salvi il file e la skill è già aggiornata nella
+**le modifiche sono live**, salvi il file e la skill è già aggiornata nella
 sessione in corso.
 
 Una skill non banale può avere anche materiale di supporto:
@@ -53,7 +53,7 @@ dettagli lunghi che non vuoi dentro `SKILL.md`, o script di appoggio.
 
 ## Come si scrive
 
-Un `SKILL.md` completo e minimale — frontmatter YAML tra i `---`, poi il
+Un `SKILL.md` completo e minimale: frontmatter YAML tra i `---`, poi il
 corpo in markdown:
 
 ```markdown
@@ -82,7 +82,7 @@ Sulla description vale la pena fermarsi, perché è il punto dove le skill
 falliscono. Claude non legge il corpo per decidere: legge *solo* la
 description. Quindi scrivici dentro tre cose: **cosa fa** la skill, **le
 frasi che devono attivarla** (letteralmente: "usala quando l'utente dice…"),
-e — per le skill delicate — **quando NON attivarla**. Una description vaga
+e, per le skill delicate, **quando NON attivarla**. Una description vaga
 produce una skill che non parte mai, o che parte a sproposito.
 
 ## Come funziona, passo passo
@@ -98,15 +98,15 @@ produce una skill che non parte mai, o che parte a sproposito.
 4. **Se il corpo rimanda a `references/`**, quei file vengono letti solo a
    quel punto: secondo livello di lazy loading.
 
-Le skill compaiono anche nel menu `/` accanto ai comandi built-in — è lo
+Le skill compaiono anche nel menu `/` accanto ai comandi built-in, lo
 stesso menu che hai visto nel cap. 03 (`assets/03-slash-menu.svg`): digiti
 `/` e le trovi lì, con la loro description come sottotitolo.
 
 Due frontmatter di controllo regolano *chi* può invocarla:
 
-- `disable-model-invocation: true` — solo tu puoi lanciarla, Claude non la
+- `disable-model-invocation: true`: solo tu puoi lanciarla, Claude non la
   attiva da solo. Giusto per azioni con effetti (deploy, commit).
-- `user-invocable: false` — l'inverso: solo Claude, sparisce dal menu `/`.
+- `user-invocable: false`: l'inverso, solo Claude, sparisce dal menu `/`.
 
 ## Argomenti e superpoteri del corpo
 
@@ -138,19 +138,19 @@ Invocazione: `/fix-issue 123 high`. Cosa succede, riga per riga:
 | `arguments: issue priority` | dichiara argomenti nominati: `123` finisce in `$issue`, `high` in `$priority` |
 | `argument-hint` | il suggerimento che vedi nel menu `/` mentre digiti |
 | `$issue`, `$priority` | sostituiti nel corpo prima che Claude lo legga (in alternativa: `$ARGUMENTS` per tutto, `$0`/`$1` per posizione) |
-| `` !`git status --short` `` | **iniezione dinamica**: il comando viene eseguito *prima* che Claude legga la skill e il suo output incollato lì — la skill parte già col contesto giusto (diff, status, log) senza sprecare turni |
+| `` !`git status --short` `` | **iniezione dinamica**: il comando viene eseguito *prima* che Claude legga la skill e il suo output incollato lì, così la skill parte già col contesto giusto (diff, status, log) senza sprecare turni |
 
 Altri frontmatter utili quando servono:
 
-- `allowed-tools: Bash(git add *) …` — pre-approva quei tool per la durata
+- `allowed-tools: Bash(git add *) …`: pre-approva quei tool per la durata
   della skill (niente richieste di permesso a metà procedura);
-- `model:` / `effort:` — la fanno girare su un modello o sforzo diverso;
-- `context: fork` — la esegue in un subagent, con contesto separato (cap. 06).
+- `model:` / `effort:`: la fanno girare su un modello o sforzo diverso;
+- `context: fork`: la esegue in un subagent, con contesto separato (cap. 06).
 
 ## E i vecchi slash command?
 
 `.claude/commands/nome.md` funziona ancora: stesso frontmatter, stessa
-invocazione `/nome`. Ma è il formato legacy — un file singolo, senza
+invocazione `/nome`. Ma è il formato legacy, un file singolo, senza
 `references/` né `assets/`. Se esistono entrambi con lo stesso nome, vince la
 skill. Per cose nuove usa le skill; i command esistenti non vanno riscritti,
 migrali solo quando ti serve la struttura in più.
@@ -164,7 +164,7 @@ imparare lo stile.
 Per crearne una tua, il flusso più pratico è: descrivi a Claude la procedura
 a voce ("quando faccio il release check, prima lancio la build, poi…") e
 chiedigli di scriverla come skill. Poi **affina la description** finché non
-scatta sulle frasi giuste — è un piccolo lavoro iterativo. Esiste anche il
+scatta sulle frasi giuste: è un piccolo lavoro iterativo. Esiste anche il
 plugin ufficiale `skill-creator`
 (`/plugin install skill-creator@claude-plugins-official`) che aggiunge test
 case e A/B delle description.

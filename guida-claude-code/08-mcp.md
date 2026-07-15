@@ -1,4 +1,4 @@
-# 08 — MCP: dare occhi e mani nuove a Claude
+# 08 - MCP: dare occhi e mani nuove a Claude
 
 > Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
 
@@ -13,10 +13,10 @@ aggiunge capacità che da solo non ha.
 
 Concretamente, un server può portare tre cose:
 
-- **tool** — azioni nuove che Claude può eseguire ("apri questa pagina nel
+- **tool**: azioni nuove che Claude può eseguire ("apri questa pagina nel
   browser", "elenca le issue di GitHub");
-- **risorse** — dati che tu puoi riferire in chat come fossero file;
-- **prompt** — comandi pronti che il server mette a disposizione.
+- **risorse**: dati che tu puoi riferire in chat come fossero file;
+- **prompt**: comandi pronti che il server mette a disposizione.
 
 I tool sono la parte che userai sempre; risorse e prompt sono bonus che
 vediamo più avanti.
@@ -26,7 +26,7 @@ vediamo più avanti.
 Il comando è `claude mcp add`, dal terminale (non in sessione). La forma
 cambia a seconda di *dove gira* il server.
 
-**Server locale (stdio)** — un processo che Claude Code avvia sulla tua
+**Server locale (stdio)**. Un processo che Claude Code avvia sulla tua
 macchina e con cui parla via stdin/stdout:
 
 ```bash
@@ -35,12 +35,12 @@ claude mcp add playwright -- npx -y @playwright/mcp@latest
 
 Leggiamolo pezzo per pezzo: `playwright` è il **nome** che dai tu al server
 (lo ritroverai ovunque: nei permessi, in `/mcp`, nei nomi dei tool); il
-`--` è un **separatore obbligatorio** — tutto ciò che sta a destra è il
+`--` è un **separatore obbligatorio**: tutto ciò che sta a destra è il
 comando che avvia il server, non opzioni di `claude mcp`; `npx -y
 @playwright/mcp@latest` è quel comando (il `-y` evita la conferma
 interattiva di npx, che bloccherebbe l'avvio automatico).
 
-**Server remoto (HTTP)** — un servizio che gira altrove, tipicamente
+**Server remoto (HTTP)**. Un servizio che gira altrove, tipicamente
 gestito dal fornitore; qui non c'è nessun processo da avviare, solo un URL:
 
 ```bash
@@ -51,7 +51,7 @@ claude mcp add --transport http figma https://mcp.figma.com/mcp
 *eseguire*; `figma` è di nuovo il nome scelto da te; l'URL è l'endpoint del
 servizio.
 
-**Gestione** — tre comandi da conoscere:
+**Gestione**: tre comandi da conoscere:
 
 ```bash
 claude mcp list      # tutti i server configurati, con stato di connessione
@@ -69,8 +69,8 @@ nulla: chiedi "apri la homepage e dimmi cosa vedi" e Claude sceglie il tool
 del server giusto, come sceglierebbe Read per un file.
 
 I server remoti spesso richiedono un login OAuth: dopo l'add appare
-"Needs authentication". Si risolve in sessione — `/mcp` → seleziona il
-server → Authenticate (si apre il browser per il login) — oppure da CLI
+"Needs authentication". Si risolve in sessione: `/mcp` → seleziona il
+server → Authenticate (si apre il browser per il login), oppure da CLI
 con `claude mcp login nome`.
 
 Il pannello `/mcp` è anche il cruscotto di controllo:
@@ -78,7 +78,7 @@ Il pannello `/mcp` è anche il cruscotto di controllo:
 ![Il pannello /mcp: server locali e connector claude.ai, con stato e numero di tool](assets/08-mcp-panel.svg)
 
 Cosa notare nella schermata: il pannello ha **due sezioni**. In alto i
-**Local MCPs**, cioè i server configurati da te su questa macchina — per
+**Local MCPs**, cioè i server configurati da te su questa macchina: per
 ciascuno vedi lo **stato** (connected o failed: la prima cosa da guardare
 quando "Claude non vede il browser") e il **numero di tool** che porta
 (qui Playwright connesso con 24 tool). Sotto, i **connector di claude.ai**:
@@ -99,7 +99,7 @@ averle configurate localmente.
 `local` e `user` vivono nella tua config personale, fuori dal repo: sono
 affari tuoi. `project` invece scrive un file **`.mcp.json` nella root del
 progetto**, pensato per essere committato: è così che si condivide lo
-stack col team — chi clona il repo si ritrova i server già configurati.
+stack col team. Chi clona il repo si ritrova i server già configurati.
 
 Ecco un `.mcp.json` completo:
 
@@ -122,15 +122,15 @@ argomenti (quello che sul terminale stava a destra del `--`).
 
 Due meccanismi di sicurezza legati a questo file. Primo: alla prima
 apertura del progetto, Claude Code ti mostra i server elencati e **chiede
-se ti fidi** — sono processi che gireranno sulla tua macchina con i tuoi
+se ti fidi**: sono processi che gireranno sulla tua macchina con i tuoi
 permessi, e il file l'ha scritto qualcun altro; la fiducia è meritata, non
 automatica. Secondo: nei valori puoi usare `${VAR}` o `${VAR:-default}`,
-espansi dall'ambiente al momento dell'avvio — le API key restano nelle
+espansi dall'ambiente al momento dell'avvio. Le API key restano nelle
 variabili d'ambiente di ciascuno, mai committate nel JSON.
 
 ## Come appaiono i tool a Claude
 
-Ogni tool MCP ha un nome con schema fisso: `mcp__server__tool` — ad
+Ogni tool MCP ha un nome con schema fisso: `mcp__server__tool`, ad
 esempio `mcp__github__list_issues` è il tool `list_issues` del server che
 hai chiamato `github`. Questo schema è utile soprattutto nei **permessi**
 (cap. 02), dove il wildcard ti permette di approvare un server intero in
@@ -142,12 +142,12 @@ un colpo:
 
 Un dubbio legittimo: dieci server per centinaia di tool non intasano il
 contesto? Dal 2026 no: gli schemi dei tool si caricano **on-demand**
-(tool search) — Claude vede l'elenco dei nomi, ma la definizione completa
+(tool search): Claude vede l'elenco dei nomi, ma la definizione completa
 di un tool entra nel contesto solo quando serve davvero.
 
 E i due bonus promessi all'inizio, spesso ignorati:
 
-- le **risorse** si riferiscono con `@server:protocollo://path` — ad
+- le **risorse** si riferiscono con `@server:protocollo://path`, ad
   esempio `@github:issue://123` porta quella issue nel contesto, con la
   stessa sintassi `@` che usi per i file (cap. 03);
 - i **prompt** dei server diventano slash command:
@@ -157,7 +157,7 @@ E i due bonus promessi all'inizio, spesso ignorati:
 ## Quali server, per un frontend dev
 
 I quattro che contano sono nel capitolo 10 (Playwright, Chrome DevTools,
-Figma, GitHub) — con il workflow completo. Qui la regola generale, che
+Figma, GitHub), con il workflow completo. Qui la regola generale, che
 vale per qualunque server: **ogni server è codice che gira con i tuoi
 permessi**. Quindi: aggiungi quello che usi, rimuovi quello che non usi
 (un `claude mcp list` ogni tanto come pulizia), fidati solo di fonti note.

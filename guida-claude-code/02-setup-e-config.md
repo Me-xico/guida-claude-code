@@ -1,4 +1,4 @@
-# 02 — Setup e configurazione
+# 02 - Setup e configurazione
 
 > Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
 > Esempio vivo: il progetto d'esempio `demo/` di questa guida contiene un
@@ -36,9 +36,9 @@ file locale, un flag CLI vale solo per quella sessione, e sopra tutto ci
 sono gli eventuali vincoli aziendali.
 
 La regola pratica per decidere dove scrivere una cosa: in
-`.claude/settings.json` le convenzioni di team (permessi, hook) — è
+`.claude/settings.json` le convenzioni di team (permessi, hook), è
 committato, quindi chi clona il repo se le ritrova; in
-`.claude/settings.local.json` i tuoi override personali su quel progetto —
+`.claude/settings.local.json` i tuoi override personali su quel progetto,
 Claude Code lo gitignora in automatico; in `~/.claude/settings.json` i
 default che vuoi su ogni progetto. I file si ricaricano **a caldo**: modifichi
 e la sessione in corso vede il cambiamento, senza riavviare (le uniche
@@ -81,10 +81,10 @@ dei file markdown, `Edit(.github/**)` le modifiche sotto `.github/`.
 
 Le liste sono tre, e rispondono a tre domande diverse:
 
-- `allow` — "fallo senza chiedermelo": niente prompt di conferma.
-- `deny` — "mai, in nessun caso": bloccato sempre, e **vince su tutto**
+- `allow`: "fallo senza chiedermelo", niente prompt di conferma.
+- `deny`: "mai, in nessun caso", bloccato sempre, e **vince su tutto**
   (anche su un `allow` che lo coprirebbe).
-- `ask` — "chiedimelo esplicitamente ogni volta".
+- `ask`: "chiedimelo esplicitamente ogni volta".
 
 **Come funziona in pratica.** Quando Claude sta per usare un tool, la
 richiesta viene confrontata con le regole: se matcha un `deny` viene
@@ -92,13 +92,13 @@ bloccata, se matcha un `allow` passa senza prompt, altrimenti si applica il
 permission mode corrente (sezione successiva). Il pattern più importante da
 copiare subito è **il deny sui segreti**: `.env` e simili non devono essere
 leggibili nemmeno per sbaglio. Nota come il deny della demo chiude entrambe
-le porte — il tool `Read` (le prime due regole) e la lettura via shell con
+le porte: il tool `Read` (le prime due regole) e la lettura via shell con
 `cat` (la terza). Bloccarne solo una lascerebbe l'altra aperta.
 
 C'è un momento in cui questo file ti passa davanti agli occhi: la prima
 volta che apri un progetto che contiene permessi pre-approvati, Claude Code
-te li elenca e ti chiede se ti fidi. È una tutela sensata — quel file arriva
-dal repo, cioè da altri — e questo è il trust dialog della nostra demo, con
+te li elenca e ti chiede se ti fidi. È una tutela sensata, quel file arriva
+dal repo, cioè da altri, e questo è il trust dialog della nostra demo, con
 le regole `allow` e `deny` viste sopra:
 
 ![Trust dialog con le permission pre-approvate del progetto](assets/02-trust-dialog.svg)
@@ -124,12 +124,12 @@ renderlo il default.
 | `plan` | solo letture: esplora e propone un piano, non tocca nulla |
 | `auto` | tutto, ma ogni azione passa da un classificatore di sicurezza; richiede modelli recenti e account abilitato |
 | `dontAsk` | solo ciò che è in `allow`, il resto è negato (per uso non interattivo) |
-| `bypassPermissions` | tutto senza controlli — **solo in container/VM isolate** |
+| `bypassPermissions` | tutto senza controlli: **solo in container/VM isolate** |
 
 **Come si presenta.** In `default` (Manual), ogni scrittura ti passa davanti
 prima di essere eseguita. Ecco la richiesta per la creazione di un file:
 nota che il prompt mostra il **diff completo** di quello che verrebbe
-scritto — decidi guardando il contenuto reale, non una descrizione — e che
+scritto, decidi guardando il contenuto reale, non una descrizione, e che
 tra le opzioni c'è la scorciatoia per passare direttamente ad `acceptEdits`
 se ti sei stancato di confermare ogni edit:
 
@@ -143,8 +143,8 @@ vengono mai auto-approvati: quelli te li chiede sempre.
 
 Per vedere e modificare le regole senza toccare il JSON a mano c'è il
 pannello `/permissions`. Qui sotto lo vedi aperto sul progetto demo: nota i
-tab in alto — **Allow / Ask / Deny / Workspace** (le tre liste, più le
-directory autorizzate) — e come le regole elencate siano esattamente quelle
+tab in alto, **Allow / Ask / Deny / Workspace** (le tre liste, più le
+directory autorizzate), e come le regole elencate siano esattamente quelle
 del `settings.json` visto sopra, con accanto il livello da cui provengono:
 
 ![Il pannello /permissions con le regole del progetto demo](assets/02-permissions-panel.svg)
@@ -153,18 +153,18 @@ del `settings.json` visto sopra, con accanto il livello da cui provengono:
 
 **Cos'è.** `CLAUDE.md` è il file di istruzioni che Claude legge all'inizio di
 ogni sessione: il documento di onboarding del progetto, scritto una volta e
-valido sempre. Tutto quello che diresti a un collega nuovo il primo giorno —
-quali comandi lanciare, quali convenzioni rispettare, dove stanno i test —
+valido sempre. Tutto quello che diresti a un collega nuovo il primo giorno,
+quali comandi lanciare, quali convenzioni rispettare, dove stanno i test,
 va qui, così non devi ripeterlo a ogni sessione.
 
 **Dove sta.** Come i settings, esiste a più livelli, caricati in ordine
 (l'approfondimento è nel cap. 04):
 
-- `~/.claude/CLAUDE.md` — le tue preferenze personali, valgono ovunque
-- `./CLAUDE.md` (o `.claude/CLAUDE.md`) — convenzioni del progetto, committato
-- `./CLAUDE.local.md` — note personali sul progetto, gitignorato
-- `.claude/rules/*.md` — regole **path-scoped** (sotto)
-- `CLAUDE.md` nelle sottocartelle — caricati on-demand, quando Claude lavora
+- `~/.claude/CLAUDE.md`: le tue preferenze personali, valgono ovunque
+- `./CLAUDE.md` (o `.claude/CLAUDE.md`): convenzioni del progetto, committato
+- `./CLAUDE.local.md`: note personali sul progetto, gitignorato
+- `.claude/rules/*.md`: regole **path-scoped** (sotto)
+- `CLAUDE.md` nelle sottocartelle: caricati on-demand, quando Claude lavora
   lì dentro (utile nei monorepo)
 
 **Come si scrive.** È markdown libero: niente schema, niente campi
@@ -192,7 +192,7 @@ componente, stile con CSS modules (niente styled-components).
 ```
 
 Nota la struttura: cosa è il progetto, i comandi (col *quando* usarli: "prima
-di dichiarare finito un task"), le convenzioni. Tienilo sotto ~200 righe —
+di dichiarare finito un task"), le convenzioni. Tienilo sotto ~200 righe,
 viene caricato a ogni sessione, e un CLAUDE.md chilometrico diluisce le
 istruzioni che contano.
 
@@ -202,7 +202,7 @@ Due meccanismi in più da conoscere:
   contesto. È ricorsivo (un file importato può importarne altri, fino a 4
   salti), utile per spezzare istruzioni lunghe in file tematici.
 - **Rules path-scoped**: i file in `.claude/rules/*.md` hanno un frontmatter
-  `paths:` con glob, e si attivano **solo quando Claude tocca quei file** —
+  `paths:` con glob, e si attivano **solo quando Claude tocca quei file**,
   a differenza del CLAUDE.md, che è sempre in contesto. Perfette per regole
   che riguardano solo una parte del codebase. Esistono anche a livello
   utente, in `~/.claude/rules/`.
@@ -224,7 +224,7 @@ sessione, senza aprire un editor:
 
 Il punto d'ingresso è `/config`: un pannello navigabile con i tab
 **Settings / Status / Config / Usage / Stats** e l'elenco filtrabile di
-tutte le impostazioni. Ecco come si presenta — nota che tra le voci c'è
+tutte le impostazioni. Ecco come si presenta: nota che tra le voci c'è
 anche il *Default permission mode* di cui abbiamo parlato, cambiabile da qui
 invece che nel JSON:
 
@@ -234,15 +234,15 @@ Due comandi meritano una menzione in più. `/init` è il modo giusto di
 iniziare su un progetto esistente: analizza il codebase e genera un primo
 CLAUDE.md, che poi rifinisci a mano. E `/doctor` non è solo diagnostica:
 propone anche tagli al CLAUDE.md quando cresce troppo e pre-approvazioni per
-i comandi che confermi sempre — due manutenzioni che altrimenti ti
+i comandi che confermi sempre, due manutenzioni che altrimenti ti
 dimenticheresti di fare.
 
 ## Variabili d'ambiente da conoscere
 
-- `CLAUDE_CONFIG_DIR` — sposta `~/.claude` altrove. Utile per tenere profili
+- `CLAUDE_CONFIG_DIR`: sposta `~/.claude` altrove. Utile per tenere profili
   completamente separati (lavoro/personale/test): ogni directory ha i suoi
   settings, le sue credenziali, i suoi CLAUDE.md.
-- `DISABLE_AUTOUPDATER=1` — disattiva il check di aggiornamento in
+- `DISABLE_AUTOUPDATER=1`: disattiva il check di aggiornamento in
   background. Va nella chiave `env` dei settings, che è il posto per le
   variabili d'ambiente che vuoi attive in ogni sessione.
 

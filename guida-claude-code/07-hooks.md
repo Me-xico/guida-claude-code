@@ -1,25 +1,25 @@
-# 07 — Hook: quando le regole smettono di essere consigli
+# 07 - Hook: quando le regole smettono di essere consigli
 
 > Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
 
 ## Cos'è un hook, a che serve
 
 Tutto quello che scrivi in CLAUDE.md è *advisory*: Claude lo segue quasi
-sempre — ma "quasi" non è "sempre". Un hook invece è **deterministico**: uno
+sempre, ma "quasi" non è "sempre". Un hook invece è **deterministico**: uno
 script che il *sistema* esegue a un evento preciso, ogni volta, che Claude lo
 voglia o no. L'analogia: CLAUDE.md è il cartello "si prega di timbrare", un
-hook è il **tornello** — non si passa senza. Regola di ripartizione:
+hook è il **tornello**: non si passa senza. Regola di ripartizione:
 preferenze e conoscenza → CLAUDE.md; **garanzie → hook**.
 
 Bonus non ovvio: un `deny` imposto da un hook `PreToolUse` vale anche in
-`bypassPermissions` — è l'unico guardrail che nessuna modalità scavalca.
+`bypassPermissions`: è l'unico guardrail che nessuna modalità scavalca.
 
 ## Dove sta e chi lo crea
 
 Gli hook si dichiarano nella chiave `"hooks"` dei `settings.json` che già
-conosci dal cap. 02 — utente (`~/.claude/settings.json`), progetto
-(`.claude/settings.json`, via git) o locale (`.claude/settings.local.json`)
-— e le definizioni **si sommano** tra i livelli. Li scrivi tu editando il
+conosci dal cap. 02: utente (`~/.claude/settings.json`), progetto
+(`.claude/settings.json`, via git) o locale (`.claude/settings.local.json`),
+e le definizioni **si sommano** tra i livelli. Li scrivi tu editando il
 JSON (o chiedendo a Claude di farlo); vengono caricati dal sistema, non dal
 modello.
 
@@ -61,7 +61,7 @@ Smontiamolo pezzo per pezzo:
 | `"type": "command"` | tipo di hook: un comando shell (vedi "Oltre gli script" per gli altri) |
 | `"command"` | lo script: legge il JSON dell'evento da stdin, `jq` ne estrae `.tool_input.file_path`, `xargs` lo passa a Prettier |
 
-Risultato: la CI non fallirà mai più per il formato — non perché Claude "si
+Risultato: la CI non fallirà mai più per il formato. Non perché Claude "si
 ricorda", ma perché non può succedere altrimenti.
 
 ## Come funziona, passo passo
@@ -96,27 +96,27 @@ ricorda", ma perché non può succedere altrimenti.
 
 ## Tre esempi ufficiali pronti all'uso
 
-**Proteggere i file che Claude non deve toccare** — `PreToolUse` con matcher
+**Proteggere i file che Claude non deve toccare**. `PreToolUse` con matcher
 `Edit|Write`: uno script che legge il `file_path` dallo stdin ed esce con `2`
 se matcha `.env`, `.git/` o `package-lock.json`. Il deny nei permessi
 (cap. 02) copre le letture; questo copre le scritture, con logica arbitraria
 perché lo script sei tu a scriverlo.
 
-**Notifica desktop quando serve il tuo ok** — `Notification` con matcher
+**Notifica desktop quando serve il tuo ok**. `Notification` con matcher
 `permission_prompt`: `notify-send` su Linux, `osascript` su macOS. Lanci un
 task lungo, vai a fare altro: ti chiama lui.
 
-**Regole che sopravvivono alla compattazione** — `SessionStart` con matcher
-`compact`: `echo 'Reminder: use Bun, not npm.'` — lo stdout viene iniettato
+**Regole che sopravvivono alla compattazione**. `SessionStart` con matcher
+`compact`: `echo 'Reminder: use Bun, not npm.'`, lo stdout viene iniettato
 nel contesto fresco (è il caso "exit 0 + stdout" del punto 4 qui sopra).
 
 ## Oltre gli script
 
 Il `type` non è solo `command`: esistono hook `prompt` (una chiamata a un
-modello piccolo che risponde `{"ok": true/false}` — "questo comando è
+modello piccolo che risponde `{"ok": true/false}`, "questo comando è
 pericoloso?"), `agent` (un subagent di verifica multi-turno, cap. 06) e
 `http` (webhook). E gli hook si possono definire anche nel frontmatter di
-skill e agenti — valgono solo mentre quelli sono attivi — e nei plugin
+skill e agenti, che valgono solo mentre quelli sono attivi, e nei plugin
 (cap. 09).
 
 ## Sicurezza

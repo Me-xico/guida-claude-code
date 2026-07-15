@@ -1,11 +1,11 @@
-# 06 — Agenti (subagent): a chi delegare
+# 06 - Agenti (subagent): a chi delegare
 
 > Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
 
 ## Cos'è un subagent, a che serve
 
 Un subagent è un **collaboratore usa-e-getta**: un'istanza di Claude che
-parte con un suo ruolo, i suoi tool e — soprattutto — un suo **contesto
+parte con un suo ruolo, i suoi tool e, soprattutto, un suo **contesto
 separato e pulito**. L'analogia: passi un task ben scritto a un collega, lui
 lavora alla *sua* scrivania, e ti riporta solo la sintesi. Le carte sparse
 restano da lui.
@@ -75,14 +75,14 @@ separato: più agenti che *scrivono* in parallelo senza pestarsi),
 1. Il main agent conosce gli agenti disponibili tramite le loro
    **description** (esattamente come per le skill: la description è il
    trigger della delega).
-2. Quando decide di delegare — da solo, o perché glielo chiedi — scrive un
+2. Quando decide di delegare (da solo, o perché glielo chiedi) scrive un
    **prompt di delega**: il task da svolgere.
 3. Il subagent parte con un contesto **nuovo**: il suo system prompt (il
    corpo del file), il prompt di delega, CLAUDE.md e la memoria. Non vede la
    tua conversazione.
 4. Lavora con i soli tool della sua allowlist; tutto l'output rumoroso
    (grep, log di test, file letti) resta nel *suo* contesto.
-5. Alla fine restituisce il messaggio conclusivo — la sintesi — che è
+5. Alla fine restituisce il messaggio conclusivo, la sintesi, che è
    l'unica cosa che entra nella tua sessione.
 
 Per invocarlo esplicitamente: nominalo nel prompt ("usa il code-reviewer sui
@@ -105,16 +105,16 @@ emergono comunque da te, non vengono auto-approvate.
 | CLAUDE.md e memoria | le skill invocate dal main |
 
 Conseguenza pratica, ed è l'errore classico: **il prompt di delega deve
-essere autosufficiente** — path esatti, vincoli, formato dell'output atteso.
-Dare per scontato che l'agente "sappia di cosa stavamo parlando" non
+essere autosufficiente**, con path esatti, vincoli, formato dell'output
+atteso. Dare per scontato che l'agente "sappia di cosa stavamo parlando" non
 funziona: non lo sa, e lavorerà su ipotesi sue.
 
 ## Quelli di serie
 
-- **Explore** — ricerche read-only nel codebase; usalo liberamente: è il modo
+- **Explore**: ricerche read-only nel codebase; usalo liberamente, è il modo
   standard di "capire dove sta X" senza sporcare il contesto.
-- **Plan** — la ricognizione che alimenta il plan mode (cap. 03).
-- **general-purpose** — tuttofare multi-step con tutti i tool.
+- **Plan**: la ricognizione che alimenta il plan mode (cap. 03).
+- **general-purpose**: tuttofare multi-step con tutti i tool.
 
 ## Quando NON usarli
 

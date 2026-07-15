@@ -1,4 +1,4 @@
-# 04 — CLAUDE.md e rules: le istruzioni permanenti
+# 04 - CLAUDE.md e rules: le istruzioni permanenti
 
 > Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
 > Esempio vivo: [`demo/CLAUDE.md`](demo/CLAUDE.md).
@@ -7,16 +7,16 @@
 
 **Cos'è**: il CLAUDE.md è quello che Claude sa del tuo progetto *prima* che
 tu scriva il primo prompt. L'analogia giusta è il documento di onboarding di
-un collega nuovo — con la differenza che Claude è un collega nuovo *a ogni
+un collega nuovo, con la differenza che Claude è un collega nuovo *a ogni
 sessione*: senza questo file riparte ogni volta da zero, riscopre i comandi,
 ridà nomi sbagliati alle cose, rifà gli stessi errori.
 
 **Dove sta**: è un normale file Markdown, `CLAUDE.md`, nella root del
-progetto. Lo crei tu — oppure lo genera `/init`, che analizza il codebase e
+progetto. Lo crei tu, oppure lo genera `/init`, che analizza il codebase e
 ne produce uno di partenza (buono, ma da potare subito: vedi sotto).
 
 **Come funziona**: all'avvio della sessione Claude Code lo cerca, lo carica
-nel contesto e ce lo tiene per tutta la sessione — è parte della "memoria"
+nel contesto e ce lo tiene per tutta la sessione: fa parte della "memoria"
 che hai visto nella griglia di `/context` (cap. 03). Nessuna magia: è testo
 che precede ogni tuo prompt. Da qui discendono le due regole del capitolo:
 ogni riga costa contesto, e ogni riga viene letta sempre.
@@ -25,7 +25,7 @@ ogni riga costa contesto, e ogni riga viene letta sempre.
 
 ## Cosa metterci (e cosa no)
 
-Il criterio: metti solo ciò che Claude **sbaglierebbe senza** —
+Il criterio: metti solo ciò che Claude **sbaglierebbe senza**:
 
 - i comandi del progetto (`npm run test`, `npm run lint`) e quando lanciarli
 - convenzioni non ovvie: "CSS modules, niente styled-components", "un
@@ -39,7 +39,7 @@ delle directory, l'elenco delle dipendenze, descrizioni generiche ("è
 un'app React"). È zavorra che consuma contesto e diluisce le regole vere.
 
 **Come si scrive**: guarda [`demo/CLAUDE.md`](demo/CLAUDE.md), il file reale
-del progetto demo di questa guida — una riga di inquadramento, i comandi con
+del progetto demo di questa guida: una riga di inquadramento, i comandi con
 il *quando* usarli, le convenzioni. Un assaggio:
 
 ```markdown
@@ -65,7 +65,7 @@ un'istruzione che cambia un comportamento.
 sbaglierebbe qualcosa?". Se no, tagliala. Obiettivo: **sotto le ~200 righe**.
 Il motivo non è estetico: i modelli seguono in modo affidabile un numero
 limitato di istruzioni, e in un CLAUDE.md gonfio le regole importanti
-annegano tra quelle inutili — il file smette di funzionare proprio dove
+annegano tra quelle inutili. Il file smette di funzionare proprio dove
 serviva. Da v2.1.206, `/doctor` propone lui stesso i tagli.
 
 ## Il pattern che rende il file vivo: il log degli errori
@@ -75,7 +75,7 @@ Claude sbaglia**. Il ciclo è questo:
 
 1. Claude sbaglia qualcosa (usa il comando deprecato, sbaglia il path degli
    asset).
-2. Lo correggi in chat — ma la correzione vive solo in *questa* sessione.
+2. Lo correggi in chat, ma la correzione vive solo in *questa* sessione.
 3. La travasi nel CLAUDE.md come riga permanente: "usa X, non Y (deprecato)".
 4. Da domani, nessuna sessione rifà quell'errore.
 
@@ -84,8 +84,8 @@ oggi che domani non dovrai rispiegare?". Dopo un mese hai un file che vale
 oro e che nessun `/init` potrebbe generare, perché codifica gli errori *del
 tuo* progetto.
 
-Per editarlo al volo senza uscire dalla sessione: `/memory` — elenca tutti i
-file di istruzioni caricati (CLAUDE.md ai vari livelli, rules) e te li apre
+Per editarlo al volo senza uscire dalla sessione c'è `/memory`: elenca tutti
+i file di istruzioni caricati (CLAUDE.md ai vari livelli, rules) e te li apre
 nell'editor.
 
 ## I livelli (ripasso dal cap. 02, con le regole d'uso)
@@ -108,9 +108,9 @@ della tua macchina → `CLAUDE.local.md` o il file utente.
 nel CLAUDE.md, come un `import` (ricorsivo, max 4 livelli). Serve a
 modularizzare: il file principale resta corto e le sezioni corpose vivono in
 file dedicati. Attenzione al caso speciale: se un import punta **fuori** dal
-progetto, Claude Code si ferma e chiede conferma — un CLAUDE.md malevolo in
-un repo di terzi potrebbe usare gli import per iniettarti istruzioni. Il
-dialog è questo, e su repo che non conosci la risposta è no:
+progetto, Claude Code si ferma e chiede conferma, perché un CLAUDE.md
+malevolo in un repo di terzi potrebbe usare gli import per iniettarti
+istruzioni. Il dialog è questo, e su repo che non conosci la risposta è no:
 
 ![Conferma per gli import esterni del CLAUDE.md](assets/04-import-dialog.svg)
 
@@ -118,7 +118,7 @@ dialog è questo, e su repo che non conosci la risposta è no:
 
 **Cos'è**: una rule è un file di istruzioni con un *campo d'azione*
 delimitato da glob sui path. Risolve un problema classico del CLAUDE.md: "le
-regole sui test valgono solo per i file di test — perché devono stare sempre
+regole sui test valgono solo per i file di test, perché devono stare sempre
 nel contesto, anche quando lavoro sul CSS?"
 
 **Dove stanno**: `.claude/rules/*.md` nel progetto (committabili, come il
@@ -151,7 +151,7 @@ convenzioni per-area nei progetti grandi.
 ## Un limite onesto
 
 CLAUDE.md e rules sono *advisory*: Claude li segue quasi sempre, ma non è un
-enforcement — sono istruzioni a un modello, non vincoli di sistema. Per le
+enforcement, sono istruzioni a un modello, non vincoli di sistema. Per le
 cose che devono succedere **sempre e comunque** (formattare dopo ogni edit,
 bloccare un comando) lo strumento giusto sono gli hook (cap. 07), che sono
 deterministici. Regola pratica: preferenze e conoscenza → CLAUDE.md;

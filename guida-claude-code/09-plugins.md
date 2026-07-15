@@ -1,4 +1,4 @@
-# 09 — Plugin: il setup in un pacchetto
+# 09 - Plugin: il setup in un pacchetto
 
 > Verificato il 15 luglio 2026 (v2.1.210).
 
@@ -28,7 +28,7 @@ mio-plugin/
 
 Il `manifest.json` è la carta d'identità (nome, versione, descrizione);
 le altre directory contengono esattamente i file che nei capitoli 5–8
-mettevi in `.claude/` — qui viaggiano insieme, versionati come un'unica
+mettevi in `.claude/`. Qui viaggiano insieme, versionati come un'unica
 cosa. Quando il plugin è installato, Claude Code carica quei contenuti
 all'avvio della sessione come se fossero tuoi: le skill compaiono tra le
 slash command, gli hook si agganciano agli eventi, i server MCP si avviano.
@@ -49,14 +49,14 @@ Tutto in sessione, a partire da `/plugin`:
 
 Da qui sfogli i marketplace, vedi cosa c'è dentro ogni plugin **prima** di
 installarlo, e gestisci quelli già installati. L'install si fa da pannello
-o direttamente con `/plugin install nome@marketplace` — la parte dopo la
+o direttamente con `/plugin install nome@marketplace`, la parte dopo la
 `@` dice da quale marketplace prendere il plugin. `/reload-plugins` serve
 quando sviluppi un plugin tuo: modifichi i file e ricarichi senza
 riavviare la sessione.
 
 ## Come funziona sotto: settings e marketplace
 
-Cosa scrive davvero un'installazione? Due chiavi nel tuo `settings.json` —
+Cosa scrive davvero un'installazione? Due chiavi nel tuo `settings.json`,
 utile conoscerle per capire cosa c'è nella propria config:
 
 ```json
@@ -77,7 +77,7 @@ che vive su GitHub, indicato con `"source": "github"` e il `repo` in forma
 E un marketplace cos'è? Poco più di **un repo Git con un indice** dei
 plugin che contiene. Ne esiste uno ufficiale, `claude-plugins-official`
 (es. `/plugin install skill-creator@claude-plugins-official`, citato nel
-cap. 05), e puoi aggiungerne di terze parti come sopra — anche uno tuo.
+cap. 05), e puoi aggiungerne di terze parti come sopra, anche uno tuo.
 
 ## Quando un plugin invece di config sparsa
 
@@ -87,12 +87,12 @@ cap. 05), e puoi aggiungerne di terze parti come sopra — anche uno tuo.
 - **Per te**: se ti ritrovi a rifare lo stesso setup su ogni macchina o
   progetto, un plugin personale su un repo GitHub è il tuo "dotfiles" di
   Claude Code.
-- **Dalla community**: prima di costruire, guarda cosa esiste — browser
-  automation, code intelligence, integrazioni: spesso c'è già un plugin.
+- **Dalla community**: prima di costruire, guarda cosa esiste: browser
+  automation, code intelligence, integrazioni; spesso c'è già un plugin.
 
 Attenzione simmetrica a quella degli hook (cap. 07): un plugin può portare
 hook e MCP server, cioè **codice che gira con le tue credenziali**.
-Installa da fonti di cui ti fidi, e leggi cosa contiene — il pannello
+Installa da fonti di cui ti fidi, e leggi cosa contiene. Il pannello
 `/plugin` lo mostra proprio per questo.
 
 ## Esempio dal vivo
@@ -101,7 +101,7 @@ Questa guida è stata scritta su una macchina con un plugin installato da un
 marketplace GitHub di terze parti: porta una persona di review ("lazy
 senior dev") con le sue skill e un hook SessionStart che la attiva a ogni
 sessione. Un solo `install`, e cinque skill più un hook sono arrivati
-insieme — e con `/plugin uninstall` se ne andrebbero altrettanto in blocco.
+insieme, e con `/plugin uninstall` se ne andrebbero altrettanto in blocco.
 Questo è il punto dei plugin.
 
 ---

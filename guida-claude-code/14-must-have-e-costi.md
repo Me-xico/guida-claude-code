@@ -1,4 +1,4 @@
-# 14 — Must-have e costi: il setup dei primi 30 minuti
+# 14 - Must-have e costi: il setup dei primi 30 minuti
 
 > Verificato il 15 luglio 2026. I prezzi cambiano: controlla claude.com/pricing.
 
@@ -13,19 +13,19 @@ giusto, perché ripagano dal primo pomeriggio? Eccole:
    Senza CLAUDE.md ogni sessione riparte da zero e rispieghi le stesse
    convenzioni ogni giorno.
 2. **Deny sui segreti** in `.claude/settings.json`: `Read(.env)`,
-   `Read(.env.*)`, `Bash(cat *.env*)` (cap. 02). Due minuti, per sempre —
-   e il giorno che Claude, esplorando per un bug, sta per aprire il file
+   `Read(.env.*)`, `Bash(cat *.env*)` (cap. 02). Due minuti, per sempre:
+   il giorno che Claude, esplorando per un bug, sta per aprire il file
    con le API key, il deny lo ferma senza che tu debba essere lì.
 3. **Hook Prettier** su PostToolUse (cap. 07). Ogni file toccato esce già
    formattato: niente diff sporchi di soli spazi, niente "riformatta tutto"
    a fine sessione. Un frontend senza questo hook sta lasciando soldi sul
    tavolo.
-4. **`/statusline`** — mettici contesto usato e modello: sono le due cose
+4. **`/statusline`**: mettici contesto usato e modello, sono le due cose
    che vuoi vedere *sempre*. Il contesto che si riempie spiega metà dei
    comportamenti strani (cap. 13), e vederlo salire in tempo reale ti fa
    fare `/clear` al momento giusto invece che tre task troppo tardi.
 5. **Allow per i comandi fidati**: `npm run test`, `npm run lint`, `git
-   status/diff/log` in allow-list, così smetti di approvare l'ovvio — ogni
+   status/diff/log` in allow-list, così smetti di approvare l'ovvio. Ogni
    prompt di conferma su un comando innocuo è attrito che ti fa sorvegliare
    invece di lavorare.
 6. Quando arriva il momento: estensione Chrome o Playwright MCP (cap. 10).
@@ -45,13 +45,13 @@ un'ora. La mappa:
 
 - Il default (Sonnet) va bene per quasi tutto il lavoro quotidiano.
 - **`/model opusplan`** è il trucco più citato: il modello grosso (Opus)
-  pianifica, quello medio esegue — paghi il ragionamento dove rende (le
+  pianifica, quello medio esegue: paghi il ragionamento dove rende (le
   decisioni) e risparmi dove non serve (la manovalanza di battitura).
 - Modello piccolo (Haiku) per il lavoro meccanico, soprattutto negli agenti
   (`model: haiku` nel frontmatter, cap. 06): un agente che formatta o cerca
   stringhe non ha bisogno di ragionare.
 - `Alt+T` (extended thinking) per i problemi davvero difficili, non di
-  default — è potenza extra a costo extra, e sul task medio non si vede.
+  default: è potenza extra a costo extra, e sul task medio non si vede.
 
 Nota onesta: la doc ufficiale a volte spinge nella direzione opposta ("usa il
 modello grosso con thinking: meno correzioni = più veloce in totale").
@@ -76,39 +76,39 @@ sta mai facendo niente di intelligente, stai pagando ragionamento a vuoto.
 Noterai che sono le stesse regole dei capitoli 3, 4 e 13: **quello che fa
 lavorare meglio Claude è quello che costa meno**. Non è un caso: il nemico
 comune è il contesto sprecato. Il token che paghi e il token che confonde
-il modello sono lo stesso token — ottimizzare la qualità e ottimizzare il
+il modello sono lo stesso token: ottimizzare la qualità e ottimizzare il
 costo, qui, sono lo stesso gesto.
 
 ## Monitorare
 
 Quattro strumenti, dal più al meno frequente:
 
-- la statusline — tutto quanto sotto, sempre sott'occhio, senza chiedere
-- `/context` — quanto contesto stai usando (da guardare quando le risposte
-  peggiorano: di solito la spiegazione è lì)
-- `/usage` — dove sei coi limiti del piano (Pro/Max)
-- `/cost` — spesa della sessione (utenti API)
+- la statusline: tutto quanto sotto, sempre sott'occhio, senza chiedere
+- `/context`: quanto contesto stai usando (da guardare quando le risposte
+  peggiorano, di solito la spiegazione è lì)
+- `/usage`: dove sei coi limiti del piano (Pro/Max)
+- `/cost`: spesa della sessione (utenti API)
 
 Ordini di grandezza (luglio 2026): Pro 20 $/mese con ~200 messaggi ogni
 5 ore; Max 5x/20x a 100/200 $/mese; API a consumo (indicativamente 3 $/15 $
 per M token in/out sul modello medio). Se Claude Code diventa lo strumento
-principale, il limite del Pro si sente in fretta — i ~200 messaggi ogni
+principale, il limite del Pro si sente in fretta: i ~200 messaggi ogni
 5 ore sembrano tanti finché non passi una giornata intera in sessione.
 
 ## Per andare oltre (cenni)
 
 Tre direzioni per quando il flusso base ti sta stretto:
 
-- **`claude -p "prompt"`** — modalità headless: Claude Code negli script e
+- **`claude -p "prompt"`**: modalità headless, Claude Code negli script e
   in CI (`--output-format json` per output strutturato). Il momento in cui
   serve: quando una cosa che fai in sessione vuoi che giri da sola.
-- **GitHub Actions** — `anthropics/claude-code-action`: `@claude` nei
+- **GitHub Actions**: `anthropics/claude-code-action`, `@claude` nei
   commenti delle PR per review e fix automatici; rispetta il CLAUDE.md del
   repo, quindi le convenzioni che hai scritto valgono anche lì.
-- **Git worktrees** — più sessioni in parallelo su branch diversi
+- **Git worktrees**: più sessioni in parallelo su branch diversi
   (`claude --worktree`); il collo di bottiglia diventa la tua capacità di
   fare review, non Claude. Da provare solo quando il flusso a sessione
-  singola è già solido — parallelizzare il caos produce solo caos parallelo.
+  singola è già solido: parallelizzare il caos produce solo caos parallelo.
 
 ---
 
@@ -116,5 +116,5 @@ Tre direzioni per quando il flusso base ti sta stretto:
 statusline, allow-list), il resto quando serve davvero. E l'abitudine che
 batte tutte: contesto pulito, evidenze sempre. Se dopo queste abitudini il
 budget stringe ancora, il [cap. 15](15-risparmiare-token.md) presenta gli
-strumenti che comprimono i token alla fonte — con numeri misurati, non
+strumenti che comprimono i token alla fonte, con numeri misurati, non
 promessi.

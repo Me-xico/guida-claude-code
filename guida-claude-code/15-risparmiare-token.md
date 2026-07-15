@@ -1,4 +1,4 @@
-# 15 — Risparmiare token: rtk, ponytail e caveman
+# 15 - Risparmiare token: rtk, ponytail e caveman
 
 > Verificato il 15 luglio 2026: versioni, comandi di installazione e numeri
 > controllati su GitHub e (per rtk) misurati su un uso reale di mesi.
@@ -6,8 +6,8 @@
 ## Perché questo capitolo esiste
 
 Se sei su un piano Pro, il tuo budget è una finestra: ~200 messaggi ogni
-5 ore (cap. 01). Ma il messaggio non è l'unità che conta — lo sono i
-**token**, e la maggior parte non li scrivi tu: sono gli *output dei
+5 ore (cap. 01). Ma il messaggio non è l'unità che conta: lo sono i
+**token**. E la maggior parte non li scrivi tu: sono gli *output dei
 comandi* che Claude esegue (un `git log`, un `ls -la`, l'output dei test) e
 il *codice e la prosa* che Claude genera. Le 5 abitudini del cap. 14 riducono
 gli sprechi di comportamento; gli strumenti di questo capitolo riducono gli
@@ -15,9 +15,9 @@ sprechi **alla fonte, automaticamente**. Tradotto: finestre di lavoro più
 lunghe con lo stesso piano.
 
 Tutti e tre sono progetti di terze parti: vale il solito avviso dei cap. 07
-e 09 — hook e plugin girano coi tuoi permessi, guarda cosa installi.
+e 09: hook e plugin girano coi tuoi permessi, guarda cosa installi.
 
-## rtk — comprimere gli output dei comandi
+## rtk - comprimere gli output dei comandi
 
 **Cos'è**: un proxy CLI in Rust ([rtk-ai/rtk](https://github.com/rtk-ai/rtk),
 Apache 2.0) che si mette tra i comandi e Claude: esegue il comando vero e
@@ -51,7 +51,7 @@ differenza tra una finestra che finisce a metà pomeriggio e una che arriva
 a sera. È lo strumento col miglior rapporto beneficio/rischio del capitolo:
 non cambia *cosa* fa Claude, solo quanto pesa quello che legge.
 
-## ponytail — meno codice generato
+## ponytail - meno codice generato
 
 **Cos'è**: un plugin ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail))
 che installa una "persona" da senior dev pigro: soluzione più corta che
@@ -72,12 +72,12 @@ vengono marcate con commenti `ponytail:` così restano tracciate.
 
 **Quanto rende** (benchmark del progetto stesso, 3 modelli × 10 run,
 mediane vs baseline senza plugin): righe di codice **46%**, token **78%**,
-costo **80%**, tempo **73%** — a safety invariata. Cioè: -22% di token e
+costo **80%**, tempo **73%** (a safety invariata). Cioè: -22% di token e
 metà del codice da leggere. Avvertenza onesta: cambia lo *stile* del codice
-verso il minimalismo; provalo su un progetto tuo prima di adottarlo — o ti
+verso il minimalismo; provalo su un progetto tuo prima di adottarlo: o ti
 piace, o ti innervosisce.
 
-## caveman — risposte terse (con un asterisco)
+## caveman - risposte terse (con un asterisco)
 
 **Cos'è**: un plugin ([JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman))
 che rende terse le **risposte in prosa** dell'agente ("why use many token
@@ -94,18 +94,18 @@ claude plugin install caveman@caveman
 **L'asterisco**: il progetto dichiara ~65% di risparmio sui token di
 *output in prosa*; ma il benchmark indipendente di ponytail (che lo usa come
 termine di paragone) lo misura a **+7% di token totali** sui task di
-coding — perché nei task veri la prosa è una fetta piccola, e lo stile
+coding, perché nei task veri la prosa è una fetta piccola, e lo stile
 "caveman" a volte allunga il giro. Verdetto pratico: prendilo per la
 *leggibilità* (risposte che si scorrono in due secondi), non per il
 risparmio. Sul budget contano rtk e ponytail.
 
 ## L'ordine giusto per un piano Pro
 
-1. **rtk** — subito: risparmio misurato ~50%+ sugli output, zero cambi di
+1. **rtk**: subito, risparmio misurato ~50%+ sugli output, zero cambi di
    comportamento, si disinstalla senza lasciare traccia.
-2. **ponytail** — quando hai fatto pace con lo stile minimalista: -22% di
+2. **ponytail**: quando hai fatto pace con lo stile minimalista, -22% di
    token e molto meno codice da rivedere.
-3. **caveman** — questione di gusto, non di budget.
+3. **caveman**: questione di gusto, non di budget.
 
 E ricorda che la leva più grande resta gratis: le 5 abitudini del cap. 14
 (`/clear`, modello proporzionato, file per path, CLAUDE.md snello, piano
@@ -115,5 +115,5 @@ prima delle modifiche grandi). Prima il metodo, poi gli attrezzi.
 
 **In sintesi**: il token che non entra nel contesto è l'unico che non paghi
 e non confonde il modello. rtk comprime quello che Claude legge, ponytail
-riduce quello che Claude scrive, caveman accorcia quello che Claude ti dice
-— e solo i primi due spostano davvero il budget.
+riduce quello che Claude scrive, caveman accorcia quello che Claude ti dice.
+Solo i primi due, però, spostano davvero il budget.

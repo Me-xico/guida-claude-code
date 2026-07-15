@@ -1,4 +1,4 @@
-# 03 — Uso quotidiano
+# 03 - Uso quotidiano
 
 > Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
 
@@ -10,14 +10,14 @@ sezione di questo capitolo: i comandi slash.
 
 **Cosa sono**: comandi che iniziano con `/` (`/clear`, `/rewind`,
 `/compact`…). Non sono prompt per il modello: sono ordini all'*applicazione*
-Claude Code — pensa alla command palette di VS Code, ma testuale.
+Claude Code, pensa alla command palette di VS Code, ma testuale.
 
 **Dove stanno**: ovunque tu possa scrivere un prompt. Digita `/` come primo
 carattere e si apre il menu con tutti i comandi disponibili, ciascuno con la
 sua descrizione; continua a scrivere per filtrare, frecce + Invio per
 scegliere. Non serve impararli a memoria: il menu è l'indice.
 
-Questo è il menu che appare digitando `/` — nota le descrizioni accanto a
+Questo è il menu che appare digitando `/`: nota le descrizioni accanto a
 ogni comando:
 
 ![Il menu dei comandi che si apre digitando /](assets/03-slash-menu.svg)
@@ -33,17 +33,17 @@ righe invece che su cento righe di codice già scritto.
 Le quattro fasi in pratica:
 
 1. **Explore** (in plan mode): "leggi `src/auth` e spiegami come funziona il
-   login". Claude legge, cerca, riassume — ma non modifica nulla.
+   login". Claude legge, cerca, riassume, ma non modifica nulla.
 2. **Plan**: "prepara un piano di implementazione dettagliato". Claude
    produce il piano; con `Ctrl+G` lo apri nel tuo editor e lo correggi
-   *prima* che parta una sola riga di codice — è il momento in cui la
+   *prima* che parta una sola riga di codice: è il momento in cui la
    revisione costa meno.
 3. **Code**: approvi il piano e Claude implementa. All'approvazione ti chiede
    in che modalità procedere: auto, `acceptEdits`, o review manuale di ogni
    edit (i permission mode del cap. 02).
 4. **Commit**: "committa con un messaggio descrittivo".
 
-**Il plan mode, in concreto**: è uno dei permission mode — Claude può solo
+**Il plan mode, in concreto**: è uno dei permission mode, Claude può solo
 leggere ed esplorare, mai scrivere. Si attiva ciclando con **Shift+Tab** (lo
 stesso tasto cicla tutti i mode) oppure all'avvio con
 `claude --permission-mode plan`. Sai di esserci perché lo dice la barra di
@@ -61,7 +61,7 @@ rename, una riga di log), il plan mode è solo overhead. Vai diretto.
 ## Checkpoint e /rewind: la rete di sicurezza
 
 **Cos'è**: l'undo di Claude Code. Ogni volta che Claude modifica un file
-viene salvato un checkpoint — uno snapshot a cui puoi tornare, come i
+viene salvato un checkpoint, uno snapshot a cui puoi tornare, come i
 restore point di git ma automatici e per-intervento.
 
 **Dove sta**: premi **doppio Esc** (a input vuoto) oppure digita `/rewind`.
@@ -69,19 +69,19 @@ Si apre il menu di ripristino con la lista dei checkpoint:
 
 ![Il menu Rewind: ogni intervento è un punto di ripristino](assets/03-rewind-menu.svg)
 
-**Come si usa**: scegli il punto a cui tornare e *cosa* ripristinare —
+**Come si usa**: scegli il punto a cui tornare e *cosa* ripristinare.
 
 - **codice + conversazione**: torni indietro del tutto;
 - **solo codice**: i file tornano com'erano, ma la conversazione resta
   (utile per dire "rifallo, ma stavolta così");
 - **solo conversazione**: tieni il codice, riavvolgi la chat.
-- "Summarize from here" / "up to here": non ripristina, comprime — metà
+- "Summarize from here" / "up to here": non ripristina, comprime, metà
   sessione diventa un riassunto, l'altra resta intatta.
 
 **Come cambia il modo di lavorare**: puoi far *tentare* a Claude una strada
 rischiosa ("riscrivi lo store con Zustand, vediamo") sapendo che il ritorno
 costa due tasti. Due limiti da conoscere: traccia **solo gli edit fatti da
-Claude** — non i comandi bash (`rm`, `mv`), non le tue modifiche a mano — e
+Claude**, non i comandi bash (`rm`, `mv`), non le tue modifiche a mano, e
 tiene gli ultimi 100 checkpoint.
 
 ## La regola dei 2 tentativi
@@ -106,7 +106,7 @@ terminale non perde nulla. Le operazioni che servono davvero:
 | Scegli dal picker | `claude --resume` (o `/resume` in sessione) |
 | Dai un nome | `claude -n nome` all'avvio, `/rename nome` in sessione |
 | Riprendi per nome | `claude --resume nome` |
-| Forka la sessione | `/branch [nome]` — esplori un'alternativa senza perdere il filo principale |
+| Forka la sessione | `/branch [nome]`, esplori un'alternativa senza perdere il filo principale |
 
 `/branch` merita una nota: crea una *diramazione* della sessione corrente,
 come un branch git della conversazione. Provi una direzione diversa e, se non
@@ -114,7 +114,7 @@ convince, il filo principale è ancora lì.
 
 ## Gestione del contesto
 
-**Cos'è il contesto**: la memoria di lavoro del modello — tutto ciò che
+**Cos'è il contesto**: la memoria di lavoro del modello, tutto ciò che
 Claude "vede" quando genera la prossima risposta. È una finestra a capienza
 fissa, e non contiene solo la chat: ci stanno il system prompt, le
 definizioni dei tool, i file di memoria (CLAUDE.md, cap. 04), le skill, e poi
@@ -122,27 +122,27 @@ ogni tuo messaggio, ogni file letto, ogni output di comando. Una sessione
 appena aperta ne consuma già una parte prima che tu scriva una parola.
 
 **Dove lo vedi**: il comando `/context` mostra la griglia dell'uso per
-categoria — è la radiografia della sessione. Guardala: ogni cella è una fetta
+categoria: è la radiografia della sessione. Guardala: ogni cella è una fetta
 di finestra, le categorie in legenda dicono chi la sta occupando, e lo spazio
 libero è quello che resta per il lavoro vero:
 
 ![Output di /context: la griglia dell'uso del contesto per categoria](assets/03-context.svg)
 
 **Perché ti riguarda**: il contesto si riempie man mano che lavori, e più è
-pieno più le prestazioni degradano — Claude "dimentica" le istruzioni date
+pieno più le prestazioni degradano: Claude "dimentica" le istruzioni date
 all'inizio, ripete errori già corretti. Quasi tutte le buone abitudini di
 questa guida derivano da qui. Gli strumenti:
 
-- `/clear` — svuota la conversazione. Da usare **tra un task e l'altro,
+- `/clear`: svuota la conversazione. Da usare **tra un task e l'altro,
   sempre**: il task nuovo non ha bisogno della storia del precedente. Niente
   panico: la sessione svuotata resta recuperabile con `/resume`.
-- `/compact [istruzioni]` — da usare *dentro* un task lungo, quando la storia
+- `/compact [istruzioni]`: da usare *dentro* un task lungo, quando la storia
   serve ancora ma pesa troppo: sostituisce la conversazione con un riassunto
   e riparte da lì. Le istruzioni opzionali dicono cosa preservare:
   `/compact tieni i path dei file e le decisioni sul routing`.
-- `/context` — il check periodico di cui sopra (tienilo d'occhio in
+- `/context`: il check periodico di cui sopra (tienilo d'occhio in
   statusline, cap. 14).
-- `/btw domanda` — la domanda laterale ("com'è la sintassi di `grid-area`?")
+- `/btw domanda`: la domanda laterale ("com'è la sintassi di `grid-area`?")
   che NON entra nella storia: risposta in overlay, contesto intatto. Piccola
   ma salva-sessioni.
 
@@ -165,7 +165,7 @@ La tabella di riferimento, poi i tre trucchi che meritano il dettaglio:
 | `Alt+T` / `Option+T` | toggle extended thinking (per i problemi difficili; su alcuni modelli è sempre attivo) |
 
 **Shell mode (`!`)**: digita `!` come primo carattere e l'input cambia
-aspetto — prompt rosa, hint "! for shell mode" in basso: non stai più
+aspetto, prompt rosa, hint "! for shell mode" in basso: non stai più
 parlando col modello, stai scrivendo un comando per la tua shell. Il comando
 viene eseguito direttamente e l'output finisce nel contesto, dove Claude lo
 vede. È il modo più rapido per dargli un dato di realtà: `! npm run test` e
@@ -174,14 +174,14 @@ poi "sistema i test rossi". Ecco com'è l'input in shell mode:
 ![Input in shell mode: prompt rosa e hint "! for shell mode"](assets/03-shell-mode.svg)
 
 **Riferire file con `@`**: digita `@` e parte l'autocomplete sui file del
-progetto — continua a scrivere per filtrare, Invio per inserire il path.
+progetto, continua a scrivere per filtrare, Invio per inserire il path.
 Claude riceve il *riferimento* e va a leggersi il file da solo: più preciso
 di "il file del bottone" e più economico che incollarne il contenuto
 (cap. 14). Così appare l'autocomplete:
 
 ![Autocomplete dei file digitando @](assets/03-at-file.svg)
 
-**Coda di messaggi**: mentre Claude lavora puoi scrivere e premere Invio — il
+**Coda di messaggi**: mentre Claude lavora puoi scrivere e premere Invio: il
 messaggio si accoda per il turno dopo. Non serve aspettare.
 
 **Vim mode**: `/config` → Editor mode, per chi non può farne a meno.
@@ -190,15 +190,15 @@ messaggio si accoda per il turno dopo. Non serve aspettare.
 
 `/model` apre il picker: scegli il modello e il livello di *effort* (quanto
 ragionamento investire). Il default va bene per il lavoro quotidiano; quale
-modello per quale task — e cosa costa — è il tema del cap. 14. Il picker:
+modello per quale task, e cosa costa, è il tema del cap. 14. Il picker:
 
 ![Il picker di /model: modelli disponibili e livello di effort](assets/03-model-picker.svg)
 
 ## Due comandi che non ti aspetti
 
-- `/recap` — riassunto della sessione. Il lunedì mattina, dopo
+- `/recap`: riassunto della sessione. Il lunedì mattina, dopo
   `claude --continue`, risponde alla domanda "dov'eravamo?".
-- `/goal condizione` — fissi una condizione di completamento, ad esempio
+- `/goal condizione`: fissi una condizione di completamento, ad esempio
   `/goal tutti i test passano e la build è verde`. Da lì in poi un
   valutatore ricontrolla la condizione **a ogni turno** e non lascia
   dichiarare chiuso il task finché non è vera. È il modo più semplice di dare

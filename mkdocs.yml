@@ -52,6 +52,16 @@ nav:
 plugins:
   - search
   - offline
+  - i18n:
+      docs_structure: suffix
+      languages:
+        - locale: it
+          default: true
+          name: Italiano
+          build: true
+        - locale: en
+          name: English
+          build: true
 
 markdown_extensions:
   - admonition

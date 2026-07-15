@@ -1,4 +1,4 @@
-# 12 — Prompt engineering per Claude Code
+# 12 - Prompt engineering per Claude Code
 
 > Fonte: best practices ufficiali e pattern consolidati della community,
 > luglio 2026.
@@ -6,10 +6,10 @@
 ## Il modello mentale giusto
 
 Il problema di partenza è quasi sempre lo stesso: tratti Claude Code come un
-motore di ricerca a cui strappare risposte — domanda secca, risposta secca,
+motore di ricerca a cui strappare risposte, domanda secca, risposta secca,
 delusione. Il modello mentale che funziona è un altro: è un **junior
 brillante che gestisci**. Un junior con memoria azzerata a ogni sessione
-(per questo esiste CLAUDE.md), velocissimo, che non si offende mai — ma che
+(per questo esiste CLAUDE.md), velocissimo, che non si offende mai, ma
 con una richiesta vaga produce un risultato vago, esattamente come farebbe
 un junior vero con un ticket che dice solo "sistemare il login".
 
@@ -19,7 +19,7 @@ capitolo è declinazione di questa frase.
 ## Specificità: criteri di successo, non aggettivi
 
 Il dolore: chiedi "migliora questo componente", ottieni un refactor che
-tocca venti righe che non c'entrano, e il problema vero — i re-render — è
+tocca venti righe che non c'entrano, e il problema vero, i re-render, è
 ancora lì. Non è colpa del modello: "migliora" non dice *cosa* dev'essere
 vero alla fine.
 
@@ -32,8 +32,8 @@ Forte:
 > pubblica."
 
 La differenza non è la lunghezza: è che il secondo ha **criteri
-verificabili** (cap. 11 — "verifica col Profiler che…") e **vincoli** (cosa
-non toccare — "non cambiare l'API pubblica"). Aggettivi come "migliore",
+verificabili** (cap. 11, "verifica col Profiler che…") e **vincoli** (cosa
+non toccare, "non cambiare l'API pubblica"). Aggettivi come "migliore",
 "pulito", "moderno" non sono istruzioni: sono speranze. Il test rapido per
 il tuo prompt: *un collega che non conosce il contesto saprebbe dire se il
 lavoro è finito bene?* Se no, mancano i criteri.
@@ -44,11 +44,11 @@ chiesto" ma non quello che volevi. Il problema era nel brief.
 ## Contesto e vincoli, non micro-istruzioni
 
 L'errore opposto alla vaghezza: dettare *come* fare ogni passo, riga per
-riga. Non serve — per quello c'è il modello, che il codice lo sa scrivere.
+riga. Non serve: per quello c'è il modello, che il codice lo sa scrivere.
 Serve invece dare ciò che il modello **non può sapere** guardando il repo:
 
 - il *perché*: "questo form è il funnel di pagamento: la priorità è non
-  rompere il tracking" — cambia ogni decisione a valle
+  rompere il tracking", cambia ogni decisione a valle
 - i **vincoli**: "Node 18, niente dipendenze nuove"
 - i **riferimenti**: "`@src/components/Form.tsx` è il pattern da seguire"
 
@@ -64,13 +64,13 @@ trace contiene la risposta più spesso di quanto pensi), allega screenshot
 
 Perché funziona: il modello ragiona su quello che ha nel contesto. Perché,
 vincoli e riferimenti sono esattamente le informazioni che non può dedurre
-da solo — tutto il resto sì.
+da solo: tutto il resto sì.
 
 ## Decomposizione: chiedi il primo passo, non il viaggio
 
 L'errore più segnalato in assoluto (il "greed mistake"): chiedere in un
-prompt solo una feature intera — "fammi il carrello con persistenza,
-sconti, e la pagina checkout" — e ottenere il 60% di otto cose diverse,
+prompt solo una feature intera, "fammi il carrello con persistenza,
+sconti, e la pagina checkout", e ottenere il 60% di otto cose diverse,
 nessuna finita, con il contesto ormai saturo (cap. 13). Al contrario:
 
 > "Costruiamo il carrello a passi. Step 1: solo il data-layer — hook
@@ -81,7 +81,7 @@ Ogni passo finito e verificato è un checkpoint (in senso letterale: cap. 03)
 su cui costruire il successivo. Se lo step 2 va male, torni a un punto
 solido invece di dover disfare una matassa.
 
-Per le feature grandi, il pattern ufficiale è **farsi intervistare** — utile
+Per le feature grandi, il pattern ufficiale è **farsi intervistare**, utile
 proprio perché i requisiti che *credi* di avere chiari non lo sono:
 
 > "Devo costruire X. Prima di scrivere codice, intervistami: fammi le domande
@@ -91,7 +91,7 @@ proprio perché i requisiti che *credi* di avere chiari non lo sono:
 Le domande di Claude fanno emergere gli edge case a cui non avevi pensato
 (cosa succede al carrello se l'utente fa logout? gli sconti si sommano?).
 Rivedi la spec, `/clear`, e in una sessione fresca: "implementa SPEC.md,
-step 1". La spec sostituisce cento correzioni in corsa — e la sessione che
+step 1". La spec sostituisce cento correzioni in corsa, e la sessione che
 implementa parte pulita, senza il rumore della discussione.
 
 *Il segnale che ti serve*: stai scrivendo un prompt che contiene "e poi… e
@@ -112,7 +112,7 @@ l'errore esatto, l'output del test, lo screenshot di cosa si vede davvero.
 E ricorda la regola dei 2 tentativi (cap. 03): al secondo giro andato male,
 `/clear` e riformula da zero incorporando quello che hai imparato. Il
 motivo è meccanico: ogni correzione fallita resta nel contesto e pesa sulle
-risposte successive — le correzioni accumulate inquinano più di quanto
+risposte successive: le correzioni accumulate inquinano più di quanto
 aiutino. Il terzo tentativo nella stessa sessione parte svantaggiato; lo
 stesso prompt, riscritto meglio in una sessione pulita, parte avvantaggiato.
 
