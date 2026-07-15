@@ -52,9 +52,11 @@ che divergono.
 ## Livello cliente: un profilo per contesto
 
 Il meccanismo sotto è quello del cap. 02: `CLAUDE_CONFIG_DIR` sposta l'intera
-configurazione. Io lo governo con uno script fatto in casa che chiama i
-profili per nome ("passa al cliente A") ed esporta la variabile giusta; il
-principio funziona anche a mano:
+configurazione. Io lo governo con [cloak](https://github.com/synth1s/cloak)
+(`npm install -g @synth1s/cloak`): profili nominati da creare e indossare in
+un comando — `cloak create cliente-a`, `cloak switch cliente-a` — con la
+lista del "guardaroba" sempre a portata di `cloak ls`. Il principio comunque
+funziona anche a mano, senza installare nulla:
 
 ```bash
 CLAUDE_CONFIG_DIR=~/.profili/cliente-a claude

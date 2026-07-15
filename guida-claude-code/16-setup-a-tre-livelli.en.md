@@ -52,9 +52,12 @@ drifting out of sync.
 ## Client level: one profile per context
 
 The mechanism underneath is the one from ch. 02: `CLAUDE_CONFIG_DIR` moves
-the entire configuration. I drive it with a homemade script that switches
-profiles by name ("switch to client A") and exports the right variable, but
-the principle works by hand too:
+the entire configuration. I manage it with
+[cloak](https://github.com/synth1s/cloak)
+(`npm install -g @synth1s/cloak`): named profiles you create and put on in
+one command — `cloak create cliente-a`, `cloak switch cliente-a` — with the
+"wardrobe" list always a `cloak ls` away. The principle works by hand too,
+without installing anything:
 
 ```bash
 CLAUDE_CONFIG_DIR=~/.profili/cliente-a claude
