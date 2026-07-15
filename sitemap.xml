@@ -113,6 +113,13 @@
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/15-risparmiare-token.html"/>
     </url>
     <url>
+        <loc>None16-setup-a-tre-livelli.html</loc>
+        <lastmod>2026-07-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="None16-setup-a-tre-livelli.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/16-setup-a-tre-livelli.html"/>
+    </url>
+    <url>
         <loc>Nonedemo/CLAUDE.html</loc>
         <lastmod>2026-07-15</lastmod>
         <changefreq>daily</changefreq>
@@ -230,6 +237,13 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/15-risparmiare-token.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None15-risparmiare-token.html"/>
+    </url>
+    <url>
+        <loc>Noneen/16-setup-a-tre-livelli.html</loc>
+        <lastmod>2026-07-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/16-setup-a-tre-livelli.html"/>
+        <xhtml:link rel="alternate" hreflang="it" href="None16-setup-a-tre-livelli.html"/>
     </url>
     <url>
         <loc>Noneen/demo/CLAUDE.html</loc>

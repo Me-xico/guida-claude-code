@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="it" class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -11,32 +11,30 @@
       
       
       
-        <link rel="prev" href="10-workflow-frontend.html">
+        <link rel="prev" href="15-risparmiare-token.html">
       
-      
-        <link rel="next" href="15-risparmiare-token.html">
       
       
         
-          <link rel="alternate" href="14-must-have-e-costi.html" hreflang="it">
+          <link rel="alternate" href="../16-setup-a-tre-livelli.html" hreflang="it">
         
-          <link rel="alternate" href="en/14-must-have-e-costi.html" hreflang="en">
+          <link rel="alternate" href="16-setup-a-tre-livelli.html" hreflang="en">
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>14 · Must-have e costi - Guida a Claude Code</title>
+        <title>16 · A real-world setup - Guida a Claude Code</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +49,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,8 +74,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#14-must-have-e-costi-il-setup-dei-primi-30-minuti" class="md-skip">
-          Vai al contenuto
+        <a href="#16-a-real-setup-global-per-client-per-repo" class="md-skip">
+          Skip to content
         </a>
       
     </div>
@@ -91,7 +89,7 @@
   
 
 <header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+  <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="index.html" title="Guida a Claude Code" class="md-header__button md-logo" aria-label="Guida a Claude Code" data-md-component="logo">
       
   
@@ -112,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              14 · Must-have e costi
+              16 · A real-world setup
             
           </span>
         </div>
@@ -152,20 +150,20 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Seleziona la lingua">
+    <button class="md-header__button md-icon" aria-label="Select language">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="14-must-have-e-costi.html" hreflang="it" class="md-select__link">
+            <a href="../16-setup-a-tre-livelli.html" hreflang="it" class="md-select__link">
               Italiano
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="en/14-must-have-e-costi.html" hreflang="en" class="md-select__link">
+            <a href="16-setup-a-tre-livelli.html" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -186,16 +184,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Cerca">
+      <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -208,7 +206,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Inizializza la ricerca
+            Initializing search
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -242,7 +240,7 @@
 
 
 
-<nav class="md-nav md-nav--primary" aria-label="Navigazione" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="index.html" title="Guida a Claude Code" class="md-nav__button md-logo" aria-label="Guida a Claude Code" data-md-component="logo">
       
@@ -307,7 +305,7 @@
   <span class="md-ellipsis">
     
   
-    Base
+    Basics
   
 
     
@@ -323,7 +321,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Base
+    Basics
   
 
           </label>
@@ -343,7 +341,7 @@
   <span class="md-ellipsis">
     
   
-    01 · Installazione
+    01 · Installation
   
 
     
@@ -371,7 +369,7 @@
   <span class="md-ellipsis">
     
   
-    02 · Setup e configurazione
+    02 · Setup and configuration
   
 
     
@@ -399,7 +397,7 @@
   <span class="md-ellipsis">
     
   
-    03 · Uso quotidiano
+    03 · Daily use
   
 
     
@@ -427,7 +425,7 @@
   <span class="md-ellipsis">
     
   
-    04 · CLAUDE.md e rules
+    04 · CLAUDE.md and rules
   
 
     
@@ -473,7 +471,7 @@
   <span class="md-ellipsis">
     
   
-    Metodo
+    Method
   
 
     
@@ -489,7 +487,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Metodo
+    Method
   
 
           </label>
@@ -509,7 +507,7 @@
   <span class="md-ellipsis">
     
   
-    11 · Verifica
+    11 · Verification
   
 
     
@@ -565,7 +563,7 @@
   <span class="md-ellipsis">
     
   
-    13 · Errori comuni
+    13 · Common mistakes
   
 
     
@@ -611,7 +609,7 @@
   <span class="md-ellipsis">
     
   
-    Potenza
+    Power
   
 
     
@@ -627,7 +625,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Potenza
+    Power
   
 
           </label>
@@ -647,7 +645,7 @@
   <span class="md-ellipsis">
     
   
-    05 · Skill e slash command
+    05 · Skills and slash commands
   
 
     
@@ -675,7 +673,7 @@
   <span class="md-ellipsis">
     
   
-    06 · Agenti
+    06 · Agents
   
 
     
@@ -703,7 +701,7 @@
   <span class="md-ellipsis">
     
   
-    07 · Hook
+    07 · Hooks
   
 
     
@@ -759,7 +757,7 @@
   <span class="md-ellipsis">
     
   
-    09 · Plugin
+    09 · Plugins
   
 
     
@@ -787,7 +785,7 @@
   <span class="md-ellipsis">
     
   
-    10 · Workflow frontend
+    10 · Frontend workflow
   
 
     
@@ -835,7 +833,7 @@
   <span class="md-ellipsis">
     
   
-    Riferimento
+    Reference
   
 
     
@@ -851,11 +849,67 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Riferimento
+    Reference
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14-must-have-e-costi.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14 · Must-haves and costs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15-risparmiare-token.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15 · Saving tokens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -880,7 +934,7 @@
   <span class="md-ellipsis">
     
   
-    14 · Must-have e costi
+    16 · A real-world setup
   
 
     
@@ -891,14 +945,14 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="14-must-have-e-costi.html" class="md-nav__link md-nav__link--active">
+      <a href="16-setup-a-tre-livelli.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    14 · Must-have e costi
+    16 · A real-world setup
   
 
     
@@ -910,7 +964,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Indice">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -919,15 +973,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Indice
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#il-setup-minimo-che-rende-subito" class="md-nav__link">
+  <a href="#the-problem-it-solves" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Il setup minimo che rende subito
+        The problem it solves
       
     </span>
   </a>
@@ -935,10 +989,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modello-giusto-per-il-task-giusto" class="md-nav__link">
+  <a href="#global-level-who-you-are" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modello giusto per il task giusto
+        Global level: who you are
       
     </span>
   </a>
@@ -946,10 +1000,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#le-5-abitudini-di-risparmio-ufficiali" class="md-nav__link">
+  <a href="#client-level-one-profile-per-context" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Le 5 abitudini di risparmio (ufficiali)
+        Client level: one profile per context
       
     </span>
   </a>
@@ -957,10 +1011,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#monitorare" class="md-nav__link">
+  <a href="#repo-level-the-code-in-front-of-you" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Monitorare
+        Repo level: the code in front of you
       
     </span>
   </a>
@@ -968,10 +1022,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#per-andare-oltre-cenni" class="md-nav__link">
+  <a href="#graphify-a-map-of-the-codebase" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Per andare oltre (cenni)
+        graphify: a map of the codebase
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-short" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In short
       
     </span>
   </a>
@@ -982,62 +1047,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="15-risparmiare-token.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15 · Risparmiare token
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="16-setup-a-tre-livelli.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    16 · Un setup reale
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1063,7 +1072,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Indice">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -1072,15 +1081,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Indice
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#il-setup-minimo-che-rende-subito" class="md-nav__link">
+  <a href="#the-problem-it-solves" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Il setup minimo che rende subito
+        The problem it solves
       
     </span>
   </a>
@@ -1088,10 +1097,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modello-giusto-per-il-task-giusto" class="md-nav__link">
+  <a href="#global-level-who-you-are" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modello giusto per il task giusto
+        Global level: who you are
       
     </span>
   </a>
@@ -1099,10 +1108,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#le-5-abitudini-di-risparmio-ufficiali" class="md-nav__link">
+  <a href="#client-level-one-profile-per-context" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Le 5 abitudini di risparmio (ufficiali)
+        Client level: one profile per context
       
     </span>
   </a>
@@ -1110,10 +1119,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#monitorare" class="md-nav__link">
+  <a href="#repo-level-the-code-in-front-of-you" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Monitorare
+        Repo level: the code in front of you
       
     </span>
   </a>
@@ -1121,10 +1130,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#per-andare-oltre-cenni" class="md-nav__link">
+  <a href="#graphify-a-map-of-the-codebase" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Per andare oltre (cenni)
+        graphify: a map of the codebase
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-short" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In short
       
     </span>
   </a>
@@ -1148,116 +1168,148 @@
 
 
 
-<h1 id="14-must-have-e-costi-il-setup-dei-primi-30-minuti">14 - Must-have e costi: il setup dei primi 30 minuti<a class="headerlink" href="#14-must-have-e-costi-il-setup-dei-primi-30-minuti" title="Permanent link">&para;</a></h1>
+<h1 id="16-a-real-setup-global-per-client-per-repo">16 - A real setup: global, per client, per repo<a class="headerlink" href="#16-a-real-setup-global-per-client-per-repo" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>Verificato il 15 luglio 2026. I prezzi cambiano: controlla claude.com/pricing.</p>
+<p>This chapter describes the author's day-to-day setup (July 2026),
+sanitized: no client names, no work-project details. It's the "how far
+you can take it" after chapters 1-15, not the starting point.</p>
 </blockquote>
-<h2 id="il-setup-minimo-che-rende-subito">Il setup minimo che rende subito<a class="headerlink" href="#il-setup-minimo-che-rende-subito" title="Permanent link">&para;</a></h2>
-<p>Il problema che questo capitolo risolve: la guida ha 14 capitoli e non li
-applicherai tutti il primo giorno. Quali cinque cose fare <em>subito</em>, nell'ordine
-giusto, perché ripagano dal primo pomeriggio? Eccole:</p>
+<h2 id="the-problem-it-solves">The problem it solves<a class="headerlink" href="#the-problem-it-solves" title="Permanent link">&para;</a></h2>
+<p>If you work for several clients, a single <code>~/.claude/</code> isn't enough: one
+client's memory shouldn't leak into another client's sessions, integrations
+(client A's Jira, client B's GitLab) shouldn't even <em>exist</em> in the wrong
+context, and your personal preferences need to apply everywhere without
+copying them ten times over. The answer is to organize the setup into three
+levels, each with its own job:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Where it lives</th>
+<th>What goes in it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global</td>
+<td><code>~/.claude/</code> (shared across profiles)</td>
+<td>who you are: preferences, security, cross-cutting tools</td>
+</tr>
+<tr>
+<td>Client</td>
+<td>an isolated profile per client</td>
+<td>the context: memory, permissions, integrations, domain skills</td>
+</tr>
+<tr>
+<td>Repo</td>
+<td><code>.claude/</code> in the project</td>
+<td>the code: conventions, hooks, agents and maps for that codebase</td>
+</tr>
+</tbody>
+</table>
+<p>The rule for deciding where something belongs: <strong>put it at the highest
+level where it holds true for everything underneath</strong>. Always true → global.
+True for one client → profile. True for one repo → repo.</p>
+<h2 id="global-level-who-you-are">Global level: who you are<a class="headerlink" href="#global-level-who-you-are" title="Permanent link">&para;</a></h2>
+<p>My <code>~/.claude/</code> holds the things that never change, no matter which client
+I'm working for that day:</p>
+<ul>
+<li><strong>A lean CLAUDE.md</strong> (about forty lines): language, commit style, Python
+  tooling via <code>uv</code>, the "delegate to agents by default" rule, and the
+  "just-in-time agents" rule (if an ad hoc role comes up twice, it becomes a
+  persistent agent; that's how half the list below was born).</li>
+<li><strong>The deny-list on secrets</strong> (ch. 02): any path containing credentials is
+  unreadable to any session, always, shell workarounds included.</li>
+<li><strong>The token-saving hook</strong> (ch. 15): rtk rewrites commands transparently,
+  on any project.</li>
+<li><strong>About fifteen advisory agents</strong> covering my various professional hats
+  (Python, IaC, data engineering, architecture, frontend, DevOps…), all
+  following the "advise, don't edit" pattern and with clear boundaries
+  against neighboring agents spelled out in their descriptions.</li>
+<li><strong>Cross-cutting skills</strong>: prose review (one reviewer per language), the
+  translation-plus-sync pair that keeps this guide bilingual, screenshot
+  capture, the Playwright core for driving a browser.</li>
+</ul>
+<p>One infrastructure detail that pays off: client profiles (below) don't copy
+this base, they <strong>link</strong> to it. Global rules, agents and skills are symlinked
+into every profile: update one file, it applies everywhere, no copies
+drifting out of sync.</p>
+<h2 id="client-level-one-profile-per-context">Client level: one profile per context<a class="headerlink" href="#client-level-one-profile-per-context" title="Permanent link">&para;</a></h2>
+<p>The mechanism underneath is the one from ch. 02: <code>CLAUDE_CONFIG_DIR</code> moves
+the entire configuration. I drive it with a homemade script that switches
+profiles by name ("switch to client A") and exports the right variable, but
+the principle works by hand too:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CLAUDE_CONFIG_DIR</span><span class="o">=</span>~/.profili/cliente-a<span class="w"> </span>claude
+</code></pre></div>
+<p>Each profile is its own world: its own session history, its own
+<strong>persistent memory</strong> (lessons learned on one client don't surface in
+another client's sessions), its own MCP servers and permissions. The
+practical payoffs that make me love it:</p>
+<ul>
+<li><strong>Integration isolation</strong>: client A's profile has the credentials for
+  their Jira; in every other profile that Jira simply doesn't exist. A
+  whole class of incidents ("I posted on the wrong ticket") becomes
+  impossible by construction.</li>
+<li><strong>Domain skills</strong>: procedures that only apply to one client (their
+  delivery pipeline, their product screenshots) live in that client's
+  profile instead of cluttering everyone else's <code>/</code> menu.</li>
+<li><strong>Routed documentation</strong>: a profile-level skill writes project notes into
+  a vault organized by client, so knowledge accumulates in the right place
+  without having to decide each time.</li>
+</ul>
+<h2 id="repo-level-the-code-in-front-of-you">Repo level: the code in front of you<a class="headerlink" href="#repo-level-the-code-in-front-of-you" title="Permanent link">&para;</a></h2>
+<p>Everything from ch. 02 and 04 applies here (project CLAUDE.md, a committed
+<code>settings.json</code>), plus the pieces that show up once a repo becomes "home
+turf":</p>
+<ul>
+<li><strong>Project hooks</strong>: the PostToolUse autoformat (ch. 07) tuned to the
+  repo's formatter (in my main repo, a <code>make format</code> that keeps CI
+  permanently green).</li>
+<li><strong>Project agents</strong> (committed under <code>.claude/agents/</code>): a <em>gate-runner</em> on
+  a small model that runs the build gate in an isolated context and reports
+  only the verdict, and a read-only <em>guardian</em> that reviews every diff
+  against the repo's architectural invariants. Both are ch. 06 in practice:
+  noise stays out of the session, powers stay minimal.</li>
+<li><strong>Scaffolding skills</strong>: when the repo has components with a fixed anatomy
+  (the same N files every time, conformance tests), a skill generates them
+  right on the first try.</li>
+</ul>
+<h2 id="graphify-a-map-of-the-codebase">graphify: a map of the codebase<a class="headerlink" href="#graphify-a-map-of-the-codebase" title="Permanent link">&para;</a></h2>
+<p>The newest addition to the setup, currently in pilot adoption:
+<a href="https://github.com/Graphify-Labs/graphify">graphify</a> turns a codebase into
+a <strong>queryable knowledge graph</strong> — <code>graphify query "who implements this
+interface?"</code> instead of three rounds of grep and five files read. Parsing
+happens locally (tree-sitter), and for agents it's a force multiplier: the
+reconnaissance that used to eat up half the context window (ch. 03) becomes
+a single query.</p>
+<p>It complements rtk rather than overlapping with it: rtk compresses the
+output of the commands you run, graphify lets you skip running them in the
+first place. The rules I've settled on after studying it:</p>
 <ol>
-<li><strong><code>/init</code> nel tuo progetto</strong> → CLAUDE.md di partenza, poi potalo
-   (cap. 04). Committalo: è documentazione per il team, non solo per te.
-   Senza CLAUDE.md ogni sessione riparte da zero e rispieghi le stesse
-   convenzioni ogni giorno.</li>
-<li><strong>Deny sui segreti</strong> in <code>.claude/settings.json</code>: <code>Read(.env)</code>,
-   <code>Read(.env.*)</code>, <code>Bash(cat *.env*)</code> (cap. 02). Due minuti, per sempre:
-   il giorno che Claude, esplorando per un bug, sta per aprire il file
-   con le API key, il deny lo ferma senza che tu debba essere lì.</li>
-<li><strong>Hook Prettier</strong> su PostToolUse (cap. 07). Ogni file toccato esce già
-   formattato: niente diff sporchi di soli spazi, niente "riformatta tutto"
-   a fine sessione. Un frontend senza questo hook sta lasciando soldi sul
-   tavolo.</li>
-<li><strong><code>/statusline</code></strong>: mettici contesto usato e modello, sono le due cose
-   che vuoi vedere <em>sempre</em>. Il contesto che si riempie spiega metà dei
-   comportamenti strani (cap. 13), e vederlo salire in tempo reale ti fa
-   fare <code>/clear</code> al momento giusto invece che tre task troppo tardi.</li>
-<li><strong>Allow per i comandi fidati</strong>: <code>npm run test</code>, <code>npm run lint</code>, <code>git
-   status/diff/log</code> in allow-list, così smetti di approvare l'ovvio. Ogni
-   prompt di conferma su un comando innocuo è attrito che ti fa sorvegliare
-   invece di lavorare.</li>
-<li>Quando arriva il momento: estensione Chrome o Playwright MCP (cap. 10).</li>
+<li><strong>Per-repo only, never global</strong>: it installs into the project's
+   <code>.claude/</code> (project mode); the graph itself is a local artifact you
+   <code>.gitignore</code>.</li>
+<li><strong>Pin the version</strong>: it's pre-1.0 with frequent releases. Watch the
+   package name too: <code>uv tool install graphifyy==&lt;version&gt;</code> has a double <em>y</em>
+   (the "clean" name on PyPI belongs to a different project).</li>
+<li><strong>Where it pays off</strong>: large codebases you haven't read yourself, a new
+   client's, or your own <em>vibe-coded</em> projects (the agent wrote the code:
+   you know the product, not the code). Cross-repo only when the repos
+   genuinely form one system (a data platform spread across ten repos,
+   yes; a folder of unrelated projects, no, since you'd end up with
+   disconnected islands stitched together by guesswork).</li>
+<li><strong>What it isn't</strong>: it doesn't replace persistent memory or a notes vault.
+   Those hold <em>experiential</em> knowledge ("I've already tried this tool,
+   here's what I learned"); graphify only extracts <em>structural</em> relationships
+   from the code. If a lesson was never written down, no graph will invent
+   it; if it was written down, you'll find it without a graph.</li>
 </ol>
-<p>E poi, la regola più importante: <strong>lascia che il resto cresca
-just-in-time</strong>. Skill alla seconda volta che rispieghi una procedura,
-agente alla prima ricerca che ti sporca il contesto, hook alla prima regola
-che Claude "dimentica". Costruire l'arsenale in anticipo è il modo più
-sicuro di costruire quello sbagliato: il bisogno reale è un criterio di
-progettazione migliore di qualunque previsione.</p>
-<h2 id="modello-giusto-per-il-task-giusto">Modello giusto per il task giusto<a class="headerlink" href="#modello-giusto-per-il-task-giusto" title="Permanent link">&para;</a></h2>
-<p>Il dolore da evitare è doppio: pagare il modello grosso per rinominare una
-variabile, o far litigare il modello piccolo con un bug subdolo per
-un'ora. La mappa:</p>
-<ul>
-<li>Il default (Sonnet) va bene per quasi tutto il lavoro quotidiano.</li>
-<li><strong><code>/model opusplan</code></strong> è il trucco più citato: il modello grosso (Opus)
-  pianifica, quello medio esegue: paghi il ragionamento dove rende (le
-  decisioni) e risparmi dove non serve (la manovalanza di battitura).</li>
-<li>Modello piccolo (Haiku) per il lavoro meccanico, soprattutto negli agenti
-  (<code>model: haiku</code> nel frontmatter, cap. 06): un agente che formatta o cerca
-  stringhe non ha bisogno di ragionare.</li>
-<li><code>Alt+T</code> (extended thinking) per i problemi davvero difficili, non di
-  default: è potenza extra a costo extra, e sul task medio non si vede.</li>
-</ul>
-<p>Nota onesta: la doc ufficiale a volte spinge nella direzione opposta ("usa il
-modello grosso con thinking: meno correzioni = più veloce in totale").
-Entrambe le posizioni sono vere in casi diversi: task ben specificato →
-modello medio; task ambiguo e costoso da correggere → modello grosso. Il
-discrimine è quanto è probabile che il primo tentativo vada male: se è
-probabile, il modello grosso che ci azzecca subito costa <em>meno</em> di tre giri
-col medio.</p>
-<p><em>Il segnale</em>: se ti accorgi che stai correggendo spesso il modello medio su
-un certo tipo di task, quel tipo di task merita il grosso. Se il grosso non
-sta mai facendo niente di intelligente, stai pagando ragionamento a vuoto.</p>
-<h2 id="le-5-abitudini-di-risparmio-ufficiali">Le 5 abitudini di risparmio (ufficiali)<a class="headerlink" href="#le-5-abitudini-di-risparmio-ufficiali" title="Permanent link">&para;</a></h2>
-<ol>
-<li><code>/clear</code> tra un task e l'altro</li>
-<li>modello proporzionato al task</li>
-<li>riferisci i file per path (<code>@src/…</code>) invece di incollarli</li>
-<li>CLAUDE.md sotto ~200 righe</li>
-<li>piano prima delle modifiche grandi (meno tentativi = meno token)</li>
-</ol>
-<p>Noterai che sono le stesse regole dei capitoli 3, 4 e 13: <strong>quello che fa
-lavorare meglio Claude è quello che costa meno</strong>. Non è un caso: il nemico
-comune è il contesto sprecato. Il token che paghi e il token che confonde
-il modello sono lo stesso token: ottimizzare la qualità e ottimizzare il
-costo, qui, sono lo stesso gesto.</p>
-<h2 id="monitorare">Monitorare<a class="headerlink" href="#monitorare" title="Permanent link">&para;</a></h2>
-<p>Quattro strumenti, dal più al meno frequente:</p>
-<ul>
-<li>la statusline: tutto quanto sotto, sempre sott'occhio, senza chiedere</li>
-<li><code>/context</code>: quanto contesto stai usando (da guardare quando le risposte
-  peggiorano, di solito la spiegazione è lì)</li>
-<li><code>/usage</code>: dove sei coi limiti del piano (Pro/Max)</li>
-<li><code>/cost</code>: spesa della sessione (utenti API)</li>
-</ul>
-<p>Ordini di grandezza (luglio 2026): Pro 20 $/mese con ~200 messaggi ogni
-5 ore; Max 5x/20x a 100/200 $/mese; API a consumo (indicativamente 3 $/15 $
-per M token in/out sul modello medio). Se Claude Code diventa lo strumento
-principale, il limite del Pro si sente in fretta: i ~200 messaggi ogni
-5 ore sembrano tanti finché non passi una giornata intera in sessione.</p>
-<h2 id="per-andare-oltre-cenni">Per andare oltre (cenni)<a class="headerlink" href="#per-andare-oltre-cenni" title="Permanent link">&para;</a></h2>
-<p>Tre direzioni per quando il flusso base ti sta stretto:</p>
-<ul>
-<li><strong><code>claude -p "prompt"</code></strong>: modalità headless, Claude Code negli script e
-  in CI (<code>--output-format json</code> per output strutturato). Il momento in cui
-  serve: quando una cosa che fai in sessione vuoi che giri da sola.</li>
-<li><strong>GitHub Actions</strong>: <code>anthropics/claude-code-action</code>, <code>@claude</code> nei
-  commenti delle PR per review e fix automatici; rispetta il CLAUDE.md del
-  repo, quindi le convenzioni che hai scritto valgono anche lì.</li>
-<li><strong>Git worktrees</strong>: più sessioni in parallelo su branch diversi
-  (<code>claude --worktree</code>); il collo di bottiglia diventa la tua capacità di
-  fare review, non Claude. Da provare solo quando il flusso a sessione
-  singola è già solido: parallelizzare il caos produce solo caos parallelo.</li>
-</ul>
-<hr />
-<p><strong>In sintesi</strong>: cinque mosse il primo giorno (init, deny, hook format,
-statusline, allow-list), il resto quando serve davvero. E l'abitudine che
-batte tutte: contesto pulito, evidenze sempre. Se dopo queste abitudini il
-budget stringe ancora, il <a href="15-risparmiare-token.html">cap. 15</a> presenta gli
-strumenti che comprimono i token alla fonte, con numeri misurati, non
-promessi.</p>
+<h2 id="in-short">In short<a class="headerlink" href="#in-short" title="Permanent link">&para;</a></h2>
+<p>Three levels, three questions: <em>is it true everywhere?</em> → global; <em>is it
+true for this client?</em> → profile; <em>is it true for this code?</em> → repo. The
+setup grows just-in-time like everything else in this guide. None of the
+pieces above came out of an afternoon of configuring: each one arrived once
+the need had asked for it twice.</p>
 
 
 
@@ -1281,7 +1333,7 @@ promessi.</p>
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Torna su
+  Back to top
 </button>
         
       </main>
@@ -1290,40 +1342,24 @@ promessi.</p>
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Piede" >
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="10-workflow-frontend.html" class="md-footer__link md-footer__link--prev" aria-label="Precedente: 10 · Workflow frontend">
+          <a href="15-risparmiare-token.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 15 · Saving tokens">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Precedente
+                Previous
               </span>
               <div class="md-ellipsis">
-                10 · Workflow frontend
+                15 · Saving tokens
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="15-risparmiare-token.html" class="md-footer__link md-footer__link--next" aria-label="Successivo: 15 · Risparmiare token">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Successivo
-              </span>
-              <div class="md-ellipsis">
-                15 · Risparmiare token
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
@@ -1353,10 +1389,10 @@ promessi.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
