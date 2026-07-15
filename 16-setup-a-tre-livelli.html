@@ -1236,9 +1236,11 @@ symlink dentro ogni profilo: si aggiorna un file, vale ovunque, niente copie
 che divergono.</p>
 <h2 id="livello-cliente-un-profilo-per-contesto">Livello cliente: un profilo per contesto<a class="headerlink" href="#livello-cliente-un-profilo-per-contesto" title="Permanent link">&para;</a></h2>
 <p>Il meccanismo sotto è quello del cap. 02: <code>CLAUDE_CONFIG_DIR</code> sposta l'intera
-configurazione. Io lo governo con uno script fatto in casa che chiama i
-profili per nome ("passa al cliente A") ed esporta la variabile giusta; il
-principio funziona anche a mano:</p>
+configurazione. Io lo governo con <a href="https://github.com/synth1s/cloak">cloak</a>
+(<code>npm install -g @synth1s/cloak</code>): profili nominati da creare e indossare in
+un comando — <code>cloak create cliente-a</code>, <code>cloak switch cliente-a</code> — con la
+lista del "guardaroba" sempre a portata di <code>cloak ls</code>. Il principio comunque
+funziona anche a mano, senza installare nulla:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CLAUDE_CONFIG_DIR</span><span class="o">=</span>~/.profili/cliente-a<span class="w"> </span>claude
 </code></pre></div>
 <p>Ogni profilo è un mondo: la sua storia delle sessioni, la sua <strong>memoria

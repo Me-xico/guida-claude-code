@@ -1236,9 +1236,12 @@ into every profile: update one file, it applies everywhere, no copies
 drifting out of sync.</p>
 <h2 id="client-level-one-profile-per-context">Client level: one profile per context<a class="headerlink" href="#client-level-one-profile-per-context" title="Permanent link">&para;</a></h2>
 <p>The mechanism underneath is the one from ch. 02: <code>CLAUDE_CONFIG_DIR</code> moves
-the entire configuration. I drive it with a homemade script that switches
-profiles by name ("switch to client A") and exports the right variable, but
-the principle works by hand too:</p>
+the entire configuration. I manage it with
+<a href="https://github.com/synth1s/cloak">cloak</a>
+(<code>npm install -g @synth1s/cloak</code>): named profiles you create and put on in
+one command — <code>cloak create cliente-a</code>, <code>cloak switch cliente-a</code> — with the
+"wardrobe" list always a <code>cloak ls</code> away. The principle works by hand too,
+without installing anything:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CLAUDE_CONFIG_DIR</span><span class="o">=</span>~/.profili/cliente-a<span class="w"> </span>claude
 </code></pre></div>
 <p>Each profile is its own world: its own session history, its own
