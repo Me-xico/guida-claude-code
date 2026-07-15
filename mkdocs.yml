@@ -1,0 +1,67 @@
+site_name: Guida a Claude Code
+site_description: Da zero a produttivo — verificato luglio 2026, v2.1.210
+docs_dir: guida-claude-code
+site_dir: guida-claude-code-sito
+use_directory_urls: false
+
+theme:
+  name: material
+  language: it
+  font: false
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Tema chiaro
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Tema scuro
+  features:
+    - navigation.footer
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+
+nav:
+  - Home: README.md
+  - Base:
+      - 01 · Installazione: 01-installazione.md
+      - 02 · Setup e configurazione: 02-setup-e-config.md
+      - 03 · Uso quotidiano: 03-uso-quotidiano.md
+      - 04 · CLAUDE.md e rules: 04-claude-md-e-rules.md
+  - Metodo:
+      - 11 · Verifica: 11-verifica.md
+      - 12 · Prompt engineering: 12-prompt-engineering.md
+      - 13 · Errori comuni: 13-errori-comuni.md
+  - Potenza:
+      - 05 · Skill e slash command: 05-skills-e-slash-commands.md
+      - 06 · Agenti: 06-agenti.md
+      - 07 · Hook: 07-hooks.md
+      - 08 · MCP: 08-mcp.md
+      - 09 · Plugin: 09-plugins.md
+      - 10 · Workflow frontend: 10-workflow-frontend.md
+  - Riferimento:
+      - 14 · Must-have e costi: 14-must-have-e-costi.md
+      - 15 · Risparmiare token: 15-risparmiare-token.md
+
+plugins:
+  - search
+  - offline
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+exclude_docs: |
+  slides.html
+  build-slides.py
+  SANITIZE.md

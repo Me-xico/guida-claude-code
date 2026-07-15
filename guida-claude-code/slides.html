@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guida a Claude Code — sfogliabile</title>
+<style>
+:root { --bg:#1a1c1f; --fg:#e8e6e3; --dim:#9a978f; --accent:#e8845c;
+         --code-bg:#26292e; --border:#3a3d42; }
+html[data-theme=light] { --bg:#faf9f6; --fg:#1f2328; --dim:#6a6e74;
+         --accent:#c2542a; --code-bg:#f0efec; --border:#d8d6d0; }
+* { box-sizing:border-box; margin:0; }
+body { background:var(--bg); color:var(--fg); font:22px/1.55 system-ui,sans-serif; }
+.slide { display:none; min-height:100vh; padding:3.2rem 8vw 4.5rem; }
+.slide.active { display:block; }
+.crumb { color:var(--accent); font-size:.75em; text-transform:uppercase;
+          letter-spacing:.06em; margin-bottom:1.2rem; }
+.content h1 { font-size:2.1em; margin-bottom:1rem; }
+.content h2 { font-size:1.6em; margin-bottom:1rem; color:var(--accent); }
+.content h3 { font-size:1.15em; margin:1.2rem 0 .5rem; }
+.content p, .content ul, .content ol, .content table, .content blockquote,
+.content pre { margin-bottom:.9rem; }
+.content li { margin:.3rem 0 .3rem 1.2rem; }
+.content code { background:var(--code-bg); padding:.12em .35em;
+                 border-radius:4px; font-size:.85em; }
+.content pre { background:var(--code-bg); padding:1rem; border-radius:8px;
+                overflow-x:auto; }
+.content pre code { background:none; padding:0; font-size:.8em; }
+.content blockquote { border-left:4px solid var(--accent); padding:.4rem 1rem;
+                       color:var(--dim); }
+.content table { border-collapse:collapse; width:100%; font-size:.9em; }
+.content th, .content td { border:1px solid var(--border); padding:.45rem .7rem;
+                            text-align:left; }
+.content img { max-width:100%; max-height:62vh; display:block;
+                margin:1rem auto; border-radius:8px; }
+.content a { color:var(--accent); }
+.divider { display:none; } .divider.active { display:flex;
+            align-items:center; justify-content:center; }
+.divider h1 { font-size:4em; color:var(--accent); }
+#bar { position:fixed; bottom:0; left:0; right:0; display:flex;
+        justify-content:space-between; padding:.5rem 1.2rem;
+        background:var(--bg); border-top:1px solid var(--border);
+        font-size:.7em; color:var(--dim); }
+#toc { position:fixed; inset:0; background:var(--bg); overflow-y:auto;
+        padding:3rem 10vw; display:none; z-index:10; }
+#toc.open { display:block; }
+.toc-item { padding:.3rem .6rem; cursor:pointer; border-radius:6px; }
+.toc-item:hover { background:var(--code-bg); }
+.toc-block { color:var(--accent); font-weight:700; margin-top:1rem;
+              pointer-events:none; }
+.edge { position:fixed; top:0; bottom:2.5rem; width:11vw; cursor:pointer;
+         z-index:5; } #prev { left:0; } #next { right:0; }
+</style></head><body>
+<section class="slide divider"><div class="divider-inner">
+<h1 style="font-size:3em">Guida a Claude Code</h1>
+<p style="color:var(--dim);margin-top:1rem">Da zero a produttivo · verificato
+luglio 2026 (v2.1.210) · ← → per sfogliare · <b>i</b> = indice · <b>t</b> = tema</p>
+</div></section>
+<section class="slide divider"><div class="divider-inner"><h1>Base</h1></div></section><section class="slide"><div class="crumb">01 — Installazione e primo avvio</div><div class="content"><h1>01 — Installazione e primo avvio</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 sulla doc ufficiale, con Claude Code <strong>2.1.210</strong>.
+Se qualche comando non corrisponde, controlla i <a href="https://code.claude.com/docs/en/setup">docs di setup</a>.</p>
+</blockquote>
+<p>In questo capitolo installiamo Claude Code, facciamo il login e diamo
+un'occhiata a cosa succede al primo avvio. Alla fine avrai un <code>claude</code>
+funzionante nel terminale e saprai dove mettere le mani se qualcosa non parte.</p></div></section><section class="slide"><div class="crumb">01 · Installazione</div><div class="content"><h2>Installazione</h2>
+<p><strong>Cos'è.</strong> L'installer ufficiale è un semplice script che scarica un binario
+nativo e lo mette nel tuo <code>PATH</code>. È il metodo raccomandato per un motivo
+preciso: il binario installato così <strong>si aggiorna da solo in background</strong> —
+come fa un browser moderno — quindi dopo l'installazione non dovrai più
+pensarci.</p>
+<p><strong>Come si installa.</strong> Un comando, a seconda del sistema:</p>
+<pre><code class="language-bash"># macOS / Linux / WSL
+curl -fsSL https://claude.ai/install.sh | bash
+</code></pre>
+<pre><code class="language-powershell"># Windows (PowerShell)
+irm https://claude.ai/install.ps1 | iex
+</code></pre>
+<p><strong>Dove finisce.</strong> Il binario viene messo in <code>~/.local/bin/claude</code>. È un
+eseguibile autonomo: <strong>non serve Node.js</strong>, né nessun altro runtime. Se hai
+già visto in giro il pacchetto npm (<code>npm install -g @anthropic-ai/claude-code</code>)
+sappi che è la via legacy: funziona ancora, ma anche lui non fa altro che
+scaricare lo stesso binario nativo — non c'è motivo di preferirlo.</p>
+<p>Se invece vuoi che sia il tuo package manager a governare gli aggiornamenti
+(niente auto-update), esistono le alternative classiche: Homebrew
+(<code>brew install --cask claude-code</code>), WinGet, e repository apt/dnf/apk firmati.</p>
+<p><strong>Verifica.</strong> Appena finito, controlla che il binario risponda:</p>
+<pre><code class="language-console">$ claude --version
+2.1.210 (Claude Code)
+</code></pre>
+<p>Se il comando non viene trovato, quasi sempre il problema è che
+<code>~/.local/bin</code> non è nel <code>PATH</code> della tua shell.</p>
+<p><strong>Requisiti e note per piattaforma.</strong> Serve macOS 13+ / Windows 10 1809+ /
+Ubuntu 20.04+ / Debian 10+ e 4 GB di RAM — requisiti che qualunque macchina
+da sviluppo soddisfa. Due note valgono la pena:</p>
+<ul>
+<li><strong>Windows nativo</strong>: Git for Windows è opzionale, ma installa anche una
+  bash — e questo abilita il tool Bash di Claude Code. Senza, Claude esegue
+  i comandi via PowerShell. Funziona, ma gran parte degli esempi che trovi
+  in giro (e in questa guida) assumono una shell POSIX.</li>
+<li><strong>WSL</strong>: installa Claude Code <em>dentro</em> la distribuzione Linux (quindi con
+  lo script <code>curl</code> da un terminale WSL), non da PowerShell. Deve vivere
+  nello stesso mondo dei file su cui lavorerai.</li>
+</ul></div></section><section class="slide"><div class="crumb">01 · Login e piani</div><div class="content"><h2>Login e piani</h2>
+<p><strong>Come funziona.</strong> Alla prima esecuzione di <code>claude</code>, prima ancora di poter
+scrivere qualcosa, parte il flusso di autenticazione: Claude Code apre il
+browser, tu ti autentichi lì, e il terminale riceve le credenziali. Questa è
+la schermata di scelta che ti accoglie:</p>
+<p><img alt="Schermata di scelta del metodo di login" src="assets/01-login.svg" /></p>
+<p>Le due opzioni corrispondono a due modi diversi di pagare:</p>
+<ul>
+<li><strong>Abbonamento claude.ai (Pro/Max)</strong> — la via semplice per uso personale:
+  OAuth via browser, nessuna API key da gestire, costo fisso mensile.</li>
+<li><strong>Claude Console (API)</strong> — per billing a consumo o aziendale: paghi a
+  token effettivamente usati, senza limiti orari.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Piano</th>
+<th>Costo</th>
+<th>Claude Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free</td>
+<td>0 $</td>
+<td>❌ non incluso</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td>20 $/mese</td>
+<td>✅ ~200 messaggi / 5 ore</td>
+</tr>
+<tr>
+<td>Max 5x / 20x</td>
+<td>100 / 200 $/mese</td>
+<td>✅ limiti 5x / 20x rispetto a Pro</td>
+</tr>
+<tr>
+<td>API</td>
+<td>a token</td>
+<td>✅ senza limiti orari</td>
+</tr>
+</tbody>
+</table>
+<p>Come leggere la tabella: i piani in abbonamento hanno un budget di messaggi
+che si rinnova ogni 5 ore. Per iniziare <strong>Pro basta</strong> — il limite si sente
+solo con un uso intensivo. Se Claude Code diventa il tuo strumento
+principale, Max 5x è l'upgrade naturale; l'API conviene quando serve un uso
+senza tetti orari o fatturazione aziendale.</p>
+<p><strong>Dove finiscono le credenziali.</strong> Su Linux in
+<code>~/.claude/.credentials.json</code>, con permessi <code>0600</code> (leggibile solo da te);
+su macOS nel Keychain di sistema. Non devi toccarle mai a mano: per cambiare
+account senza uscire dalla sessione c'è <code>/login</code>, per scollegarti <code>/logout</code>.</p></div></section><section class="slide"><div class="crumb">01 · Primo avvio</div><div class="content"><h2>Primo avvio</h2>
+<p>Finito il login ti trovi direttamente nel prompt interattivo. Niente wizard,
+niente scelta del tema (quello si cambia dopo, con <code>/config</code>): Claude Code ti
+mostra versione, modello attivo e piano, e aspetta il primo messaggio.</p>
+<p><img alt="Primo avvio: versione, modello, piano e prompt" src="assets/01-primo-avvio.svg" /></p>
+<p>Nota nella schermata i tre elementi in alto — versione, modello, piano —
+sono la prima cosa da controllare quando qualcosa si comporta in modo
+inatteso. Due comandi da conoscere subito:</p>
+<ul>
+<li><code>/help</code> — l'elenco dei comandi disponibili.</li>
+<li><code>/doctor</code> — la diagnostica completa: verifica installazione,
+  configurazione, server MCP e stato degli aggiornamenti. Esiste anche
+  fuori dalla sessione come <code>claude doctor</code>, utile proprio quando Claude
+  non parte e non puoi usare lo slash command.</li>
+</ul></div></section><section class="slide"><div class="crumb">01 · Estensione VS Code (e le altre interfacce)</div><div class="content"><h2>Estensione VS Code (e le altre interfacce)</h2>
+<p>Per chi vive nell'editor esiste l'estensione ufficiale: cerca <strong>"Claude
+Code"</strong> nel marketplace (publisher Anthropic, id <code>Anthropic.claude-code</code>,
+richiede VS Code 1.98+). Rispetto alla CLI aggiunge un pannello di chat,
+diff affiancati con commenti inline, checkpoint per riavvolgere il codice e
+la gestione dei permessi direttamente dal prompt box.</p>
+<p>Un dettaglio importante da capire: l'estensione include una <strong>sua copia
+della CLI</strong>, ma <strong>condivide la configurazione</strong> — <code>~/.claude/settings.json</code>,
+i CLAUDE.md, i server MCP, le skills. In pratica esiste una sola "identità"
+di Claude Code sulla tua macchina: tutto quello che configuri nel terminale
+(cap. 02) vale automaticamente anche nell'editor, e viceversa.</p>
+<p>Esistono anche una <strong>desktop app</strong> (macOS/Windows/Linux) e <strong>Claude Code on
+web</strong>: stessa sostanza, interfacce diverse. Questa guida usa la CLI, che è
+dove vivono tutte le feature.</p></div></section><section class="slide"><div class="crumb">01 · Aggiornamenti</div><div class="content"><h2>Aggiornamenti</h2>
+<p>Con l'installer nativo la regola è: non fai nulla. Il binario controlla e
+scarica gli aggiornamenti da solo, in background. Se vuoi forzare
+l'aggiornamento a mano c'è <code>claude update</code>; per sapere com'è andato l'ultimo
+tentativo, <code>claude doctor</code>.</p>
+<p>L'unica scelta che puoi fare è <strong>quale canale di rilascio</strong> seguire. Si
+configura in <code>settings.json</code> (il file di configurazione che vedremo in
+dettaglio nel cap. 02 — per le impostazioni personali è
+<code>~/.claude/settings.json</code>). Il file completo, nel caso minimo, è questo:</p>
+<pre><code class="language-json">{ &quot;autoUpdatesChannel&quot;: &quot;stable&quot; }
+</code></pre>
+<p>I valori possibili sono due: <code>latest</code> (il default — ricevi le novità appena
+escono) e <code>stable</code> (circa una settimana indietro, così le release con
+regressioni vengono saltate prima che ti arrivino). Se hai installato con
+Homebrew/WinGet/apt, invece, l'auto-update non c'è: aggiorni con il package
+manager, come per qualunque altro pacchetto.</p>
+<hr />
+<p><strong>In sintesi</strong>: <code>curl | bash</code>, login col browser, <code>/doctor</code> se qualcosa non
+torna. Prossimo capitolo: dove vive la configurazione e come piegarla al tuo
+progetto.</p></div></section><section class="slide"><div class="crumb">02 — Setup e configurazione</div><div class="content"><h1>02 — Setup e configurazione</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
+Esempio vivo: la cartella <a href="demo/"><code>demo/</code></a> di questa guida contiene un
+progetto React/TS con <code>CLAUDE.md</code> e <code>.claude/settings.json</code> reali.</p>
+</blockquote>
+<p>La configurazione di Claude Code ruota attorno a tre cose: <strong>dove</strong> stanno i
+file, <strong>cosa</strong> ci scrivi dentro (permessi, modello, istruzioni) e <strong>come</strong>
+Claude li combina quando parte una sessione. Questo capitolo le affronta in
+quest'ordine.</p></div></section><section class="slide"><div class="crumb">02 · Dove vive la configurazione</div><div class="content"><h2>Dove vive la configurazione</h2>
+<p><strong>Cos'è.</strong> Claude Code legge la configurazione da due mondi distinti:
+<code>~/.claude/</code> nella tua home (personale: vale per te, su qualunque progetto)
+e <code>.claude/</code> dentro il progetto (condiviso col team via git). L'analogia
+utile è quella delle preferenze utente vs. la config del repo: <code>.editorconfig</code>
+è del progetto e viaggia con il codice, le impostazioni del tuo editor sono
+tue e restano sulla tua macchina.</p>
+<p><strong>Come funziona il merge.</strong> All'avvio della sessione i settings dei vari
+livelli si sommano; quando la stessa chiave è definita a più livelli, vince
+il livello più forte. La precedenza, dal più forte al più debole:</p>
+<table>
+<thead>
+<tr>
+<th>Livello</th>
+<th>File</th>
+<th>In git?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Managed (azienda)</td>
+<td><code>/etc/claude-code/managed-settings.json</code></td>
+<td>gestito dall'IT, non scavalcabile</td>
+</tr>
+<tr>
+<td>Flag CLI</td>
+<td><code>claude --permission-mode …</code></td>
+<td>no (solo sessione)</td>
+</tr>
+<tr>
+<td>Locale</td>
+<td><code>.claude/settings.local.json</code></td>
+<td><strong>no</strong> (gitignorato in automatico)</td>
+</tr>
+<tr>
+<td>Progetto</td>
+<td><code>.claude/settings.json</code></td>
+<td><strong>sì</strong></td>
+</tr>
+<tr>
+<td>Utente</td>
+<td><code>~/.claude/settings.json</code></td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>Leggila dal basso: i tuoi default globali (<code>~/.claude/settings.json</code>) valgono
+ovunque, il progetto li può scavalcare, tu puoi scavalcare il progetto con il
+file locale, un flag CLI vale solo per quella sessione, e sopra tutto ci
+sono gli eventuali vincoli aziendali.</p>
+<p>La regola pratica per decidere dove scrivere una cosa: in
+<code>.claude/settings.json</code> le convenzioni di team (permessi, hook) — è
+committato, quindi chi clona il repo se le ritrova; in
+<code>.claude/settings.local.json</code> i tuoi override personali su quel progetto —
+Claude Code lo gitignora in automatico; in <code>~/.claude/settings.json</code> i
+default che vuoi su ogni progetto. I file si ricaricano <strong>a caldo</strong>: modifichi
+e la sessione in corso vede il cambiamento, senza riavviare (le uniche
+eccezioni sono <code>model</code> e <code>outputStyle</code>).</p></div></section><section class="slide"><div class="crumb">02 · settings.json: le chiavi che usi davvero</div><div class="content"><h2>settings.json: le chiavi che usi davvero</h2>
+<p><strong>Cos'è.</strong> Il file di settings è un JSON che governa il comportamento di
+Claude Code: che cosa può fare senza chiederti il permesso, quale modello
+usare, quali hook eseguire. Lo crei tu a mano (o lo fa <code>/permissions</code> quando
+salvi una regola dal pannello); non esiste finché qualcuno non lo scrive.</p>
+<p><strong>Come si scrive.</strong> Questo è il file <strong>completo</strong> del progetto demo,
+<a href="demo/.claude/settings.json"><code>demo/.claude/settings.json</code></a>:</p>
+<pre><code class="language-json">{
+  &quot;permissions&quot;: {
+    &quot;allow&quot;: [
+      &quot;Bash(npm run lint)&quot;,
+      &quot;Bash(npm run test:*)&quot;,
+      &quot;Bash(git status)&quot;,
+      &quot;Bash(git diff:*)&quot;,
+      &quot;Bash(git log:*)&quot;
+    ],
+    &quot;deny&quot;: [
+      &quot;Read(.env)&quot;,
+      &quot;Read(.env.*)&quot;,
+      &quot;Bash(cat *.env*)&quot;
+    ]
+  }
+}
+</code></pre>
+<p>La sintassi di ogni regola è <code>Tool(specifier)</code>: il nome del tool di Claude
+Code (<code>Bash</code>, <code>Read</code>, <code>Edit</code>, …) e, tra parentesi, un pattern con glob su
+cosa la regola copre. Quindi <code>Bash(npm run test:*)</code> copre <code>npm run test</code> e
+ogni sua variante (<code>npm run test:unit</code>, …), <code>Read(*.md)</code> copre la lettura
+dei file markdown, <code>Edit(.github/**)</code> le modifiche sotto <code>.github/</code>.</p>
+<p>Le liste sono tre, e rispondono a tre domande diverse:</p>
+<ul>
+<li><code>allow</code> — "fallo senza chiedermelo": niente prompt di conferma.</li>
+<li><code>deny</code> — "mai, in nessun caso": bloccato sempre, e <strong>vince su tutto</strong>
+  (anche su un <code>allow</code> che lo coprirebbe).</li>
+<li><code>ask</code> — "chiedimelo esplicitamente ogni volta".</li>
+</ul>
+<p><strong>Come funziona in pratica.</strong> Quando Claude sta per usare un tool, la
+richiesta viene confrontata con le regole: se matcha un <code>deny</code> viene
+bloccata, se matcha un <code>allow</code> passa senza prompt, altrimenti si applica il
+permission mode corrente (sezione successiva). Il pattern più importante da
+copiare subito è <strong>il deny sui segreti</strong>: <code>.env</code> e simili non devono essere
+leggibili nemmeno per sbaglio. Nota come il deny della demo chiude entrambe
+le porte — il tool <code>Read</code> (le prime due regole) e la lettura via shell con
+<code>cat</code> (la terza). Bloccarne solo una lascerebbe l'altra aperta.</p>
+<p>C'è un momento in cui questo file ti passa davanti agli occhi: la prima
+volta che apri un progetto che contiene permessi pre-approvati, Claude Code
+te li elenca e ti chiede se ti fidi. È una tutela sensata — quel file arriva
+dal repo, cioè da altri — e questo è il trust dialog della nostra demo, con
+le regole <code>allow</code> e <code>deny</code> viste sopra:</p>
+<p><img alt="Trust dialog con le permission pre-approvate del progetto" src="assets/02-trust-dialog.svg" /></p>
+<p>Oltre a <code>permissions</code>, le altre chiavi che incontrerai in questa guida:
+<code>model</code>, <code>hooks</code> (cap. 07), <code>env</code> (variabili d'ambiente per la sessione),
+<code>statusLine</code>, <code>outputStyle</code>, <code>autoUpdatesChannel</code> (cap. 01),
+<code>enabledPlugins</code> (cap. 09), <code>permissions.defaultMode</code> (qui sotto).</p></div></section><section class="slide"><div class="crumb">02 · Permission mode</div><div class="content"><h2>Permission mode</h2>
+<p><strong>Cos'è.</strong> Se le regole di <code>settings.json</code> decidono il destino delle singole
+azioni, il permission mode è la manopola globale: quanto Claude può fare
+<em>senza chiedere</em> per tutto ciò che non è coperto da una regola. Si cambia in
+tre modi: <strong>Shift+Tab</strong> durante la sessione (il più comodo),
+<code>--permission-mode</code> all'avvio, o <code>permissions.defaultMode</code> nei settings per
+renderlo il default.</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Cosa fa senza chiedere</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code> (Manual)</td>
+<td>solo letture; chiede per edit e comandi</td>
+</tr>
+<tr>
+<td><code>acceptEdits</code></td>
+<td>letture + edit dei file + operazioni fs sicure</td>
+</tr>
+<tr>
+<td><code>plan</code></td>
+<td>solo letture: esplora e propone un piano, non tocca nulla</td>
+</tr>
+<tr>
+<td><code>auto</code></td>
+<td>tutto, ma ogni azione passa da un classificatore di sicurezza; richiede modelli recenti e account abilitato</td>
+</tr>
+<tr>
+<td><code>dontAsk</code></td>
+<td>solo ciò che è in <code>allow</code>, il resto è negato (per uso non interattivo)</td>
+</tr>
+<tr>
+<td><code>bypassPermissions</code></td>
+<td>tutto senza controlli — <strong>solo in container/VM isolate</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Come si presenta.</strong> In <code>default</code> (Manual), ogni scrittura ti passa davanti
+prima di essere eseguita. Ecco la richiesta per la creazione di un file:
+nota che il prompt mostra il <strong>diff completo</strong> di quello che verrebbe
+scritto — decidi guardando il contenuto reale, non una descrizione — e che
+tra le opzioni c'è la scorciatoia per passare direttamente ad <code>acceptEdits</code>
+se ti sei stancato di confermare ogni edit:</p>
+<p><img alt="Richiesta di permesso per la creazione di un file" src="assets/02-permission-prompt.svg" /></p>
+<p>La progressione consigliata: <code>default</code> finché non hai preso confidenza, poi
+<code>acceptEdits</code> per il lavoro quotidiano, <code>plan</code> quando affronti task grossi
+in cui vuoi vedere il piano prima del codice (cap. 03). Qualunque mode tu
+scelga, i percorsi protetti (<code>.git/</code>, <code>.claude/</code>, i dotfile della shell) non
+vengono mai auto-approvati: quelli te li chiede sempre.</p>
+<p>Per vedere e modificare le regole senza toccare il JSON a mano c'è il
+pannello <code>/permissions</code>. Qui sotto lo vedi aperto sul progetto demo: nota i
+tab in alto — <strong>Allow / Ask / Deny / Workspace</strong> (le tre liste, più le
+directory autorizzate) — e come le regole elencate siano esattamente quelle
+del <code>settings.json</code> visto sopra, con accanto il livello da cui provengono:</p>
+<p><img alt="Il pannello /permissions con le regole del progetto demo" src="assets/02-permissions-panel.svg" /></p></div></section><section class="slide"><div class="crumb">02 · CLAUDE.md: le istruzioni permanenti</div><div class="content"><h2>CLAUDE.md: le istruzioni permanenti</h2>
+<p><strong>Cos'è.</strong> <code>CLAUDE.md</code> è il file di istruzioni che Claude legge all'inizio di
+ogni sessione: il documento di onboarding del progetto, scritto una volta e
+valido sempre. Tutto quello che diresti a un collega nuovo il primo giorno —
+quali comandi lanciare, quali convenzioni rispettare, dove stanno i test —
+va qui, così non devi ripeterlo a ogni sessione.</p>
+<p><strong>Dove sta.</strong> Come i settings, esiste a più livelli, caricati in ordine
+(l'approfondimento è nel cap. 04):</p>
+<ul>
+<li><code>~/.claude/CLAUDE.md</code> — le tue preferenze personali, valgono ovunque</li>
+<li><code>./CLAUDE.md</code> (o <code>.claude/CLAUDE.md</code>) — convenzioni del progetto, committato</li>
+<li><code>./CLAUDE.local.md</code> — note personali sul progetto, gitignorato</li>
+<li><code>.claude/rules/*.md</code> — regole <strong>path-scoped</strong> (sotto)</li>
+<li><code>CLAUDE.md</code> nelle sottocartelle — caricati on-demand, quando Claude lavora
+  lì dentro (utile nei monorepo)</li>
+</ul>
+<p><strong>Come si scrive.</strong> È markdown libero: niente schema, niente campi
+obbligatori. Questo è il <a href="demo/CLAUDE.md"><code>demo/CLAUDE.md</code></a> completo, un
+esempio realistico da progetto frontend:</p>
+<p>```markdown</p>
+<h1>demo-app</h1>
+<p>SPA React + TypeScript (Vite). Componenti in <code>src/components/</code>, un file per
+componente, stile con CSS modules (niente styled-components).</p></div></section><section class="slide"><div class="crumb">02 · Comandi</div><div class="content"><h2>Comandi</h2>
+<ul>
+<li><code>npm run dev</code> — dev server</li>
+<li><code>npm run test</code> — test (Vitest); lanciali prima di dichiarare finito un task</li>
+<li><code>npm run lint</code> — ESLint su src/</li>
+</ul></div></section><section class="slide"><div class="crumb">02 · Convenzioni</div><div class="content"><h2>Convenzioni</h2>
+<ul>
+<li>TypeScript strict: niente <code>any</code>, preferisci type inference dove possibile.</li>
+<li>Componenti funzione + hooks, niente class components.</li>
+<li>I test stanno accanto al componente: <code>Button.tsx</code> → <code>Button.test.tsx</code>.</li>
+<li>Messaggi di commit in inglese, imperativi ("add login form").
+```</li>
+</ul>
+<p>Nota la struttura: cosa è il progetto, i comandi (col <em>quando</em> usarli: "prima
+di dichiarare finito un task"), le convenzioni. Tienilo sotto ~200 righe —
+viene caricato a ogni sessione, e un CLAUDE.md chilometrico diluisce le
+istruzioni che contano.</p>
+<p>Due meccanismi in più da conoscere:</p>
+<ul>
+<li><strong>Import</strong>: una riga che inizia con <code>@path/to/file</code> include quel file nel
+  contesto. È ricorsivo (un file importato può importarne altri, fino a 4
+  salti), utile per spezzare istruzioni lunghe in file tematici.</li>
+<li><strong>Rules path-scoped</strong>: i file in <code>.claude/rules/*.md</code> hanno un frontmatter
+  <code>paths:</code> con glob, e si attivano <strong>solo quando Claude tocca quei file</strong> —
+  a differenza del CLAUDE.md, che è sempre in contesto. Perfette per regole
+  che riguardano solo una parte del codebase. Esistono anche a livello
+  utente, in <code>~/.claude/rules/</code>.</li>
+</ul></div></section><section class="slide"><div class="crumb">02 · I comandi di configurazione</div><div class="content"><h2>I comandi di configurazione</h2>
+<p>Quasi tutto quello che abbiamo visto si può gestire anche da dentro la
+sessione, senza aprire un editor:</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>A cosa serve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/init</code></td>
+<td>genera il CLAUDE.md del progetto analizzando il codebase</td>
+</tr>
+<tr>
+<td><code>/config</code></td>
+<td>UI dei settings; anche diretto: <code>/config model=opus theme=dark</code></td>
+</tr>
+<tr>
+<td><code>/permissions</code></td>
+<td>gestisce allow/deny/ask e le directory autorizzate</td>
+</tr>
+<tr>
+<td><code>/model</code></td>
+<td>cambia modello</td>
+</tr>
+<tr>
+<td><code>/memory</code></td>
+<td>lista/edita CLAUDE.md, CLAUDE.local.md e rules</td>
+</tr>
+<tr>
+<td><code>/doctor</code></td>
+<td>salute dell'installazione; propone anche tagli al CLAUDE.md e pre-approvazioni dei comandi frequenti</td>
+</tr>
+<tr>
+<td><code>/statusline</code></td>
+<td>configura la barra di stato</td>
+</tr>
+</tbody>
+</table>
+<p>Il punto d'ingresso è <code>/config</code>: un pannello navigabile con i tab
+<strong>Settings / Status / Config / Usage / Stats</strong> e l'elenco filtrabile di
+tutte le impostazioni. Ecco come si presenta — nota che tra le voci c'è
+anche il <em>Default permission mode</em> di cui abbiamo parlato, cambiabile da qui
+invece che nel JSON:</p>
+<p><img alt="Il pannello /config con i tab e l'elenco delle impostazioni" src="assets/02-config-panel.svg" /></p>
+<p>Due comandi meritano una menzione in più. <code>/init</code> è il modo giusto di
+iniziare su un progetto esistente: analizza il codebase e genera un primo
+CLAUDE.md, che poi rifinisci a mano. E <code>/doctor</code> non è solo diagnostica:
+propone anche tagli al CLAUDE.md quando cresce troppo e pre-approvazioni per
+i comandi che confermi sempre — due manutenzioni che altrimenti ti
+dimenticheresti di fare.</p></div></section><section class="slide"><div class="crumb">02 · Variabili d'ambiente da conoscere</div><div class="content"><h2>Variabili d'ambiente da conoscere</h2>
+<ul>
+<li><code>CLAUDE_CONFIG_DIR</code> — sposta <code>~/.claude</code> altrove. Utile per tenere profili
+  completamente separati (lavoro/personale/test): ogni directory ha i suoi
+  settings, le sue credenziali, i suoi CLAUDE.md.</li>
+<li><code>DISABLE_AUTOUPDATER=1</code> — disattiva il check di aggiornamento in
+  background. Va nella chiave <code>env</code> dei settings, che è il posto per le
+  variabili d'ambiente che vuoi attive in ogni sessione.</li>
+</ul>
+<hr />
+<p><strong>In sintesi</strong>: committa <code>.claude/settings.json</code> e <code>CLAUDE.md</code> (sono lo
+standard del team), tieni il personale in <code>*.local.*</code>, metti subito il deny
+sui <code>.env</code>, e usa Shift+Tab per dosare la fiducia. Prossimo capitolo: come si
+lavora davvero tutti i giorni.</p></div></section><section class="slide"><div class="crumb">03 — Uso quotidiano</div><div class="content"><h1>03 — Uso quotidiano</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).</p>
+</blockquote>
+<p>Nel capitolo 02 hai configurato Claude Code; qui vediamo come ci si lavora
+tutti i giorni. Prima però un concetto di interfaccia che userai in ogni
+sezione di questo capitolo: i comandi slash.</p></div></section><section class="slide"><div class="crumb">03 · I comandi slash: il pannello di controllo</div><div class="content"><h2>I comandi slash: il pannello di controllo</h2>
+<p><strong>Cosa sono</strong>: comandi che iniziano con <code>/</code> (<code>/clear</code>, <code>/rewind</code>,
+<code>/compact</code>…). Non sono prompt per il modello: sono ordini all'<em>applicazione</em>
+Claude Code — pensa alla command palette di VS Code, ma testuale.</p>
+<p><strong>Dove stanno</strong>: ovunque tu possa scrivere un prompt. Digita <code>/</code> come primo
+carattere e si apre il menu con tutti i comandi disponibili, ciascuno con la
+sua descrizione; continua a scrivere per filtrare, frecce + Invio per
+scegliere. Non serve impararli a memoria: il menu è l'indice.</p>
+<p>Questo è il menu che appare digitando <code>/</code> — nota le descrizioni accanto a
+ogni comando:</p>
+<p><img alt="Il menu dei comandi che si apre digitando /" src="assets/03-slash-menu.svg" /></p>
+<p>Nel menu compaiono anche le skill (cap. 05): comandi che puoi definire tu.</p></div></section><section class="slide"><div class="crumb">03 · Il flusso: Explore → Plan → Code → Commit</div><div class="content"><h2>Il flusso: Explore → Plan → Code → Commit</h2>
+<p><strong>Cos'è</strong>: il pattern ufficiale per i task non banali. L'idea di fondo:
+separare il <em>capire</em> dal <em>fare</em>, così correggi Claude su un piano di dieci
+righe invece che su cento righe di codice già scritto.</p>
+<p>Le quattro fasi in pratica:</p>
+<ol>
+<li><strong>Explore</strong> (in plan mode): "leggi <code>src/auth</code> e spiegami come funziona il
+   login". Claude legge, cerca, riassume — ma non modifica nulla.</li>
+<li><strong>Plan</strong>: "prepara un piano di implementazione dettagliato". Claude
+   produce il piano; con <code>Ctrl+G</code> lo apri nel tuo editor e lo correggi
+   <em>prima</em> che parta una sola riga di codice — è il momento in cui la
+   revisione costa meno.</li>
+<li><strong>Code</strong>: approvi il piano e Claude implementa. All'approvazione ti chiede
+   in che modalità procedere: auto, <code>acceptEdits</code>, o review manuale di ogni
+   edit (i permission mode del cap. 02).</li>
+<li><strong>Commit</strong>: "committa con un messaggio descrittivo".</li>
+</ol>
+<p><strong>Il plan mode, in concreto</strong>: è uno dei permission mode — Claude può solo
+leggere ed esplorare, mai scrivere. Si attiva ciclando con <strong>Shift+Tab</strong> (lo
+stesso tasto cicla tutti i mode) oppure all'avvio con
+<code>claude --permission-mode plan</code>. Sai di esserci perché lo dice la barra di
+stato sotto il prompt, come qui:</p>
+<p><img alt="Plan mode attivo, indicato nella barra sotto il prompt" src="assets/03-plan-mode.svg" /></p>
+<p>È la modalità giusta anche solo per esplorare un codebase nuovo senza rischi:
+"non può toccare nulla" è garantito dal permission system, non dalla buona
+volontà del modello.</p>
+<p><strong>Quando saltare il piano</strong>: se il diff si descrive in una frase (typo,
+rename, una riga di log), il plan mode è solo overhead. Vai diretto.</p></div></section><section class="slide"><div class="crumb">03 · Checkpoint e /rewind: la rete di sicurezza</div><div class="content"><h2>Checkpoint e /rewind: la rete di sicurezza</h2>
+<p><strong>Cos'è</strong>: l'undo di Claude Code. Ogni volta che Claude modifica un file
+viene salvato un checkpoint — uno snapshot a cui puoi tornare, come i
+restore point di git ma automatici e per-intervento.</p>
+<p><strong>Dove sta</strong>: premi <strong>doppio Esc</strong> (a input vuoto) oppure digita <code>/rewind</code>.
+Si apre il menu di ripristino con la lista dei checkpoint:</p>
+<p><img alt="Il menu Rewind: ogni intervento è un punto di ripristino" src="assets/03-rewind-menu.svg" /></p>
+<p><strong>Come si usa</strong>: scegli il punto a cui tornare e <em>cosa</em> ripristinare —</p>
+<ul>
+<li><strong>codice + conversazione</strong>: torni indietro del tutto;</li>
+<li><strong>solo codice</strong>: i file tornano com'erano, ma la conversazione resta
+  (utile per dire "rifallo, ma stavolta così");</li>
+<li><strong>solo conversazione</strong>: tieni il codice, riavvolgi la chat.</li>
+<li>"Summarize from here" / "up to here": non ripristina, comprime — metà
+  sessione diventa un riassunto, l'altra resta intatta.</li>
+</ul>
+<p><strong>Come cambia il modo di lavorare</strong>: puoi far <em>tentare</em> a Claude una strada
+rischiosa ("riscrivi lo store con Zustand, vediamo") sapendo che il ritorno
+costa due tasti. Due limiti da conoscere: traccia <strong>solo gli edit fatti da
+Claude</strong> — non i comandi bash (<code>rm</code>, <code>mv</code>), non le tue modifiche a mano — e
+tiene gli ultimi 100 checkpoint.</p></div></section><section class="slide"><div class="crumb">03 · La regola dei 2 tentativi</div><div class="content"><h2>La regola dei 2 tentativi</h2>
+<p>Se hai corretto Claude due volte sullo stesso punto e ancora sbaglia, <strong>non
+insistere con la terza correzione</strong>. Il motivo è meccanico: ogni tentativo
+fallito e ogni tua correzione restano nel contesto, e Claude sta ormai
+ragionando dentro una storia piena di falsi indizi. Meglio <code>/clear</code> e un
+prompt riformulato da zero che incorpora quello che hai imparato: "fai X;
+attenzione che Y non funziona perché Z". Una sessione pulita con un prompt
+migliore batte quasi sempre una sessione lunga piena di correzioni
+accumulate.</p></div></section><section class="slide"><div class="crumb">03 · Sessioni</div><div class="content"><h2>Sessioni</h2>
+<p>Ogni conversazione è una <strong>sessione</strong>, salvata automaticamente: chiudere il
+terminale non perde nulla. Le operazioni che servono davvero:</p>
+<table>
+<thead>
+<tr>
+<th>Cosa</th>
+<th>Come</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Riprendi l'ultima</td>
+<td><code>claude --continue</code></td>
+</tr>
+<tr>
+<td>Scegli dal picker</td>
+<td><code>claude --resume</code> (o <code>/resume</code> in sessione)</td>
+</tr>
+<tr>
+<td>Dai un nome</td>
+<td><code>claude -n nome</code> all'avvio, <code>/rename nome</code> in sessione</td>
+</tr>
+<tr>
+<td>Riprendi per nome</td>
+<td><code>claude --resume nome</code></td>
+</tr>
+<tr>
+<td>Forka la sessione</td>
+<td><code>/branch [nome]</code> — esplori un'alternativa senza perdere il filo principale</td>
+</tr>
+</tbody>
+</table>
+<p><code>/branch</code> merita una nota: crea una <em>diramazione</em> della sessione corrente,
+come un branch git della conversazione. Provi una direzione diversa e, se non
+convince, il filo principale è ancora lì.</p></div></section><section class="slide"><div class="crumb">03 · Gestione del contesto</div><div class="content"><h2>Gestione del contesto</h2>
+<p><strong>Cos'è il contesto</strong>: la memoria di lavoro del modello — tutto ciò che
+Claude "vede" quando genera la prossima risposta. È una finestra a capienza
+fissa, e non contiene solo la chat: ci stanno il system prompt, le
+definizioni dei tool, i file di memoria (CLAUDE.md, cap. 04), le skill, e poi
+ogni tuo messaggio, ogni file letto, ogni output di comando. Una sessione
+appena aperta ne consuma già una parte prima che tu scriva una parola.</p>
+<p><strong>Dove lo vedi</strong>: il comando <code>/context</code> mostra la griglia dell'uso per
+categoria — è la radiografia della sessione. Guardala: ogni cella è una fetta
+di finestra, le categorie in legenda dicono chi la sta occupando, e lo spazio
+libero è quello che resta per il lavoro vero:</p>
+<p><img alt="Output di /context: la griglia dell'uso del contesto per categoria" src="assets/03-context.svg" /></p>
+<p><strong>Perché ti riguarda</strong>: il contesto si riempie man mano che lavori, e più è
+pieno più le prestazioni degradano — Claude "dimentica" le istruzioni date
+all'inizio, ripete errori già corretti. Quasi tutte le buone abitudini di
+questa guida derivano da qui. Gli strumenti:</p>
+<ul>
+<li><code>/clear</code> — svuota la conversazione. Da usare <strong>tra un task e l'altro,
+  sempre</strong>: il task nuovo non ha bisogno della storia del precedente. Niente
+  panico: la sessione svuotata resta recuperabile con <code>/resume</code>.</li>
+<li><code>/compact [istruzioni]</code> — da usare <em>dentro</em> un task lungo, quando la storia
+  serve ancora ma pesa troppo: sostituisce la conversazione con un riassunto
+  e riparte da lì. Le istruzioni opzionali dicono cosa preservare:
+  <code>/compact tieni i path dei file e le decisioni sul routing</code>.</li>
+<li><code>/context</code> — il check periodico di cui sopra (tienilo d'occhio in
+  statusline, cap. 14).</li>
+<li><code>/btw domanda</code> — la domanda laterale ("com'è la sintassi di <code>grid-area</code>?")
+  che NON entra nella storia: risposta in overlay, contesto intatto. Piccola
+  ma salva-sessioni.</li>
+</ul></div></section><section class="slide"><div class="crumb">03 · Scorciatoie e trucchi di input</div><div class="content"><h2>Scorciatoie e trucchi di input</h2>
+<p>La tabella di riferimento, poi i tre trucchi che meritano il dettaglio:</p>
+<table>
+<thead>
+<tr>
+<th>Tasto</th>
+<th>Effetto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Esc</code></td>
+<td>interrompe Claude (i tuoi messaggi in coda restano)</td>
+</tr>
+<tr>
+<td><code>Esc Esc</code></td>
+<td>input pieno: svuota la riga; input vuoto: apre <code>/rewind</code></td>
+</tr>
+<tr>
+<td><code>Ctrl+C</code></td>
+<td>primo: pulisce l'input; secondo: esce</td>
+</tr>
+<tr>
+<td><code>Shift+Tab</code></td>
+<td>cicla i permission mode (cap. 02)</td>
+</tr>
+<tr>
+<td><code>!comando</code></td>
+<td>shell mode: esegue il comando, output nel contesto</td>
+</tr>
+<tr>
+<td><code>@path</code></td>
+<td>riferisci un file (autocomplete)</td>
+</tr>
+<tr>
+<td><code>Ctrl+V</code></td>
+<td>incolla un'immagine dagli appunti (fondamentale per il frontend: screenshot → "riproduci questo layout")</td>
+</tr>
+<tr>
+<td><code>Ctrl+O</code></td>
+<td>transcript dettagliato (tool call, tempi, modello)</td>
+</tr>
+<tr>
+<td><code>Ctrl+R</code></td>
+<td>ricerca nella storia</td>
+</tr>
+<tr>
+<td><code>Ctrl+B</code></td>
+<td>manda in background il comando in corso</td>
+</tr>
+<tr>
+<td><code>Alt+T</code> / <code>Option+T</code></td>
+<td>toggle extended thinking (per i problemi difficili; su alcuni modelli è sempre attivo)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Shell mode (<code>!</code>)</strong>: digita <code>!</code> come primo carattere e l'input cambia
+aspetto — prompt rosa, hint "! for shell mode" in basso: non stai più
+parlando col modello, stai scrivendo un comando per la tua shell. Il comando
+viene eseguito direttamente e l'output finisce nel contesto, dove Claude lo
+vede. È il modo più rapido per dargli un dato di realtà: <code>! npm run test</code> e
+poi "sistema i test rossi". Ecco com'è l'input in shell mode:</p>
+<p><img alt="Input in shell mode: prompt rosa e hint &quot;! for shell mode&quot;" src="assets/03-shell-mode.svg" /></p>
+<p><strong>Riferire file con <code>@</code></strong>: digita <code>@</code> e parte l'autocomplete sui file del
+progetto — continua a scrivere per filtrare, Invio per inserire il path.
+Claude riceve il <em>riferimento</em> e va a leggersi il file da solo: più preciso
+di "il file del bottone" e più economico che incollarne il contenuto
+(cap. 14). Così appare l'autocomplete:</p>
+<p><img alt="Autocomplete dei file digitando @" src="assets/03-at-file.svg" /></p>
+<p><strong>Coda di messaggi</strong>: mentre Claude lavora puoi scrivere e premere Invio — il
+messaggio si accoda per il turno dopo. Non serve aspettare.</p>
+<p><strong>Vim mode</strong>: <code>/config</code> → Editor mode, per chi non può farne a meno.</p></div></section><section class="slide"><div class="crumb">03 · Cambiare modello: /model</div><div class="content"><h2>Cambiare modello: /model</h2>
+<p><code>/model</code> apre il picker: scegli il modello e il livello di <em>effort</em> (quanto
+ragionamento investire). Il default va bene per il lavoro quotidiano; quale
+modello per quale task — e cosa costa — è il tema del cap. 14. Il picker:</p>
+<p><img alt="Il picker di /model: modelli disponibili e livello di effort" src="assets/03-model-picker.svg" /></p></div></section><section class="slide"><div class="crumb">03 · Due comandi che non ti aspetti</div><div class="content"><h2>Due comandi che non ti aspetti</h2>
+<ul>
+<li><code>/recap</code> — riassunto della sessione. Il lunedì mattina, dopo
+  <code>claude --continue</code>, risponde alla domanda "dov'eravamo?".</li>
+<li><code>/goal condizione</code> — fissi una condizione di completamento, ad esempio
+  <code>/goal tutti i test passano e la build è verde</code>. Da lì in poi un
+  valutatore ricontrolla la condizione <strong>a ogni turno</strong> e non lascia
+  dichiarare chiuso il task finché non è vera. È il modo più semplice di dare
+  a Claude un criterio di "finito" verificabile invece di fidarti del suo
+  "fatto!" (tema del cap. 11).</li>
+</ul>
+<hr />
+<p><strong>In sintesi</strong>: plan mode per i task grossi, doppio Esc come undo universale,
+<code>/clear</code> tra i task e la regola dei 2 tentativi quando ti impantani. Il
+prossimo capitolo entra nel file più importante del tuo setup: il CLAUDE.md.</p></div></section><section class="slide"><div class="crumb">04 — CLAUDE.md e rules: le istruzioni permanenti</div><div class="content"><h1>04 — CLAUDE.md e rules: le istruzioni permanenti</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).
+Esempio vivo: <a href="demo/CLAUDE.md"><code>demo/CLAUDE.md</code></a>.</p>
+</blockquote></div></section><section class="slide"><div class="crumb">04 · Cos'è davvero</div><div class="content"><h2>Cos'è davvero</h2>
+<p><strong>Cos'è</strong>: il CLAUDE.md è quello che Claude sa del tuo progetto <em>prima</em> che
+tu scriva il primo prompt. L'analogia giusta è il documento di onboarding di
+un collega nuovo — con la differenza che Claude è un collega nuovo <em>a ogni
+sessione</em>: senza questo file riparte ogni volta da zero, riscopre i comandi,
+ridà nomi sbagliati alle cose, rifà gli stessi errori.</p>
+<p><strong>Dove sta</strong>: è un normale file Markdown, <code>CLAUDE.md</code>, nella root del
+progetto. Lo crei tu — oppure lo genera <code>/init</code>, che analizza il codebase e
+ne produce uno di partenza (buono, ma da potare subito: vedi sotto).</p>
+<p><strong>Come funziona</strong>: all'avvio della sessione Claude Code lo cerca, lo carica
+nel contesto e ce lo tiene per tutta la sessione — è parte della "memoria"
+che hai visto nella griglia di <code>/context</code> (cap. 03). Nessuna magia: è testo
+che precede ogni tuo prompt. Da qui discendono le due regole del capitolo:
+ogni riga costa contesto, e ogni riga viene letta sempre.</p>
+<p>È il singolo file col miglior rapporto sforzo/resa di tutto il setup.</p></div></section><section class="slide"><div class="crumb">04 · Cosa metterci (e cosa no)</div><div class="content"><h2>Cosa metterci (e cosa no)</h2>
+<p>Il criterio: metti solo ciò che Claude <strong>sbaglierebbe senza</strong> —</p>
+<ul>
+<li>i comandi del progetto (<code>npm run test</code>, <code>npm run lint</code>) e quando lanciarli</li>
+<li>convenzioni non ovvie: "CSS modules, niente styled-components", "un
+  componente per file", "test accanto al componente"</li>
+<li>i vincoli: "TypeScript strict, niente <code>any</code>"</li>
+<li>le trappole note: "il mock del router va importato prima del componente,
+  altrimenti i test si rompono in modo criptico"</li>
+</ul>
+<p>NON metterci ciò che Claude capisce da solo guardando il codice: l'albero
+delle directory, l'elenco delle dipendenze, descrizioni generiche ("è
+un'app React"). È zavorra che consuma contesto e diluisce le regole vere.</p>
+<p><strong>Come si scrive</strong>: guarda <a href="demo/CLAUDE.md"><code>demo/CLAUDE.md</code></a>, il file reale
+del progetto demo di questa guida — una riga di inquadramento, i comandi con
+il <em>quando</em> usarli, le convenzioni. Un assaggio:</p>
+<p>```markdown</p>
+<h1>demo-app</h1>
+<p>SPA React + TypeScript (Vite). Componenti in <code>src/components/</code>, un file per
+componente, stile con CSS modules (niente styled-components).</p></div></section><section class="slide"><div class="crumb">04 · Comandi</div><div class="content"><h2>Comandi</h2>
+<ul>
+<li><code>npm run test</code> — test (Vitest); lanciali prima di dichiarare finito un task</li>
+</ul></div></section><section class="slide"><div class="crumb">04 · Convenzioni</div><div class="content"><h2>Convenzioni</h2>
+<ul>
+<li>TypeScript strict: niente <code>any</code>, preferisci type inference dove possibile.</li>
+<li>I test stanno accanto al componente: <code>Button.tsx</code> → <code>Button.test.tsx</code>.
+```</li>
+</ul>
+<p>Nota lo stile: frasi imperative e specifiche, niente prosa. Ogni riga è
+un'istruzione che cambia un comportamento.</p>
+<p><strong>Il test della riga</strong>: per ogni riga chiediti "se la tolgo, Claude
+sbaglierebbe qualcosa?". Se no, tagliala. Obiettivo: <strong>sotto le ~200 righe</strong>.
+Il motivo non è estetico: i modelli seguono in modo affidabile un numero
+limitato di istruzioni, e in un CLAUDE.md gonfio le regole importanti
+annegano tra quelle inutili — il file smette di funzionare proprio dove
+serviva. Da v2.1.206, <code>/doctor</code> propone lui stesso i tagli.</p></div></section><section class="slide"><div class="crumb">04 · Il pattern che rende il file vivo: il log degli errori</div><div class="content"><h2>Il pattern che rende il file vivo: il log degli errori</h2>
+<p>Il CLAUDE.md migliore non si scrive in un pomeriggio: <strong>cresce ogni volta che
+Claude sbaglia</strong>. Il ciclo è questo:</p>
+<ol>
+<li>Claude sbaglia qualcosa (usa il comando deprecato, sbaglia il path degli
+   asset).</li>
+<li>Lo correggi in chat — ma la correzione vive solo in <em>questa</em> sessione.</li>
+<li>La travasi nel CLAUDE.md come riga permanente: "usa X, non Y (deprecato)".</li>
+<li>Da domani, nessuna sessione rifà quell'errore.</li>
+</ol>
+<p>A fine sessione chiediti (o chiedi direttamente a Claude): "cosa hai imparato
+oggi che domani non dovrai rispiegare?". Dopo un mese hai un file che vale
+oro e che nessun <code>/init</code> potrebbe generare, perché codifica gli errori <em>del
+tuo</em> progetto.</p>
+<p>Per editarlo al volo senza uscire dalla sessione: <code>/memory</code> — elenca tutti i
+file di istruzioni caricati (CLAUDE.md ai vari livelli, rules) e te li apre
+nell'editor.</p></div></section><section class="slide"><div class="crumb">04 · I livelli (ripasso dal cap. 02, con le regole d'uso)</div><div class="content"><h2>I livelli (ripasso dal cap. 02, con le regole d'uso)</h2>
+<p>Non esiste un solo CLAUDE.md: all'avvio Claude Code li carica in ordine, dal
+più generale al più specifico, e li somma. Ogni livello ha il suo mestiere:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Per cosa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.claude/CLAUDE.md</code></td>
+<td>le TUE preferenze, su tutti i progetti ("rispondi in italiano", "usa sempre pnpm")</td>
+</tr>
+<tr>
+<td><code>./CLAUDE.md</code></td>
+<td>le convenzioni del PROGETTO, committato: è lo standard del team</td>
+</tr>
+<tr>
+<td><code>./CLAUDE.local.md</code></td>
+<td>note tue su questo progetto, gitignorato ("il mio dev server gira sulla 3001")</td>
+</tr>
+<tr>
+<td><code>CLAUDE.md</code> di sottocartella</td>
+<td>monorepo: NON viene caricato all'avvio, ma solo quando Claude lavora su file di quella cartella</td>
+</tr>
+</tbody>
+</table>
+<p>La riga di separazione pratica: se un collega clonando il repo trarrebbe
+beneficio dalla regola → <code>./CLAUDE.md</code> (committato); se è una cosa tua o
+della tua macchina → <code>CLAUDE.local.md</code> o il file utente.</p>
+<p><strong>Gli import</strong>: <code>@docs/convenzioni-css.md</code> a inizio riga include quel file
+nel CLAUDE.md, come un <code>import</code> (ricorsivo, max 4 livelli). Serve a
+modularizzare: il file principale resta corto e le sezioni corpose vivono in
+file dedicati. Attenzione al caso speciale: se un import punta <strong>fuori</strong> dal
+progetto, Claude Code si ferma e chiede conferma — un CLAUDE.md malevolo in
+un repo di terzi potrebbe usare gli import per iniettarti istruzioni. Il
+dialog è questo, e su repo che non conosci la risposta è no:</p>
+<p><img alt="Conferma per gli import esterni del CLAUDE.md" src="assets/04-import-dialog.svg" /></p></div></section><section class="slide"><div class="crumb">04 · Rules: istruzioni con mira</div><div class="content"><h2>Rules: istruzioni con mira</h2>
+<p><strong>Cos'è</strong>: una rule è un file di istruzioni con un <em>campo d'azione</em>
+delimitato da glob sui path. Risolve un problema classico del CLAUDE.md: "le
+regole sui test valgono solo per i file di test — perché devono stare sempre
+nel contesto, anche quando lavoro sul CSS?"</p>
+<p><strong>Dove stanno</strong>: <code>.claude/rules/*.md</code> nel progetto (committabili, come il
+CLAUDE.md) oppure <code>~/.claude/rules/</code> a livello utente. Un file per regola o
+per area.</p>
+<p><strong>Come si scrive</strong>: Markdown con un frontmatter YAML che dichiara i path a
+cui la regola si applica. Esempio completo:</p>
+<pre><code class="language-markdown">---
+paths:
+  - &quot;src/**/*.test.ts&quot;
+---
+# Regole per i test
+- Usa Testing Library, mai enzyme.
+- Ogni test ha un solo assert concettuale.
+</code></pre>
+<p>Il campo <code>paths:</code> accetta una lista di glob (<code>**</code> = qualunque sottocartella).
+Il corpo è scritto come un CLAUDE.md: istruzioni brevi e imperative.</p>
+<p><strong>Come funziona</strong>: a differenza del CLAUDE.md, la rule NON è sempre nel
+contesto. Entra in gioco <strong>solo quando Claude tocca file che matchano i
+glob</strong>: finché lavori su <code>src/styles/</code>, la regola sui test non esiste; appena
+apre <code>Button.test.ts</code>, si attiva. Contesto pulito e regole più seguite
+(ricordi il limite sul numero di istruzioni?). È il posto giusto per le
+convenzioni per-area nei progetti grandi.</p></div></section><section class="slide"><div class="crumb">04 · Un limite onesto</div><div class="content"><h2>Un limite onesto</h2>
+<p>CLAUDE.md e rules sono <em>advisory</em>: Claude li segue quasi sempre, ma non è un
+enforcement — sono istruzioni a un modello, non vincoli di sistema. Per le
+cose che devono succedere <strong>sempre e comunque</strong> (formattare dopo ogni edit,
+bloccare un comando) lo strumento giusto sono gli hook (cap. 07), che sono
+deterministici. Regola pratica: preferenze e conoscenza → CLAUDE.md;
+garanzie → hook.</p>
+<hr />
+<p><strong>In sintesi</strong>: parti da <code>/init</code>, pota col test della riga, tieni sotto 200
+righe, e fai crescere il file a ogni errore di Claude. Prossimi capitoli: le
+skill (i "manuali on-demand") e gli agenti.</p></div></section><section class="slide divider"><div class="divider-inner"><h1>Metodo</h1></div></section><section class="slide"><div class="crumb">11 — Verifica: il principio più importante di tutta la guida</div><div class="content"><h1>11 — Verifica: il principio più importante di tutta la guida</h1>
+<blockquote>
+<p>Fonte: best practices ufficiali ("the single most impactful tip in this
+guide is verification") + doc su hook e /goal, luglio 2026.</p>
+</blockquote></div></section><section class="slide"><div class="crumb">11 · Il problema</div><div class="content"><h2>Il problema</h2>
+<p>Scenario che prima o poi capita a tutti: chiedi una modifica, Claude lavora
+qualche minuto, conclude con un rassicurante "fatto, ora funziona", tu ti
+fidi, mergi — e alle 18:30 scopri che il form di pagamento non invia più
+nulla. Il codice <em>sembrava</em> giusto. Il messaggio <em>suonava</em> sicuro. Ma nessuno
+aveva davvero verificato niente: né Claude, né tu.</p>
+<p>La differenza tra una sessione che devi sorvegliare riga per riga e una da
+cui puoi allontanarti è una sola: <strong>Claude ha un modo per verificare da solo
+il proprio lavoro?</strong> Se sì, il loop diventa lavora → controlla → correggi →
+ripeti finché passa, senza di te nel mezzo. Se no, il test runner sei tu — e
+sei anche il collo di bottiglia.</p></div></section><section class="slide"><div class="crumb">11 · Come si applica: dai a Claude un criterio eseguibile</div><div class="content"><h2>Come si applica: dai a Claude un criterio eseguibile</h2>
+<p>Per un frontend dev i "modi per verificare" sono concreti e quasi sempre già
+nel progetto:</p>
+<ul>
+<li>i <strong>test</strong>: "scrivi prima i test (devono fallire), poi implementa finché
+  passano" — il TDD si sposa con Claude meglio che con gli umani, perché il
+  test fallito è un segnale che il modello può leggere e inseguire da solo</li>
+<li>l'<strong>exit code della build</strong>: <code>npm run build</code> che esce 0</li>
+<li>il <strong>lint/typecheck</strong>: <code>tsc --noEmit</code></li>
+<li>lo <strong>screenshot confrontato col mock</strong>: "ecco il design; implementa, fai lo
+  screenshot, confronta, elenca le differenze, correggi" (cap. 10)</li>
+</ul>
+<p>Un prompt completo, per fissare la forma:</p>
+<blockquote>
+<p>"Aggiungi la validazione a <code>@src/components/CheckoutForm.tsx</code>: email
+obbligatoria e formato valido, CAP a 5 cifre. Prima scrivi i test Vitest
+per questi casi (devono fallire), poi implementa. Considera finito solo
+quando <code>npm test</code> passa e <code>tsc --noEmit</code> esce pulito."</p>
+</blockquote>
+<p>Nota la struttura: cosa fare, come verificarlo, quando fermarsi. Il criterio
+di verifica costa una riga in più e cambia tutto quello che viene prima.</p></div></section><section class="slide"><div class="crumb">11 · Perché funziona</div><div class="content"><h2>Perché funziona</h2>
+<p>Senza un criterio, "finito" è un giudizio del modello su sé stesso — e il
+modello, come chiunque abbia appena scritto del codice, tende a crederci.
+Con un criterio eseguibile, "finito" diventa un fatto osservabile: il test
+passa o non passa. Claude può iterare contro quel fatto in autonomia, e ogni
+iterazione consuma il <em>suo</em> tempo, non il tuo.</p></div></section><section class="slide"><div class="crumb">11 · Chiedi evidenze, non asserzioni</div><div class="content"><h2>Chiedi evidenze, non asserzioni</h2>
+<p>"Fatto, ora funziona" non è informazione: è una speranza. La contromossa è
+sempre la stessa domanda, in tre varianti:</p>
+<blockquote>
+<p>"Mostrami l'output dei test."
+"Incolla l'exit code della build."
+"Fammi lo screenshot del componente com'è adesso."</p>
+</blockquote>
+<p>Rivedere le <strong>prove</strong> è molto più veloce che ri-verificare tutto a mano. E
+c'è un effetto secondario prezioso: Claude, sapendo che dovrà esibirle,
+lavora meglio — esattamente come un junior che sa che il PR verrà letto
+davvero.</p>
+<p><em>Il segnale che ti serve</em>: ti accorgi che stai per accettare un "fatto"
+sulla parola. Fermati lì e chiedi l'evidenza.</p></div></section><section class="slide"><div class="crumb">11 · La scala della verifica</div><div class="content"><h2>La scala della verifica</h2>
+<p>Quattro livelli, dal più leggero al più blindato. Il criterio per salire è
+uno solo: <strong>quanto costa l'errore se passa inosservato</strong>.</p>
+<ol>
+<li><strong>Nel prompt</strong> — "…e considera finito solo quando <code>npm test</code> passa".
+   Gratis, funziona quasi sempre. È il default: se non stai facendo almeno
+   questo, parti da qui.</li>
+<li><strong><code>/goal</code></strong> — dichiari la condizione ("tutti i test passano e la build è
+   verde") e un valutatore separato la ricontrolla a ogni turno, senza
+   lasciar chiudere la sessione finché non è vera. Utile quando la sessione
+   è lunga e temi che il criterio scritto nel prompt "sbiadisca" strada
+   facendo.</li>
+<li><strong>Stop hook</strong> (cap. 07) — uno script che lancia i test quando Claude
+   dichiara di aver finito, ed esce con <code>2</code> se falliscono: il "finito" viene
+   respinto d'ufficio. È il livello <strong>deterministico</strong>: non dipende più
+   dall'attenzione del modello, è codice che gira sempre.</li>
+<li><strong>Subagent revisore</strong> (cap. 06) — un agente a contesto fresco che giudica
+   il lavoro senza il bias di chi l'ha scritto. Copre quello che i test non
+   coprono: requisiti fraintesi, casi mancanti, scelte discutibili.</li>
+</ol>
+<p><em>Il segnale che devi salire di livello</em>: hai appena trovato in produzione
+(o in review) un errore che il livello attuale avrebbe dovuto fermare.</p></div></section><section class="slide"><div class="crumb">11 · La review avversaria (con l'antidoto)</div><div class="content"><h2>La review avversaria (con l'antidoto)</h2>
+<p>Il problema: chi ha scritto il codice — umano o modello — non vede più i
+propri errori; il contesto della sessione contiene tutte le giustificazioni
+delle scelte fatte, e quelle giustificazioni "convincono" anche il revisore
+se è la stessa sessione. Il pattern: scrivi con una sessione, fai
+revisionare a una <strong>seconda</strong> sessione (o al <code>/code-review</code> built-in) a
+contesto pulito — chi non ha scritto il codice vede quello che l'autore non
+vede più.</p>
+<p><strong>Ma attenzione all'effetto collaterale documentato</strong>: un reviewer istruito
+a trovare problemi ne troverà <em>sempre</em> — è il suo mandato. Se ubbidisci a
+ogni finding, dopo tre giri di review ti ritrovi con astrazioni, guard
+clause e configurabilità che nessuno ha chiesto: l'over-engineering da
+review. L'antidoto è limitare il mandato in partenza:</p>
+<blockquote>
+<p>"Fai la review di questo diff. Segnala <strong>solo</strong> bug reali e requisiti
+mancati rispetto a SPEC.md. Non proporre migliorie di stile, refactoring
+o astrazioni: se qualcosa funziona ed è nei requisiti, passa."</p>
+</blockquote>
+<p>I suggerimenti extra che arrivano comunque: trattali come opzionali, non
+come to-do.</p></div></section><section class="slide"><div class="crumb">11 · Il caso senza test</div><div class="content"><h2>Il caso senza test</h2>
+<p>Codebase legacy senza test? È il caso in cui la verifica serve <em>di più</em>,
+non di meno: stai per toccare codice di cui nessuno ricorda il
+comportamento previsto. Non rinunciare — falla creare a Claude:</p>
+<blockquote>
+<p>"Prima di toccare qualsiasi cosa, scrivi un test di caratterizzazione che
+fotografa il comportamento <strong>attuale</strong> di <code>formatPrice</code> in
+<code>@src/utils/price.ts</code>: input tipici, zero, negativi, valute diverse.
+Deve passare così com'è. Poi, e solo poi, fai il refactor — il test deve
+continuare a passare."</p>
+</blockquote>
+<p>Il test di caratterizzazione non dice che il codice è giusto: dice che il
+refactor non ha cambiato nulla. Che è esattamente la garanzia che ti serve
+sul legacy.</p>
+<hr />
+<p><strong>In sintesi</strong>: mai chiedere un lavoro senza chiederti "come farà a sapere
+di averlo finito bene?". Un criterio verificabile nel prompt costa una riga
+e cambia la qualità di tutto il resto. È il capitolo da rileggere quando gli
+altri sembrano non funzionare — perché di solito è questo che manca.</p></div></section><section class="slide"><div class="crumb">12 — Prompt engineering per Claude Code</div><div class="content"><h1>12 — Prompt engineering per Claude Code</h1>
+<blockquote>
+<p>Fonte: best practices ufficiali e pattern consolidati della community,
+luglio 2026.</p>
+</blockquote></div></section><section class="slide"><div class="crumb">12 · Il modello mentale giusto</div><div class="content"><h2>Il modello mentale giusto</h2>
+<p>Il problema di partenza è quasi sempre lo stesso: tratti Claude Code come un
+motore di ricerca a cui strappare risposte — domanda secca, risposta secca,
+delusione. Il modello mentale che funziona è un altro: è un <strong>junior
+brillante che gestisci</strong>. Un junior con memoria azzerata a ogni sessione
+(per questo esiste CLAUDE.md), velocissimo, che non si offende mai — ma che
+con una richiesta vaga produce un risultato vago, esattamente come farebbe
+un junior vero con un ticket che dice solo "sistemare il login".</p>
+<p>Tu sei il PM: più chiaro il brief, migliore la consegna. Tutto questo
+capitolo è declinazione di questa frase.</p></div></section><section class="slide"><div class="crumb">12 · Specificità: criteri di successo, non aggettivi</div><div class="content"><h2>Specificità: criteri di successo, non aggettivi</h2>
+<p>Il dolore: chiedi "migliora questo componente", ottieni un refactor che
+tocca venti righe che non c'entrano, e il problema vero — i re-render — è
+ancora lì. Non è colpa del modello: "migliora" non dice <em>cosa</em> dev'essere
+vero alla fine.</p>
+<p>Debole: "migliora questo componente".
+Forte:</p>
+<blockquote>
+<p>"Riduci i re-render di <code>ProductList</code>: memoizza le callback passate ai
+figli, sposta il filtro in un <code>useMemo</code>, e verifica con il Profiler che al
+cambio di <code>query</code> re-renderizzi solo la lista. Non cambiare l'API
+pubblica."</p>
+</blockquote>
+<p>La differenza non è la lunghezza: è che il secondo ha <strong>criteri
+verificabili</strong> (cap. 11 — "verifica col Profiler che…") e <strong>vincoli</strong> (cosa
+non toccare — "non cambiare l'API pubblica"). Aggettivi come "migliore",
+"pulito", "moderno" non sono istruzioni: sono speranze. Il test rapido per
+il tuo prompt: <em>un collega che non conosce il contesto saprebbe dire se il
+lavoro è finito bene?</em> Se no, mancano i criteri.</p>
+<p><em>Il segnale che ti serve</em>: il risultato è "tecnicamente quello che ho
+chiesto" ma non quello che volevi. Il problema era nel brief.</p></div></section><section class="slide"><div class="crumb">12 · Contesto e vincoli, non micro-istruzioni</div><div class="content"><h2>Contesto e vincoli, non micro-istruzioni</h2>
+<p>L'errore opposto alla vaghezza: dettare <em>come</em> fare ogni passo, riga per
+riga. Non serve — per quello c'è il modello, che il codice lo sa scrivere.
+Serve invece dare ciò che il modello <strong>non può sapere</strong> guardando il repo:</p>
+<ul>
+<li>il <em>perché</em>: "questo form è il funnel di pagamento: la priorità è non
+  rompere il tracking" — cambia ogni decisione a valle</li>
+<li>i <strong>vincoli</strong>: "Node 18, niente dipendenze nuove"</li>
+<li>i <strong>riferimenti</strong>: "<code>@src/components/Form.tsx</code> è il pattern da seguire"</li>
+</ul>
+<p>E il contesto passalo nella forma più ricca disponibile: riferisci i file
+con <code>@</code> (invece di descriverli), incolla gli errori <strong>interi</strong> (lo stack
+trace contiene la risposta più spesso di quanto pensi), allega screenshot
+(<code>Ctrl+V</code>) quando il problema è visivo. Un prompt che mette insieme i pezzi:</p>
+<blockquote>
+<p>"Il tracking del funnel si è rotto dopo l'ultimo refactor. Questo form è
+il funnel di pagamento: priorità assoluta non perdere eventi. Errore in
+console: [incollato intero]. Il pattern corretto di invio eventi è in
+<code>@src/analytics/track.ts</code>. Vincolo: niente dipendenze nuove."</p>
+</blockquote>
+<p>Perché funziona: il modello ragiona su quello che ha nel contesto. Perché,
+vincoli e riferimenti sono esattamente le informazioni che non può dedurre
+da solo — tutto il resto sì.</p></div></section><section class="slide"><div class="crumb">12 · Decomposizione: chiedi il primo passo, non il viaggio</div><div class="content"><h2>Decomposizione: chiedi il primo passo, non il viaggio</h2>
+<p>L'errore più segnalato in assoluto (il "greed mistake"): chiedere in un
+prompt solo una feature intera — "fammi il carrello con persistenza,
+sconti, e la pagina checkout" — e ottenere il 60% di otto cose diverse,
+nessuna finita, con il contesto ormai saturo (cap. 13). Al contrario:</p>
+<blockquote>
+<p>"Costruiamo il carrello a passi. Step 1: solo il data-layer — hook
+<code>useCart</code> con aggiunta, rimozione, quantità, e i test Vitest. Niente UI,
+niente persistenza per ora. Poi ci vediamo qui e decidiamo lo step 2."</p>
+</blockquote>
+<p>Ogni passo finito e verificato è un checkpoint (in senso letterale: cap. 03)
+su cui costruire il successivo. Se lo step 2 va male, torni a un punto
+solido invece di dover disfare una matassa.</p>
+<p>Per le feature grandi, il pattern ufficiale è <strong>farsi intervistare</strong> — utile
+proprio perché i requisiti che <em>credi</em> di avere chiari non lo sono:</p>
+<blockquote>
+<p>"Devo costruire X. Prima di scrivere codice, intervistami: fammi le domande
+che servono a chiarire requisiti e edge case, poi scrivi una spec in
+SPEC.md."</p>
+</blockquote>
+<p>Le domande di Claude fanno emergere gli edge case a cui non avevi pensato
+(cosa succede al carrello se l'utente fa logout? gli sconti si sommano?).
+Rivedi la spec, <code>/clear</code>, e in una sessione fresca: "implementa SPEC.md,
+step 1". La spec sostituisce cento correzioni in corsa — e la sessione che
+implementa parte pulita, senza il rumore della discussione.</p>
+<p><em>Il segnale che ti serve</em>: stai scrivendo un prompt che contiene "e poi… e
+anche…". Fermati alla prima "e".</p></div></section><section class="slide"><div class="crumb">12 · Iterare: feedback concreti, non ripetizioni</div><div class="content"><h2>Iterare: feedback concreti, non ripetizioni</h2>
+<p>Il dolore: il risultato è sbagliato, tu rispieghi la stessa cosa con più
+enfasi ("no, il bottone deve stare A DESTRA"), e va male di nuovo. Ripetere
+più forte non aggiunge informazione. Dai invece <strong>materiale nuovo</strong>:
+l'errore esatto, l'output del test, lo screenshot di cosa si vede davvero.
+"Non funziona" non dà a Claude nulla su cui lavorare; uno stack trace sì:</p>
+<blockquote>
+<p>"Il fix non basta: al submit ora arriva questo — [stack trace intero].
+Ecco anche lo screenshot dello stato del form [Ctrl+V]. Nota che succede
+solo quando il campo email è vuoto."</p>
+</blockquote>
+<p>E ricorda la regola dei 2 tentativi (cap. 03): al secondo giro andato male,
+<code>/clear</code> e riformula da zero incorporando quello che hai imparato. Il
+motivo è meccanico: ogni correzione fallita resta nel contesto e pesa sulle
+risposte successive — le correzioni accumulate inquinano più di quanto
+aiutino. Il terzo tentativo nella stessa sessione parte svantaggiato; lo
+stesso prompt, riscritto meglio in una sessione pulita, parte avvantaggiato.</p></div></section><section class="slide"><div class="crumb">12 · Prima/dopo</div><div class="content"><h2>Prima/dopo</h2>
+<table>
+<thead>
+<tr>
+<th>Debole</th>
+<th>Forte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"fixa il bug del login"</td>
+<td>"il login fallisce con 401 dopo il refresh del token — ecco il log: […]. Il flusso è in <code>@src/auth/</code>. Trova la causa, proponi il fix, e aggiungi un test che riproduca il caso"</td>
+</tr>
+<tr>
+<td>"aggiungi i test"</td>
+<td>"copri <code>useCart</code> con Vitest: aggiunta, rimozione, quantità a zero, carrello vuoto. Guarda <code>@src/hooks/useAuth.test.ts</code> per lo stile"</td>
+</tr>
+<tr>
+<td>"rifai il css della navbar"</td>
+<td>"la navbar deve diventare sticky con blur al scroll, come in questo screenshot [Ctrl+V]. Solo CSS modules, niente librerie. Poi screenshot del risultato"</td>
+</tr>
+</tbody>
+</table>
+<p>Nota il pattern comune delle versioni forti: fatto osservabile (log,
+screenshot) + dove guardare (<code>@</code>) + criterio di fine (test, screenshot del
+risultato). Sono sempre gli stessi tre ingredienti.</p>
+<hr />
+<p><strong>In sintesi</strong>: criteri verificabili + vincoli + contesto, un passo alla
+volta, feedback fatti di prove. Il prompt perfetto non esiste; il prompt con
+un criterio di successo verificabile sì, ed è quello che conta.</p></div></section><section class="slide"><div class="crumb">13 — Errori comuni (e come riconoscerli addosso)</div><div class="content"><h1>13 — Errori comuni (e come riconoscerli addosso)</h1>
+<blockquote>
+<p>Fonte: sezione "avoid common failure patterns" delle best practices
+ufficiali + errori più segnalati dalla community, luglio 2026.</p>
+</blockquote>
+<p>Otto errori, tutti con la stessa struttura: come si presenta (il sintomo),
+cosa sta succedendo davvero (la meccanica), e la cura. Il valore del
+capitolo non è la lista in sé — è imparare a riconoscere il sintomo <em>mentre
+ti capita</em>, non tre ore dopo.</p></div></section><section class="slide"><div class="crumb">13 · 1. Usarlo come ChatGPT</div><div class="content"><h2>1. Usarlo come ChatGPT</h2>
+<p><em>Sintomo</em>: domande secche, zero contesto, nessun file riferito — e poi
+"non capisce niente".
+<em>Cosa succede</em>: stai usando il 10% dello strumento. Claude Code è un agente
+col tuo repo davanti: può aprire file, lanciare comandi, verificare i
+risultati. Se gli fai solo domande, hai una chat costosa.
+<em>Cura</em>: dagli file (<code>@src/components/Modal.tsx</code>), comandi da eseguire
+("lancia <code>npm test</code> e guarda cosa fallisce"), criteri di successo. Il
+valore sta nel loop agentico — esplora, modifica, verifica — non nella
+risposta singola. Confronta: "come si centra un div?" contro "il modal in
+<code>@src/components/Modal.tsx</code> non è centrato su mobile — riproducilo, fixalo,
+e mostrami lo screenshot". La seconda è una richiesta da Claude Code.</p></div></section><section class="slide"><div class="crumb">13 · 2. Il greed mistake</div><div class="content"><h2>2. Il greed mistake</h2>
+<p><em>Sintomo</em>: un prompt che contiene "e poi… e anche… e già che ci sei…".
+<em>Risultato</em>: otto fronti aperti al 60%, nessuno finito, contesto saturo —
+e non puoi nemmeno fare revert pulito, perché le otto cose sono
+intrecciate negli stessi file.
+<em>Cosa succede</em>: ogni obiettivo in più diluisce l'attenzione su tutti gli
+altri, e nessuno arriva alla soglia del "finito e verificato".
+<em>Cura</em>: un obiettivo per prompt, verificato prima del successivo (cap. 12).
+Il momento per accorgersene è <strong>mentre scrivi il prompt</strong>: alla prima
+"e già che ci sei", taglia e metti il resto in un appunto per dopo.</p></div></section><section class="slide"><div class="crumb">13 · 3. Correggere in loop</div><div class="content"><h2>3. Correggere in loop</h2>
+<p><em>Sintomo</em>: "no, non così… no, intendevo… ancora sbagliato…" — sei al quinto
+tentativo sullo stesso punto e ognuno è peggio del precedente.
+<em>Cosa succede</em>: ogni correzione fallita resta nel contesto e <em>aumenta</em> la
+probabilità del prossimo errore — il modello continua a "vedere" i propri
+tentativi sbagliati e ci gravita attorno. Non è testardaggine: è come
+funziona l'attenzione sul contesto.
+<em>Cura</em>: <strong>regola dei 2 tentativi</strong>. Due correzioni andate male → <code>/clear</code> →
+prompt nuovo che incorpora ciò che hai imparato dai fallimenti ("attenzione:
+l'approccio con X non funziona perché Y"). Costa meno dell'orgoglio di
+"farglielo capire" — e la sessione pulita, paradossalmente, capisce al
+primo colpo quello che quella inquinata non capiva al quinto.</p></div></section><section class="slide"><div class="crumb">13 · 4. Il CLAUDE.md enciclopedia</div><div class="content"><h2>4. Il CLAUDE.md enciclopedia</h2>
+<p><em>Sintomo</em>: 600 righe di istruzioni, e Claude che ignora proprio quella
+importante.
+<em>Cosa succede</em>: le istruzioni competono tra loro per l'attenzione del
+modello — ogni riga in più diluisce tutte le altre. Un file gonfio non è
+"più completo": è un file dove le regole che contano annegano tra quelle
+che non servono.
+<em>Cura</em>: test della riga ("questa riga ha mai cambiato un comportamento?")
+e ~200 righe massimo (cap. 04).
+<em>Il segnale</em>: quando ti scopri ad aggiungere una riga al CLAUDE.md per un
+problema successo una volta sola. Aspetta la seconda.</p></div></section><section class="slide"><div class="crumb">13 · 5. Fidarsi senza verificare</div><div class="content"><h2>5. Fidarsi senza verificare</h2>
+<p><em>Sintomo</em>: "ok, ha detto che funziona" → merge → rollback alle 18:30.
+<em>Cosa succede</em>: hai accettato un'asserzione come se fosse un'evidenza. Il
+modello che dichiara "funziona" sta esprimendo fiducia nel proprio codice —
+la stessa fiducia mal riposta di qualunque autore.
+<em>Cura</em>: mai accettare un'asserzione senza evidenza (cap. 11). "Mostrami
+l'output dei test" è la frase più redditizia della guida: cinque secondi
+per chiederla, e trasforma una speranza in un fatto.</p></div></section><section class="slide"><div class="crumb">13 · 6. Non revisionare tra un prompt e l'altro</div><div class="content"><h2>6. Non revisionare tra un prompt e l'altro</h2>
+<p><em>Sintomo</em>: tre feature costruite una sopra l'altra, poi scopri che la prima
+era sbagliata — e le altre due la usano.
+<em>Cosa succede</em>: l'errore non costa quanto costa quando lo fai — costa
+quanto ci hai costruito sopra. Ogni blocco non verificato è un debito che
+matura interessi a ogni prompt successivo.
+<em>Cura</em>: rivedi (o fai verificare: test, review, screenshot) ogni blocco
+prima di costruirci sopra. I checkpoint (cap. 03) esistono per questo:
+torna indietro finché è gratis.</p></div></section><section class="slide"><div class="crumb">13 · 7. Investigazioni senza scope</div><div class="content"><h2>7. Investigazioni senza scope</h2>
+<p><em>Sintomo</em>: "guarda un po' nel codebase e dimmi cosa ne pensi" → mezz'ora
+dopo il contesto è pieno di file letti a caso e la sessione è rincitrullita.
+<em>Cosa succede</em>: ogni file letto entra nel contesto e ci resta — anche i
+venti irrilevanti. L'esplorazione libera è il modo più rapido di riempire
+il contesto di rumore, e il rumore degrada tutte le risposte successive,
+anche quelle sul task vero.
+<em>Cura</em>: scope esplicito ("solo <code>src/auth/</code>, rispondi in 10 righe") oppure
+delega a un subagent Explore che esplora nel <em>suo</em> contesto e ti riporta
+solo la sintesi (cap. 06). Un prompt fatto bene:</p>
+<blockquote>
+<p>"Devo capire come funziona l'autenticazione. Guarda solo <code>src/auth/</code> e
+<code>src/api/client.ts</code>. Rispondi in 10 righe: flusso del token, dove viene
+salvato, cosa succede alla scadenza. Non leggere altro."</p>
+</blockquote></div></section><section class="slide"><div class="crumb">13 · 8. La kitchen-sink session</div><div class="content"><h2>8. La kitchen-sink session</h2>
+<p><em>Sintomo</em>: nella stessa sessione hai fatto il bugfix, tre domande di
+architettura, un refactor e la spesa. Le risposte peggiorano a vista
+d'occhio.
+<em>Cosa succede</em>: il contesto si riempie e le prestazioni degradano — è la
+causa radice di metà di questa lista (il loop di correzioni del punto 3,
+l'esplorazione del punto 7: tutti affluenti dello stesso fiume). Per vedere
+il fenomeno coi tuoi occhi, lancia <code>/context</code>: la griglia mostra quanto
+spazio si stanno prendendo messaggi, file letti e output dei comandi.</p>
+<p><img alt="Uso del contesto per categoria, da /context" src="assets/03-context.svg" /></p>
+<p><em>Cura</em>: <code>/clear</code> tra task diversi, sempre. Costa zero: la sessione resta
+recuperabile con <code>/resume</code>, quindi non stai "buttando via" niente — stai
+solo dando al task nuovo un contesto che parla solo di lui.
+<em>Il segnale</em>: ti accorgi che stai per fare una domanda che non c'entra col
+task in corso. Quella domanda merita una sessione sua.</p>
+<hr />
+<p><strong>In sintesi</strong>: quasi tutti gli errori qui sopra sono lo stesso errore visto
+da angoli diversi — trattare il contesto come infinito e le asserzioni come
+prove. Contesto pulito + verifica a ogni passo, e l'80% dei problemi non
+nasce proprio.</p></div></section><section class="slide divider"><div class="divider-inner"><h1>Potenza</h1></div></section><section class="slide"><div class="crumb">05 — Skill e slash command</div><div class="content"><h1>05 — Skill e slash command</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).</p>
+</blockquote></div></section><section class="slide"><div class="crumb">05 · Cos'è una skill, a che serve</div><div class="content"><h2>Cos'è una skill, a che serve</h2>
+<p>Una skill è una <strong>procedura confezionata</strong>: una directory con dentro un file
+<code>SKILL.md</code> che spiega a Claude, passo passo, come si fa una cosa specifica —
+il check pre-release, il fix di una issue GitHub, qualunque routine che oggi
+rispiegate a voce.</p>
+<p>L'analogia che regge: una skill è una <strong>ricetta in un ricettario</strong>. Claude
+tiene sempre sott'occhio l'indice (nome e una riga di descrizione per ogni
+ricetta), ma apre la pagina solo quando deve cucinare quel piatto. È il
+caricamento <em>lazy</em>: finché non la usi, una skill costa zero contesto.</p>
+<p>Il problema che risolve lo riconosci al volo: stai incollando in chat le
+stesse istruzioni per la terza volta, oppure il tuo CLAUDE.md (cap. 04) si
+sta gonfiando di procedure lunghe che servono una volta su dieci. La regola
+di ripartizione ufficiale:</p>
+<ul>
+<li><strong>fatti → CLAUDE.md</strong>: sempre in contesto ("usiamo CSS modules", "i test
+  stanno accanto al componente");</li>
+<li><strong>procedure → skill</strong>: caricate on-demand, zero costo quando non le usi.</li>
+</ul></div></section><section class="slide"><div class="crumb">05 · Dove sta e chi la crea</div><div class="content"><h2>Dove sta e chi la crea</h2>
+<p>Una skill è una directory che contiene almeno un <code>SKILL.md</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Path</th>
+<th>Quando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Personale</td>
+<td><code>~/.claude/skills/&lt;nome&gt;/SKILL.md</code></td>
+<td>tue procedure, valide ovunque</td>
+</tr>
+<tr>
+<td>Progetto</td>
+<td><code>.claude/skills/&lt;nome&gt;/SKILL.md</code></td>
+<td>committata: tutto il team la usa</td>
+</tr>
+<tr>
+<td>Plugin</td>
+<td>dentro il plugin (cap. 09)</td>
+<td>distribuita con un plugin</td>
+</tr>
+<tr>
+<td>Monorepo</td>
+<td><code>apps/web/.claude/skills/…</code></td>
+<td>si attiva lavorando lì, o con <code>/apps/web:deploy</code></td>
+</tr>
+</tbody>
+</table>
+<p>La crei tu: a mano (è solo markdown) oppure — più comodo — chiedendo a Claude
+di scrivertela (ci torniamo in fondo al capitolo). Non serve riavviare nulla:
+<strong>le modifiche sono live</strong> — salvi il file e la skill è già aggiornata nella
+sessione in corso.</p>
+<p>Una skill non banale può avere anche materiale di supporto:</p>
+<pre><code>.claude/skills/release-check/
+├── SKILL.md          # frontmatter + procedura (tienilo sotto ~500 righe)
+├── references/       # doc di dettaglio, caricata solo se la skill la richiede
+└── assets/           # script deterministici, template
+</code></pre>
+<p><code>references/</code> e <code>assets/</code> sono opzionali: servono quando la procedura ha
+dettagli lunghi che non vuoi dentro <code>SKILL.md</code>, o script di appoggio.</p></div></section><section class="slide"><div class="crumb">05 · Come si scrive</div><div class="content"><h2>Come si scrive</h2>
+<p>Un <code>SKILL.md</code> completo e minimale — frontmatter YAML tra i <code>---</code>, poi il
+corpo in markdown:</p>
+<pre><code class="language-markdown">---
+name: release-check
+description: Verifica pre-release di una SPA: build pulita, test verdi,
+  bundle size sotto soglia. Usala quando l'utente dice &quot;siamo pronti al
+  rilascio?&quot;, &quot;release check&quot;, &quot;posso deployare?&quot;.
+---
+
+Esegui in ordine, fermandoti al primo problema:
+
+1. Lancia la build di produzione: deve chiudersi pulita.
+2. Lancia la suite di test: tutti verdi.
+3. Controlla la dimensione del bundle rispetto alla soglia.
+4. Riporta il verdetto (pronto / non pronto) con i dettagli.
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>A cosa serve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>identifica la skill: è il nome della directory e diventa il comando <code>/release-check</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><strong>il trigger</strong>: l'unica cosa che Claude vede per decidere se attivarla</td>
+</tr>
+<tr>
+<td>corpo</td>
+<td>la ricetta: le istruzioni che Claude segue quando la skill si attiva</td>
+</tr>
+</tbody>
+</table>
+<p>Sulla description vale la pena fermarsi, perché è il punto dove le skill
+falliscono. Claude non legge il corpo per decidere: legge <em>solo</em> la
+description. Quindi scrivici dentro tre cose: <strong>cosa fa</strong> la skill, <strong>le
+frasi che devono attivarla</strong> (letteralmente: "usala quando l'utente dice…"),
+e — per le skill delicate — <strong>quando NON attivarla</strong>. Una description vaga
+produce una skill che non parte mai, o che parte a sproposito.</p></div></section><section class="slide"><div class="crumb">05 · Come funziona, passo passo</div><div class="content"><h2>Come funziona, passo passo</h2>
+<ol>
+<li><strong>All'avvio della sessione</strong> Claude carica l'indice delle skill
+   disponibili: per ognuna solo <code>name</code> e <code>description</code>. I corpi restano su
+   disco: costo in contesto quasi nullo.</li>
+<li><strong>A ogni tua richiesta</strong> Claude confronta quello che chiedi con le
+   description. "Posso deployare?" matcha quella di <code>release-check</code> → la
+   skill si attiva. In alternativa la attivi tu, digitando <code>/release-check</code>.</li>
+<li><strong>All'attivazione</strong> Claude legge l'intero <code>SKILL.md</code> e ne segue il corpo
+   come se glielo avessi appena incollato in chat.</li>
+<li><strong>Se il corpo rimanda a <code>references/</code></strong>, quei file vengono letti solo a
+   quel punto: secondo livello di lazy loading.</li>
+</ol>
+<p>Le skill compaiono anche nel menu <code>/</code> accanto ai comandi built-in — è lo
+stesso menu che hai visto nel cap. 03 (<code>assets/03-slash-menu.svg</code>): digiti
+<code>/</code> e le trovi lì, con la loro description come sottotitolo.</p>
+<p>Due frontmatter di controllo regolano <em>chi</em> può invocarla:</p>
+<ul>
+<li><code>disable-model-invocation: true</code> — solo tu puoi lanciarla, Claude non la
+  attiva da solo. Giusto per azioni con effetti (deploy, commit).</li>
+<li><code>user-invocable: false</code> — l'inverso: solo Claude, sparisce dal menu <code>/</code>.</li>
+</ul></div></section><section class="slide"><div class="crumb">05 · Argomenti e superpoteri del corpo</div><div class="content"><h2>Argomenti e superpoteri del corpo</h2>
+<p>Una skill può ricevere argomenti ed eseguire comandi prima ancora che Claude
+la legga. Esempio completo:</p>
+<h2>```markdown</h2>
+<p>name: fix-issue
+description: Risolve una issue GitHub per numero
+arguments: issue priority
+argument-hint: [numero-issue] [priorità]
+disable-model-invocation: true</p>
+<hr />
+<p>Risolvi la issue #$issue con priorità $priority:</p></div></section><section class="slide"><div class="crumb">05 · Stato attuale</div><div class="content"><h2>Stato attuale</h2>
+<p>!<code>git status --short</code></p>
+<ol>
+<li>Leggi la issue, implementa il fix, aggiungi i test.</li>
+<li>Commit: "fix: #$issue"
+```</li>
+</ol>
+<p>Invocazione: <code>/fix-issue 123 high</code>. Cosa succede, riga per riga:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Meccanica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arguments: issue priority</code></td>
+<td>dichiara argomenti nominati: <code>123</code> finisce in <code>$issue</code>, <code>high</code> in <code>$priority</code></td>
+</tr>
+<tr>
+<td><code>argument-hint</code></td>
+<td>il suggerimento che vedi nel menu <code>/</code> mentre digiti</td>
+</tr>
+<tr>
+<td><code>$issue</code>, <code>$priority</code></td>
+<td>sostituiti nel corpo prima che Claude lo legga (in alternativa: <code>$ARGUMENTS</code> per tutto, <code>$0</code>/<code>$1</code> per posizione)</td>
+</tr>
+<tr>
+<td><code>!`git status --short`</code></td>
+<td><strong>iniezione dinamica</strong>: il comando viene eseguito <em>prima</em> che Claude legga la skill e il suo output incollato lì — la skill parte già col contesto giusto (diff, status, log) senza sprecare turni</td>
+</tr>
+</tbody>
+</table>
+<p>Altri frontmatter utili quando servono:</p>
+<ul>
+<li><code>allowed-tools: Bash(git add *) …</code> — pre-approva quei tool per la durata
+  della skill (niente richieste di permesso a metà procedura);</li>
+<li><code>model:</code> / <code>effort:</code> — la fanno girare su un modello o sforzo diverso;</li>
+<li><code>context: fork</code> — la esegue in un subagent, con contesto separato (cap. 06).</li>
+</ul></div></section><section class="slide"><div class="crumb">05 · E i vecchi slash command?</div><div class="content"><h2>E i vecchi slash command?</h2>
+<p><code>.claude/commands/nome.md</code> funziona ancora: stesso frontmatter, stessa
+invocazione <code>/nome</code>. Ma è il formato legacy — un file singolo, senza
+<code>references/</code> né <code>assets/</code>. Se esistono entrambi con lo stesso nome, vince la
+skill. Per cose nuove usa le skill; i command esistenti non vanno riscritti,
+migrali solo quando ti serve la struttura in più.</p></div></section><section class="slide"><div class="crumb">05 · Skill di serie e come crearne di buone</div><div class="content"><h2>Skill di serie e come crearne di buone</h2>
+<p>Claude Code ne porta alcune built-in: <code>/code-review</code>, <code>/verify</code>, <code>/run</code>,
+<code>/debug</code>, <code>/loop</code>, <code>/batch</code>. Aprirle e leggerle è il modo più rapido per
+imparare lo stile.</p>
+<p>Per crearne una tua, il flusso più pratico è: descrivi a Claude la procedura
+a voce ("quando faccio il release check, prima lancio la build, poi…") e
+chiedigli di scriverla come skill. Poi <strong>affina la description</strong> finché non
+scatta sulle frasi giuste — è un piccolo lavoro iterativo. Esiste anche il
+plugin ufficiale <code>skill-creator</code>
+(<code>/plugin install skill-creator@claude-plugins-official</code>) che aggiunge test
+case e A/B delle description.</p>
+<p>Best practice ufficiali: SKILL.md corto e <strong>imperativo</strong> ("fai X", non "si
+potrebbe fare X"), dettagli in <code>references/</code> caricati on-demand, script negli
+<code>assets/</code> riferiti con <code>${CLAUDE_SKILL_DIR}</code> così funzionano da qualunque
+directory.</p>
+<hr />
+<p><strong>In sintesi</strong>: ogni volta che ti accorgi di rispiegare una procedura, è una
+skill che vuole nascere. Description = trigger, corpo = ricetta, lazy loading
+= contesto pulito. Prossimo capitolo: gli agenti, ovvero a chi delegare.</p></div></section><section class="slide"><div class="crumb">06 — Agenti (subagent): a chi delegare</div><div class="content"><h1>06 — Agenti (subagent): a chi delegare</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).</p>
+</blockquote></div></section><section class="slide"><div class="crumb">06 · Cos'è un subagent, a che serve</div><div class="content"><h2>Cos'è un subagent, a che serve</h2>
+<p>Un subagent è un <strong>collaboratore usa-e-getta</strong>: un'istanza di Claude che
+parte con un suo ruolo, i suoi tool e — soprattutto — un suo <strong>contesto
+separato e pulito</strong>. L'analogia: passi un task ben scritto a un collega, lui
+lavora alla <em>sua</em> scrivania, e ti riporta solo la sintesi. Le carte sparse
+restano da lui.</p>
+<p>Il motivo profondo per cui esistono è il <strong>contesto</strong>: una ricerca nel
+codebase o una suite di test verbosa possono bruciare metà della finestra di
+contesto della tua sessione con output che non ti serve conservare. Il
+subagent fa il lavoro sporco nel suo contesto e riporta indietro solo la
+conclusione. Tu tieni la sintesi, non i log.</p>
+<p>Secondo motivo: <strong>restringere i poteri</strong>. Un reviewer con soli tool di
+lettura non può "aggiustare" le cose di sua iniziativa mentre giudica.</p></div></section><section class="slide"><div class="crumb">06 · Dove sta e chi lo crea</div><div class="content"><h2>Dove sta e chi lo crea</h2>
+<p>Un agente è un singolo file markdown:</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Personale</td>
+<td><code>~/.claude/agents/&lt;nome&gt;.md</code></td>
+</tr>
+<tr>
+<td>Progetto</td>
+<td><code>.claude/agents/&lt;nome&gt;.md</code> (committato: tutto il team lo usa)</td>
+</tr>
+</tbody>
+</table>
+<p>Lo crei tu, e non c'è nessun wizard: o editi il file a mano, o chiedi a
+Claude di fartelo ("crea un agente code-reviewer per questo progetto").
+Le modifiche sono live: salvi il file e l'agente è già aggiornato in sessione.</p></div></section><section class="slide"><div class="crumb">06 · Come si scrive</div><div class="content"><h2>Come si scrive</h2>
+<p>Un esempio realistico e completo per un progetto frontend,
+<code>.claude/agents/code-reviewer.md</code>:</p>
+<pre><code class="language-markdown">---
+name: code-reviewer
+description: Reviews code for quality, a11y and security. Use proactively
+  after writing or modifying components.
+tools: Read, Grep, Glob, Bash
+model: sonnet
+---
+
+You are a senior frontend reviewer. When invoked:
+1. Look at the recent diff.
+2. Check: correctness, accessibility (labels, focus, contrast),
+   render performance (unnecessary re-renders), security (XSS, injections).
+3. Return a checklist of findings (critical / warning / suggestion)
+   with file:line references. You review, you do NOT edit.
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>A cosa serve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>il nome con cui l'agente viene invocato e mostrato</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><strong>il trigger</strong>, come per le skill: il main agent la legge per decidere quando delegare. "Use proactively" incoraggia la delega automatica; scrivi anche cosa l'agente NON fa</td>
+</tr>
+<tr>
+<td><code>tools</code></td>
+<td>allowlist dei tool: dai solo il necessario (<code>Read, Grep, Glob, Bash</code> per un read-only)</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>haiku</code> per lavoro meccanico (lint, esecuzione test), <code>sonnet</code> per review; ometti per ereditare dal main</td>
+</tr>
+<tr>
+<td>corpo</td>
+<td>il <strong>system prompt</strong> dell'agente: chi è, cosa fa quando viene invocato, in che formato risponde</td>
+</tr>
+</tbody>
+</table>
+<p>Nota il corpo dell'esempio: definisce il ruolo, i passi, il formato
+dell'output e il confine ("you do NOT edit"). È il pattern da copiare.</p>
+<p>Campi avanzati quando servono: <code>maxTurns</code> (tetto ai giri), <code>memory</code> (l'agente
+accumula conoscenza tra sessioni), <code>isolation: worktree</code> (checkout git
+separato: più agenti che <em>scrivono</em> in parallelo senza pestarsi),
+<code>permissionMode</code>, <code>effort</code>.</p></div></section><section class="slide"><div class="crumb">06 · Come funziona, passo passo</div><div class="content"><h2>Come funziona, passo passo</h2>
+<ol>
+<li>Il main agent conosce gli agenti disponibili tramite le loro
+   <strong>description</strong> (esattamente come per le skill: la description è il
+   trigger della delega).</li>
+<li>Quando decide di delegare — da solo, o perché glielo chiedi — scrive un
+   <strong>prompt di delega</strong>: il task da svolgere.</li>
+<li>Il subagent parte con un contesto <strong>nuovo</strong>: il suo system prompt (il
+   corpo del file), il prompt di delega, CLAUDE.md e la memoria. Non vede la
+   tua conversazione.</li>
+<li>Lavora con i soli tool della sua allowlist; tutto l'output rumoroso
+   (grep, log di test, file letti) resta nel <em>suo</em> contesto.</li>
+<li>Alla fine restituisce il messaggio conclusivo — la sintesi — che è
+   l'unica cosa che entra nella tua sessione.</li>
+</ol>
+<p>Per invocarlo esplicitamente: nominalo nel prompt ("usa il code-reviewer sui
+componenti nuovi") o garantisci la delega con la @-mention:
+<code>@"code-reviewer (agent)"</code>.</p>
+<h3>Foreground e background</h3>
+<p>Dal 2.1.198 i subagent girano in <strong>background di default</strong>: la tua sessione
+continua mentre loro lavorano, e vieni notificato al termine. <code>/tasks</code> (o
+<code>Ctrl+T</code>) mostra cosa sta girando; le richieste di permesso dei background
+emergono comunque da te, non vengono auto-approvate.</p></div></section><section class="slide"><div class="crumb">06 · Cosa vede il subagent (e cosa no)</div><div class="content"><h2>Cosa vede il subagent (e cosa no)</h2>
+<table>
+<thead>
+<tr>
+<th>Riceve</th>
+<th>Non riceve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>il prompt di delega</td>
+<td>la storia della tua conversazione</td>
+</tr>
+<tr>
+<td>il suo system prompt</td>
+<td>i file che il main ha già letto</td>
+</tr>
+<tr>
+<td>CLAUDE.md e memoria</td>
+<td>le skill invocate dal main</td>
+</tr>
+</tbody>
+</table>
+<p>Conseguenza pratica, ed è l'errore classico: <strong>il prompt di delega deve
+essere autosufficiente</strong> — path esatti, vincoli, formato dell'output atteso.
+Dare per scontato che l'agente "sappia di cosa stavamo parlando" non
+funziona: non lo sa, e lavorerà su ipotesi sue.</p></div></section><section class="slide"><div class="crumb">06 · Quelli di serie</div><div class="content"><h2>Quelli di serie</h2>
+<ul>
+<li><strong>Explore</strong> — ricerche read-only nel codebase; usalo liberamente: è il modo
+  standard di "capire dove sta X" senza sporcare il contesto.</li>
+<li><strong>Plan</strong> — la ricognizione che alimenta il plan mode (cap. 03).</li>
+<li><strong>general-purpose</strong> — tuttofare multi-step con tutti i tool.</li>
+</ul></div></section><section class="slide"><div class="crumb">06 · Quando NON usarli</div><div class="content"><h2>Quando NON usarli</h2>
+<ul>
+<li>Modifica piccola e mirata: il giro di delega costa più del lavoro.</li>
+<li>Task che richiede botta e risposta con te: il subagent non ti vede.</li>
+<li>Fasi che condividono molto contesto: rispiegarlo a ogni agente costa più
+  che tenerlo in sessione.</li>
+</ul>
+<p>Esiste anche una modalità sperimentale a <strong>team di agenti</strong> che si parlano
+tra loro (<code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code>): sappi che c'è, ma per
+iniziare i subagent bastano e avanzano.</p>
+<hr />
+<p><strong>In sintesi</strong>: delega agli agenti le cose rumorose (ricerche, test, review)
+e resta proprietario del contesto. Description chiara, tool minimi, prompt di
+delega autosufficiente. Prossimo capitolo: gli hook, dove le regole smettono
+di essere consigli.</p></div></section><section class="slide"><div class="crumb">07 — Hook: quando le regole smettono di essere consigli</div><div class="content"><h1>07 — Hook: quando le regole smettono di essere consigli</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).</p>
+</blockquote></div></section><section class="slide"><div class="crumb">07 · Cos'è un hook, a che serve</div><div class="content"><h2>Cos'è un hook, a che serve</h2>
+<p>Tutto quello che scrivi in CLAUDE.md è <em>advisory</em>: Claude lo segue quasi
+sempre — ma "quasi" non è "sempre". Un hook invece è <strong>deterministico</strong>: uno
+script che il <em>sistema</em> esegue a un evento preciso, ogni volta, che Claude lo
+voglia o no. L'analogia: CLAUDE.md è il cartello "si prega di timbrare", un
+hook è il <strong>tornello</strong> — non si passa senza. Regola di ripartizione:
+preferenze e conoscenza → CLAUDE.md; <strong>garanzie → hook</strong>.</p>
+<p>Bonus non ovvio: un <code>deny</code> imposto da un hook <code>PreToolUse</code> vale anche in
+<code>bypassPermissions</code> — è l'unico guardrail che nessuna modalità scavalca.</p></div></section><section class="slide"><div class="crumb">07 · Dove sta e chi lo crea</div><div class="content"><h2>Dove sta e chi lo crea</h2>
+<p>Gli hook si dichiarano nella chiave <code>"hooks"</code> dei <code>settings.json</code> che già
+conosci dal cap. 02 — utente (<code>~/.claude/settings.json</code>), progetto
+(<code>.claude/settings.json</code>, via git) o locale (<code>.claude/settings.local.json</code>)
+— e le definizioni <strong>si sommano</strong> tra i livelli. Li scrivi tu editando il
+JSON (o chiedendo a Claude di farlo); vengono caricati dal sistema, non dal
+modello.</p>
+<p>In sessione, <code>/hooks</code> apre un browser di consultazione: la lista di tutti
+gli eventi disponibili e quanti hook hai configurato su ciascuno.</p>
+<p><img alt="Il browser di /hooks: gli eventi disponibili (PreToolUse, PostToolUse, PostToolUseFailure, PostToolBatch, PermissionDenied…) e il conteggio degli hook configurati, qui ancora zero" src="assets/07-hooks-browser.svg" /></p></div></section><section class="slide"><div class="crumb">07 · Come si scrive</div><div class="content"><h2>Come si scrive</h2>
+<p>L'hook <strong>più utile per un frontend dev</strong> (esempio ufficiale): dopo ogni edit
+di Claude, Prettier formatta il file.</p>
+<pre><code class="language-json">{
+  &quot;hooks&quot;: {
+    &quot;PostToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Edit|Write&quot;,
+        &quot;hooks&quot;: [
+          {
+            &quot;type&quot;: &quot;command&quot;,
+            &quot;command&quot;: &quot;jq -r '.tool_input.file_path' | xargs npx prettier --write&quot;
+          }
+        ]
+      }
+    ]
+  }
+}
+</code></pre>
+<p>Smontiamolo pezzo per pezzo:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Significato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"PostToolUse"</code></td>
+<td>l'<strong>evento</strong>: questo blocco scatta dopo ogni uso di un tool</td>
+</tr>
+<tr>
+<td><code>"matcher": "Edit\|Write"</code></td>
+<td>il <strong>filtro</strong>: solo se il tool si chiama <code>Edit</code> o <code>Write</code> (il <code>\|</code> è un'alternativa)</td>
+</tr>
+<tr>
+<td><code>"hooks": [...]</code></td>
+<td>la lista di script da eseguire quando evento + matcher combaciano</td>
+</tr>
+<tr>
+<td><code>"type": "command"</code></td>
+<td>tipo di hook: un comando shell (vedi "Oltre gli script" per gli altri)</td>
+</tr>
+<tr>
+<td><code>"command"</code></td>
+<td>lo script: legge il JSON dell'evento da stdin, <code>jq</code> ne estrae <code>.tool_input.file_path</code>, <code>xargs</code> lo passa a Prettier</td>
+</tr>
+</tbody>
+</table>
+<p>Risultato: la CI non fallirà mai più per il formato — non perché Claude "si
+ricorda", ma perché non può succedere altrimenti.</p></div></section><section class="slide"><div class="crumb">07 · Come funziona, passo passo</div><div class="content"><h2>Come funziona, passo passo</h2>
+<ol>
+<li>Claude sta per usare (o ha appena usato) un tool → l'evento
+   corrispondente scatta.</li>
+<li>Il sistema seleziona gli hook configurati su quell'evento il cui
+   <code>matcher</code> combacia.</li>
+<li>Ogni hook riceve su <strong>stdin un JSON</strong> con i dettagli: <code>tool_name</code>,
+   <code>tool_input</code> (con <code>file_path</code>, <code>command</code>…), <code>cwd</code>.</li>
+<li>Lo script fa il suo lavoro e risponde con l'<strong>exit code</strong>:</li>
+<li><code>0</code> = tutto ok; per alcuni eventi lo stdout viene iniettato nel
+     contesto di Claude (è così che un hook "gli parla");</li>
+<li><code>2</code> = <strong>blocca l'azione</strong>, e lo stderr torna a Claude come spiegazione
+     del perché.</li>
+<li>Claude non può scavalcare né negoziare: tutto avviene fuori dal modello.</li>
+</ol></div></section><section class="slide"><div class="crumb">07 · Gli eventi che userai davvero</div><div class="content"><h2>Gli eventi che userai davvero</h2>
+<table>
+<thead>
+<tr>
+<th>Evento</th>
+<th>Scatta…</th>
+<th>Uso tipico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PreToolUse</code></td>
+<td>prima di un tool</td>
+<td>bloccare/filtrare comandi e file</td>
+</tr>
+<tr>
+<td><code>PostToolUse</code></td>
+<td>dopo un tool</td>
+<td>autoformat, lint, log dei comandi</td>
+</tr>
+<tr>
+<td><code>Stop</code></td>
+<td>quando Claude finisce il turno</td>
+<td>eseguire i test come cancello (cap. 11)</td>
+</tr>
+<tr>
+<td><code>UserPromptSubmit</code></td>
+<td>a ogni tuo prompt</td>
+<td>iniettare contesto, validare</td>
+</tr>
+<tr>
+<td><code>SessionStart</code></td>
+<td>avvio / <code>/clear</code> / dopo compact</td>
+<td>ricaricare regole o env</td>
+</tr>
+<tr>
+<td><code>Notification</code></td>
+<td>Claude chiede permesso o è idle</td>
+<td>notifica desktop</td>
+</tr>
+<tr>
+<td><code>PreCompact</code> / <code>PostCompact</code></td>
+<td>attorno alla compattazione</td>
+<td>salvare/re-iniettare contesto</td>
+</tr>
+</tbody>
+</table>
+<p>(La lista completa conta ~30 eventi: è quella che vedi nel browser di
+<code>/hooks</code> qui sopra.)</p></div></section><section class="slide"><div class="crumb">07 · Tre esempi ufficiali pronti all'uso</div><div class="content"><h2>Tre esempi ufficiali pronti all'uso</h2>
+<p><strong>Proteggere i file che Claude non deve toccare</strong> — <code>PreToolUse</code> con matcher
+<code>Edit|Write</code>: uno script che legge il <code>file_path</code> dallo stdin ed esce con <code>2</code>
+se matcha <code>.env</code>, <code>.git/</code> o <code>package-lock.json</code>. Il deny nei permessi
+(cap. 02) copre le letture; questo copre le scritture, con logica arbitraria
+perché lo script sei tu a scriverlo.</p>
+<p><strong>Notifica desktop quando serve il tuo ok</strong> — <code>Notification</code> con matcher
+<code>permission_prompt</code>: <code>notify-send</code> su Linux, <code>osascript</code> su macOS. Lanci un
+task lungo, vai a fare altro: ti chiama lui.</p>
+<p><strong>Regole che sopravvivono alla compattazione</strong> — <code>SessionStart</code> con matcher
+<code>compact</code>: <code>echo 'Reminder: use Bun, not npm.'</code> — lo stdout viene iniettato
+nel contesto fresco (è il caso "exit 0 + stdout" del punto 4 qui sopra).</p></div></section><section class="slide"><div class="crumb">07 · Oltre gli script</div><div class="content"><h2>Oltre gli script</h2>
+<p>Il <code>type</code> non è solo <code>command</code>: esistono hook <code>prompt</code> (una chiamata a un
+modello piccolo che risponde <code>{"ok": true/false}</code> — "questo comando è
+pericoloso?"), <code>agent</code> (un subagent di verifica multi-turno, cap. 06) e
+<code>http</code> (webhook). E gli hook si possono definire anche nel frontmatter di
+skill e agenti — valgono solo mentre quelli sono attivi — e nei plugin
+(cap. 09).</p></div></section><section class="slide"><div class="crumb">07 · Sicurezza</div><div class="content"><h2>Sicurezza</h2>
+<p>Gli hook girano <strong>con le tue credenziali e senza conferme</strong>: leggi qualunque
+hook prima di copiarlo da internet, e tratta il <code>settings.json</code> di progetto
+come codice da review (arriva via git dal team). È potere vero: usalo per i
+guardrail, non per la magia.</p>
+<hr />
+<p><strong>In sintesi</strong>: un hook per il formato (subito), uno per i file proibiti, uno
+per le notifiche. Quando ti accorgi che stai <em>sperando</em> che Claude faccia una
+cosa ogni volta, quella cosa vuole diventare un hook. Prossimo capitolo: MCP,
+ovvero dare occhi e mani nuove a Claude.</p></div></section><section class="slide"><div class="crumb">08 — MCP: dare occhi e mani nuove a Claude</div><div class="content"><h1>08 — MCP: dare occhi e mani nuove a Claude</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 sulla doc ufficiale (v2.1.210).</p>
+</blockquote></div></section><section class="slide"><div class="crumb">08 · Cos'è e a che serve</div><div class="content"><h2>Cos'è e a che serve</h2>
+<p>Il Model Context Protocol è lo standard con cui Claude Code si collega a
+strumenti esterni: un browser, Figma, GitHub, il tuo database. L'analogia
+giusta è una <strong>presa elettrica</strong>: un server MCP è una presa a cui Claude
+attacca nuovi sensi e nuove mani. Di fabbrica, Claude Code sa leggere e
+scrivere file e lanciare comandi shell; ogni server MCP collegato gli
+aggiunge capacità che da solo non ha.</p>
+<p>Concretamente, un server può portare tre cose:</p>
+<ul>
+<li><strong>tool</strong> — azioni nuove che Claude può eseguire ("apri questa pagina nel
+  browser", "elenca le issue di GitHub");</li>
+<li><strong>risorse</strong> — dati che tu puoi riferire in chat come fossero file;</li>
+<li><strong>prompt</strong> — comandi pronti che il server mette a disposizione.</li>
+</ul>
+<p>I tool sono la parte che userai sempre; risorse e prompt sono bonus che
+vediamo più avanti.</p></div></section><section class="slide"><div class="crumb">08 · Come si aggiunge un server</div><div class="content"><h2>Come si aggiunge un server</h2>
+<p>Il comando è <code>claude mcp add</code>, dal terminale (non in sessione). La forma
+cambia a seconda di <em>dove gira</em> il server.</p>
+<p><strong>Server locale (stdio)</strong> — un processo che Claude Code avvia sulla tua
+macchina e con cui parla via stdin/stdout:</p>
+<pre><code class="language-bash">claude mcp add playwright -- npx -y @playwright/mcp@latest
+</code></pre>
+<p>Leggiamolo pezzo per pezzo: <code>playwright</code> è il <strong>nome</strong> che dai tu al server
+(lo ritroverai ovunque: nei permessi, in <code>/mcp</code>, nei nomi dei tool); il
+<code>--</code> è un <strong>separatore obbligatorio</strong> — tutto ciò che sta a destra è il
+comando che avvia il server, non opzioni di <code>claude mcp</code>; <code>npx -y
+@playwright/mcp@latest</code> è quel comando (il <code>-y</code> evita la conferma
+interattiva di npx, che bloccherebbe l'avvio automatico).</p>
+<p><strong>Server remoto (HTTP)</strong> — un servizio che gira altrove, tipicamente
+gestito dal fornitore; qui non c'è nessun processo da avviare, solo un URL:</p>
+<pre><code class="language-bash">claude mcp add --transport http figma https://mcp.figma.com/mcp
+</code></pre>
+<p><code>--transport http</code> dice a Claude Code che deve <em>connettersi</em> invece di
+<em>eseguire</em>; <code>figma</code> è di nuovo il nome scelto da te; l'URL è l'endpoint del
+servizio.</p>
+<p><strong>Gestione</strong> — tre comandi da conoscere:</p>
+<pre><code class="language-bash">claude mcp list      # tutti i server configurati, con stato di connessione
+claude mcp get nome  # dettagli di un server
+claude mcp remove nome
+</code></pre></div></section><section class="slide"><div class="crumb">08 · Come funziona: cosa succede all'avvio</div><div class="content"><h2>Come funziona: cosa succede all'avvio</h2>
+<p>All'avvio di una sessione, Claude Code legge la lista dei server
+configurati, avvia i processi stdio e si connette agli endpoint HTTP. Ogni
+server risponde dichiarando i tool che offre, e da quel momento quei tool
+esistono per Claude accanto a quelli nativi (Read, Bash…). Tu non fai
+nulla: chiedi "apri la homepage e dimmi cosa vedi" e Claude sceglie il tool
+del server giusto, come sceglierebbe Read per un file.</p>
+<p>I server remoti spesso richiedono un login OAuth: dopo l'add appare
+"Needs authentication". Si risolve in sessione — <code>/mcp</code> → seleziona il
+server → Authenticate (si apre il browser per il login) — oppure da CLI
+con <code>claude mcp login nome</code>.</p>
+<p>Il pannello <code>/mcp</code> è anche il cruscotto di controllo:</p>
+<p><img alt="Il pannello /mcp: server locali e connector claude.ai, con stato e numero di tool" src="assets/08-mcp-panel.svg" /></p>
+<p>Cosa notare nella schermata: il pannello ha <strong>due sezioni</strong>. In alto i
+<strong>Local MCPs</strong>, cioè i server configurati da te su questa macchina — per
+ciascuno vedi lo <strong>stato</strong> (connected o failed: la prima cosa da guardare
+quando "Claude non vede il browser") e il <strong>numero di tool</strong> che porta
+(qui Playwright connesso con 24 tool). Sotto, i <strong>connector di claude.ai</strong>:
+integrazioni collegate al tuo account, che ti ritrovi in Claude Code senza
+averle configurate localmente.</p></div></section><section class="slide"><div class="crumb">08 · Gli scope: dove sta la configurazione</div><div class="content"><h2>Gli scope: dove sta la configurazione</h2>
+<p><code>claude mcp add</code> scrive la configurazione in uno di tre posti, scelto con
+<code>--scope</code>. La domanda a cui rispondono è: <em>chi deve avere questo server?</em></p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Dove</th>
+<th>Per chi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>local</code> (default)</td>
+<td>config personale, per questo progetto</td>
+<td>te</td>
+</tr>
+<tr>
+<td><code>project</code></td>
+<td><strong><code>.mcp.json</code> nella root, committato</strong></td>
+<td>tutto il team</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>config personale, tutti i progetti</td>
+<td>te, ovunque</td>
+</tr>
+</tbody>
+</table>
+<p><code>local</code> e <code>user</code> vivono nella tua config personale, fuori dal repo: sono
+affari tuoi. <code>project</code> invece scrive un file <strong><code>.mcp.json</code> nella root del
+progetto</strong>, pensato per essere committato: è così che si condivide lo
+stack col team — chi clona il repo si ritrova i server già configurati.</p>
+<p>Ecco un <code>.mcp.json</code> completo:</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;playwright&quot;: {
+      &quot;type&quot;: &quot;stdio&quot;,
+      &quot;command&quot;: &quot;npx&quot;,
+      &quot;args&quot;: [&quot;-y&quot;, &quot;@playwright/mcp@latest&quot;]
+    }
+  }
+}
+</code></pre>
+<p>La struttura ricalca il comando CLI: <code>mcpServers</code> è la mappa
+nome → definizione; <code>"type": "stdio"</code> dice come parlare col server;
+<code>command</code> e <code>args</code> sono il comando di avvio, spezzato in eseguibile e
+argomenti (quello che sul terminale stava a destra del <code>--</code>).</p>
+<p>Due meccanismi di sicurezza legati a questo file. Primo: alla prima
+apertura del progetto, Claude Code ti mostra i server elencati e <strong>chiede
+se ti fidi</strong> — sono processi che gireranno sulla tua macchina con i tuoi
+permessi, e il file l'ha scritto qualcun altro; la fiducia è meritata, non
+automatica. Secondo: nei valori puoi usare <code>${VAR}</code> o <code>${VAR:-default}</code>,
+espansi dall'ambiente al momento dell'avvio — le API key restano nelle
+variabili d'ambiente di ciascuno, mai committate nel JSON.</p></div></section><section class="slide"><div class="crumb">08 · Come appaiono i tool a Claude</div><div class="content"><h2>Come appaiono i tool a Claude</h2>
+<p>Ogni tool MCP ha un nome con schema fisso: <code>mcp__server__tool</code> — ad
+esempio <code>mcp__github__list_issues</code> è il tool <code>list_issues</code> del server che
+hai chiamato <code>github</code>. Questo schema è utile soprattutto nei <strong>permessi</strong>
+(cap. 02), dove il wildcard ti permette di approvare un server intero in
+un colpo:</p>
+<pre><code class="language-json">&quot;allow&quot;: [&quot;mcp__playwright__*&quot;]
+</code></pre>
+<p>Un dubbio legittimo: dieci server per centinaia di tool non intasano il
+contesto? Dal 2026 no: gli schemi dei tool si caricano <strong>on-demand</strong>
+(tool search) — Claude vede l'elenco dei nomi, ma la definizione completa
+di un tool entra nel contesto solo quando serve davvero.</p>
+<p>E i due bonus promessi all'inizio, spesso ignorati:</p>
+<ul>
+<li>le <strong>risorse</strong> si riferiscono con <code>@server:protocollo://path</code> — ad
+  esempio <code>@github:issue://123</code> porta quella issue nel contesto, con la
+  stessa sintassi <code>@</code> che usi per i file (cap. 03);</li>
+<li>i <strong>prompt</strong> dei server diventano slash command:
+  <code>/mcp__github__pr_review 456</code> esegue il prompt <code>pr_review</code> del server
+  GitHub con l'argomento <code>456</code>.</li>
+</ul></div></section><section class="slide"><div class="crumb">08 · Quali server, per un frontend dev</div><div class="content"><h2>Quali server, per un frontend dev</h2>
+<p>I quattro che contano sono nel capitolo 10 (Playwright, Chrome DevTools,
+Figma, GitHub) — con il workflow completo. Qui la regola generale, che
+vale per qualunque server: <strong>ogni server è codice che gira con i tuoi
+permessi</strong>. Quindi: aggiungi quello che usi, rimuovi quello che non usi
+(un <code>claude mcp list</code> ogni tanto come pulizia), fidati solo di fonti note.
+E se un tool restituisce output enormi (capita, con le pagine web),
+<code>MAX_MCP_OUTPUT_TOKENS</code> nei settings mette un tetto a quanto ne entra nel
+contesto.</p>
+<hr />
+<p><strong>In sintesi</strong>: <code>claude mcp add</code> per te, <code>.mcp.json</code> committato per il
+team, <code>/mcp</code> per stato e autenticazione. MCP è il moltiplicatore: da solo
+Claude vede il filesystem, con MCP vede il tuo browser e il tuo design
+system. Il prossimo capitolo mostra come impacchettare tutto questo; quello
+dopo è il workflow frontend vero e proprio.</p></div></section><section class="slide"><div class="crumb">09 — Plugin: il setup in un pacchetto</div><div class="content"><h1>09 — Plugin: il setup in un pacchetto</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026 (v2.1.210).</p>
+</blockquote></div></section><section class="slide"><div class="crumb">09 · Cosa sono e a che servono</div><div class="content"><h2>Cosa sono e a che servono</h2>
+<p>Un plugin impacchetta in un'unica unità installabile tutto quello che hai
+visto nei capitoli 5–8: <strong>skill, agenti, hook e server MCP</strong> (più eventuali
+temi e comandi). L'analogia è il package manager: come <code>npm install</code> ti
+porta una libreria con tutte le sue parti invece di file da copiare a mano,
+<code>/plugin install</code> ti porta un setup completo di Claude Code. È la
+differenza tra "copia questi cinque file nel posto giusto e configura tre
+chiavi" e un comando solo.</p></div></section><section class="slide"><div class="crumb">09 · Dove sta: la struttura</div><div class="content"><h2>Dove sta: la struttura</h2>
+<p>Un plugin è una directory (tipicamente un repo Git) con una struttura che
+riconoscerai subito, perché ricalca i capitoli precedenti:</p>
+<pre><code>mio-plugin/
+├── manifest.json     # nome, versione, descrizione
+├── skills/           # le skill (cap. 05)
+├── agents/           # gli agenti (cap. 06)
+├── hooks/hooks.json  # gli hook (cap. 07)
+└── .mcp.json         # i server MCP (cap. 08)
+</code></pre>
+<p>Il <code>manifest.json</code> è la carta d'identità (nome, versione, descrizione);
+le altre directory contengono esattamente i file che nei capitoli 5–8
+mettevi in <code>.claude/</code> — qui viaggiano insieme, versionati come un'unica
+cosa. Quando il plugin è installato, Claude Code carica quei contenuti
+all'avvio della sessione come se fossero tuoi: le skill compaiono tra le
+slash command, gli hook si agganciano agli eventi, i server MCP si avviano.</p></div></section><section class="slide"><div class="crumb">09 · Come si installa e si gestisce</div><div class="content"><h2>Come si installa e si gestisce</h2>
+<p>Tutto in sessione, a partire da <code>/plugin</code>:</p>
+<pre><code>/plugin                              # sfoglia marketplace e plugin installati
+/plugin install nome@marketplace
+/reload-plugins                      # ricarica dopo modifiche ai file del plugin
+</code></pre>
+<p><code>/plugin</code> da solo apre il pannello di gestione:</p>
+<p><img alt="Il pannello /plugin: plugin installati e marketplace da sfogliare" src="assets/09-plugin-browser.svg" /></p>
+<p>Da qui sfogli i marketplace, vedi cosa c'è dentro ogni plugin <strong>prima</strong> di
+installarlo, e gestisci quelli già installati. L'install si fa da pannello
+o direttamente con <code>/plugin install nome@marketplace</code> — la parte dopo la
+<code>@</code> dice da quale marketplace prendere il plugin. <code>/reload-plugins</code> serve
+quando sviluppi un plugin tuo: modifichi i file e ricarichi senza
+riavviare la sessione.</p></div></section><section class="slide"><div class="crumb">09 · Come funziona sotto: settings e marketplace</div><div class="content"><h2>Come funziona sotto: settings e marketplace</h2>
+<p>Cosa scrive davvero un'installazione? Due chiavi nel tuo <code>settings.json</code> —
+utile conoscerle per capire cosa c'è nella propria config:</p>
+<pre><code class="language-json">{
+  &quot;enabledPlugins&quot;: { &quot;nome@marketplace&quot;: true },
+  &quot;extraKnownMarketplaces&quot;: {
+    &quot;mio-marketplace&quot;: { &quot;source&quot;: { &quot;source&quot;: &quot;github&quot;, &quot;repo&quot;: &quot;utente/repo&quot; } }
+  }
+}
+</code></pre>
+<p><code>enabledPlugins</code> è l'elenco di ciò che è attivo: la chiave è
+<code>nome@marketplace</code>, il valore <code>true</code>/<code>false</code> accende o spegne il plugin.
+<code>extraKnownMarketplaces</code> registra i marketplace di terze parti: qui uno
+che vive su GitHub, indicato con <code>"source": "github"</code> e il <code>repo</code> in forma
+<code>utente/repo</code>.</p>
+<p>E un marketplace cos'è? Poco più di <strong>un repo Git con un indice</strong> dei
+plugin che contiene. Ne esiste uno ufficiale, <code>claude-plugins-official</code>
+(es. <code>/plugin install skill-creator@claude-plugins-official</code>, citato nel
+cap. 05), e puoi aggiungerne di terze parti come sopra — anche uno tuo.</p></div></section><section class="slide"><div class="crumb">09 · Quando un plugin invece di config sparsa</div><div class="content"><h2>Quando un plugin invece di config sparsa</h2>
+<ul>
+<li><strong>Per il team</strong>: lo standard aziendale (hook di format, agente di review,
+  skill di deploy) diventa UN pacchetto versionato che tutti installano e
+  aggiornano, invece di file copiati che divergono silenziosamente.</li>
+<li><strong>Per te</strong>: se ti ritrovi a rifare lo stesso setup su ogni macchina o
+  progetto, un plugin personale su un repo GitHub è il tuo "dotfiles" di
+  Claude Code.</li>
+<li><strong>Dalla community</strong>: prima di costruire, guarda cosa esiste — browser
+  automation, code intelligence, integrazioni: spesso c'è già un plugin.</li>
+</ul>
+<p>Attenzione simmetrica a quella degli hook (cap. 07): un plugin può portare
+hook e MCP server, cioè <strong>codice che gira con le tue credenziali</strong>.
+Installa da fonti di cui ti fidi, e leggi cosa contiene — il pannello
+<code>/plugin</code> lo mostra proprio per questo.</p></div></section><section class="slide"><div class="crumb">09 · Esempio dal vivo</div><div class="content"><h2>Esempio dal vivo</h2>
+<p>Questa guida è stata scritta su una macchina con un plugin installato da un
+marketplace GitHub di terze parti: porta una persona di review ("lazy
+senior dev") con le sue skill e un hook SessionStart che la attiva a ogni
+sessione. Un solo <code>install</code>, e cinque skill più un hook sono arrivati
+insieme — e con <code>/plugin uninstall</code> se ne andrebbero altrettanto in blocco.
+Questo è il punto dei plugin.</p>
+<hr />
+<p><strong>In sintesi</strong>: quando il tuo setup diventa buono, il plugin è come lo
+condividi (col team o con te stesso del futuro). Prossimo capitolo: il
+workflow frontend con un browser vero.</p></div></section><section class="slide"><div class="crumb">10 — Il workflow frontend: Claude con un browser vero</div><div class="content"><h1>10 — Il workflow frontend: Claude con un browser vero</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026. È IL capitolo per chi fa frontend: qui il
+loop di verifica (cap. 11) diventa visivo.</p>
+</blockquote></div></section><section class="slide"><div class="crumb">10 · Il salto di qualità</div><div class="content"><h2>Il salto di qualità</h2>
+<p>Senza browser, Claude scrive CSS alla cieca: lui modifica, tu guardi,
+descrivi a parole cosa non va ("no, il padding è ancora troppo stretto"),
+lui riprova. Sei tu il suo apparato visivo, ed è il collo di bottiglia.
+Con un browser collegato, <strong>Claude vede quello che vedi tu</strong>: naviga la
+pagina, legge la console, fa screenshot, confronta col design e si corregge
+da solo. Il loop diventa chiuso — e tu esci dal giro delle iterazioni per
+rientrare solo all'approvazione finale.</p>
+<p>Le strade per collegare un browser sono due (più una terza freccia per il
+debugging). Vediamole con lo stesso schema: cos'è, come si installa, come
+funziona.</p></div></section><section class="slide"><div class="crumb">10 · Strada 1: Playwright MCP (gratuito, open source)</div><div class="content"><h2>Strada 1: Playwright MCP (gratuito, open source)</h2>
+<p><strong>Cos'è</strong>: un server MCP (cap. 08) che dà a Claude un browser tutto suo —
+headless o visibile — da pilotare: aprire pagine, cliccare, compilare
+form, fare screenshot, leggere la console.</p>
+<p><strong>Come si installa</strong>: una riga, con la sintassi vista nel cap. 08 (nome del
+server, <code>--</code>, comando di avvio):</p>
+<pre><code class="language-bash">claude mcp add playwright -- npx -y @playwright/mcp@latest
+</code></pre>
+<blockquote>
+<p><strong>Testato dal vivo il 15 lug 2026</strong> — due trappole reali incontrate:
+1. di default il server cerca <strong>Google Chrome</strong>: se non ce l'hai (o
+   preferisci altro), scegli l'engine con <code>--browser firefox</code> o
+   <code>--browser chromium</code> in coda al comando;
+2. al primo avvio può chiedere un browser che non hai in cache — si
+   risolve con <code>npx @playwright/mcp install-browser [firefox]</code>.
+Fatto questo, il test "apri example.com e dimmi titolo e h1" risponde
+correttamente con un browser vero (verificato qui su Firefox: lo user
+agent riportava proprio Gecko/Firefox).</p>
+</blockquote>
+<p><strong>Come funziona</strong>: da qui in poi, quando chiedi qualcosa che riguarda una
+pagina, Claude usa i tool del server per pilotare il browser. Il punto
+tecnico che lo rende potente: non ragiona (solo) sui pixel, ma
+sull'<strong>accessibility tree</strong> — la rappresentazione strutturata della pagina
+che il browser costruisce per gli screen reader. Sono dati deterministici
+("c'è un bottone con label 'Salva'", "questo campo è required"), che Claude
+legge con precisione dove uno screenshot lascerebbe ambiguità. Perfetto
+per: verificare flussi, compilare form, leggere errori console, e come
+base dei test e2e. Bonus non piccolo: se la tua UI è illeggibile per
+l'accessibility tree, hai appena scoperto un problema di a11y — lo stesso
+che avrebbe uno screen reader.</p></div></section><section class="slide"><div class="crumb">10 · Strada 2: l'estensione Chrome ufficiale (Anthropic, per gli abbonati)</div><div class="content"><h2>Strada 2: l'estensione Chrome ufficiale (Anthropic, per gli abbonati)</h2>
+<p><strong>Cos'è</strong>: Claude dentro il <em>tuo</em> Chrome, non in un browser a parte. La
+differenza pratica: le tue sessioni già autenticate, il tuo stato reale —
+niente da rifare login o ricostruire. E risposte più mirate: Playwright su
+pagine complesse può restituire alberi da decine di migliaia di token,
+l'estensione lavora in modo più selettivo.</p>
+<p><strong>Come si ottiene</strong>: è legata all'abbonamento — controlla la disponibilità
+sul tuo piano su claude.ai. Se ce l'hai, è la strada più comoda per lo
+sviluppo interattivo quotidiano; Playwright resta il cavallo di battaglia
+per l'automazione e per chi parte da zero.</p></div></section><section class="slide"><div class="crumb">10 · Terza freccia: Chrome DevTools MCP</div><div class="content"><h2>Terza freccia: Chrome DevTools MCP</h2>
+<p>Per il debugging profondo c'è un terzo server:</p>
+<pre><code class="language-bash">claude mcp add chrome-devtools -- npx chrome-devtools-mcp@latest
+</code></pre>
+<p>Parla il protocollo DevTools di Chrome: network, performance, coverage —
+le tab che apriresti tu in DevTools, lette da Claude. È complementare a
+Playwright: quello pilota la pagina, questo la ausculta.</p></div></section><section class="slide"><div class="crumb">10 · Il ciclo screenshot-driven</div><div class="content"><h2>Il ciclo screenshot-driven</h2>
+<p>Con il browser collegato si sblocca il pattern ufficiale per implementare
+da design. Tre mosse:</p>
+<ol>
+<li><strong>Dai il mock</strong>: incolla lo screenshot del design (<code>Ctrl+V</code> in sessione)
+   o collega Figma (sotto). Questo è il <em>target</em>: un'immagine, non una
+   descrizione a parole.</li>
+<li><strong>Chiedi il loop completo</strong>, non solo l'implementazione: "implementa
+   questo componente; poi avvia il dev server, apri la pagina, fai uno
+   screenshot, confrontalo col mock, elenca le differenze e correggile.
+   Ripeti finché non corrispondono." La frase chiave è <em>ripeti finché</em>: è
+   quello che trasforma un tentativo unico in un ciclo.</li>
+<li>Claude itera da solo: implementa → guarda (screenshot vero, dal browser
+   vero) → confronta → corregge → riguarda.</li>
+</ol>
+<p>Cosa aspettarsi: la prima iterazione sarà al 70%; la terza, quasi
+indistinguibile dal mock. Il tuo lavoro si sposta da "descrivere le
+differenze a parole" ad "approvare il risultato" — che è esattamente il
+mestiere che vuoi fare.</p>
+<p>Lo stesso loop vale al contrario, per i bug visivi: incolla lo screenshot
+del glitch e chiedi "riproduci, trova la causa, correggi, dimostra con uno
+screenshot dopo". Lo screenshot finale è l'evidenza che il fix funziona.</p></div></section><section class="slide"><div class="crumb">10 · Figma</div><div class="content"><h2>Figma</h2>
+<p><strong>Cos'è</strong>: il server MCP ufficiale di Figma, che collega il design system
+alla sessione. È un server remoto (HTTP, cap. 08): niente processi locali,
+si aggiunge con l'URL e si autentica col tuo account Figma:</p>
+<pre><code class="language-bash">claude mcp add --transport http figma https://mcp.figma.com/mcp
+</code></pre>
+<p><strong>Come funziona</strong>: Claude legge frame, componenti e design token
+direttamente dal file Figma — non da uno screenshot, ma dai dati. "Usa i
+token di spacing del design system, non valori a mano" smette di essere
+una speranza: Claude i token li vede davvero. E dal 2026 l'integrazione
+con Claude Code è bidirezionale — anche code → canvas.</p></div></section><section class="slide"><div class="crumb">10 · Il quadro completo</div><div class="content"><h2>Il quadro completo</h2>
+<p>Con questo stack (Playwright o estensione + Figma + i test del cap. 11),
+un task frontend suona così:</p>
+<blockquote>
+<p>"Implementa la card prodotto dal frame Figma 'ProductCard v2'. Componente
+in <code>src/components/</code>, CSS modules, dati mock. Poi: dev server, screenshot
+alla viewport 375px e 1280px, confronto col frame, correggi le differenze.
+Chiudi quando gli screenshot corrispondono e <code>npm run test</code> passa."</p>
+</blockquote>
+<p>Nota i tre ruoli: il design come <strong>input verificabile</strong> (il frame Figma,
+non una descrizione), il browser come <strong>strumento di verifica</strong> (gli
+screenshot alle due viewport), i test come <strong>cancello</strong> (non si chiude
+finché non passano). È il capitolo 11 applicato al frontend — ed è il
+motivo per cui questo setup ripaga l'ora che costa metterlo in piedi.</p>
+<hr />
+<p><strong>In sintesi</strong>: Playwright MCP subito (una riga, gratis), l'estensione
+Chrome se il tuo piano la include, Figma quando lavori da design. E da
+domani, mai più "aggiusta il padding" a parole: screenshot, loop, evidenze.</p></div></section><section class="slide divider"><div class="divider-inner"><h1>Riferimento</h1></div></section><section class="slide"><div class="crumb">14 — Must-have e costi: il setup dei primi 30 minuti</div><div class="content"><h1>14 — Must-have e costi: il setup dei primi 30 minuti</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026. I prezzi cambiano: controlla claude.com/pricing.</p>
+</blockquote></div></section><section class="slide"><div class="crumb">14 · Il setup minimo che rende subito</div><div class="content"><h2>Il setup minimo che rende subito</h2>
+<p>Il problema che questo capitolo risolve: la guida ha 14 capitoli e non li
+applicherai tutti il primo giorno. Quali cinque cose fare <em>subito</em>, nell'ordine
+giusto, perché ripagano dal primo pomeriggio? Eccole:</p>
+<ol>
+<li><strong><code>/init</code> nel tuo progetto</strong> → CLAUDE.md di partenza, poi potalo
+   (cap. 04). Committalo: è documentazione per il team, non solo per te.
+   Senza CLAUDE.md ogni sessione riparte da zero e rispieghi le stesse
+   convenzioni ogni giorno.</li>
+<li><strong>Deny sui segreti</strong> in <code>.claude/settings.json</code>: <code>Read(.env)</code>,
+   <code>Read(.env.*)</code>, <code>Bash(cat *.env*)</code> (cap. 02). Due minuti, per sempre —
+   e il giorno che Claude, esplorando per un bug, sta per aprire il file
+   con le API key, il deny lo ferma senza che tu debba essere lì.</li>
+<li><strong>Hook Prettier</strong> su PostToolUse (cap. 07). Ogni file toccato esce già
+   formattato: niente diff sporchi di soli spazi, niente "riformatta tutto"
+   a fine sessione. Un frontend senza questo hook sta lasciando soldi sul
+   tavolo.</li>
+<li><strong><code>/statusline</code></strong> — mettici contesto usato e modello: sono le due cose
+   che vuoi vedere <em>sempre</em>. Il contesto che si riempie spiega metà dei
+   comportamenti strani (cap. 13), e vederlo salire in tempo reale ti fa
+   fare <code>/clear</code> al momento giusto invece che tre task troppo tardi.</li>
+<li><strong>Allow per i comandi fidati</strong>: <code>npm run test</code>, <code>npm run lint</code>, <code>git
+   status/diff/log</code> in allow-list, così smetti di approvare l'ovvio — ogni
+   prompt di conferma su un comando innocuo è attrito che ti fa sorvegliare
+   invece di lavorare.</li>
+<li>Quando arriva il momento: estensione Chrome o Playwright MCP (cap. 10).</li>
+</ol>
+<p>E poi, la regola più importante: <strong>lascia che il resto cresca
+just-in-time</strong>. Skill alla seconda volta che rispieghi una procedura,
+agente alla prima ricerca che ti sporca il contesto, hook alla prima regola
+che Claude "dimentica". Costruire l'arsenale in anticipo è il modo più
+sicuro di costruire quello sbagliato: il bisogno reale è un criterio di
+progettazione migliore di qualunque previsione.</p></div></section><section class="slide"><div class="crumb">14 · Modello giusto per il task giusto</div><div class="content"><h2>Modello giusto per il task giusto</h2>
+<p>Il dolore da evitare è doppio: pagare il modello grosso per rinominare una
+variabile, o far litigare il modello piccolo con un bug subdolo per
+un'ora. La mappa:</p>
+<ul>
+<li>Il default (Sonnet) va bene per quasi tutto il lavoro quotidiano.</li>
+<li><strong><code>/model opusplan</code></strong> è il trucco più citato: il modello grosso (Opus)
+  pianifica, quello medio esegue — paghi il ragionamento dove rende (le
+  decisioni) e risparmi dove non serve (la manovalanza di battitura).</li>
+<li>Modello piccolo (Haiku) per il lavoro meccanico, soprattutto negli agenti
+  (<code>model: haiku</code> nel frontmatter, cap. 06): un agente che formatta o cerca
+  stringhe non ha bisogno di ragionare.</li>
+<li><code>Alt+T</code> (extended thinking) per i problemi davvero difficili, non di
+  default — è potenza extra a costo extra, e sul task medio non si vede.</li>
+</ul>
+<p>Nota onesta: la doc ufficiale a volte spinge nella direzione opposta ("usa il
+modello grosso con thinking: meno correzioni = più veloce in totale").
+Entrambe le posizioni sono vere in casi diversi: task ben specificato →
+modello medio; task ambiguo e costoso da correggere → modello grosso. Il
+discrimine è quanto è probabile che il primo tentativo vada male: se è
+probabile, il modello grosso che ci azzecca subito costa <em>meno</em> di tre giri
+col medio.</p>
+<p><em>Il segnale</em>: se ti accorgi che stai correggendo spesso il modello medio su
+un certo tipo di task, quel tipo di task merita il grosso. Se il grosso non
+sta mai facendo niente di intelligente, stai pagando ragionamento a vuoto.</p></div></section><section class="slide"><div class="crumb">14 · Le 5 abitudini di risparmio (ufficiali)</div><div class="content"><h2>Le 5 abitudini di risparmio (ufficiali)</h2>
+<ol>
+<li><code>/clear</code> tra un task e l'altro</li>
+<li>modello proporzionato al task</li>
+<li>riferisci i file per path (<code>@src/…</code>) invece di incollarli</li>
+<li>CLAUDE.md sotto ~200 righe</li>
+<li>piano prima delle modifiche grandi (meno tentativi = meno token)</li>
+</ol>
+<p>Noterai che sono le stesse regole dei capitoli 3, 4 e 13: <strong>quello che fa
+lavorare meglio Claude è quello che costa meno</strong>. Non è un caso: il nemico
+comune è il contesto sprecato. Il token che paghi e il token che confonde
+il modello sono lo stesso token — ottimizzare la qualità e ottimizzare il
+costo, qui, sono lo stesso gesto.</p></div></section><section class="slide"><div class="crumb">14 · Monitorare</div><div class="content"><h2>Monitorare</h2>
+<p>Quattro strumenti, dal più al meno frequente:</p>
+<ul>
+<li>la statusline — tutto quanto sotto, sempre sott'occhio, senza chiedere</li>
+<li><code>/context</code> — quanto contesto stai usando (da guardare quando le risposte
+  peggiorano: di solito la spiegazione è lì)</li>
+<li><code>/usage</code> — dove sei coi limiti del piano (Pro/Max)</li>
+<li><code>/cost</code> — spesa della sessione (utenti API)</li>
+</ul>
+<p>Ordini di grandezza (luglio 2026): Pro 20 $/mese con ~200 messaggi ogni
+5 ore; Max 5x/20x a 100/200 $/mese; API a consumo (indicativamente 3 $/15 $
+per M token in/out sul modello medio). Se Claude Code diventa lo strumento
+principale, il limite del Pro si sente in fretta — i ~200 messaggi ogni
+5 ore sembrano tanti finché non passi una giornata intera in sessione.</p></div></section><section class="slide"><div class="crumb">14 · Per andare oltre (cenni)</div><div class="content"><h2>Per andare oltre (cenni)</h2>
+<p>Tre direzioni per quando il flusso base ti sta stretto:</p>
+<ul>
+<li><strong><code>claude -p "prompt"</code></strong> — modalità headless: Claude Code negli script e
+  in CI (<code>--output-format json</code> per output strutturato). Il momento in cui
+  serve: quando una cosa che fai in sessione vuoi che giri da sola.</li>
+<li><strong>GitHub Actions</strong> — <code>anthropics/claude-code-action</code>: <code>@claude</code> nei
+  commenti delle PR per review e fix automatici; rispetta il CLAUDE.md del
+  repo, quindi le convenzioni che hai scritto valgono anche lì.</li>
+<li><strong>Git worktrees</strong> — più sessioni in parallelo su branch diversi
+  (<code>claude --worktree</code>); il collo di bottiglia diventa la tua capacità di
+  fare review, non Claude. Da provare solo quando il flusso a sessione
+  singola è già solido — parallelizzare il caos produce solo caos parallelo.</li>
+</ul>
+<hr />
+<p><strong>In sintesi</strong>: cinque mosse il primo giorno (init, deny, hook format,
+statusline, allow-list), il resto quando serve davvero. E l'abitudine che
+batte tutte: contesto pulito, evidenze sempre. Se dopo queste abitudini il
+budget stringe ancora, il <a href="15-risparmiare-token.md">cap. 15</a> presenta gli
+strumenti che comprimono i token alla fonte — con numeri misurati, non
+promessi.</p></div></section><section class="slide"><div class="crumb">15 — Risparmiare token: rtk, ponytail e caveman</div><div class="content"><h1>15 — Risparmiare token: rtk, ponytail e caveman</h1>
+<blockquote>
+<p>Verificato il 15 luglio 2026: versioni, comandi di installazione e numeri
+controllati su GitHub e (per rtk) misurati su un uso reale di mesi.</p>
+</blockquote></div></section><section class="slide"><div class="crumb">15 · Perché questo capitolo esiste</div><div class="content"><h2>Perché questo capitolo esiste</h2>
+<p>Se sei su un piano Pro, il tuo budget è una finestra: ~200 messaggi ogni
+5 ore (cap. 01). Ma il messaggio non è l'unità che conta — lo sono i
+<strong>token</strong>, e la maggior parte non li scrivi tu: sono gli <em>output dei
+comandi</em> che Claude esegue (un <code>git log</code>, un <code>ls -la</code>, l'output dei test) e
+il <em>codice e la prosa</em> che Claude genera. Le 5 abitudini del cap. 14 riducono
+gli sprechi di comportamento; gli strumenti di questo capitolo riducono gli
+sprechi <strong>alla fonte, automaticamente</strong>. Tradotto: finestre di lavoro più
+lunghe con lo stesso piano.</p>
+<p>Tutti e tre sono progetti di terze parti: vale il solito avviso dei cap. 07
+e 09 — hook e plugin girano coi tuoi permessi, guarda cosa installi.</p></div></section><section class="slide"><div class="crumb">15 · rtk — comprimere gli output dei comandi</div><div class="content"><h2>rtk — comprimere gli output dei comandi</h2>
+<p><strong>Cos'è</strong>: un proxy CLI in Rust (<a href="https://github.com/rtk-ai/rtk">rtk-ai/rtk</a>,
+Apache 2.0) che si mette tra i comandi e Claude: esegue il comando vero e
+passa al contesto una versione <strong>filtrata e compressa</strong> dell'output. Un
+<code>git status</code> verboso diventa tre righe dense; un <code>ls -la</code> perde i permessi
+che a Claude non servono. Dichiarato: 60–90% di risparmio sugli output.</p>
+<p><strong>Come si installa</strong>:</p>
+<pre><code class="language-bash">brew install rtk        # oppure: curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+rtk init -g             # installa l'hook per Claude Code + RTK.md, poi riavvia Claude
+</code></pre>
+<p><strong>Come funziona</strong>: <code>rtk init -g</code> aggiunge un hook <code>PreToolUse</code> (cap. 07) che
+riscrive in trasparenza i comandi Bash di Claude in <code>rtk &lt;comando&gt;</code>: Claude
+chiede <code>git diff</code>, il sistema esegue <code>rtk git diff</code>, e nel contesto entra
+l'output compresso. Tu non fai niente; Claude nemmeno se ne accorge.</p>
+<p><strong>Quanto rende davvero</strong>: dal contatore (<code>rtk gain</code>) di un'installazione
+reale usata per mesi di lavoro quotidiano:</p>
+<pre><code class="language-console">$ rtk gain
+Total commands:    6812
+Tokens saved:      2.1M (54.3%)
+</code></pre>
+<p>Metà dei token degli output di comando, spariti. Per un piano Pro è la
+differenza tra una finestra che finisce a metà pomeriggio e una che arriva
+a sera. È lo strumento col miglior rapporto beneficio/rischio del capitolo:
+non cambia <em>cosa</em> fa Claude, solo quanto pesa quello che legge.</p></div></section><section class="slide"><div class="crumb">15 · ponytail — meno codice generato</div><div class="content"><h2>ponytail — meno codice generato</h2>
+<p><strong>Cos'è</strong>: un plugin (<a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a>)
+che installa una "persona" da senior dev pigro: soluzione più corta che
+funziona, stdlib prima delle dipendenze, niente astrazioni speculative,
+diff minimo. Il risparmio token è la conseguenza del design: <strong>meno codice
+generato = meno token di output</strong> (e spesso meno bug da rivedere).</p>
+<p><strong>Come si installa</strong> (è l'esempio vivo del cap. 09):</p>
+<pre><code class="language-bash">claude plugin marketplace add DietrichGebert/ponytail
+claude plugin install ponytail@ponytail
+</code></pre>
+<p><strong>Come funziona</strong>: un hook <code>SessionStart</code> inietta le regole a ogni sessione;
+tre intensità (<code>/ponytail lite|full|ultra</code>); le scorciatoie deliberate
+vengono marcate con commenti <code>ponytail:</code> così restano tracciate.</p>
+<p><strong>Quanto rende</strong> (benchmark del progetto stesso, 3 modelli × 10 run,
+mediane vs baseline senza plugin): righe di codice <strong>46%</strong>, token <strong>78%</strong>,
+costo <strong>80%</strong>, tempo <strong>73%</strong> — a safety invariata. Cioè: -22% di token e
+metà del codice da leggere. Avvertenza onesta: cambia lo <em>stile</em> del codice
+verso il minimalismo; provalo su un progetto tuo prima di adottarlo — o ti
+piace, o ti innervosisce.</p></div></section><section class="slide"><div class="crumb">15 · caveman — risposte terse (con un asterisco)</div><div class="content"><h2>caveman — risposte terse (con un asterisco)</h2>
+<p><strong>Cos'è</strong>: un plugin (<a href="https://github.com/JuliusBrussee/caveman">JuliusBrussee/caveman</a>)
+che rende terse le <strong>risposte in prosa</strong> dell'agente ("why use many token
+when few token do trick"), lasciando intatti byte-per-byte codice, comandi
+ed errori.</p>
+<p><strong>Come si installa</strong>:</p>
+<pre><code class="language-bash">claude plugin marketplace add JuliusBrussee/caveman
+claude plugin install caveman@caveman
+</code></pre>
+<p><strong>L'asterisco</strong>: il progetto dichiara ~65% di risparmio sui token di
+<em>output in prosa</em>; ma il benchmark indipendente di ponytail (che lo usa come
+termine di paragone) lo misura a <strong>+7% di token totali</strong> sui task di
+coding — perché nei task veri la prosa è una fetta piccola, e lo stile
+"caveman" a volte allunga il giro. Verdetto pratico: prendilo per la
+<em>leggibilità</em> (risposte che si scorrono in due secondi), non per il
+risparmio. Sul budget contano rtk e ponytail.</p></div></section><section class="slide"><div class="crumb">15 · L'ordine giusto per un piano Pro</div><div class="content"><h2>L'ordine giusto per un piano Pro</h2>
+<ol>
+<li><strong>rtk</strong> — subito: risparmio misurato ~50%+ sugli output, zero cambi di
+   comportamento, si disinstalla senza lasciare traccia.</li>
+<li><strong>ponytail</strong> — quando hai fatto pace con lo stile minimalista: -22% di
+   token e molto meno codice da rivedere.</li>
+<li><strong>caveman</strong> — questione di gusto, non di budget.</li>
+</ol>
+<p>E ricorda che la leva più grande resta gratis: le 5 abitudini del cap. 14
+(<code>/clear</code>, modello proporzionato, file per path, CLAUDE.md snello, piano
+prima delle modifiche grandi). Prima il metodo, poi gli attrezzi.</p>
+<hr />
+<p><strong>In sintesi</strong>: il token che non entra nel contesto è l'unico che non paghi
+e non confonde il modello. rtk comprime quello che Claude legge, ponytail
+riduce quello che Claude scrive, caveman accorcia quello che Claude ti dice
+— e solo i primi due spostano davvero il budget.</p></div></section>
+<div id="toc"><div class="toc-item toc-block" data-n="1">— Base —</div><div class="toc-item" data-n="2">01 — Installazione e primo avvio</div><div class="toc-item" data-n="3">Installazione</div><div class="toc-item" data-n="4">Login e piani</div><div class="toc-item" data-n="5">Primo avvio</div><div class="toc-item" data-n="6">Estensione VS Code (e le altre interfacce)</div><div class="toc-item" data-n="7">Aggiornamenti</div><div class="toc-item" data-n="8">02 — Setup e configurazione</div><div class="toc-item" data-n="9">Dove vive la configurazione</div><div class="toc-item" data-n="10">settings.json: le chiavi che usi davvero</div><div class="toc-item" data-n="11">Permission mode</div><div class="toc-item" data-n="12">CLAUDE.md: le istruzioni permanenti</div><div class="toc-item" data-n="13">Comandi</div><div class="toc-item" data-n="14">Convenzioni</div><div class="toc-item" data-n="15">I comandi di configurazione</div><div class="toc-item" data-n="16">Variabili d'ambiente da conoscere</div><div class="toc-item" data-n="17">03 — Uso quotidiano</div><div class="toc-item" data-n="18">I comandi slash: il pannello di controllo</div><div class="toc-item" data-n="19">Il flusso: Explore → Plan → Code → Commit</div><div class="toc-item" data-n="20">Checkpoint e /rewind: la rete di sicurezza</div><div class="toc-item" data-n="21">La regola dei 2 tentativi</div><div class="toc-item" data-n="22">Sessioni</div><div class="toc-item" data-n="23">Gestione del contesto</div><div class="toc-item" data-n="24">Scorciatoie e trucchi di input</div><div class="toc-item" data-n="25">Cambiare modello: /model</div><div class="toc-item" data-n="26">Due comandi che non ti aspetti</div><div class="toc-item" data-n="27">04 — CLAUDE.md e rules: le istruzioni permanenti</div><div class="toc-item" data-n="28">Cos'è davvero</div><div class="toc-item" data-n="29">Cosa metterci (e cosa no)</div><div class="toc-item" data-n="30">Comandi</div><div class="toc-item" data-n="31">Convenzioni</div><div class="toc-item" data-n="32">Il pattern che rende il file vivo: il log degli errori</div><div class="toc-item" data-n="33">I livelli (ripasso dal cap. 02, con le regole d'uso)</div><div class="toc-item" data-n="34">Rules: istruzioni con mira</div><div class="toc-item" data-n="35">Un limite onesto</div><div class="toc-item toc-block" data-n="36">— Metodo —</div><div class="toc-item" data-n="37">11 — Verifica: il principio più importante di tutta la guida</div><div class="toc-item" data-n="38">Il problema</div><div class="toc-item" data-n="39">Come si applica: dai a Claude un criterio eseguibile</div><div class="toc-item" data-n="40">Perché funziona</div><div class="toc-item" data-n="41">Chiedi evidenze, non asserzioni</div><div class="toc-item" data-n="42">La scala della verifica</div><div class="toc-item" data-n="43">La review avversaria (con l'antidoto)</div><div class="toc-item" data-n="44">Il caso senza test</div><div class="toc-item" data-n="45">12 — Prompt engineering per Claude Code</div><div class="toc-item" data-n="46">Il modello mentale giusto</div><div class="toc-item" data-n="47">Specificità: criteri di successo, non aggettivi</div><div class="toc-item" data-n="48">Contesto e vincoli, non micro-istruzioni</div><div class="toc-item" data-n="49">Decomposizione: chiedi il primo passo, non il viaggio</div><div class="toc-item" data-n="50">Iterare: feedback concreti, non ripetizioni</div><div class="toc-item" data-n="51">Prima/dopo</div><div class="toc-item" data-n="52">13 — Errori comuni (e come riconoscerli addosso)</div><div class="toc-item" data-n="53">1. Usarlo come ChatGPT</div><div class="toc-item" data-n="54">2. Il greed mistake</div><div class="toc-item" data-n="55">3. Correggere in loop</div><div class="toc-item" data-n="56">4. Il CLAUDE.md enciclopedia</div><div class="toc-item" data-n="57">5. Fidarsi senza verificare</div><div class="toc-item" data-n="58">6. Non revisionare tra un prompt e l'altro</div><div class="toc-item" data-n="59">7. Investigazioni senza scope</div><div class="toc-item" data-n="60">8. La kitchen-sink session</div><div class="toc-item toc-block" data-n="61">— Potenza —</div><div class="toc-item" data-n="62">05 — Skill e slash command</div><div class="toc-item" data-n="63">Cos'è una skill, a che serve</div><div class="toc-item" data-n="64">Dove sta e chi la crea</div><div class="toc-item" data-n="65">Come si scrive</div><div class="toc-item" data-n="66">Come funziona, passo passo</div><div class="toc-item" data-n="67">Argomenti e superpoteri del corpo</div><div class="toc-item" data-n="68">Stato attuale</div><div class="toc-item" data-n="69">E i vecchi slash command?</div><div class="toc-item" data-n="70">Skill di serie e come crearne di buone</div><div class="toc-item" data-n="71">06 — Agenti (subagent): a chi delegare</div><div class="toc-item" data-n="72">Cos'è un subagent, a che serve</div><div class="toc-item" data-n="73">Dove sta e chi lo crea</div><div class="toc-item" data-n="74">Come si scrive</div><div class="toc-item" data-n="75">Come funziona, passo passo</div><div class="toc-item" data-n="76">Cosa vede il subagent (e cosa no)</div><div class="toc-item" data-n="77">Quelli di serie</div><div class="toc-item" data-n="78">Quando NON usarli</div><div class="toc-item" data-n="79">07 — Hook: quando le regole smettono di essere consigli</div><div class="toc-item" data-n="80">Cos'è un hook, a che serve</div><div class="toc-item" data-n="81">Dove sta e chi lo crea</div><div class="toc-item" data-n="82">Come si scrive</div><div class="toc-item" data-n="83">Come funziona, passo passo</div><div class="toc-item" data-n="84">Gli eventi che userai davvero</div><div class="toc-item" data-n="85">Tre esempi ufficiali pronti all'uso</div><div class="toc-item" data-n="86">Oltre gli script</div><div class="toc-item" data-n="87">Sicurezza</div><div class="toc-item" data-n="88">08 — MCP: dare occhi e mani nuove a Claude</div><div class="toc-item" data-n="89">Cos'è e a che serve</div><div class="toc-item" data-n="90">Come si aggiunge un server</div><div class="toc-item" data-n="91">Come funziona: cosa succede all'avvio</div><div class="toc-item" data-n="92">Gli scope: dove sta la configurazione</div><div class="toc-item" data-n="93">Come appaiono i tool a Claude</div><div class="toc-item" data-n="94">Quali server, per un frontend dev</div><div class="toc-item" data-n="95">09 — Plugin: il setup in un pacchetto</div><div class="toc-item" data-n="96">Cosa sono e a che servono</div><div class="toc-item" data-n="97">Dove sta: la struttura</div><div class="toc-item" data-n="98">Come si installa e si gestisce</div><div class="toc-item" data-n="99">Come funziona sotto: settings e marketplace</div><div class="toc-item" data-n="100">Quando un plugin invece di config sparsa</div><div class="toc-item" data-n="101">Esempio dal vivo</div><div class="toc-item" data-n="102">10 — Il workflow frontend: Claude con un browser vero</div><div class="toc-item" data-n="103">Il salto di qualità</div><div class="toc-item" data-n="104">Strada 1: Playwright MCP (gratuito, open source)</div><div class="toc-item" data-n="105">Strada 2: l'estensione Chrome ufficiale (Anthropic, per gli abbonati)</div><div class="toc-item" data-n="106">Terza freccia: Chrome DevTools MCP</div><div class="toc-item" data-n="107">Il ciclo screenshot-driven</div><div class="toc-item" data-n="108">Figma</div><div class="toc-item" data-n="109">Il quadro completo</div><div class="toc-item toc-block" data-n="110">— Riferimento —</div><div class="toc-item" data-n="111">14 — Must-have e costi: il setup dei primi 30 minuti</div><div class="toc-item" data-n="112">Il setup minimo che rende subito</div><div class="toc-item" data-n="113">Modello giusto per il task giusto</div><div class="toc-item" data-n="114">Le 5 abitudini di risparmio (ufficiali)</div><div class="toc-item" data-n="115">Monitorare</div><div class="toc-item" data-n="116">Per andare oltre (cenni)</div><div class="toc-item" data-n="117">15 — Risparmiare token: rtk, ponytail e caveman</div><div class="toc-item" data-n="118">Perché questo capitolo esiste</div><div class="toc-item" data-n="119">rtk — comprimere gli output dei comandi</div><div class="toc-item" data-n="120">ponytail — meno codice generato</div><div class="toc-item" data-n="121">caveman — risposte terse (con un asterisco)</div><div class="toc-item" data-n="122">L'ordine giusto per un piano Pro</div></div>
+<div class="edge" id="prev"></div><div class="edge" id="next"></div>
+<div id="bar"><span id="where"></span><span><b>i</b> indice · <b>t</b> tema ·
+<span id="count"></span></span></div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let cur=0;
+function go(n){S[cur].classList.remove('active');cur=Math.max(0,Math.min(S.length-1,n));
+S[cur].classList.add('active');location.hash=cur;window.scrollTo(0,0);
+document.getElementById('count').textContent=(cur+1)+' / '+S.length;
+const c=S[cur].querySelector('.crumb');
+document.getElementById('where').textContent=c?c.textContent:'Guida a Claude Code';}
+addEventListener('keydown',e=>{
+if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&!e.shiftKey))go(cur+1);
+else if(e.key==='ArrowLeft'||e.key==='PageUp'||(e.key===' '&&e.shiftKey))go(cur-1);
+else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);
+else if(e.key==='i'||e.key==='o')document.getElementById('toc').classList.toggle('open');
+else if(e.key==='Escape')document.getElementById('toc').classList.remove('open');
+else if(e.key==='t'){const h=document.documentElement;
+h.dataset.theme=h.dataset.theme==='light'?'':'light';}else return;e.preventDefault();});
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+document.querySelectorAll('.toc-item:not(.toc-block)').forEach(el=>el.onclick=()=>{
+document.getElementById('toc').classList.remove('open');go(+el.dataset.n);});
+go(+location.hash.slice(1)||0);
+</script></body></html>
