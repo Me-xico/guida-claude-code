@@ -62,6 +62,26 @@ plugins:
         - locale: en
           name: English
           build: true
+          nav_translations:
+            Base: Basics
+            Metodo: Method
+            Potenza: Power
+            Riferimento: Reference
+            01 · Installazione: 01 · Installation
+            02 · Setup e configurazione: 02 · Setup and configuration
+            03 · Uso quotidiano: 03 · Daily use
+            04 · CLAUDE.md e rules: 04 · CLAUDE.md and rules
+            11 · Verifica: 11 · Verification
+            12 · Prompt engineering: 12 · Prompt engineering
+            13 · Errori comuni: 13 · Common mistakes
+            05 · Skill e slash command: 05 · Skills and slash commands
+            06 · Agenti: 06 · Agents
+            07 · Hook: 07 · Hooks
+            08 · MCP: 08 · MCP
+            09 · Plugin: 09 · Plugins
+            10 · Workflow frontend: 10 · Frontend workflow
+            14 · Must-have e costi: 14 · Must-haves and costs
+            15 · Risparmiare token: 15 · Saving tokens
 
 markdown_extensions:
   - admonition
