@@ -55,10 +55,8 @@ parte Base. I capitoli 02 e 04 usano come esempio un piccolo progetto
 React/TS i cui file (`CLAUDE.md` e `.claude/settings.json`) sono mostrati
 per intero nei capitoli stessi: non serve scaricare nulla.
 
-## La promessa
+## Perché esiste
 
-Alla fine di questa guida sai: installare e configurare Claude Code **in
-sicurezza** (i tuoi segreti restano tuoi), fargli fare task veri **con un
-metodo che regge** (e accorgerti subito quando qualcosa va storto), ed
-**estenderlo** con automazioni e strumenti su misura del tuo lavoro. Il
-resto, cioè la velocità, arriva da solo con la pratica.
+Questa guida è prima di tutto il mio quaderno di bordo: scritta per
+ricordare, verificata per potermi fidare. Se fa comodo anche a te, ne sono
+felice.

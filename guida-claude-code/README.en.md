@@ -56,10 +56,8 @@ for the Basics section. Chapters 02 and 04 use a small React/TS project as
 their example; its files (`CLAUDE.md` and `.claude/settings.json`) are
 shown in full within the chapters themselves: there's nothing to download.
 
-## The promise
+## Why this exists
 
-By the end of this guide you know how to: install and configure Claude
-Code **safely** (your secrets stay yours), have it do real tasks **with a
-method that holds up** (and notice right away when something goes wrong),
-and **extend it** with automations and tools tailored to your work. Speed,
-the one thing left, comes on its own with practice.
+This guide is first and foremost my own logbook: written so I remember,
+verified so I can trust it. If it turns out to be useful to you too, I'm
+glad.
