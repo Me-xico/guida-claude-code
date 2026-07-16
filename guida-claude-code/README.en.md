@@ -55,9 +55,3 @@ A terminal, a Claude subscription (Pro is enough: ch. 01) and half an hour
 for the Basics section. Chapters 02 and 04 use a small React/TS project as
 their example; its files (`CLAUDE.md` and `.claude/settings.json`) are
 shown in full within the chapters themselves: there's nothing to download.
-
-## Why this exists
-
-This guide is first and foremost my own logbook: written so I remember,
-verified so I can trust it. If it turns out to be useful to you too, I'm
-glad.

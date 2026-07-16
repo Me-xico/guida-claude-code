@@ -54,9 +54,3 @@ Un terminale, un abbonamento Claude (Pro basta: cap. 01) e mezz'ora per la
 parte Base. I capitoli 02 e 04 usano come esempio un piccolo progetto
 React/TS i cui file (`CLAUDE.md` e `.claude/settings.json`) sono mostrati
 per intero nei capitoli stessi: non serve scaricare nulla.
-
-## Perché esiste
-
-Questa guida è prima di tutto il mio quaderno di bordo: scritta per
-ricordare, verificata per potermi fidare. Se fa comodo anche a te, ne sono
-felice.
