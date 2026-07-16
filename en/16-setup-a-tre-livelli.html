@@ -556,14 +556,14 @@
   
   
     <li class="md-nav__item">
-      <a href="13-errori-comuni.html" class="md-nav__link">
+      <a href="17-ricerca-e-progettazione.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    13 · Common mistakes
+    17 · Research and design
   
 
     
@@ -584,14 +584,14 @@
   
   
     <li class="md-nav__item">
-      <a href="17-ricerca-e-progettazione.html" class="md-nav__link">
+      <a href="13-errori-comuni.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    17 · Research and design
+    13 · Common mistakes
   
 
     
@@ -1047,9 +1047,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Repo level: the code in front of you">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#graphify-a-map-of-the-codebase" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1057,6 +1058,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1155,9 +1161,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Repo level: the code in front of you">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#graphify-a-map-of-the-codebase" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1165,6 +1172,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1200,7 +1212,7 @@
 <blockquote>
 <p>This chapter describes the author's day-to-day setup (July 2026),
 sanitized: no client names, no work-project details. It's the "how far
-you can take it" after chapters 1-15, not the starting point.</p>
+you can take it" after the rest of the guide, not the starting point.</p>
 </blockquote>
 <h2 id="the-problem-it-solves">The problem it solves<a class="headerlink" href="#the-problem-it-solves" title="Permanent link">&para;</a></h2>
 <p>If you work for several clients, a single <code>~/.claude/</code> isn't enough: one
@@ -1305,8 +1317,8 @@ turf":</p>
   (the same N files every time, conformance tests), a skill generates them
   right on the first try.</li>
 </ul>
-<h2 id="graphify-a-map-of-the-codebase">graphify: a map of the codebase<a class="headerlink" href="#graphify-a-map-of-the-codebase" title="Permanent link">&para;</a></h2>
-<p>The newest addition to the setup, currently in pilot adoption:
+<h3 id="graphify-a-map-of-the-codebase">graphify: a map of the codebase<a class="headerlink" href="#graphify-a-map-of-the-codebase" title="Permanent link">&para;</a></h3>
+<p>The newest addition to this level, currently in pilot adoption:
 <a href="https://github.com/Graphify-Labs/graphify">graphify</a> turns a codebase into
 a <strong>queryable knowledge graph</strong> — <code>graphify query "who implements this
 interface?"</code> instead of three rounds of grep and five files read. Parsing

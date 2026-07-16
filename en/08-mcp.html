@@ -558,14 +558,14 @@
   
   
     <li class="md-nav__item">
-      <a href="13-errori-comuni.html" class="md-nav__link">
+      <a href="17-ricerca-e-progettazione.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    13 · Common mistakes
+    17 · Research and design
   
 
     
@@ -586,14 +586,14 @@
   
   
     <li class="md-nav__item">
-      <a href="17-ricerca-e-progettazione.html" class="md-nav__link">
+      <a href="13-errori-comuni.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    17 · Research and design
+    13 · Common mistakes
   
 
     
@@ -1332,7 +1332,7 @@ Claude sees the list of names, but a tool's full definition only enters
 the context when it's actually needed.</p>
 <p>And the two bonuses promised at the start, often overlooked:</p>
 <ul>
-<li><strong>resources</strong> are referenced with <code>@server:protocollo://path</code>, e.g.
+<li><strong>resources</strong> are referenced with <code>@server:protocol://path</code>, e.g.
   <code>@github:issue://123</code> brings that issue into the context, with the same
   <code>@</code> syntax you use for files (ch. 03);</li>
 <li>server <strong>prompts</strong> become slash commands:
@@ -1340,8 +1340,8 @@ the context when it's actually needed.</p>
   prompt with the argument <code>456</code>.</li>
 </ul>
 <h2 id="which-servers-for-a-frontend-dev">Which servers, for a frontend dev<a class="headerlink" href="#which-servers-for-a-frontend-dev" title="Permanent link">&para;</a></h2>
-<p>The four that matter are in chapter 10 (Playwright, Chrome DevTools,
-Figma, GitHub), with the full workflow. Here's the general rule, which
+<p>The four that matter are in chapter 10 (Playwright, the Chrome extension,
+Chrome DevTools, Figma), with the full workflow. Here's the general rule, which
 holds for any server: <strong>every server is code running with your
 permissions</strong>. So: add what you use, remove what you don't (an occasional
 <code>claude mcp list</code> as housekeeping), and only trust known sources. And if a

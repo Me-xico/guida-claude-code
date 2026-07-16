@@ -11,10 +11,10 @@
       
       
       
-        <link rel="prev" href="12-prompt-engineering.html">
+        <link rel="prev" href="17-ricerca-e-progettazione.html">
       
       
-        <link rel="next" href="17-ricerca-e-progettazione.html">
+        <link rel="next" href="05-skills-e-slash-commands.html">
       
       
         
@@ -557,6 +557,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="17-ricerca-e-progettazione.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17 · Ricerca e progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -711,34 +739,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="17-ricerca-e-progettazione.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    17 · Ricerca e progettazione
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1276,15 +1276,11 @@ Il momento per accorgersene è <strong>mentre scrivi il prompt</strong>: alla pr
 <h2 id="3-correggere-in-loop">3. Correggere in loop<a class="headerlink" href="#3-correggere-in-loop" title="Permanent link">&para;</a></h2>
 <p><em>Sintomo</em>: "no, non così… no, intendevo… ancora sbagliato…": sei al quinto
 tentativo sullo stesso punto e ognuno è peggio del precedente.
-<em>Cosa succede</em>: ogni correzione fallita resta nel contesto e <em>aumenta</em> la
-probabilità del prossimo errore: il modello continua a "vedere" i propri
-tentativi sbagliati e ci gravita attorno. Non è testardaggine: è come
-funziona l'attenzione sul contesto.
 <em>Cura</em>: <strong>regola dei 2 tentativi</strong>. Due correzioni andate male → <code>/clear</code> →
 prompt nuovo che incorpora ciò che hai imparato dai fallimenti ("attenzione:
-l'approccio con X non funziona perché Y"). Costa meno dell'orgoglio di
-"farglielo capire", e la sessione pulita, paradossalmente, capisce al
-primo colpo quello che quella inquinata non capiva al quinto.</p>
+l'approccio con X non funziona perché Y"). La sessione pulita capisce al
+primo colpo quello che quella inquinata non capiva al quinto (il perché
+meccanico è nel cap. 03).</p>
 <h2 id="4-il-claudemd-enciclopedia">4. Il CLAUDE.md enciclopedia<a class="headerlink" href="#4-il-claudemd-enciclopedia" title="Permanent link">&para;</a></h2>
 <p><em>Sintomo</em>: 600 righe di istruzioni, e Claude che ignora proprio quella
 importante.
@@ -1332,22 +1328,22 @@ salvato, cosa succede alla scadenza. Non leggere altro."</p>
 <p><em>Sintomo</em>: nella stessa sessione hai fatto il bugfix, tre domande di
 architettura, un refactor e la spesa. Le risposte peggiorano a vista
 d'occhio.
-<em>Cosa succede</em>: il contesto si riempie e le prestazioni degradano. È la
-causa radice di metà di questa lista (il loop di correzioni del punto 3,
-l'esplorazione del punto 7: tutti affluenti dello stesso fiume). Per vedere
-il fenomeno coi tuoi occhi, lancia <code>/context</code>: la griglia mostra quanto
-spazio si stanno prendendo messaggi, file letti e output dei comandi.</p>
-<p><img alt="Uso del contesto per categoria, da /context" src="assets/03-context.svg" /></p>
-<p><em>Cura</em>: <code>/clear</code> tra task diversi, sempre. Costa zero: la sessione resta
-recuperabile con <code>/resume</code>, quindi non stai "buttando via" niente: stai
-solo dando al task nuovo un contesto che parla solo di lui.
+<em>Cosa succede</em>: il contesto si riempie e le prestazioni degradano (la
+meccanica, con l'immagine di <code>/context</code>, è nel cap. 03). È la causa radice
+di metà di questa lista: il loop di correzioni del punto 3, l'esplorazione
+del punto 7, tutti affluenti dello stesso fiume.
+<em>Cura</em>: <code>/clear</code> tra task diversi, sempre. Costa zero e la sessione resta
+recuperabile con <code>/resume</code>: stai solo dando al task nuovo un contesto che
+parla solo di lui.
 <em>Il segnale</em>: ti accorgi che stai per fare una domanda che non c'entra col
 task in corso. Quella domanda merita una sessione sua.</p>
 <hr />
 <p><strong>In sintesi</strong>: quasi tutti gli errori qui sopra sono lo stesso errore visto
 da angoli diversi: trattare il contesto come infinito e le asserzioni come
 prove. Contesto pulito + verifica a ogni passo, e l'80% dei problemi non
-nasce proprio.</p>
+nasce proprio. Da qui in poi, la Potenza: skill, agenti, hook e MCP
+(cap. 05-10). Gli attrezzi rendono al massimo proprio quando questi errori
+non li fai più.</p>
 
 
 
@@ -1383,7 +1379,7 @@ nasce proprio.</p>
       <nav class="md-footer__inner md-grid" aria-label="Piede" >
         
           
-          <a href="12-prompt-engineering.html" class="md-footer__link md-footer__link--prev" aria-label="Precedente: 12 · Prompt engineering">
+          <a href="17-ricerca-e-progettazione.html" class="md-footer__link md-footer__link--prev" aria-label="Precedente: 17 · Ricerca e progettazione">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1393,20 +1389,20 @@ nasce proprio.</p>
                 Precedente
               </span>
               <div class="md-ellipsis">
-                12 · Prompt engineering
+                17 · Ricerca e progettazione
               </div>
             </div>
           </a>
         
         
           
-          <a href="17-ricerca-e-progettazione.html" class="md-footer__link md-footer__link--next" aria-label="Successivo: 17 · Ricerca e progettazione">
+          <a href="05-skills-e-slash-commands.html" class="md-footer__link md-footer__link--next" aria-label="Successivo: 05 · Skill e slash command">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Successivo
               </span>
               <div class="md-ellipsis">
-                17 · Ricerca e progettazione
+                05 · Skill e slash command
               </div>
             </div>
             <div class="md-footer__button md-icon">
