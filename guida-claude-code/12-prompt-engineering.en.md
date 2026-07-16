@@ -71,10 +71,8 @@ its own: everything else it can.
 
 ## Decomposition: ask for the first step, not the journey
 
-The single most reported mistake (the "greed mistake"): asking for a whole
-feature in one prompt, "build me the cart with persistence, discounts,
-and the checkout page", and getting 60% of eight different things, none
-finished, with the context saturated by then (ch. 13). Instead:
+Asking for a whole feature in one prompt is the greed mistake, mistake 2
+in ch. 13. Instead:
 
 > "Let's build the cart in steps. Step 1: the data layer only — a
 > `useCart` hook with add, remove, quantity, and the Vitest tests. No UI,
@@ -139,4 +137,5 @@ screenshot of the result). It's always the same three ingredients.
 **In short**: verifiable criteria + constraints + context, one step at a
 time, feedback made of evidence. The perfect prompt doesn't exist; the
 prompt with a verifiable success criterion does, and that's the one that
-counts.
+counts. The next chapter (17) takes this method one step before the
+prompt: researching and designing before building.

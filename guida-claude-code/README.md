@@ -15,6 +15,10 @@ fonte da consultare quando questa guida invecchierà.
 
 ## Come leggerla
 
+Una nota sulla numerazione: il numero nel nome dei capitoli è un
+identificatore stabile, non l'ordine di lettura — la guida cresce per
+sezioni e i capitoli nuovi si accodano. L'ordine giusto è questo indice.
+
 **Base - partire bene (giorno 1):**
 
 1. [Installazione e primo avvio](01-installazione.md) - dal `curl` al primo prompt
@@ -26,8 +30,8 @@ fonte da consultare quando questa guida invecchierà.
 
 5. [Verifica](11-verifica.md) - *se leggi un solo capitolo, questo*
 6. [Prompt engineering](12-prompt-engineering.md) - chiedere le cose in modo che riescano
-7. [Errori comuni](13-errori-comuni.md) - riconoscerli prima di farli
-8. [Ricerca e progettazione](17-ricerca-e-progettazione.md) - deep research, SPEC, Ultraplan e Claude Design: decidere bene prima di costruire
+7. [Ricerca e progettazione](17-ricerca-e-progettazione.md) - deep research, SPEC, Ultraplan e Claude Design: decidere bene prima di costruire
+8. [Errori comuni](13-errori-comuni.md) - riconoscerli prima di farli, la checklist che chiude il Metodo
 
 **Potenza - quando le basi girano:**
 

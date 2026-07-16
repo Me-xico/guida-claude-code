@@ -124,7 +124,7 @@ renderlo il default.
 | `plan` | solo letture: esplora e propone un piano, non tocca nulla |
 | `auto` | tutto, ma ogni azione passa da un classificatore di sicurezza; richiede modelli recenti e account abilitato |
 | `dontAsk` | solo ciò che è in `allow`, il resto è negato (per uso non interattivo) |
-| `bypassPermissions` | tutto senza controlli: **solo in container/VM isolate** |
+| `bypassPermissions` | tutto, senza controlli di permesso (ma i deny degli hook restano: cap. 07): **solo in container/VM isolate** |
 
 **Come si presenta.** In `default` (Manual), ogni scrittura ti passa davanti
 prima di essere eseguita. Ecco la richiesta per la creazione di un file:

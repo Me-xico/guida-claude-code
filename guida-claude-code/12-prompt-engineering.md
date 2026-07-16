@@ -68,10 +68,8 @@ da solo: tutto il resto sì.
 
 ## Decomposizione: chiedi il primo passo, non il viaggio
 
-L'errore più segnalato in assoluto (il "greed mistake"): chiedere in un
-prompt solo una feature intera, "fammi il carrello con persistenza,
-sconti, e la pagina checkout", e ottenere il 60% di otto cose diverse,
-nessuna finita, con il contesto ormai saturo (cap. 13). Al contrario:
+Chiedere in un prompt solo una feature intera è il greed mistake, l'errore
+2 del cap. 13. Al contrario:
 
 > "Costruiamo il carrello a passi. Step 1: solo il data-layer — hook
 > `useCart` con aggiunta, rimozione, quantità, e i test Vitest. Niente UI,
@@ -132,4 +130,6 @@ risultato). Sono sempre gli stessi tre ingredienti.
 
 **In sintesi**: criteri verificabili + vincoli + contesto, un passo alla
 volta, feedback fatti di prove. Il prompt perfetto non esiste; il prompt con
-un criterio di successo verificabile sì, ed è quello che conta.
+un criterio di successo verificabile sì, ed è quello che conta. Il prossimo
+capitolo (17) porta questo metodo un passo prima del prompt: ricercare e
+progettare prima di costruire.

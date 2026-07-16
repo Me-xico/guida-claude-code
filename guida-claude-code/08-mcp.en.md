@@ -147,7 +147,7 @@ the context when it's actually needed.
 
 And the two bonuses promised at the start, often overlooked:
 
-- **resources** are referenced with `@server:protocollo://path`, e.g.
+- **resources** are referenced with `@server:protocol://path`, e.g.
   `@github:issue://123` brings that issue into the context, with the same
   `@` syntax you use for files (ch. 03);
 - server **prompts** become slash commands:
@@ -156,8 +156,8 @@ And the two bonuses promised at the start, often overlooked:
 
 ## Which servers, for a frontend dev
 
-The four that matter are in chapter 10 (Playwright, Chrome DevTools,
-Figma, GitHub), with the full workflow. Here's the general rule, which
+The four that matter are in chapter 10 (Playwright, the Chrome extension,
+Chrome DevTools, Figma), with the full workflow. Here's the general rule, which
 holds for any server: **every server is code running with your
 permissions**. So: add what you use, remove what you don't (an occasional
 `claude mcp list` as housekeeping), and only trust known sources. And if a

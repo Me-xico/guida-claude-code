@@ -107,9 +107,8 @@ risparmio. Sul budget contano rtk e ponytail.
    token e molto meno codice da rivedere.
 3. **caveman**: questione di gusto, non di budget.
 
-E ricorda che la leva più grande resta gratis: le 5 abitudini del cap. 14
-(`/clear`, modello proporzionato, file per path, CLAUDE.md snello, piano
-prima delle modifiche grandi). Prima il metodo, poi gli attrezzi.
+E ricorda che la leva più grande resta gratis: le 5 abitudini del cap. 14.
+Prima il metodo, poi gli attrezzi.
 
 ---
 

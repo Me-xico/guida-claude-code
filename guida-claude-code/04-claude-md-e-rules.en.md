@@ -167,5 +167,8 @@ CLAUDE.md; guarantees → hooks.
 ---
 
 **In short**: start from `/init`, prune with the line test, stay under 200
-lines, and grow the file with every mistake Claude makes. Next chapters:
-skills (the "on-demand manuals") and agents.
+lines, and grow the file with every mistake Claude makes. With this, the
+Foundation is complete: the next leg of the journey is the Method, starting
+with verification (ch. 11) — the most important chapter in this guide.
+Skills and agents (ch. 05-06) come right after, and they'll pay off double
+once you have the method in hand.

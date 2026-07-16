@@ -156,8 +156,8 @@ E i due bonus promessi all'inizio, spesso ignorati:
 
 ## Quali server, per un frontend dev
 
-I quattro che contano sono nel capitolo 10 (Playwright, Chrome DevTools,
-Figma, GitHub), con il workflow completo. Qui la regola generale, che
+I quattro che contano sono nel capitolo 10 (Playwright, l'estensione
+Chrome, Chrome DevTools, Figma), con il workflow completo. Qui la regola generale, che
 vale per qualunque server: **ogni server è codice che gira con i tuoi
 permessi**. Quindi: aggiungi quello che usi, rimuovi quello che non usi
 (un `claude mcp list` ogni tanto come pulizia), fidati solo di fonti note.

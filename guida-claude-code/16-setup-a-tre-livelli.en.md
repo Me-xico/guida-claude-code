@@ -2,7 +2,7 @@
 
 > This chapter describes the author's day-to-day setup (July 2026),
 > sanitized: no client names, no work-project details. It's the "how far
-> you can take it" after chapters 1-15, not the starting point.
+> you can take it" after the rest of the guide, not the starting point.
 
 ## The problem it solves
 
@@ -97,9 +97,9 @@ turf":
   (the same N files every time, conformance tests), a skill generates them
   right on the first try.
 
-## graphify: a map of the codebase
+### graphify: a map of the codebase
 
-The newest addition to the setup, currently in pilot adoption:
+The newest addition to this level, currently in pilot adoption:
 [graphify](https://github.com/Graphify-Labs/graphify) turns a codebase into
 a **queryable knowledge graph** — `graphify query "who implements this
 interface?"` instead of three rounds of grep and five files read. Parsing

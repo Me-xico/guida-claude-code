@@ -160,5 +160,8 @@ garanzie → hook.
 ---
 
 **In sintesi**: parti da `/init`, pota col test della riga, tieni sotto 200
-righe, e fai crescere il file a ogni errore di Claude. Prossimi capitoli: le
-skill (i "manuali on-demand") e gli agenti.
+righe, e fai crescere il file a ogni errore di Claude. Con questo la Base è
+completa: la prossima tappa del percorso è il Metodo, a partire dalla
+verifica (cap. 11) — il capitolo più importante della guida. Skill e agenti
+(cap. 05-06) arrivano subito dopo, e renderanno il doppio col metodo in
+tasca.

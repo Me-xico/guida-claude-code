@@ -139,3 +139,5 @@ motivo per cui questo setup ripaga l'ora che costa metterlo in piedi.
 **In sintesi**: Playwright MCP subito (una riga, gratis), l'estensione
 Chrome se il tuo piano la include, Figma quando lavori da design. E da
 domani, mai più "aggiusta il padding" a parole: screenshot, loop, evidenze.
+Qui si chiude la Potenza; nel Riferimento trovi le cinque mosse dei primi
+30 minuti e la mappa dei costi (cap. 14).

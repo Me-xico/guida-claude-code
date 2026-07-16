@@ -38,10 +38,10 @@ sources.
 **When to use it.** The signal is a hard-to-reverse decision made on
 unfamiliar ground: which library to adopt, where to host a project,
 whether a tool is mature and maintained, how a service actually behaves
-on its free tier. This guide has a real example. The hosting decision (see the GitHub Pages
-chapter) came out of exactly this kind of research: five options checked
-against the official docs, with the real free-tier constraints that
-marketing pages don't mention. The tools in ch. 15 went through the same
+on its free tier. This guide has a real example: the choice of where to
+publish its site came out of exactly this kind of research, five options
+checked against the official docs, with the real free-tier constraints
+that marketing pages don't mention. The tools in ch. 15 went through the same
 process before making it into the guide: checking the right repo,
 confirming active maintenance, comparing claimed numbers against what we
 actually measured.
@@ -115,4 +115,5 @@ tool and the right check: **research** (`/deep-research`, cited
 sources) → **decision** → **plan** (plan mode → SPEC → Ultraplan, review
 scaled to the stakes) → **implementation** (ch. 03 and 10, with the
 "done" criterion from ch. 11). Skip a stage and it comes back later,
-with interest.
+with interest. Closing out the Method is the chapter on common mistakes
+(ch. 13): the checklist of symptoms, before we move on to the tools.

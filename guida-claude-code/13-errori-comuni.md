@@ -38,15 +38,11 @@ Il momento per accorgersene è **mentre scrivi il prompt**: alla prima
 
 *Sintomo*: "no, non così… no, intendevo… ancora sbagliato…": sei al quinto
 tentativo sullo stesso punto e ognuno è peggio del precedente.
-*Cosa succede*: ogni correzione fallita resta nel contesto e *aumenta* la
-probabilità del prossimo errore: il modello continua a "vedere" i propri
-tentativi sbagliati e ci gravita attorno. Non è testardaggine: è come
-funziona l'attenzione sul contesto.
 *Cura*: **regola dei 2 tentativi**. Due correzioni andate male → `/clear` →
 prompt nuovo che incorpora ciò che hai imparato dai fallimenti ("attenzione:
-l'approccio con X non funziona perché Y"). Costa meno dell'orgoglio di
-"farglielo capire", e la sessione pulita, paradossalmente, capisce al
-primo colpo quello che quella inquinata non capiva al quinto.
+l'approccio con X non funziona perché Y"). La sessione pulita capisce al
+primo colpo quello che quella inquinata non capiva al quinto (il perché
+meccanico è nel cap. 03).
 
 ## 4. Il CLAUDE.md enciclopedia
 
@@ -103,17 +99,13 @@ solo la sintesi (cap. 06). Un prompt fatto bene:
 *Sintomo*: nella stessa sessione hai fatto il bugfix, tre domande di
 architettura, un refactor e la spesa. Le risposte peggiorano a vista
 d'occhio.
-*Cosa succede*: il contesto si riempie e le prestazioni degradano. È la
-causa radice di metà di questa lista (il loop di correzioni del punto 3,
-l'esplorazione del punto 7: tutti affluenti dello stesso fiume). Per vedere
-il fenomeno coi tuoi occhi, lancia `/context`: la griglia mostra quanto
-spazio si stanno prendendo messaggi, file letti e output dei comandi.
-
-![Uso del contesto per categoria, da /context](assets/03-context.svg)
-
-*Cura*: `/clear` tra task diversi, sempre. Costa zero: la sessione resta
-recuperabile con `/resume`, quindi non stai "buttando via" niente: stai
-solo dando al task nuovo un contesto che parla solo di lui.
+*Cosa succede*: il contesto si riempie e le prestazioni degradano (la
+meccanica, con l'immagine di `/context`, è nel cap. 03). È la causa radice
+di metà di questa lista: il loop di correzioni del punto 3, l'esplorazione
+del punto 7, tutti affluenti dello stesso fiume.
+*Cura*: `/clear` tra task diversi, sempre. Costa zero e la sessione resta
+recuperabile con `/resume`: stai solo dando al task nuovo un contesto che
+parla solo di lui.
 *Il segnale*: ti accorgi che stai per fare una domanda che non c'entra col
 task in corso. Quella domanda merita una sessione sua.
 
@@ -122,4 +114,6 @@ task in corso. Quella domanda merita una sessione sua.
 **In sintesi**: quasi tutti gli errori qui sopra sono lo stesso errore visto
 da angoli diversi: trattare il contesto come infinito e le asserzioni come
 prove. Contesto pulito + verifica a ogni passo, e l'80% dei problemi non
-nasce proprio.
+nasce proprio. Da qui in poi, la Potenza: skill, agenti, hook e MCP
+(cap. 05-10). Gli attrezzi rendono al massimo proprio quando questi errori
+non li fai più.

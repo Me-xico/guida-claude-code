@@ -4,7 +4,7 @@
 
 ## The minimal setup that pays off right away
 
-The problem this chapter solves: the guide has 14 chapters and you won't
+The problem this chapter solves: the guide has 17 chapters and you won't
 apply them all on day one. Which five things should you do *right now*, in
 the right order, so they pay off by the first afternoon? Here they are:
 
@@ -28,7 +28,9 @@ the right order, so they pay off by the first afternoon? Here they are:
    `git status/diff/log` on the allow-list, so you stop approving the
    obvious. Every confirmation prompt on a harmless command is friction
    that keeps you supervising instead of working.
-6. When the time comes: the Chrome extension or Playwright MCP (ch. 10).
+
+And when the time comes, the sixth move adds itself: the Chrome extension
+or Playwright MCP (ch. 10).
 
 And then, the most important rule of all: **let the rest grow
 just-in-time**. A skill the second time you re-explain a procedure, an
@@ -90,11 +92,10 @@ Four tools, from most to least frequent:
 - `/usage`: where you stand against your plan limits (Pro/Max)
 - `/cost`: session spend (API users)
 
-Orders of magnitude (July 2026): Pro at $20/month with ~200 messages every
-5 hours; Max 5x/20x at $100/$200 a month; pay-as-you-go API (roughly $3/$15
-per M tokens in/out on the mid-size model). If Claude Code becomes your
-main tool, the Pro limit bites quickly: ~200 messages every 5 hours sounds
-like a lot until you spend a whole day in session.
+Orders of magnitude: the full table of plans is in ch. 01; the practical
+point is that if Claude Code becomes your main tool, the Pro limit (~200
+messages every 5 hours) bites quickly: it sounds like a lot until you spend
+a whole day in session.
 
 ## Going further (a glimpse)
 

@@ -4,7 +4,7 @@
 
 ## Il setup minimo che rende subito
 
-Il problema che questo capitolo risolve: la guida ha 14 capitoli e non li
+Il problema che questo capitolo risolve: la guida ha 17 capitoli e non li
 applicherai tutti il primo giorno. Quali cinque cose fare *subito*, nell'ordine
 giusto, perché ripagano dal primo pomeriggio? Eccole:
 
@@ -28,7 +28,9 @@ giusto, perché ripagano dal primo pomeriggio? Eccole:
    status/diff/log` in allow-list, così smetti di approvare l'ovvio. Ogni
    prompt di conferma su un comando innocuo è attrito che ti fa sorvegliare
    invece di lavorare.
-6. Quando arriva il momento: estensione Chrome o Playwright MCP (cap. 10).
+
+E quando arriva il momento, la sesta mossa si aggiunge da sola: estensione
+Chrome o Playwright MCP (cap. 10).
 
 E poi, la regola più importante: **lascia che il resto cresca
 just-in-time**. Skill alla seconda volta che rispieghi una procedura,
@@ -89,11 +91,10 @@ Quattro strumenti, dal più al meno frequente:
 - `/usage`: dove sei coi limiti del piano (Pro/Max)
 - `/cost`: spesa della sessione (utenti API)
 
-Ordini di grandezza (luglio 2026): Pro 20 $/mese con ~200 messaggi ogni
-5 ore; Max 5x/20x a 100/200 $/mese; API a consumo (indicativamente 3 $/15 $
-per M token in/out sul modello medio). Se Claude Code diventa lo strumento
-principale, il limite del Pro si sente in fretta: i ~200 messaggi ogni
-5 ore sembrano tanti finché non passi una giornata intera in sessione.
+Ordini di grandezza: la tabella completa dei piani è nel cap. 01; il punto
+pratico è che se Claude Code diventa lo strumento principale, il limite del
+Pro (~200 messaggi ogni 5 ore) si sente in fretta: sembrano tanti finché
+non passi una giornata intera in sessione.
 
 ## Per andare oltre (cenni)
 

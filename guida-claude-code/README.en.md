@@ -16,6 +16,10 @@ look once this guide starts to age.
 
 ## How to read it
 
+A note on numbering: the number in a chapter's name is a stable
+identifier, not the reading order — the guide grows by section and new
+chapters get appended at the end. The right order is this index.
+
 **Basics - starting right (day 1):**
 
 1. [Installation and first run](01-installazione.md) - from `curl` to your first prompt
@@ -27,8 +31,8 @@ look once this guide starts to age.
 
 5. [Verification](11-verifica.md) - *if you read only one chapter, make it this one*
 6. [Prompt engineering](12-prompt-engineering.md) - asking for things in a way that works
-7. [Common mistakes](13-errori-comuni.md) - recognizing them before you make them
-8. [Research and design](17-ricerca-e-progettazione.md) - deep research, SPEC, Ultraplan and Claude Design: decide well before you build
+7. [Research and design](17-ricerca-e-progettazione.md) - deep research, SPEC, Ultraplan and Claude Design: decide well before you build
+8. [Common mistakes](13-errori-comuni.md) - the checklist that closes the Method
 
 **Power - once the basics are running:**
 

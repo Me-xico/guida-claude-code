@@ -2,7 +2,8 @@
 
 > Questo capitolo descrive il setup quotidiano dell'autore (luglio 2026),
 > sanitizzato: niente nomi di clienti né dettagli di progetti di lavoro.
-> È il "dove si può arrivare" dopo i capitoli 1-15, non il punto di partenza.
+> È il "dove si può arrivare" dopo il resto della guida, non il punto di
+> partenza.
 
 ## Il problema che risolve
 
@@ -95,9 +96,9 @@ committato), più i pezzi che nascono quando un repo diventa "di casa":
   fissa (N file sempre uguali, test di conformità), una skill le genera
   giuste al primo colpo.
 
-## graphify: la mappa del codebase
+### graphify: la mappa del codebase
 
-L'ultimo arrivato nel setup, in fase di adozione pilota:
+L'ultimo arrivato a questo livello, in fase di adozione pilota:
 [graphify](https://github.com/Graphify-Labs/graphify) trasforma un codebase
 in un **knowledge graph interrogabile** — `graphify query "chi implementa
 questa interfaccia?"` al posto di tre giri di grep e cinque file letti. Il

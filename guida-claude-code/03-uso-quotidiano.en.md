@@ -200,12 +200,9 @@ picker:
 
 - `/recap`: a summary of the session. On Monday morning, after
   `claude --continue`, it answers the question "where were we?".
-- `/goal condition`: you set a completion condition, for example
-  `/goal all tests pass and the build is green`. From then on an
-  evaluator re-checks the condition **every turn** and won't let the task
-  be declared closed until it's true. It's the simplest way to give Claude
-  a verifiable definition of "done" instead of trusting its "done!" (the
-  subject of ch. 11).
+- `/goal condition`: you set a completion condition that Claude can't
+  declare met until it's actually true (the mechanics are in ch. 11, where
+  it's one rung of the verification ladder).
 
 ---
 

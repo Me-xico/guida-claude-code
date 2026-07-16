@@ -198,12 +198,9 @@ modello per quale task, e cosa costa, è il tema del cap. 14. Il picker:
 
 - `/recap`: riassunto della sessione. Il lunedì mattina, dopo
   `claude --continue`, risponde alla domanda "dov'eravamo?".
-- `/goal condizione`: fissi una condizione di completamento, ad esempio
-  `/goal tutti i test passano e la build è verde`. Da lì in poi un
-  valutatore ricontrolla la condizione **a ogni turno** e non lascia
-  dichiarare chiuso il task finché non è vera. È il modo più semplice di dare
-  a Claude un criterio di "finito" verificabile invece di fidarti del suo
-  "fatto!" (tema del cap. 11).
+- `/goal condizione`: fissi una condizione di completamento che Claude non
+  può dichiarare raggiunta finché non è vera (la meccanica nel cap. 11,
+  dove è un gradino della scala della verifica).
 
 ---
 

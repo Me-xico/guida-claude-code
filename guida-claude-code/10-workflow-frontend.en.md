@@ -141,4 +141,5 @@ why this setup pays back the hour it costs to set up.
 **In short**: Playwright MCP right away (one line, free), the Chrome
 extension if your plan includes it, Figma when you work from designs. And
 starting tomorrow, no more "fix the padding" in words: screenshot, loop,
-evidence.
+evidence. This closes the Power section; the Reference chapter has the five
+moves for the first 30 minutes and the cost map (ch. 14).

@@ -125,7 +125,7 @@ settings to make it the default.
 | `plan` | reads only: explores and proposes a plan, touches nothing |
 | `auto` | everything, but every action goes through a safety classifier; requires recent models and an enabled account |
 | `dontAsk` | only what's in `allow`, everything else is denied (for non-interactive use) |
-| `bypassPermissions` | everything, no checks: **only in isolated containers/VMs** |
+| `bypassPermissions` | everything, no permission checks (but hook denies still apply: ch. 07): **only in isolated containers/VMs** |
 
 **What it looks like.** In `default` (Manual), every write is shown to you
 before it runs. Here's the request for creating a file: note that the

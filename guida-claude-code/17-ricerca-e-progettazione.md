@@ -38,9 +38,9 @@ trasforma una domanda in un'indagine strutturata. Non è "cerca sul web":
 su un terreno che non conosci: quale libreria adottare, dove hostare un
 progetto, se uno strumento è maturo e mantenuto, come si comporta davvero
 un servizio nei suoi piani gratuiti. Un esempio vissuto da questa guida: la
-scelta dell'hosting (cap. su GitHub Pages) è uscita da una ricerca così —
-cinque opzioni verificate sui documenti ufficiali, con i vincoli reali dei
-piani gratuiti che le pagine di marketing non dicono. E gli strumenti del
+scelta di dove pubblicare il suo sito è uscita da una ricerca così, cinque
+opzioni di hosting verificate sui documenti ufficiali, con i vincoli reali
+dei piani gratuiti che le pagine di marketing non dicono. E gli strumenti del
 cap. 15 sono entrati in guida solo dopo lo stesso trattamento: repo giusto,
 manutenzione, numeri dichiarati contro numeri misurati.
 
@@ -106,4 +106,5 @@ strumento e la verifica giusti: **ricerca** (`/deep-research`, fonti
 citate) → **decisione** → **piano** (plan mode → SPEC → Ultraplan, revisione
 proporzionata alla posta) → **implementazione** (cap. 03 e 10, col criterio
 di "finito" del cap. 11). Ogni tappa saltata si ripresenta più avanti, con
-gli interessi.
+gli interessi. A chiudere il Metodo resta il capitolo sugli errori comuni
+(cap. 13): la checklist dei sintomi, prima di passare agli attrezzi.

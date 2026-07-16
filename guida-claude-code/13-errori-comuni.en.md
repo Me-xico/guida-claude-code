@@ -39,15 +39,11 @@ The moment to catch it is **while you're writing the prompt**: at the first
 
 *Symptom*: "no, not like that… no, I meant… still wrong…": you're on the
 fifth attempt at the same spot and each one is worse than the last.
-*What's happening*: every failed correction stays in the context and
-*increases* the probability of the next mistake: the model keeps "seeing"
-its own wrong attempts and gravitates toward them. It's not stubbornness:
-it's how attention over the context works.
 *Fix*: **the 2-attempt rule**. Two corrections gone wrong → `/clear` →
 a fresh prompt that folds in what you learned from the failures ("note:
-the approach using X doesn't work because Y"). It costs less than the pride
-of "making it understand", and the clean session, paradoxically, gets on
-the first try what the polluted one couldn't get on the fifth.
+the approach using X doesn't work because Y"). The clean session gets on
+the first try what the polluted one couldn't get on the fifth (the
+mechanical reason is in ch. 03).
 
 ## 4. The encyclopedia CLAUDE.md
 
@@ -105,14 +101,10 @@ brings back only the summary (ch. 06). A well-made prompt:
 *Symptom*: in the same session you've done the bugfix, three architecture
 questions, a refactor and your grocery list. The answers get visibly
 worse.
-*What's happening*: the context fills up and performance degrades. It's
-the root cause of half this list (the correction loop of point 3, the
-exploration of point 7: all tributaries of the same river). To see the
-phenomenon with your own eyes, run `/context`: the grid shows how much
-space messages, files read and command outputs are taking up.
-
-![Context usage by category, from /context](assets/03-context.svg)
-
+*What's happening*: the context fills up and performance degrades (the
+mechanics, with the `/context` screenshot, are in ch. 03). It's the root
+cause of half this list: the correction loop of point 3, the exploration
+of point 7, all tributaries of the same river.
 *Fix*: `/clear` between different tasks, always. It costs nothing: the
 session stays recoverable with `/resume`, so you're not "throwing away"
 anything: you're just giving the new task a context that's only about it.
@@ -124,4 +116,6 @@ task at hand. That question deserves a session of its own.
 **In short**: almost all the mistakes above are the same mistake seen
 from different angles: treating the context as infinite and assertions as
 proof. Clean context + verification at every step, and 80% of the problems
-never happen in the first place.
+never happen in the first place. From here on, the Power section: skills,
+agents, hooks and MCP (ch. 05-10). The tools pay off most precisely once
+you stop making these mistakes.

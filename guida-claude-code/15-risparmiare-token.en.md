@@ -110,9 +110,8 @@ For your budget, rtk and ponytail are what count.
    tokens and much less code to review.
 3. **caveman**: a matter of taste, not of budget.
 
-And remember the biggest lever is still free: the 5 habits from ch. 14
-(`/clear`, a model sized to the task, files by path, a lean CLAUDE.md, a
-plan before large changes). Method first, then tools.
+And remember the biggest lever is still free: the 5 habits from ch. 14.
+Method first, then tools.
 
 ---
 
