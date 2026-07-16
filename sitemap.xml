@@ -2,252 +2,266 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>Noneindex.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="Noneindex.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/index.html"/>
     </url>
     <url>
         <loc>None01-installazione.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None01-installazione.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/01-installazione.html"/>
     </url>
     <url>
         <loc>None02-setup-e-config.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None02-setup-e-config.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/02-setup-e-config.html"/>
     </url>
     <url>
         <loc>None03-uso-quotidiano.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None03-uso-quotidiano.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/03-uso-quotidiano.html"/>
     </url>
     <url>
         <loc>None04-claude-md-e-rules.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None04-claude-md-e-rules.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/04-claude-md-e-rules.html"/>
     </url>
     <url>
         <loc>None05-skills-e-slash-commands.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None05-skills-e-slash-commands.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/05-skills-e-slash-commands.html"/>
     </url>
     <url>
         <loc>None06-agenti.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None06-agenti.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/06-agenti.html"/>
     </url>
     <url>
         <loc>None07-hooks.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None07-hooks.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/07-hooks.html"/>
     </url>
     <url>
         <loc>None08-mcp.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None08-mcp.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/08-mcp.html"/>
     </url>
     <url>
         <loc>None09-plugins.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None09-plugins.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/09-plugins.html"/>
     </url>
     <url>
         <loc>None10-workflow-frontend.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None10-workflow-frontend.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/10-workflow-frontend.html"/>
     </url>
     <url>
         <loc>None11-verifica.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None11-verifica.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/11-verifica.html"/>
     </url>
     <url>
         <loc>None12-prompt-engineering.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None12-prompt-engineering.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/12-prompt-engineering.html"/>
     </url>
     <url>
         <loc>None13-errori-comuni.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None13-errori-comuni.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/13-errori-comuni.html"/>
     </url>
     <url>
         <loc>None14-must-have-e-costi.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None14-must-have-e-costi.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/14-must-have-e-costi.html"/>
     </url>
     <url>
         <loc>None15-risparmiare-token.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None15-risparmiare-token.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/15-risparmiare-token.html"/>
     </url>
     <url>
         <loc>None16-setup-a-tre-livelli.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="None16-setup-a-tre-livelli.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/16-setup-a-tre-livelli.html"/>
     </url>
     <url>
+        <loc>None17-ricerca-e-progettazione.html</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="None17-ricerca-e-progettazione.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/17-ricerca-e-progettazione.html"/>
+    </url>
+    <url>
         <loc>Nonedemo/CLAUDE.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="it" href="Nonedemo/CLAUDE.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/demo/CLAUDE.html"/>
     </url>
     <url>
         <loc>Noneen/index.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/index.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="Noneindex.html"/>
     </url>
     <url>
         <loc>Noneen/01-installazione.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/01-installazione.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None01-installazione.html"/>
     </url>
     <url>
         <loc>Noneen/02-setup-e-config.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/02-setup-e-config.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None02-setup-e-config.html"/>
     </url>
     <url>
         <loc>Noneen/03-uso-quotidiano.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/03-uso-quotidiano.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None03-uso-quotidiano.html"/>
     </url>
     <url>
         <loc>Noneen/04-claude-md-e-rules.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/04-claude-md-e-rules.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None04-claude-md-e-rules.html"/>
     </url>
     <url>
         <loc>Noneen/05-skills-e-slash-commands.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/05-skills-e-slash-commands.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None05-skills-e-slash-commands.html"/>
     </url>
     <url>
         <loc>Noneen/06-agenti.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/06-agenti.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None06-agenti.html"/>
     </url>
     <url>
         <loc>Noneen/07-hooks.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/07-hooks.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None07-hooks.html"/>
     </url>
     <url>
         <loc>Noneen/08-mcp.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/08-mcp.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None08-mcp.html"/>
     </url>
     <url>
         <loc>Noneen/09-plugins.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/09-plugins.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None09-plugins.html"/>
     </url>
     <url>
         <loc>Noneen/10-workflow-frontend.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/10-workflow-frontend.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None10-workflow-frontend.html"/>
     </url>
     <url>
         <loc>Noneen/11-verifica.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/11-verifica.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None11-verifica.html"/>
     </url>
     <url>
         <loc>Noneen/12-prompt-engineering.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/12-prompt-engineering.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None12-prompt-engineering.html"/>
     </url>
     <url>
         <loc>Noneen/13-errori-comuni.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/13-errori-comuni.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None13-errori-comuni.html"/>
     </url>
     <url>
         <loc>Noneen/14-must-have-e-costi.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/14-must-have-e-costi.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None14-must-have-e-costi.html"/>
     </url>
     <url>
         <loc>Noneen/15-risparmiare-token.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/15-risparmiare-token.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None15-risparmiare-token.html"/>
     </url>
     <url>
         <loc>Noneen/16-setup-a-tre-livelli.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/16-setup-a-tre-livelli.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="None16-setup-a-tre-livelli.html"/>
     </url>
     <url>
+        <loc>Noneen/17-ricerca-e-progettazione.html</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/17-ricerca-e-progettazione.html"/>
+        <xhtml:link rel="alternate" hreflang="it" href="None17-ricerca-e-progettazione.html"/>
+    </url>
+    <url>
         <loc>Noneen/demo/CLAUDE.html</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/demo/CLAUDE.html"/>
         <xhtml:link rel="alternate" hreflang="it" href="Nonedemo/CLAUDE.html"/>
