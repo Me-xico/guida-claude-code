@@ -28,21 +28,22 @@ look once this guide starts to age.
 5. [Verification](11-verifica.md) - *if you read only one chapter, make it this one*
 6. [Prompt engineering](12-prompt-engineering.md) - asking for things in a way that works
 7. [Common mistakes](13-errori-comuni.md) - recognizing them before you make them
+8. [Research and design](17-ricerca-e-progettazione.md) - deep research, SPEC, Ultraplan and Claude Design: decide well before you build
 
 **Power - once the basics are running:**
 
-8. [Skills and slash commands](05-skills-e-slash-commands.md) - reusable procedures
-9. [Agents](06-agenti.md) - who to delegate the noisy work to
-10. [Hooks](07-hooks.md) - rules that always hold, not almost always
-11. [MCP](08-mcp.md) - connecting browsers, Figma, GitHub
-12. [Plugins](09-plugins.md) - your setup in a package
-13. [Frontend workflow](10-workflow-frontend.md) - *for frontend devs: Claude with a real browser*
+9. [Skills and slash commands](05-skills-e-slash-commands.md) - reusable procedures
+10. [Agents](06-agenti.md) - who to delegate the noisy work to
+11. [Hooks](07-hooks.md) - rules that always hold, not almost always
+12. [MCP](08-mcp.md) - connecting browsers, Figma, GitHub
+13. [Plugins](09-plugins.md) - your setup in a package
+14. [Frontend workflow](10-workflow-frontend.md) - *for frontend devs: Claude with a real browser*
 
 **Reference:**
 
-14. [Must-haves and costs](14-must-have-e-costi.md) - the first 30 minutes of setup, the plans, the money-saving habits
-15. [Saving tokens](15-risparmiare-token.md) - the tools for longer work windows on the Pro plan
-16. [A real setup: global, per client, per repo](16-setup-a-tre-livelli.md) - how the author actually organizes it, three levels at a time
+15. [Must-haves and costs](14-must-have-e-costi.md) - the first 30 minutes of setup, the plans, the money-saving habits
+16. [Saving tokens](15-risparmiare-token.md) - the tools for longer work windows on the Pro plan
+17. [A real setup: global, per client, per repo](16-setup-a-tre-livelli.md) - how the author actually organizes it, three levels at a time
 
 ## What you need to follow along
 

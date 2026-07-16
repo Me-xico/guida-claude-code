@@ -27,21 +27,22 @@ fonte da consultare quando questa guida invecchierà.
 5. [Verifica](11-verifica.md) - *se leggi un solo capitolo, questo*
 6. [Prompt engineering](12-prompt-engineering.md) - chiedere le cose in modo che riescano
 7. [Errori comuni](13-errori-comuni.md) - riconoscerli prima di farli
+8. [Ricerca e progettazione](17-ricerca-e-progettazione.md) - deep research, SPEC, Ultraplan e Claude Design: decidere bene prima di costruire
 
 **Potenza - quando le basi girano:**
 
-8. [Skill e slash command](05-skills-e-slash-commands.md) - procedure riusabili
-9. [Agenti](06-agenti.md) - a chi delegare il lavoro rumoroso
-10. [Hook](07-hooks.md) - regole che valgono sempre, non quasi sempre
-11. [MCP](08-mcp.md) - collegare browser, Figma, GitHub
-12. [Plugin](09-plugins.md) - il setup in un pacchetto
-13. [Workflow frontend](10-workflow-frontend.md) - *per chi fa frontend: Claude con un browser vero*
+9. [Skill e slash command](05-skills-e-slash-commands.md) - procedure riusabili
+10. [Agenti](06-agenti.md) - a chi delegare il lavoro rumoroso
+11. [Hook](07-hooks.md) - regole che valgono sempre, non quasi sempre
+12. [MCP](08-mcp.md) - collegare browser, Figma, GitHub
+13. [Plugin](09-plugins.md) - il setup in un pacchetto
+14. [Workflow frontend](10-workflow-frontend.md) - *per chi fa frontend: Claude con un browser vero*
 
 **Riferimento:**
 
-14. [Must-have e costi](14-must-have-e-costi.md) - il setup dei primi 30 minuti, i piani, le abitudini di risparmio
-15. [Risparmiare token](15-risparmiare-token.md) - gli strumenti per finestre di lavoro più lunghe sul piano Pro
-16. [Un setup reale](16-setup-a-tre-livelli.md) - globale, per cliente, per repo: dove si può arrivare
+15. [Must-have e costi](14-must-have-e-costi.md) - il setup dei primi 30 minuti, i piani, le abitudini di risparmio
+16. [Risparmiare token](15-risparmiare-token.md) - gli strumenti per finestre di lavoro più lunghe sul piano Pro
+17. [Un setup reale](16-setup-a-tre-livelli.md) - globale, per cliente, per repo: dove si può arrivare
 
 ## Cosa ti serve per seguirla
 

@@ -39,6 +39,7 @@ nav:
       - 11 · Verifica: 11-verifica.md
       - 12 · Prompt engineering: 12-prompt-engineering.md
       - 13 · Errori comuni: 13-errori-comuni.md
+      - 17 · Ricerca e progettazione: 17-ricerca-e-progettazione.md
   - Potenza:
       - 05 · Skill e slash command: 05-skills-e-slash-commands.md
       - 06 · Agenti: 06-agenti.md
@@ -76,6 +77,7 @@ plugins:
             11 · Verifica: 11 · Verification
             12 · Prompt engineering: 12 · Prompt engineering
             13 · Errori comuni: 13 · Common mistakes
+            17 · Ricerca e progettazione: 17 · Research and design
             05 · Skill e slash command: 05 · Skills and slash commands
             06 · Agenti: 06 · Agents
             07 · Hook: 07 · Hooks
