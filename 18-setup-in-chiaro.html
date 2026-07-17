@@ -1064,6 +1064,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Agenti: la squadra fissa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#come-parte-la-delega-senza-che-io-la-chieda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Come parte la delega (senza che io la chieda)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#come-li-orchestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Come li orchestro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1071,6 +1099,34 @@
     <span class="md-ellipsis">
       
         Skill e slash command: le procedure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skill e slash command: le procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#come-vengono-usate-le-due-porte-dingresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Come vengono usate (le due porte d'ingresso)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profili-lanatomia-dellisolamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Profili: l'anatomia dell'isolamento
       
     </span>
   </a>
@@ -1183,6 +1239,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Agenti: la squadra fissa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#come-parte-la-delega-senza-che-io-la-chieda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Come parte la delega (senza che io la chieda)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#come-li-orchestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Come li orchestro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1190,6 +1274,34 @@
     <span class="md-ellipsis">
       
         Skill e slash command: le procedure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skill e slash command: le procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#come-vengono-usate-le-due-porte-dingresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Come vengono usate (le due porte d'ingresso)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profili-lanatomia-dellisolamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Profili: l'anatomia dell'isolamento
       
     </span>
   </a>
@@ -1417,6 +1529,49 @@ dividono in due famiglie, e la differenza governa anche il modello:</p>
 <em>gate-runner</em> che esegue il build gate e un <em>guardiano</em> read-only che rivede
 i diff sulle invarianti architetturali (cap. 16), committati in
 <code>.claude/agents/</code>, così valgono per chiunque cloni il repo.</p>
+<h3 id="come-parte-la-delega-senza-che-io-la-chieda">Come parte la delega (senza che io la chieda)<a class="headerlink" href="#come-parte-la-delega-senza-che-io-la-chieda" title="Permanent link">&para;</a></h3>
+<p>Non c'è nessun meccanismo nascosto: l'invocazione automatica è tutta scritta
+in due posti che la sessione legge sempre.</p>
+<p>Il primo è la <strong>description dell'agente</strong>. In ogni sessione Claude ha davanti
+la lista degli agenti disponibili con le loro description, e quando valuta
+come affrontare un task le usa come regole di instradamento. Per questo le
+mie non sono riassunti ma <strong>regole di routing</strong>: dicono quando usare
+l'agente, elencano i casi tipici e, soprattutto, delimitano i confini con i
+vicini ("NOT for Terraform → use terraform-expert"). Una description vaga
+produce un agente che non viene mai scelto, o peggio scelto a sproposito: è
+il campo più importante del file, e lo riscrivo più spesso del prompt.</p>
+<p>Il secondo è il <strong>CLAUDE.md globale</strong>, che trasforma il principio in
+riflesso. La regola "delega agli agenti come default" da sola pesava poco;
+quello che funziona è la mappa dei casi accanto: <em>bug non banale → debugger
+prima di toccare codice; suite rumorose → test-runner; scelte di stack →
+architect prima di implementare; esplorazione ampia → Explore; testi da
+umanizzare → semantica-</em>.<em> Quando il caso si presenta, la sessione non
+decide </em>se* delegare: riconosce la riga della mappa e delega (cap. 16: gli
+esempi battono i precetti).</p>
+<p>E poi c'è la terza via, la più semplice: lo chiedo io per nome ("fai girare
+il debugger su questo"). Vale sempre, e vince sulle altre due.</p>
+<h3 id="come-li-orchestro">Come li orchestro<a class="headerlink" href="#come-li-orchestro" title="Permanent link">&para;</a></h3>
+<p>Tre pattern coprono quasi tutto il mio uso:</p>
+<ul>
+<li><strong>In parallelo quando i lavori sono indipendenti.</strong> Più agenti lanciati
+  nello stesso messaggio girano in concorrenza: la review Python e la review
+  IaC dello stesso diff non si aspettano a vicenda. È il modo più economico
+  di comprare tempo.</li>
+<li><strong>In pipeline quando l'output di uno è l'input dell'altro.</strong> Il caso di
+  scuola è questa guida: ogni capitolo nuovo passa per semantica-it
+  (revisione italiana) → traduttore-it-en (il gemello <code>.en.md</code>) →
+  semantica-en (rifinitura inglese). Io scrivo, la catena rifinisce, e non
+  la rilancio mai a mano: è codificata in una skill (sotto).</li>
+<li><strong>In background quando il risultato non serve subito.</strong> Un'analisi lunga
+  parte, io continuo a lavorare, la notifica arriva a fine corsa. Un agente
+  già lanciato, poi, si può continuare con un messaggio di follow-up invece
+  di ripartire da zero: il suo contesto sopravvive alla risposta.</li>
+</ul>
+<p>Il filo comune: la sessione principale resta il direttore, gli agenti
+riportano <em>conclusioni</em> (un verdetto, un diff proposto, una diagnosi), mai
+il rumore del percorso. È il motivo per cui i miei advisor non editano: se
+l'agente applicasse le modifiche da solo, l'orchestrazione diventerebbe
+sorveglianza.</p>
 <h2 id="skill-e-slash-command-le-procedure">Skill e slash command: le procedure<a class="headerlink" href="#skill-e-slash-command-le-procedure" title="Permanent link">&para;</a></h2>
 <p>Dodici skill globali in <code>~/.claude/skills/</code>, raggruppabili per mestiere:</p>
 <ul>
@@ -1442,17 +1597,68 @@ logici, branch e push secondo le mie convenzioni) e <code>/standup</code> (il "d
 rimasto" sul repo corrente). La differenza pratica rispetto alle skill: i
 command sono procedure che invoco <em>io</em>, le skill sono procedure che anche la
 sessione può scegliere di usare da sola quando riconosce il caso.</p>
+<h3 id="come-vengono-usate-le-due-porte-dingresso">Come vengono usate (le due porte d'ingresso)<a class="headerlink" href="#come-vengono-usate-le-due-porte-dingresso" title="Permanent link">&para;</a></h3>
+<p>Il meccanismo è lo stesso degli agenti: in ogni sessione Claude vede
+l'elenco delle skill con le loro description, e sono le description a fare
+da grilletto. Le mie contengono <strong>frasi di trigger esplicite</strong> ("TRIGGER:
+'umanizza', 'sa di AI', 'de-bot questo testo'") e i <strong>non-casi</strong> ("NON per
+codice sorgente; NON per lo screenshot del desktop → usa screenshot"):
+quando il mio prompt contiene il caso, la sessione carica la skill da sola.
+La seconda porta sono io con <code>/nome</code>, che forza l'invocazione senza
+interpretazione. Stessa lezione delle description degli agenti: non
+descrivono, <em>instradano</em>.</p>
+<p>La cosa più utile che ho capito scrivendole: <strong>una skill è un orchestratore
+scritto</strong>. <code>humanize</code> non rivede testi: smista i file ai revisori
+<code>semantica-it</code>/<code>semantica-en</code> in parallelo e riporta un campione delle
+riscritture. <code>sync-en</code> non traduce: trova via git i capitoli italiani
+cambiati, manda i gemelli a <code>traduttore-it-en</code>, passa <code>semantica-en</code> sul
+nuovo materiale e rigenera il sito. La pipeline di traduzione di questa
+guida, insomma, non è una mia abitudine: è un file. Se un'orchestrazione ti
+riesce bene due volte a mano, la terza volta scrivila in una skill: è la
+regola just-in-time applicata ai processi invece che ai ruoli.</p>
+<h2 id="profili-lanatomia-dellisolamento">Profili: l'anatomia dell'isolamento<a class="headerlink" href="#profili-lanatomia-dellisolamento" title="Permanent link">&para;</a></h2>
+<p>Il cap. 16 descrive i profili come livello "cliente"; nel mio setup reale la
+divisione è per <strong>attività</strong>, non per committente: <code>delivery</code> (il lavoro di
+consegna), <code>personale</code> (i progetti miei, questa guida inclusa) e <code>scouting</code>
+(esplorazione di strumenti e tecnologie). Stesso meccanismo, taglio diverso:
+il confine giusto è quello che separa i <em>contesti mentali</em>, e per me due
+attività sullo stesso codice sono più diverse di due clienti sulla stessa
+attività.</p>
+<p>Dentro ogni profilo, la struttura dice esattamente cosa è condiviso e cosa è
+isolato, ed è tutta fatta di symlink verso <code>~/.claude/</code>:</p>
+<div class="highlight"><pre><span></span><code>~/.cloak/profiles/delivery/
+├── CLAUDE.md      -&gt; ~/.claude/CLAUDE.md      (condiviso)
+├── settings.json  -&gt; ~/.claude/settings.json  (condiviso: permessi e hook)
+├── agents         -&gt; ~/.claude/agents          (condiviso)
+├── commands       -&gt; ~/.claude/commands        (condiviso)
+├── skills         -&gt; ~/.claude/skills          (condiviso)
+├── plugins        -&gt; ~/.claude/plugins         (condiviso)
+├── .credentials.json        (SUO: login e token)
+├── .claude.json             (SUO: MCP e stato dei progetti)
+├── projects/&lt;repo&gt;/memory/  (SUA: la memoria persistente)
+└── sessions/, history, plans/, jobs/ (SUOI)
+</code></pre></div>
+<p>La riga più importante è <code>settings.json</code>: anche i <strong>permessi e gli hook sono
+condivisi</strong>. La deny-list sui segreti e il guardiano dei commit valgono
+identici in ogni profilo, perché sono regole su chi sono io, non su cosa sto
+facendo. Resta per-profilo, invece, lo <em>stato</em>: le credenziali (ogni profilo ha il
+suo login), i server MCP con la loro autenticazione e, soprattutto, la
+<strong>memoria per progetto</strong>. Quest'ultima è il beneficio più
+concreto: lo stesso repo ha memorie diverse in <code>delivery</code> e in <code>scouting</code>,
+perché le lezioni del consegnare non sono le lezioni dell'esplorare.</p>
 <h2 id="mcp-pochi-e-al-livello-giusto">MCP: pochi, e al livello giusto<a class="headerlink" href="#mcp-pochi-e-al-livello-giusto" title="Permanent link">&para;</a></h2>
 <p>La lista dei server MCP è volutamente corta, e il <em>dove</em> conta quanto il
 <em>cosa</em>:</p>
 <ul>
-<li><strong>Globale</strong> (<code>~/.claude/mcp.json</code>): solo <code>tolaria</code>, il server della mia app
-  di note, il vault Markdown dove finisce la documentazione dei progetti.
-  È globale perché il vault è uno solo, qualunque sia il contesto.</li>
-<li><strong>Per profilo cliente</strong>: <code>atlassian</code> (Jira) vive nel profilo del cliente
-  che lo usa, con la sua autenticazione. Negli altri profili quel Jira non
-  esiste proprio: l'incidente "ho scritto sul ticket sbagliato" è impossibile
-  per costruzione, non per disciplina (cap. 16).</li>
+<li><strong>In ogni profilo</strong>: <code>tolaria</code> (il server della mia app di note, il vault
+  Markdown dove finisce la documentazione dei progetti) e <code>atlassian</code> (Jira).
+  I server sono registrati ovunque, ma l'<strong>autenticazione</strong> è per-profilo:
+  ogni profilo ha le sue credenziali, e un profilo senza login a un Jira non
+  può scriverci per costruzione, non per disciplina (cap. 16).</li>
+<li><strong>Per directory</strong>: <code>playwright</code> esiste solo nella directory demo di questa
+  guida, nel profilo dove ci lavoro: serve a pilotare il browser per gli
+  screenshot dei capitoli, e nessun'altra sessione ha motivo di averlo nel
+  contesto. È il criterio "livello più basso" portato all'estremo.</li>
 </ul>
 <p>Il criterio è lo stesso dei tre livelli: un MCP va <strong>al livello più basso in
 cui serve</strong>. E ogni server in più è superficie di contesto e di rischio: il
@@ -1469,10 +1675,13 @@ un'impostazione che non va mantenuta.</p>
 <p>Il file più importante di questo capitolo non è nessuno dei blocchi JSON: è
 il criterio dietro ognuno. L'allow si misura sui transcript, non si immagina;
 il deny si scrive per stringhe sensibili, non per elenchi di comandi; l'ask
-copre la zona grigia; le regole inderogabili diventano hook; gli agenti
-nascono quando un ruolo ricorre, mai prima; gli MCP stanno al livello più
-basso che li giustifica. Se il tuo setup applica questi criteri, assomiglierà
-al mio solo dove i nostri mestieri coincidono, ed è esattamente il punto.</p>
+copre la zona grigia; le regole inderogabili diventano hook. Gli agenti
+nascono quando un ruolo ricorre, mai prima; le description di agenti e skill
+instradano, non descrivono; le orchestrazioni che ripeti diventano skill.
+L'isolamento tra contesti lo fanno i profili, e ciò che vale ovunque viaggia
+in symlink; gli MCP stanno al livello più basso che li giustifica. Se il tuo
+setup applica questi criteri, assomiglierà al mio solo dove i nostri mestieri
+coincidono, ed è esattamente il punto.</p>
 
 
 

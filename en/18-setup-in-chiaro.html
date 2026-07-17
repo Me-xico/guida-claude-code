@@ -1064,6 +1064,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Agents: the standing team">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-delegation-kicks-in-without-me-asking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How delegation kicks in (without me asking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-i-orchestrate-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How I orchestrate them
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1071,6 +1099,34 @@
     <span class="md-ellipsis">
       
         Skills and slash commands: the procedures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skills and slash commands: the procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-they-get-used-the-two-entry-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How they get used (the two entry points)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profiles-the-anatomy-of-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Profiles: the anatomy of isolation
       
     </span>
   </a>
@@ -1183,6 +1239,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Agents: the standing team">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-delegation-kicks-in-without-me-asking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How delegation kicks in (without me asking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-i-orchestrate-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How I orchestrate them
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1190,6 +1274,34 @@
     <span class="md-ellipsis">
       
         Skills and slash commands: the procedures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skills and slash commands: the procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-they-get-used-the-two-entry-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How they get used (the two entry points)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profiles-the-anatomy-of-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Profiles: the anatomy of isolation
       
     </span>
   </a>
@@ -1418,6 +1530,50 @@ They split into two families, and the difference also governs the model:</p>
 <em>gate-runner</em> that runs the build gate, and a read-only <em>guardian</em> that
 reviews diffs against architectural invariants (ch. 16). Both are committed
 under <code>.claude/agents/</code>, so they apply to anyone who clones the repo.</p>
+<h3 id="how-delegation-kicks-in-without-me-asking">How delegation kicks in (without me asking)<a class="headerlink" href="#how-delegation-kicks-in-without-me-asking" title="Permanent link">&para;</a></h3>
+<p>There's no hidden mechanism: automatic invocation is entirely written down
+in two places the session always reads.</p>
+<p>The first is the <strong>agent description</strong>. In every session Claude has the
+list of available agents with their descriptions in front of it, and when
+it weighs how to tackle a task it uses them as routing rules. That's why
+mine aren't summaries but <strong>routing rules</strong>: they say when to use the
+agent, list the typical cases, and, above all, mark the boundaries against
+its neighbors ("NOT for Terraform → use terraform-expert"). A vague
+description produces an agent that's never picked, or worse, picked
+wrongly: it's the most important field in the file, and I rewrite it more
+often than the prompt.</p>
+<p>The second is the <strong>global CLAUDE.md</strong>, which turns the principle into a
+reflex. The rule "delegate to agents by default" carried little weight on
+its own; what works is the map of cases next to it: <em>non-trivial bug →
+debugger before touching code; noisy suites → test-runner; stack choices →
+architect before implementing; broad exploration → Explore; text to
+humanize → semantica-</em>.<em> When the case comes up, the session doesn't decide
+</em>whether* to delegate: it recognizes the row in the map and delegates
+(ch. 16: examples beat precepts).</p>
+<p>And then there's the third way, the simplest one: I ask by name ("run the
+debugger on this"). It always applies, and it wins over the other two.</p>
+<h3 id="how-i-orchestrate-them">How I orchestrate them<a class="headerlink" href="#how-i-orchestrate-them" title="Permanent link">&para;</a></h3>
+<p>Three patterns cover almost all of my usage:</p>
+<ul>
+<li><strong>In parallel when the jobs are independent.</strong> Multiple agents launched
+  in the same message run concurrently: the Python review and the IaC
+  review of the same diff don't wait on each other. It's the cheapest way
+  to buy time.</li>
+<li><strong>In a pipeline when one's output is another's input.</strong> The textbook case
+  is this guide: every new chapter goes through semantica-it (Italian
+  review) → traduttore-it-en (the <code>.en.md</code> twin) → semantica-en (English
+  polish). I write, the chain refines, and I never re-run it by hand: it's
+  encoded in a skill (below).</li>
+<li><strong>In the background when the result isn't needed right away.</strong> A long
+  analysis starts, I keep working, the notification arrives when it's done.
+  An agent I've already launched can also be resumed with a follow-up
+  message rather than restarted from scratch: its context survives the
+  response.</li>
+</ul>
+<p>The common thread: the main session stays the director, agents report back
+<em>conclusions</em> (a verdict, a proposed diff, a diagnosis), never the noise of
+the path. That's why my advisors don't edit: if the agent applied changes
+on its own, orchestration would turn into surveillance.</p>
 <h2 id="skills-and-slash-commands-the-procedures">Skills and slash commands: the procedures<a class="headerlink" href="#skills-and-slash-commands-the-procedures" title="Permanent link">&para;</a></h2>
 <p>Twelve global skills in <code>~/.claude/skills/</code>, grouped by job:</p>
 <ul>
@@ -1445,21 +1601,74 @@ commits, branch and push per my conventions) and <code>/standup</code> (the "whe
 I" on the current repo). The practical difference from skills: commands are
 procedures <em>I</em> invoke, skills are procedures the session can also choose to
 use on its own when it recognizes the case.</p>
+<h3 id="how-they-get-used-the-two-entry-points">How they get used (the two entry points)<a class="headerlink" href="#how-they-get-used-the-two-entry-points" title="Permanent link">&para;</a></h3>
+<p>The mechanism is the same as for agents: in every session Claude sees the
+list of skills with their descriptions, and the descriptions act as the
+trigger. Mine contain <strong>explicit trigger phrases</strong> ("TRIGGER: 'umanizza',
+'sa di AI', 'de-bot questo testo'") and <strong>non-cases</strong> ("NOT for source
+code; NOT for a desktop screenshot → use screenshot"): when my prompt
+matches the case, the session loads the skill on its own. The second entry
+point is me typing <code>/name</code>, which forces invocation without interpretation.
+Same lesson as the agent descriptions: they don't describe, they <em>route</em>.</p>
+<p>The most useful thing I learned writing them: <strong>a skill is a written
+orchestrator</strong>. <code>humanize</code> doesn't review text: it routes files to the
+<code>semantica-it</code>/<code>semantica-en</code> reviewers in parallel and reports back a
+sample of the rewrites. <code>sync-en</code> doesn't translate: it finds Italian
+chapters changed via git, sends the twins to <code>traduttore-it-en</code>, runs
+<code>semantica-en</code> over the new material, and regenerates the site. This
+guide's translation pipeline, in other words, isn't a habit of mine: it's a
+file. If an orchestration works well by hand twice, the third time write it
+into a skill: it's the just-in-time rule applied to processes instead of
+roles.</p>
+<h2 id="profiles-the-anatomy-of-isolation">Profiles: the anatomy of isolation<a class="headerlink" href="#profiles-the-anatomy-of-isolation" title="Permanent link">&para;</a></h2>
+<p>Ch. 16 describes profiles as the "client" level; in my actual setup the
+split is by <strong>activity</strong>, not by client: <code>delivery</code> (delivery work),
+<code>personale</code> (my own projects, this guide included), and <code>scouting</code>
+(exploring tools and technologies). Same mechanism, different cut: the
+right boundary is the one that separates <em>mental contexts</em>, and for me two
+activities on the same code are more different than two clients on the
+same activity.</p>
+<p>Inside each profile, the structure says exactly what's shared and what's
+isolated, and it's all done with symlinks into <code>~/.claude/</code>:</p>
+<div class="highlight"><pre><span></span><code>~/.cloak/profiles/delivery/
+├── CLAUDE.md      -&gt; ~/.claude/CLAUDE.md      (shared)
+├── settings.json  -&gt; ~/.claude/settings.json  (shared: permissions and hooks)
+├── agents         -&gt; ~/.claude/agents          (shared)
+├── commands       -&gt; ~/.claude/commands        (shared)
+├── skills         -&gt; ~/.claude/skills          (shared)
+├── plugins        -&gt; ~/.claude/plugins         (shared)
+├── .credentials.json        (ITS OWN: login and tokens)
+├── .claude.json             (ITS OWN: MCP and project state)
+├── projects/&lt;repo&gt;/memory/  (ITS OWN: persistent memory)
+└── sessions/, history, plans/, jobs/ (ITS OWN)
+</code></pre></div>
+<p>The most important line is <code>settings.json</code>: even the <strong>permissions and
+hooks are shared</strong>. The secrets deny-list and the commit guardian apply
+identically in every profile, because they're rules about who I am, not
+about what I'm doing. What stays per-profile is the <em>state</em> instead:
+credentials (each profile has its own login), the MCP servers with their
+authentication, and, above all, <strong>per-project memory</strong>. That last one is
+the most concrete benefit: the same repo has different memories in
+<code>delivery</code> and in <code>scouting</code>, because the lessons of delivering aren't the
+lessons of exploring.</p>
 <h2 id="mcp-few-and-at-the-right-level">MCP: few, and at the right level<a class="headerlink" href="#mcp-few-and-at-the-right-level" title="Permanent link">&para;</a></h2>
 <p>The list of MCP servers is deliberately short, and <em>where</em> matters as much
 as <em>what</em>:</p>
 <ul>
-<li><strong>Global</strong> (<code>~/.claude/mcp.json</code>): just <code>tolaria</code>, the server for my
-  notes app, the Markdown vault where project documentation ends up. It's
-  global because there's only one vault, whatever the context.</li>
-<li><strong>Per client profile</strong>: <code>atlassian</code> (Jira) lives in the profile of the
-  client who uses it, with its own authentication. In every other profile
-  that Jira simply doesn't exist: the "I posted on the wrong ticket"
-  incident becomes impossible by construction, not by discipline (ch. 16).</li>
+<li><strong>In every profile</strong>: <code>tolaria</code> (the server for my notes app, the
+  Markdown vault where project documentation ends up) and <code>atlassian</code>
+  (Jira). The servers are registered everywhere, but <strong>authentication</strong> is
+  per-profile: each profile has its own credentials, and a profile without
+  login to a given Jira can't write to it by construction, not by
+  discipline (ch. 16).</li>
+<li><strong>Per directory</strong>: <code>playwright</code> exists only in this guide's demo
+  directory, in the profile where I work on it: it drives the browser for
+  chapter screenshots, and no other session has any reason to have it in
+  context. It's the "lowest level" criterion taken to the extreme.</li>
 </ul>
 <p>The criterion is the same as the three levels: an MCP belongs <strong>at the
-lowest level where it's needed</strong>. And every extra server is more context
-and risk surface: a well-reasoned no (ch. 16, the web-search server I
+lowest level where it's needed</strong>. Every extra server adds context and
+attack surface, so a well-reasoned no (ch. 16, the web-search server I
 passed on) is as much a part of the setup as the yeses.</p>
 <h2 id="everything-else-plugin-statusline-model">Everything else: plugin, statusline, model<a class="headerlink" href="#everything-else-plugin-statusline-model" title="Permanent link">&para;</a></h2>
 <p>Three lines round out the picture. A plugin (<code>ponytail</code>, an output style
@@ -1470,12 +1679,16 @@ window. Everything else is default: every setting you don't write is a
 setting you don't have to maintain.</p>
 <h2 id="in-short">In short<a class="headerlink" href="#in-short" title="Permanent link">&para;</a></h2>
 <p>The most important file in this chapter isn't any of the JSON blocks: it's
-the criterion behind each one. Allow gets measured against transcripts, not
-imagined; deny gets written for sensitive strings, not lists of commands;
-ask covers the gray zone. Rules with no exceptions become hooks; agents get
-born when a role recurs, never before; MCP servers sit at the lowest level
-that justifies them. If your setup applies these criteria, it'll look like
-mine only where our jobs overlap, and that's exactly the point.</p>
+the criterion behind each one. Allow is measured against real transcripts,
+not imagined ones. Deny targets sensitive strings, not lists of commands.
+Ask covers the gray zone in between, and rules with no exceptions become
+hooks. Agents are born when a role recurs, never before; agent and skill
+descriptions route rather than describe; orchestrations you repeat by hand
+become skills. Profiles handle isolation between contexts, and whatever
+applies everywhere travels via symlink, while MCP servers sit at the
+lowest level that justifies them. If your setup applies these criteria,
+it'll look like mine only where our jobs overlap, and that's exactly the
+point.</p>
 
 
 
