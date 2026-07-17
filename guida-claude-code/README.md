@@ -47,6 +47,7 @@ sezioni e i capitoli nuovi si accodano. L'ordine giusto è questo indice.
 15. [Must-have e costi](14-must-have-e-costi.md) - il setup dei primi 30 minuti, i piani, le abitudini di risparmio
 16. [Risparmiare token](15-risparmiare-token.md) - gli strumenti per finestre di lavoro più lunghe sul piano Pro
 17. [Un setup reale](16-setup-a-tre-livelli.md) - globale, per cliente, per repo: dove si può arrivare
+18. [Il setup in chiaro](18-setup-in-chiaro.md) - i file veri riga per riga: permessi, hook, agenti, skill, MCP
 
 ## Cosa ti serve per seguirla
 

@@ -48,6 +48,7 @@ chapters get appended at the end. The right order is this index.
 15. [Must-haves and costs](14-must-have-e-costi.md) - the first 30 minutes of setup, the plans, the money-saving habits
 16. [Saving tokens](15-risparmiare-token.md) - the tools for longer work windows on the Pro plan
 17. [A real setup: global, per client, per repo](16-setup-a-tre-livelli.md) - how the author actually organizes it, three levels at a time
+18. [The setup in plain sight](18-setup-in-chiaro.md) - the actual files line by line: permissions, hooks, agents, skills, MCP
 
 ## What you need to follow along
 
