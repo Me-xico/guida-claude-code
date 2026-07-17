@@ -49,6 +49,50 @@ this base, they **link** to it. Global rules, agents and skills are symlinked
 into every profile: update one file, it applies everywhere, no copies
 drifting out of sync.
 
+### Maintaining the global level: four recent decisions
+
+The global level isn't "write once and forget": it needs revisiting now and
+then. The latest review (July 2026) is a good sample of the kind of
+decisions this level demands, along with the lessons they carry:
+
+- **From a generic rule to a map of cases.** "Delegate to agents by default"
+  was a nice sentiment, but sentiments don't hold much weight when the model
+  is actually deciding what to do next. I paired it with a line of concrete
+  examples — non-trivial bug → *debugger*, noisy test suites →
+  *test-runner*, stack choices → *architect* before implementing — and that
+  cost two lines of CLAUDE.md but turned delegation into a reflex instead of
+  a principle. Lesson: in CLAUDE.md, examples beat precepts.
+- **Pinning a model sets a ceiling, not just a cost.** Advisory agents were
+  originally pinned to whatever flagship model was current at the time; once
+  the session moved to a stronger model, that pin had turned into a ceiling
+  — the session was reasoning better than its own consultants. Now advisors
+  don't declare a model at all (they inherit whatever the session is
+  running), while mechanical agents (test-runner, translators) stay pinned
+  to small models. The rule I distilled from this: whoever *thinks* inherits
+  the best available, whoever *executes* stays cheap.
+- **Rules with no exceptions become hooks.** A rule in CLAUDE.md is an
+  instruction the model almost always follows; a hook (ch. 07) follows it
+  *always*. My commit rules now have both layers: the prose in CLAUDE.md
+  explains the intent, a PreToolUse on `git commit` mechanically blocks
+  messages that violate it — with deliberately narrow patterns, because a
+  guardian that cries wolf on false positives ends up disabled. The
+  criterion for choosing: if even an "almost never" violation is still one
+  too many, that rule deserves a hook.
+- **The allowlist gets measured, not guessed.** The real friction on agent
+  autonomy wasn't the rules, it was the permission prompts. Instead of
+  widening the list by gut feel, I used the built-in
+  `/fewer-permission-prompts` skill to analyze recent transcripts: turns out
+  most of it was already covered by auto-allow and existing rules, with only
+  three real additions to show for it. Two non-negotiable limits: never
+  allowlist interpreters (`python`, `node`…
+  that's arbitrary execution under another name) and never a generic `curl`
+  (it can POST and exfiltrate anything it reads).
+
+Maintenance also includes the no's: in the same review I evaluated a keyless
+web-search MCP server and chose *not* to adopt it — too immature, and the
+native tools already cover most of it. A well-reasoned no, with a memory
+note on when to check again, is maintenance too.
+
 ## Client level: one profile per context
 
 The mechanism underneath is the one from ch. 02: `CLAUDE_CONFIG_DIR` moves

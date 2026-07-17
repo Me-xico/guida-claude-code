@@ -50,6 +50,50 @@ copiano questa base, la **linkano**. Regole, agenti e skill globali sono
 symlink dentro ogni profilo: si aggiorna un file, vale ovunque, niente copie
 che divergono.
 
+### Manutenzione del livello globale: quattro decisioni recenti
+
+Il livello globale non è "scrivi e dimentica": ogni tanto va rimesso in
+discussione. L'ultima revisione (luglio 2026) raccoglie bene il tipo di
+decisioni che questo livello richiede, con le lezioni che si porta dietro:
+
+- **Dalla regola generica alla mappa dei casi.** "Delega agli agenti come
+  default" era un'esortazione, e le esortazioni pesano poco nel momento in
+  cui il modello sceglie come procedere. L'ho affiancata a una riga di
+  esempi concreti — bug non banale → *debugger*, suite rumorose →
+  *test-runner*, scelte di stack → *architect* prima di implementare — che
+  costa due righe di CLAUDE.md e rende la delega un riflesso invece di un
+  principio. Lezione: nel CLAUDE.md gli esempi battono i precetti.
+- **Il pin di modello è un tetto, non solo un costo.** Gli agenti advisory
+  nascevano pinnati sul modello di punta di allora; quando la sessione è
+  passata a un modello superiore, quel pin era diventato un limite — la
+  sessione ragionava meglio dei suoi consulenti. Ora gli advisor non
+  dichiarano più un modello (ereditano quello di sessione, qualunque sia),
+  mentre gli agenti meccanici — test-runner, traduttori — restano pinnati su
+  modelli piccoli. La regola che ne ho ricavato: chi *pensa* eredita il
+  meglio disponibile, chi *esegue* resta economico.
+- **Le regole inderogabili diventano hook.** Una regola in CLAUDE.md è
+  un'istruzione che il modello quasi sempre rispetta; un hook (cap. 07) la
+  rispetta *sempre*. Le mie regole sui commit ora hanno entrambi i livelli:
+  la prosa nel CLAUDE.md spiega l'intento, un PreToolUse su `git commit`
+  blocca meccanicamente i messaggi che violano — con pattern volutamente
+  stretti, perché un guardiano che grida ai falsi positivi finisce
+  disattivato. Il criterio di scelta: se una violazione "quasi mai" è
+  comunque troppo, quella regola merita un hook.
+- **L'allowlist si misura, non si immagina.** L'attrito vero all'autonomia
+  degli agenti non erano le regole ma i prompt di permesso. Invece di
+  allargare a intuito, ho usato la skill built-in `/fewer-permission-prompts`
+  per analizzare i transcript recenti: il verdetto onesto è che quasi tutto
+  era già coperto tra auto-allow e regole esistenti, e sono uscite solo tre
+  aggiunte reali. Due paletti non negoziabili: mai
+  allowlistare interpreti (`python`, `node`… è esecuzione arbitraria con un
+  altro nome) e mai `curl` generico (può fare POST ed esfiltrare quanto
+  legge).
+
+La manutenzione include anche i no: nella stessa revisione ho valutato un
+MCP server di ricerca web keyless e ho scelto di *non* adottarlo — troppo
+giovane, e i tool nativi coprono già il grosso. Anche un no motivato, con
+una nota in memoria su quando ricontrollare, è manutenzione del setup.
+
 ## Livello cliente: un profilo per contesto
 
 Il meccanismo sotto è quello del cap. 02: `CLAUDE_CONFIG_DIR` sposta l'intera
