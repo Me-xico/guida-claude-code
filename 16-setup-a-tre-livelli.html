@@ -14,6 +14,8 @@
         <link rel="prev" href="15-risparmiare-token.html">
       
       
+        <link rel="next" href="18-setup-in-chiaro.html">
+      
       
         
           <link rel="alternate" href="16-setup-a-tre-livelli.html" hreflang="it">
@@ -1025,6 +1027,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Livello globale: chi sei tu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manutenzione-del-livello-globale-quattro-decisioni-recenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manutenzione del livello globale: quattro decisioni recenti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1086,6 +1105,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="18-setup-in-chiaro.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18 · Il setup in chiaro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1138,6 +1185,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Livello globale: chi sei tu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manutenzione-del-livello-globale-quattro-decisioni-recenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manutenzione del livello globale: quattro decisioni recenti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1275,6 +1339,48 @@ cliente del giorno:</p>
 copiano questa base, la <strong>linkano</strong>. Regole, agenti e skill globali sono
 symlink dentro ogni profilo: si aggiorna un file, vale ovunque, niente copie
 che divergono.</p>
+<h3 id="manutenzione-del-livello-globale-quattro-decisioni-recenti">Manutenzione del livello globale: quattro decisioni recenti<a class="headerlink" href="#manutenzione-del-livello-globale-quattro-decisioni-recenti" title="Permanent link">&para;</a></h3>
+<p>Il livello globale non è "scrivi e dimentica": ogni tanto va rimesso in
+discussione. L'ultima revisione (luglio 2026) raccoglie bene il tipo di
+decisioni che questo livello richiede, con le lezioni che si porta dietro:</p>
+<ul>
+<li><strong>Dalla regola generica alla mappa dei casi.</strong> "Delega agli agenti come
+  default" era un'esortazione, e le esortazioni pesano poco nel momento in
+  cui il modello sceglie come procedere. L'ho affiancata a una riga di
+  esempi concreti — bug non banale → <em>debugger</em>, suite rumorose →
+  <em>test-runner</em>, scelte di stack → <em>architect</em> prima di implementare — che
+  costa due righe di CLAUDE.md e rende la delega un riflesso invece di un
+  principio. Lezione: nel CLAUDE.md gli esempi battono i precetti.</li>
+<li><strong>Il pin di modello è un tetto, non solo un costo.</strong> Gli agenti advisory
+  nascevano pinnati sul modello di punta di allora; quando la sessione è
+  passata a un modello superiore, quel pin era diventato un limite — la
+  sessione ragionava meglio dei suoi consulenti. Ora gli advisor non
+  dichiarano più un modello (ereditano quello di sessione, qualunque sia),
+  mentre gli agenti meccanici — test-runner, traduttori — restano pinnati su
+  modelli piccoli. La regola che ne ho ricavato: chi <em>pensa</em> eredita il
+  meglio disponibile, chi <em>esegue</em> resta economico.</li>
+<li><strong>Le regole inderogabili diventano hook.</strong> Una regola in CLAUDE.md è
+  un'istruzione che il modello quasi sempre rispetta; un hook (cap. 07) la
+  rispetta <em>sempre</em>. Le mie regole sui commit ora hanno entrambi i livelli:
+  la prosa nel CLAUDE.md spiega l'intento, un PreToolUse su <code>git commit</code>
+  blocca meccanicamente i messaggi che violano — con pattern volutamente
+  stretti, perché un guardiano che grida ai falsi positivi finisce
+  disattivato. Il criterio di scelta: se una violazione "quasi mai" è
+  comunque troppo, quella regola merita un hook.</li>
+<li><strong>L'allowlist si misura, non si immagina.</strong> L'attrito vero all'autonomia
+  degli agenti non erano le regole ma i prompt di permesso. Invece di
+  allargare a intuito, ho usato la skill built-in <code>/fewer-permission-prompts</code>
+  per analizzare i transcript recenti: il verdetto onesto è che quasi tutto
+  era già coperto tra auto-allow e regole esistenti, e sono uscite solo tre
+  aggiunte reali. Due paletti non negoziabili: mai
+  allowlistare interpreti (<code>python</code>, <code>node</code>… è esecuzione arbitraria con un
+  altro nome) e mai <code>curl</code> generico (può fare POST ed esfiltrare quanto
+  legge).</li>
+</ul>
+<p>La manutenzione include anche i no: nella stessa revisione ho valutato un
+MCP server di ricerca web keyless e ho scelto di <em>non</em> adottarlo — troppo
+giovane, e i tool nativi coprono già il grosso. Anche un no motivato, con
+una nota in memoria su quando ricontrollare, è manutenzione del setup.</p>
 <h2 id="livello-cliente-un-profilo-per-contesto">Livello cliente: un profilo per contesto<a class="headerlink" href="#livello-cliente-un-profilo-per-contesto" title="Permanent link">&para;</a></h2>
 <p>Il meccanismo sotto è quello del cap. 02: <code>CLAUDE_CONFIG_DIR</code> sposta l'intera
 configurazione. Io lo governo con <a href="https://github.com/synth1s/cloak">cloak</a>
@@ -1400,6 +1506,22 @@ l'ha chiesto due volte.</p>
             </div>
           </a>
         
+        
+          
+          <a href="18-setup-in-chiaro.html" class="md-footer__link md-footer__link--next" aria-label="Successivo: 18 · Il setup in chiaro">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Successivo
+              </span>
+              <div class="md-ellipsis">
+                18 · Il setup in chiaro
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     

@@ -11,16 +11,14 @@
       
       
       
-        <link rel="prev" href="15-risparmiare-token.html">
+        <link rel="prev" href="16-setup-a-tre-livelli.html">
       
-      
-        <link rel="next" href="18-setup-in-chiaro.html">
       
       
         
-          <link rel="alternate" href="../16-setup-a-tre-livelli.html" hreflang="it">
+          <link rel="alternate" href="../18-setup-in-chiaro.html" hreflang="it">
         
-          <link rel="alternate" href="16-setup-a-tre-livelli.html" hreflang="en">
+          <link rel="alternate" href="18-setup-in-chiaro.html" hreflang="en">
         
       
       
@@ -29,7 +27,7 @@
     
     
       
-        <title>16 · A real-world setup - Guida a Claude Code</title>
+        <title>18 · The setup in plain sight - Guida a Claude Code</title>
       
     
     
@@ -76,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#16-a-real-setup-global-per-client-per-repo" class="md-skip">
+        <a href="#18-the-setup-in-plain-sight-the-files-line-by-line" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              16 · A real-world setup
+              18 · The setup in plain sight
             
           </span>
         </div>
@@ -159,13 +157,13 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../16-setup-a-tre-livelli.html" hreflang="it" class="md-select__link">
+            <a href="../18-setup-in-chiaro.html" hreflang="it" class="md-select__link">
               Italiano
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="16-setup-a-tre-livelli.html" hreflang="en" class="md-select__link">
+            <a href="18-setup-in-chiaro.html" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -945,6 +943,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="16-setup-a-tre-livelli.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16 · A real-world setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -964,7 +990,7 @@
   <span class="md-ellipsis">
     
   
-    16 · A real-world setup
+    18 · The setup in plain sight
   
 
     
@@ -975,14 +1001,14 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="16-setup-a-tre-livelli.html" class="md-nav__link md-nav__link--active">
+      <a href="18-setup-in-chiaro.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    16 · A real-world setup
+    18 · The setup in plain sight
   
 
     
@@ -1008,10 +1034,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-problem-it-solves" class="md-nav__link">
+  <a href="#permissions-allow-deny-ask" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The problem it solves
+        Permissions: allow, deny, ask
       
     </span>
   </a>
@@ -1019,38 +1045,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#global-level-who-you-are" class="md-nav__link">
+  <a href="#hooks-the-rules-that-always-hold" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Global level: who you are
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Global level: who you are">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#maintaining-the-global-level-four-recent-decisions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Maintaining the global level: four recent decisions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#client-level-one-profile-per-context" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Client level: one profile per context
+        Hooks: the rules that always hold
       
     </span>
   </a>
@@ -1058,30 +1056,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repo-level-the-code-in-front-of-you" class="md-nav__link">
+  <a href="#agents-the-standing-team" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Repo level: the code in front of you
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Repo level: the code in front of you">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#graphify-a-map-of-the-codebase" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        graphify: a map of the codebase
+        Agents: the standing team
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#skills-and-slash-commands-the-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skills and slash commands: the procedures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcp-few-and-at-the-right-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MCP: few, and at the right level
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#everything-else-plugin-statusline-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Everything else: plugin, statusline, model
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1100,34 +1114,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="18-setup-in-chiaro.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    18 · The setup in plain sight
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1167,10 +1153,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-problem-it-solves" class="md-nav__link">
+  <a href="#permissions-allow-deny-ask" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The problem it solves
+        Permissions: allow, deny, ask
       
     </span>
   </a>
@@ -1178,38 +1164,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#global-level-who-you-are" class="md-nav__link">
+  <a href="#hooks-the-rules-that-always-hold" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Global level: who you are
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Global level: who you are">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#maintaining-the-global-level-four-recent-decisions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Maintaining the global level: four recent decisions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#client-level-one-profile-per-context" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Client level: one profile per context
+        Hooks: the rules that always hold
       
     </span>
   </a>
@@ -1217,30 +1175,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repo-level-the-code-in-front-of-you" class="md-nav__link">
+  <a href="#agents-the-standing-team" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Repo level: the code in front of you
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Repo level: the code in front of you">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#graphify-a-map-of-the-codebase" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        graphify: a map of the codebase
+        Agents: the standing team
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#skills-and-slash-commands-the-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skills and slash commands: the procedures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcp-few-and-at-the-right-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MCP: few, and at the right level
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#everything-else-plugin-statusline-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Everything else: plugin, statusline, model
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1272,193 +1246,236 @@
 
 
 
-<h1 id="16-a-real-setup-global-per-client-per-repo">16 - A real setup: global, per client, per repo<a class="headerlink" href="#16-a-real-setup-global-per-client-per-repo" title="Permanent link">&para;</a></h1>
+<h1 id="18-the-setup-in-plain-sight-the-files-line-by-line">18 - The setup in plain sight: the files, line by line<a class="headerlink" href="#18-the-setup-in-plain-sight-the-files-line-by-line" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>This chapter describes the author's day-to-day setup (July 2026),
-sanitized: no client names, no work-project details. It's the "how far
-you can take it" after the rest of the guide, not the starting point.</p>
+<p>Ch. 16 covers the philosophy: three levels, what goes where. This
+chapter shows the <strong>actual files</strong> from my setup (July 2026), sanitized
+per the guide's policy: real structure and real rules, but the paths and
+names of client work projects are swapped for generic stand-ins (<code>acme</code>).
+It's not a template to copy wholesale: it's a working example to steal the
+pieces you need from.</p>
 </blockquote>
-<h2 id="the-problem-it-solves">The problem it solves<a class="headerlink" href="#the-problem-it-solves" title="Permanent link">&para;</a></h2>
-<p>If you work for several clients, a single <code>~/.claude/</code> isn't enough: one
-client's memory shouldn't leak into another client's sessions, integrations
-(client A's Jira, client B's GitLab) shouldn't even <em>exist</em> in the wrong
-context, and your personal preferences need to apply everywhere without
-copying them ten times over. The answer is to organize the setup into three
-levels, each with its own job:</p>
-<table>
-<thead>
-<tr>
-<th>Level</th>
-<th>Where it lives</th>
-<th>What goes in it</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Global</td>
-<td><code>~/.claude/</code> (shared across profiles)</td>
-<td>who you are: preferences, security, cross-cutting tools</td>
-</tr>
-<tr>
-<td>Client</td>
-<td>an isolated profile per client</td>
-<td>the context: memory, permissions, integrations, domain skills</td>
-</tr>
-<tr>
-<td>Repo</td>
-<td><code>.claude/</code> in the project</td>
-<td>the code: conventions, hooks, agents and maps for that codebase</td>
-</tr>
-</tbody>
-</table>
-<p>The rule for deciding where something belongs: <strong>put it at the highest
-level where it holds true for everything underneath</strong>. Always true → global.
-True for one client → profile. True for one repo → repo.</p>
-<h2 id="global-level-who-you-are">Global level: who you are<a class="headerlink" href="#global-level-who-you-are" title="Permanent link">&para;</a></h2>
-<p>My <code>~/.claude/</code> holds the things that never change, no matter which client
-I'm working for that day:</p>
-<ul>
-<li><strong>A lean CLAUDE.md</strong> (about forty lines): language, commit style, Python
-  tooling via <code>uv</code>, the "delegate to agents by default" rule, and the
-  "just-in-time agents" rule (if an ad hoc role comes up twice, it becomes a
-  persistent agent; that's how half the list below was born).</li>
-<li><strong>The deny-list on secrets</strong> (ch. 02): any path containing credentials is
-  unreadable to any session, always, shell workarounds included.</li>
-<li><strong>The token-saving hook</strong> (ch. 15): rtk rewrites commands transparently,
-  on any project.</li>
-<li><strong>About fifteen advisory agents</strong> covering my various professional hats
-  (Python, IaC, data engineering, architecture, frontend, DevOps…), all
-  following the "advise, don't edit" pattern and with clear boundaries
-  against neighboring agents spelled out in their descriptions.</li>
-<li><strong>Cross-cutting skills</strong>: prose review (one reviewer per language), the
-  translation-plus-sync pair that keeps this guide bilingual, screenshot
-  capture, the Playwright core for driving a browser.</li>
-</ul>
-<p>One infrastructure detail that pays off: client profiles (below) don't copy
-this base, they <strong>link</strong> to it. Global rules, agents and skills are symlinked
-into every profile: update one file, it applies everywhere, no copies
-drifting out of sync.</p>
-<h3 id="maintaining-the-global-level-four-recent-decisions">Maintaining the global level: four recent decisions<a class="headerlink" href="#maintaining-the-global-level-four-recent-decisions" title="Permanent link">&para;</a></h3>
-<p>The global level isn't "write once and forget": it needs revisiting now and
-then. The latest review (July 2026) is a good sample of the kind of
-decisions this level demands, along with the lessons they carry:</p>
-<ul>
-<li><strong>From a generic rule to a map of cases.</strong> "Delegate to agents by default"
-  was a nice sentiment, but sentiments don't hold much weight when the model
-  is actually deciding what to do next. I paired it with a line of concrete
-  examples — non-trivial bug → <em>debugger</em>, noisy test suites →
-  <em>test-runner</em>, stack choices → <em>architect</em> before implementing — and that
-  cost two lines of CLAUDE.md but turned delegation into a reflex instead of
-  a principle. Lesson: in CLAUDE.md, examples beat precepts.</li>
-<li><strong>Pinning a model sets a ceiling, not just a cost.</strong> Advisory agents were
-  originally pinned to whatever flagship model was current at the time; once
-  the session moved to a stronger model, that pin had turned into a ceiling
-  — the session was reasoning better than its own consultants. Now advisors
-  don't declare a model at all (they inherit whatever the session is
-  running), while mechanical agents (test-runner, translators) stay pinned
-  to small models. The rule I distilled from this: whoever <em>thinks</em> inherits
-  the best available, whoever <em>executes</em> stays cheap.</li>
-<li><strong>Rules with no exceptions become hooks.</strong> A rule in CLAUDE.md is an
-  instruction the model almost always follows; a hook (ch. 07) follows it
-  <em>always</em>. My commit rules now have both layers: the prose in CLAUDE.md
-  explains the intent, a PreToolUse on <code>git commit</code> mechanically blocks
-  messages that violate it — with deliberately narrow patterns, because a
-  guardian that cries wolf on false positives ends up disabled. The
-  criterion for choosing: if even an "almost never" violation is still one
-  too many, that rule deserves a hook.</li>
-<li><strong>The allowlist gets measured, not guessed.</strong> The real friction on agent
-  autonomy wasn't the rules, it was the permission prompts. Instead of
-  widening the list by gut feel, I used the built-in
-  <code>/fewer-permission-prompts</code> skill to analyze recent transcripts: turns out
-  most of it was already covered by auto-allow and existing rules, with only
-  three real additions to show for it. Two non-negotiable limits: never
-  allowlist interpreters (<code>python</code>, <code>node</code>…
-  that's arbitrary execution under another name) and never a generic <code>curl</code>
-  (it can POST and exfiltrate anything it reads).</li>
-</ul>
-<p>Maintenance also includes the no's: in the same review I evaluated a keyless
-web-search MCP server and chose <em>not</em> to adopt it — too immature, and the
-native tools already cover most of it. A well-reasoned no, with a memory
-note on when to check again, is maintenance too.</p>
-<h2 id="client-level-one-profile-per-context">Client level: one profile per context<a class="headerlink" href="#client-level-one-profile-per-context" title="Permanent link">&para;</a></h2>
-<p>The mechanism underneath is the one from ch. 02: <code>CLAUDE_CONFIG_DIR</code> moves
-the entire configuration. I manage it with
-<a href="https://github.com/synth1s/cloak">cloak</a>
-(<code>npm install -g @synth1s/cloak</code>): named profiles you create and put on in
-one command — <code>cloak create cliente-a</code>, <code>cloak switch cliente-a</code> — with the
-"wardrobe" list always a <code>cloak ls</code> away. The principle works by hand too,
-without installing anything:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CLAUDE_CONFIG_DIR</span><span class="o">=</span>~/.profili/cliente-a<span class="w"> </span>claude
+<h2 id="permissions-allow-deny-ask">Permissions: allow, deny, ask<a class="headerlink" href="#permissions-allow-deny-ask" title="Permanent link">&para;</a></h2>
+<p>The <code>permissions</code> block in my global <code>~/.claude/settings.json</code> uses all
+three lists, and each one does a different job:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;allow&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk git status:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk git diff:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk git log:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk git show:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk git branch:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk ls:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk read:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk grep:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk rg:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk wc:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk git add:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk git commit:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(rtk git push:*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;WebSearch&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;WebFetch(domain:github.com)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;WebFetch(domain:raw.githubusercontent.com)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;WebFetch(domain:www.npmjs.com)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(make check)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;mcp__atlassian__getJiraIssue&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;mcp__atlassian__searchJiraIssuesUsingJql&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;deny&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;Read(~/.config/acme/**)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Read(**/.env)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Read(**/.env.local)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Read(**/credentials.json)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Read(**/*.pem)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Read(**/*.key)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Read(~/.ssh/**)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Read(~/.aws/credentials)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*secrets.env*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*.config/acme*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*ACME_LLM_API_KEY*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*id_rsa*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*.ssh/*)&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;ask&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;Bash(* .env*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*.pem*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*.key*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*credentials.json*)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Bash(*~/.aws/*)&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>Each profile is its own world: its own session history, its own
-<strong>persistent memory</strong> (lessons learned on one client don't surface in
-another client's sessions), its own MCP servers and permissions. The
-practical payoffs that make me love it:</p>
-<ul>
-<li><strong>Integration isolation</strong>: client A's profile has the credentials for
-  their Jira; in every other profile that Jira simply doesn't exist. A
-  whole class of incidents ("I posted on the wrong ticket") becomes
-  impossible by construction.</li>
-<li><strong>Domain skills</strong>: procedures that only apply to one client (their
-  delivery pipeline, their product screenshots) live in that client's
-  profile instead of cluttering everyone else's <code>/</code> menu.</li>
-<li><strong>Routed documentation</strong>: a profile-level skill writes project notes into
-  a vault organized by client, so knowledge accumulates in the right place
-  without having to decide each time.</li>
-</ul>
-<h2 id="repo-level-the-code-in-front-of-you">Repo level: the code in front of you<a class="headerlink" href="#repo-level-the-code-in-front-of-you" title="Permanent link">&para;</a></h2>
-<p>Everything from ch. 02 and 04 applies here (project CLAUDE.md, a committed
-<code>settings.json</code>), plus the pieces that show up once a repo becomes "home
-turf":</p>
-<ul>
-<li><strong>Project hooks</strong>: the PostToolUse autoformat (ch. 07) tuned to the
-  repo's formatter (in my main repo, a <code>make format</code> that keeps CI
-  permanently green).</li>
-<li><strong>Project agents</strong> (committed under <code>.claude/agents/</code>): a <em>gate-runner</em> on
-  a small model that runs the build gate in an isolated context and reports
-  only the verdict, and a read-only <em>guardian</em> that reviews every diff
-  against the repo's architectural invariants. Both are ch. 06 in practice:
-  noise stays out of the session, powers stay minimal.</li>
-<li><strong>Scaffolding skills</strong>: when the repo has components with a fixed anatomy
-  (the same N files every time, conformance tests), a skill generates them
-  right on the first try.</li>
-</ul>
-<h3 id="graphify-a-map-of-the-codebase">graphify: a map of the codebase<a class="headerlink" href="#graphify-a-map-of-the-codebase" title="Permanent link">&para;</a></h3>
-<p>The newest addition to this level, currently in pilot adoption:
-<a href="https://github.com/Graphify-Labs/graphify">graphify</a> turns a codebase into
-a <strong>queryable knowledge graph</strong> — <code>graphify query "who implements this
-interface?"</code> instead of three rounds of grep and five files read. Parsing
-happens locally (tree-sitter), and for agents it's a force multiplier: the
-reconnaissance that used to eat up half the context window (ch. 03) becomes
-a single query.</p>
-<p>It complements rtk rather than overlapping with it: rtk compresses the
-output of the commands you run, graphify lets you skip running them in the
-first place. The rules I've settled on after studying it:</p>
+<p><strong>Allow</strong> holds only zero-risk operations I'd approve blindfolded a hundred
+times a day: read-only git inspection (via rtk, ch. 15), reading files and
+searching, the main repo's build gate, the documentation domains I consult
+all the time, two read-only Jira tools. <code>git add</code>/<code>commit</code>/<code>push</code> look like
+an exception to that principle, but they're covered elsewhere: the "never
+commit without asking" rule lives in CLAUDE.md, and a hook (below) guards
+the message content. Two limits I never cross: <strong>never allowlist
+interpreters</strong> (<code>python</code>, <code>node</code>: that's arbitrary execution under another
+name) and <strong>never a generic <code>curl</code></strong> (it can POST, so it can exfiltrate
+whatever it just read).</p>
+<p><strong>Deny</strong> protects secrets, and its history is a three-act lesson in syntax:</p>
 <ol>
-<li><strong>Per-repo only, never global</strong>: it installs into the project's
-   <code>.claude/</code> (project mode); the graph itself is a local artifact you
-   <code>.gitignore</code>.</li>
-<li><strong>Pin the version</strong>: it's pre-1.0 with frequent releases. Watch the
-   package name too: <code>uv tool install graphifyy==&lt;version&gt;</code> has a double <em>y</em>
-   (the "clean" name on PyPI belongs to a different project).</li>
-<li><strong>Where it pays off</strong>: large codebases you haven't read yourself, a new
-   client's, or your own <em>vibe-coded</em> projects (the agent wrote the code:
-   you know the product, not the code). Cross-repo only when the repos
-   genuinely form one system (a data platform spread across ten repos,
-   yes; a folder of unrelated projects, no, since you'd end up with
-   disconnected islands stitched together by guesswork).</li>
-<li><strong>What it isn't</strong>: it doesn't replace persistent memory or a notes vault.
-   Those hold <em>experiential</em> knowledge ("I've already tried this tool,
-   here's what I learned"); graphify only extracts <em>structural</em> relationships
-   from the code. If a lesson was never written down, no graph will invent
-   it; if it was written down, you'll find it without a graph.</li>
+<li><em>Single-slash absolute paths don't work.</em> In file rules,
+   <code>Read(/home/io/...)</code> is interpreted <strong>relative to the settings file's
+   directory</strong>: my first deny-list blocked nothing at all. An absolute path
+   is written <code>//path</code> (double slash) or, better, with <code>~/</code>.</li>
+<li><em>Don't enumerate commands, describe the sensitive string.</em> The first
+   version had 32 rules (<code>cat</code>, <code>head</code>, <code>xxd</code>, <code>dd</code>, <code>strings</code>…) and still
+   leaked: the list of ways to read a file is endless (<code>bash -c</code>, <code>perl</code>, a
+   <code>&lt;</code> redirect). Bash rules accept wildcards mid-pattern too, so
+   <code>Bash(*secrets.env*)</code> denies <strong>any</strong> command that names that file, no
+   matter which binary runs it. Three rules like that cover strictly more
+   than the 32 before them.</li>
+<li><em>String matching is still gameable in principle</em> (indirect paths like
+   <code>cat ~/.config/ac*/sec*</code>). The watertight version is the sandbox's
+   <code>filesystem.denyRead</code>, which blocks reads at the kernel level for any
+   child process. It's on my list of things to evaluate.</li>
 </ol>
+<p><strong>Ask</strong> is the most recent discovery: the missing middle ground. A pattern
+as broad as "any command that touches a <code>.env</code>" in deny would cause real
+damage: <code>cp .env.example .env</code> is a legitimate operation my fixtures do
+routinely. With ask, the command pauses instead and asks: I deny suspicious
+uses by hand, legitimate ones go through with a keystroke. The criterion I
+distilled from this: <strong>deny only where a false positive is nearly
+impossible; ask where the pattern is broad</strong>. There's no appeal with deny,
+and a rule that fights you ends up deleted, which is worse than a rule that
+asks.</p>
+<h2 id="hooks-the-rules-that-always-hold">Hooks: the rules that always hold<a class="headerlink" href="#hooks-the-rules-that-always-hold" title="Permanent link">&para;</a></h2>
+<p>Two global hooks and one project hook, all born from the same criterion
+(ch. 07 and 16): if an "almost never" violation is still one too many, the
+rule deserves a hook.</p>
+<p><strong>PreToolUse on Bash, first hook: rtk.</strong> One line, <code>rtk hook claude</code>, that
+transparently rewrites commands into their compressed variant (ch. 15). No
+semantics involved, just token savings on every project.</p>
+<p><strong>PreToolUse on Bash, second hook: the commit guardian.</strong> The file is
+<code>~/.claude/hooks/block-ai-commit.sh</code>, and I'm quoting it in full because
+it's my favorite example of a small hook done well:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/sh</span>
+<span class="c1"># PreToolUse hook (Bash): block git commit messages that mention AI assistance.</span>
+<span class="c1"># Exit 2 = block the tool call and show stderr to the model.</span>
+<span class="nv">cmd</span><span class="o">=</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.tool_input.command // empty&#39;</span><span class="k">)</span>
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">  </span>*<span class="s2">&quot;git commit&quot;</span>*<span class="o">)</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">  </span>*<span class="o">)</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span>
+<span class="k">esac</span>
+<span class="c1"># Narrow patterns on purpose — &quot;anthropic&quot; alone would block legitimate</span>
+<span class="c1"># commits about Anthropic SDK code; widen only if something slips.</span>
+<span class="k">if</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-qiE<span class="w"> </span><span class="s1">&#39;co-authored-by:[^&quot;]*\b(claude|anthropic)|generated with|noreply@anthropic\.com|🤖&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Commit bloccato: il messaggio viola le regole del CLAUDE.md. Riscrivilo.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span>
+<span class="k">fi</span>
+<span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p>The choices that matter: it exits immediately if the command isn't a commit
+(zero cost on 99% of cases); exit code 2 blocks the tool <strong>and</strong> explains to
+the model why, so it corrects itself on the next try; the patterns are
+deliberately narrow (<code>anthropic</code> alone would block legitimate commits on
+code that uses the Anthropic SDK), because a guardian that cries wolf on
+false positives ends up disabled. The prose in CLAUDE.md explains the
+intent; the hook <em>guarantees</em> it.</p>
+<p><strong>Project-level PostToolUse: the autoformat.</strong> In the main repo's
+<code>.claude/settings.json</code>, on <code>Edit|Write</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;hooks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;PostToolUse&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">      </span><span class="nt">&quot;matcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Edit|Write&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;hooks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;command&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;make format &gt;/dev/null 2&gt;&amp;1 || true&quot;</span><span class="w"> </span><span class="p">}]</span>
+<span class="w">    </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>It lives at the repo level because it's <em>that repo's</em> formatter making the
+call; the <code>|| true</code> is essential: a convenience hook must never block your
+work if it fails.</p>
+<h2 id="agents-the-standing-team">Agents: the standing team<a class="headerlink" href="#agents-the-standing-team" title="Permanent link">&para;</a></h2>
+<p>Fifteen global agents in <code>~/.claude/agents/</code>, all born from the
+just-in-time rule in ch. 16 (a role comes up twice → it gets persisted).
+They split into two families, and the difference also governs the model:</p>
+<ul>
+<li><strong>Advisors</strong> (they reason, they don't touch code): <code>architect</code>,
+  <code>debugger</code>, <code>python-expert</code>, <code>web-fullstack</code>, <code>terraform-expert</code>,
+  <code>cdk-python-expert</code>, <code>devops-hosting</code>, <code>data-engineer</code>, <code>data-scientist</code>,
+  <code>data-analyst</code>, <code>cloud-ml-ai-engineer</code>. Common pattern: read-only tools
+  (Read, Grep, Glob, Bash), "advise and sketch a diff, don't apply bulk
+  edits", and a description that explicitly marks the boundary against
+  neighboring agents ("NOT for Terraform → use terraform-expert"): that
+  boundary is what lets the session pick the right agent without guessing
+  wrong. No declared model: they inherit the session's, whichever is best
+  available.</li>
+<li><strong>Executors</strong> (they do one mechanical thing): <code>test-runner</code> (runs the
+  suite in an isolated context, reports only the verdict: noise stays out
+  of the session), <code>semantica-it</code>/<code>semantica-en</code> (prose reviewers, the only
+  ones with Edit/Write) and <code>traduttore-it-en</code> (the <code>.en.md</code> twins of this
+  guide). These do declare a model, small and pinned: whoever <em>thinks</em>
+  inherits the best, whoever <em>executes</em> stays cheap.</li>
+</ul>
+<p>At the repo level, specific ones get added. In the main repo: a
+<em>gate-runner</em> that runs the build gate, and a read-only <em>guardian</em> that
+reviews diffs against architectural invariants (ch. 16). Both are committed
+under <code>.claude/agents/</code>, so they apply to anyone who clones the repo.</p>
+<h2 id="skills-and-slash-commands-the-procedures">Skills and slash commands: the procedures<a class="headerlink" href="#skills-and-slash-commands-the-procedures" title="Permanent link">&para;</a></h2>
+<p>Twelve global skills in <code>~/.claude/skills/</code>, grouped by job:</p>
+<ul>
+<li><strong>Prose and bilingualism</strong>: <code>humanize</code> (orchestrates the semantica-*
+  reviewers), <code>sync-en</code> (finds Italian chapters changed via git and gets
+  the English twins retranslated: it's the skill that keeps this guide
+  bilingual).</li>
+<li><strong>Screenshots</strong>: <code>screenshot</code> (the user shows me something),
+  <code>screenshot-autonomo</code> (I look at the screen on my own),
+  <code>screenshot-recenti</code> (reuses shots already taken). Three separate skills
+  because the <em>trigger</em> is different: lumping them together confused the
+  choice.</li>
+<li><strong>Browser</strong>: <code>playwright-browser</code>, the generic core other domain-specific
+  skills (demos, visual documentation) build on.</li>
+<li><strong>Knowledge</strong>: <code>documenta-progetto</code> (writes project notes into the right
+  vault, routing between personal and work), <code>graphify</code> (ch. 16),
+  <code>llm-council</code> (five advisors on different models for business decisions
+  with real stakes).</li>
+<li><strong>Hygiene</strong>: <code>clean-conversations</code> and <code>purge-project</code> (per-project
+  history cleanup), <code>new-agent</code> (the scaffolding for the just-in-time rule:
+  when a role recurs, this skill persists it).</li>
+</ul>
+<p>Plus two slash commands in <code>~/.claude/commands/</code>: <code>/commit</code> (stage, logical
+commits, branch and push per my conventions) and <code>/standup</code> (the "where was
+I" on the current repo). The practical difference from skills: commands are
+procedures <em>I</em> invoke, skills are procedures the session can also choose to
+use on its own when it recognizes the case.</p>
+<h2 id="mcp-few-and-at-the-right-level">MCP: few, and at the right level<a class="headerlink" href="#mcp-few-and-at-the-right-level" title="Permanent link">&para;</a></h2>
+<p>The list of MCP servers is deliberately short, and <em>where</em> matters as much
+as <em>what</em>:</p>
+<ul>
+<li><strong>Global</strong> (<code>~/.claude/mcp.json</code>): just <code>tolaria</code>, the server for my
+  notes app, the Markdown vault where project documentation ends up. It's
+  global because there's only one vault, whatever the context.</li>
+<li><strong>Per client profile</strong>: <code>atlassian</code> (Jira) lives in the profile of the
+  client who uses it, with its own authentication. In every other profile
+  that Jira simply doesn't exist: the "I posted on the wrong ticket"
+  incident becomes impossible by construction, not by discipline (ch. 16).</li>
+</ul>
+<p>The criterion is the same as the three levels: an MCP belongs <strong>at the
+lowest level where it's needed</strong>. And every extra server is more context
+and risk surface: a well-reasoned no (ch. 16, the web-search server I
+passed on) is as much a part of the setup as the yeses.</p>
+<h2 id="everything-else-plugin-statusline-model">Everything else: plugin, statusline, model<a class="headerlink" href="#everything-else-plugin-statusline-model" title="Permanent link">&para;</a></h2>
+<p>Three lines round out the picture. A plugin (<code>ponytail</code>, an output style
+that enforces the laziest solution that works, YAGNI as a permanent mode);
+a custom statusline (<code>statusline.sh</code>: branch, model and remaining context
+at a glance); the model pinned in settings with the extended context
+window. Everything else is default: every setting you don't write is a
+setting you don't have to maintain.</p>
 <h2 id="in-short">In short<a class="headerlink" href="#in-short" title="Permanent link">&para;</a></h2>
-<p>Three levels, three questions: <em>is it true everywhere?</em> → global; <em>is it
-true for this client?</em> → profile; <em>is it true for this code?</em> → repo. The
-setup grows just-in-time like everything else in this guide. None of the
-pieces above came out of an afternoon of configuring: each one arrived once
-the need had asked for it twice.</p>
+<p>The most important file in this chapter isn't any of the JSON blocks: it's
+the criterion behind each one. Allow gets measured against transcripts, not
+imagined; deny gets written for sensitive strings, not lists of commands;
+ask covers the gray zone. Rules with no exceptions become hooks; agents get
+born when a role recurs, never before; MCP servers sit at the lowest level
+that justifies them. If your setup applies these criteria, it'll look like
+mine only where our jobs overlap, and that's exactly the point.</p>
 
 
 
@@ -1494,7 +1511,7 @@ the need had asked for it twice.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="15-risparmiare-token.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 15 · Saving tokens">
+          <a href="16-setup-a-tre-livelli.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 16 · A real-world setup">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1504,27 +1521,11 @@ the need had asked for it twice.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                15 · Saving tokens
+                16 · A real-world setup
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="18-setup-in-chiaro.html" class="md-footer__link md-footer__link--next" aria-label="Next: 18 · The setup in plain sight">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                18 · The setup in plain sight
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
