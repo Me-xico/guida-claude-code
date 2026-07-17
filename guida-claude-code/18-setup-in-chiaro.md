@@ -188,6 +188,56 @@ A livello repo se ne aggiungono di specifici: nel repo principale un
 i diff sulle invarianti architetturali (cap. 16), committati in
 `.claude/agents/`, così valgono per chiunque cloni il repo.
 
+### Come parte la delega (senza che io la chieda)
+
+Non c'è nessun meccanismo nascosto: l'invocazione automatica è tutta scritta
+in due posti che la sessione legge sempre.
+
+Il primo è la **description dell'agente**. In ogni sessione Claude ha davanti
+la lista degli agenti disponibili con le loro description, e quando valuta
+come affrontare un task le usa come regole di instradamento. Per questo le
+mie non sono riassunti ma **regole di routing**: dicono quando usare
+l'agente, elencano i casi tipici e, soprattutto, delimitano i confini con i
+vicini ("NOT for Terraform → use terraform-expert"). Una description vaga
+produce un agente che non viene mai scelto, o peggio scelto a sproposito: è
+il campo più importante del file, e lo riscrivo più spesso del prompt.
+
+Il secondo è il **CLAUDE.md globale**, che trasforma il principio in
+riflesso. La regola "delega agli agenti come default" da sola pesava poco;
+quello che funziona è la mappa dei casi accanto: *bug non banale → debugger
+prima di toccare codice; suite rumorose → test-runner; scelte di stack →
+architect prima di implementare; esplorazione ampia → Explore; testi da
+umanizzare → semantica-*.* Quando il caso si presenta, la sessione non
+decide *se* delegare: riconosce la riga della mappa e delega (cap. 16: gli
+esempi battono i precetti).
+
+E poi c'è la terza via, la più semplice: lo chiedo io per nome ("fai girare
+il debugger su questo"). Vale sempre, e vince sulle altre due.
+
+### Come li orchestro
+
+Tre pattern coprono quasi tutto il mio uso:
+
+- **In parallelo quando i lavori sono indipendenti.** Più agenti lanciati
+  nello stesso messaggio girano in concorrenza: la review Python e la review
+  IaC dello stesso diff non si aspettano a vicenda. È il modo più economico
+  di comprare tempo.
+- **In pipeline quando l'output di uno è l'input dell'altro.** Il caso di
+  scuola è questa guida: ogni capitolo nuovo passa per semantica-it
+  (revisione italiana) → traduttore-it-en (il gemello `.en.md`) →
+  semantica-en (rifinitura inglese). Io scrivo, la catena rifinisce, e non
+  la rilancio mai a mano: è codificata in una skill (sotto).
+- **In background quando il risultato non serve subito.** Un'analisi lunga
+  parte, io continuo a lavorare, la notifica arriva a fine corsa. Un agente
+  già lanciato, poi, si può continuare con un messaggio di follow-up invece
+  di ripartire da zero: il suo contesto sopravvive alla risposta.
+
+Il filo comune: la sessione principale resta il direttore, gli agenti
+riportano *conclusioni* (un verdetto, un diff proposto, una diagnosi), mai
+il rumore del percorso. È il motivo per cui i miei advisor non editano: se
+l'agente applicasse le modifiche da solo, l'orchestrazione diventerebbe
+sorveglianza.
+
 ## Skill e slash command: le procedure
 
 Dodici skill globali in `~/.claude/skills/`, raggruppabili per mestiere:
@@ -215,18 +265,78 @@ rimasto" sul repo corrente). La differenza pratica rispetto alle skill: i
 command sono procedure che invoco *io*, le skill sono procedure che anche la
 sessione può scegliere di usare da sola quando riconosce il caso.
 
+### Come vengono usate (le due porte d'ingresso)
+
+Il meccanismo è lo stesso degli agenti: in ogni sessione Claude vede
+l'elenco delle skill con le loro description, e sono le description a fare
+da grilletto. Le mie contengono **frasi di trigger esplicite** ("TRIGGER:
+'umanizza', 'sa di AI', 'de-bot questo testo'") e i **non-casi** ("NON per
+codice sorgente; NON per lo screenshot del desktop → usa screenshot"):
+quando il mio prompt contiene il caso, la sessione carica la skill da sola.
+La seconda porta sono io con `/nome`, che forza l'invocazione senza
+interpretazione. Stessa lezione delle description degli agenti: non
+descrivono, *instradano*.
+
+La cosa più utile che ho capito scrivendole: **una skill è un orchestratore
+scritto**. `humanize` non rivede testi: smista i file ai revisori
+`semantica-it`/`semantica-en` in parallelo e riporta un campione delle
+riscritture. `sync-en` non traduce: trova via git i capitoli italiani
+cambiati, manda i gemelli a `traduttore-it-en`, passa `semantica-en` sul
+nuovo materiale e rigenera il sito. La pipeline di traduzione di questa
+guida, insomma, non è una mia abitudine: è un file. Se un'orchestrazione ti
+riesce bene due volte a mano, la terza volta scrivila in una skill: è la
+regola just-in-time applicata ai processi invece che ai ruoli.
+
+## Profili: l'anatomia dell'isolamento
+
+Il cap. 16 descrive i profili come livello "cliente"; nel mio setup reale la
+divisione è per **attività**, non per committente: `delivery` (il lavoro di
+consegna), `personale` (i progetti miei, questa guida inclusa) e `scouting`
+(esplorazione di strumenti e tecnologie). Stesso meccanismo, taglio diverso:
+il confine giusto è quello che separa i *contesti mentali*, e per me due
+attività sullo stesso codice sono più diverse di due clienti sulla stessa
+attività.
+
+Dentro ogni profilo, la struttura dice esattamente cosa è condiviso e cosa è
+isolato, ed è tutta fatta di symlink verso `~/.claude/`:
+
+```
+~/.cloak/profiles/delivery/
+├── CLAUDE.md      -> ~/.claude/CLAUDE.md      (condiviso)
+├── settings.json  -> ~/.claude/settings.json  (condiviso: permessi e hook)
+├── agents         -> ~/.claude/agents          (condiviso)
+├── commands       -> ~/.claude/commands        (condiviso)
+├── skills         -> ~/.claude/skills          (condiviso)
+├── plugins        -> ~/.claude/plugins         (condiviso)
+├── .credentials.json        (SUO: login e token)
+├── .claude.json             (SUO: MCP e stato dei progetti)
+├── projects/<repo>/memory/  (SUA: la memoria persistente)
+└── sessions/, history, plans/, jobs/ (SUOI)
+```
+
+La riga più importante è `settings.json`: anche i **permessi e gli hook sono
+condivisi**. La deny-list sui segreti e il guardiano dei commit valgono
+identici in ogni profilo, perché sono regole su chi sono io, non su cosa sto
+facendo. Resta per-profilo, invece, lo *stato*: le credenziali (ogni profilo ha il
+suo login), i server MCP con la loro autenticazione e, soprattutto, la
+**memoria per progetto**. Quest'ultima è il beneficio più
+concreto: lo stesso repo ha memorie diverse in `delivery` e in `scouting`,
+perché le lezioni del consegnare non sono le lezioni dell'esplorare.
+
 ## MCP: pochi, e al livello giusto
 
 La lista dei server MCP è volutamente corta, e il *dove* conta quanto il
 *cosa*:
 
-- **Globale** (`~/.claude/mcp.json`): solo `tolaria`, il server della mia app
-  di note, il vault Markdown dove finisce la documentazione dei progetti.
-  È globale perché il vault è uno solo, qualunque sia il contesto.
-- **Per profilo cliente**: `atlassian` (Jira) vive nel profilo del cliente
-  che lo usa, con la sua autenticazione. Negli altri profili quel Jira non
-  esiste proprio: l'incidente "ho scritto sul ticket sbagliato" è impossibile
-  per costruzione, non per disciplina (cap. 16).
+- **In ogni profilo**: `tolaria` (il server della mia app di note, il vault
+  Markdown dove finisce la documentazione dei progetti) e `atlassian` (Jira).
+  I server sono registrati ovunque, ma l'**autenticazione** è per-profilo:
+  ogni profilo ha le sue credenziali, e un profilo senza login a un Jira non
+  può scriverci per costruzione, non per disciplina (cap. 16).
+- **Per directory**: `playwright` esiste solo nella directory demo di questa
+  guida, nel profilo dove ci lavoro: serve a pilotare il browser per gli
+  screenshot dei capitoli, e nessun'altra sessione ha motivo di averlo nel
+  contesto. È il criterio "livello più basso" portato all'estremo.
 
 Il criterio è lo stesso dei tre livelli: un MCP va **al livello più basso in
 cui serve**. E ogni server in più è superficie di contesto e di rischio: il
@@ -247,7 +357,10 @@ un'impostazione che non va mantenuta.
 Il file più importante di questo capitolo non è nessuno dei blocchi JSON: è
 il criterio dietro ognuno. L'allow si misura sui transcript, non si immagina;
 il deny si scrive per stringhe sensibili, non per elenchi di comandi; l'ask
-copre la zona grigia; le regole inderogabili diventano hook; gli agenti
-nascono quando un ruolo ricorre, mai prima; gli MCP stanno al livello più
-basso che li giustifica. Se il tuo setup applica questi criteri, assomiglierà
-al mio solo dove i nostri mestieri coincidono, ed è esattamente il punto.
+copre la zona grigia; le regole inderogabili diventano hook. Gli agenti
+nascono quando un ruolo ricorre, mai prima; le description di agenti e skill
+instradano, non descrivono; le orchestrazioni che ripeti diventano skill.
+L'isolamento tra contesti lo fanno i profili, e ciò che vale ovunque viaggia
+in symlink; gli MCP stanno al livello più basso che li giustifica. Se il tuo
+setup applica questi criteri, assomiglierà al mio solo dove i nostri mestieri
+coincidono, ed è esattamente il punto.

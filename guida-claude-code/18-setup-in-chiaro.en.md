@@ -189,6 +189,57 @@ At the repo level, specific ones get added. In the main repo: a
 reviews diffs against architectural invariants (ch. 16). Both are committed
 under `.claude/agents/`, so they apply to anyone who clones the repo.
 
+### How delegation kicks in (without me asking)
+
+There's no hidden mechanism: automatic invocation is entirely written down
+in two places the session always reads.
+
+The first is the **agent description**. In every session Claude has the
+list of available agents with their descriptions in front of it, and when
+it weighs how to tackle a task it uses them as routing rules. That's why
+mine aren't summaries but **routing rules**: they say when to use the
+agent, list the typical cases, and, above all, mark the boundaries against
+its neighbors ("NOT for Terraform → use terraform-expert"). A vague
+description produces an agent that's never picked, or worse, picked
+wrongly: it's the most important field in the file, and I rewrite it more
+often than the prompt.
+
+The second is the **global CLAUDE.md**, which turns the principle into a
+reflex. The rule "delegate to agents by default" carried little weight on
+its own; what works is the map of cases next to it: *non-trivial bug →
+debugger before touching code; noisy suites → test-runner; stack choices →
+architect before implementing; broad exploration → Explore; text to
+humanize → semantica-*.* When the case comes up, the session doesn't decide
+*whether* to delegate: it recognizes the row in the map and delegates
+(ch. 16: examples beat precepts).
+
+And then there's the third way, the simplest one: I ask by name ("run the
+debugger on this"). It always applies, and it wins over the other two.
+
+### How I orchestrate them
+
+Three patterns cover almost all of my usage:
+
+- **In parallel when the jobs are independent.** Multiple agents launched
+  in the same message run concurrently: the Python review and the IaC
+  review of the same diff don't wait on each other. It's the cheapest way
+  to buy time.
+- **In a pipeline when one's output is another's input.** The textbook case
+  is this guide: every new chapter goes through semantica-it (Italian
+  review) → traduttore-it-en (the `.en.md` twin) → semantica-en (English
+  polish). I write, the chain refines, and I never re-run it by hand: it's
+  encoded in a skill (below).
+- **In the background when the result isn't needed right away.** A long
+  analysis starts, I keep working, the notification arrives when it's done.
+  An agent I've already launched can also be resumed with a follow-up
+  message rather than restarted from scratch: its context survives the
+  response.
+
+The common thread: the main session stays the director, agents report back
+*conclusions* (a verdict, a proposed diff, a diagnosis), never the noise of
+the path. That's why my advisors don't edit: if the agent applied changes
+on its own, orchestration would turn into surveillance.
+
 ## Skills and slash commands: the procedures
 
 Twelve global skills in `~/.claude/skills/`, grouped by job:
@@ -218,22 +269,84 @@ I" on the current repo). The practical difference from skills: commands are
 procedures *I* invoke, skills are procedures the session can also choose to
 use on its own when it recognizes the case.
 
+### How they get used (the two entry points)
+
+The mechanism is the same as for agents: in every session Claude sees the
+list of skills with their descriptions, and the descriptions act as the
+trigger. Mine contain **explicit trigger phrases** ("TRIGGER: 'umanizza',
+'sa di AI', 'de-bot questo testo'") and **non-cases** ("NOT for source
+code; NOT for a desktop screenshot → use screenshot"): when my prompt
+matches the case, the session loads the skill on its own. The second entry
+point is me typing `/name`, which forces invocation without interpretation.
+Same lesson as the agent descriptions: they don't describe, they *route*.
+
+The most useful thing I learned writing them: **a skill is a written
+orchestrator**. `humanize` doesn't review text: it routes files to the
+`semantica-it`/`semantica-en` reviewers in parallel and reports back a
+sample of the rewrites. `sync-en` doesn't translate: it finds Italian
+chapters changed via git, sends the twins to `traduttore-it-en`, runs
+`semantica-en` over the new material, and regenerates the site. This
+guide's translation pipeline, in other words, isn't a habit of mine: it's a
+file. If an orchestration works well by hand twice, the third time write it
+into a skill: it's the just-in-time rule applied to processes instead of
+roles.
+
+## Profiles: the anatomy of isolation
+
+Ch. 16 describes profiles as the "client" level; in my actual setup the
+split is by **activity**, not by client: `delivery` (delivery work),
+`personale` (my own projects, this guide included), and `scouting`
+(exploring tools and technologies). Same mechanism, different cut: the
+right boundary is the one that separates *mental contexts*, and for me two
+activities on the same code are more different than two clients on the
+same activity.
+
+Inside each profile, the structure says exactly what's shared and what's
+isolated, and it's all done with symlinks into `~/.claude/`:
+
+```
+~/.cloak/profiles/delivery/
+├── CLAUDE.md      -> ~/.claude/CLAUDE.md      (shared)
+├── settings.json  -> ~/.claude/settings.json  (shared: permissions and hooks)
+├── agents         -> ~/.claude/agents          (shared)
+├── commands       -> ~/.claude/commands        (shared)
+├── skills         -> ~/.claude/skills          (shared)
+├── plugins        -> ~/.claude/plugins         (shared)
+├── .credentials.json        (ITS OWN: login and tokens)
+├── .claude.json             (ITS OWN: MCP and project state)
+├── projects/<repo>/memory/  (ITS OWN: persistent memory)
+└── sessions/, history, plans/, jobs/ (ITS OWN)
+```
+
+The most important line is `settings.json`: even the **permissions and
+hooks are shared**. The secrets deny-list and the commit guardian apply
+identically in every profile, because they're rules about who I am, not
+about what I'm doing. What stays per-profile is the *state* instead:
+credentials (each profile has its own login), the MCP servers with their
+authentication, and, above all, **per-project memory**. That last one is
+the most concrete benefit: the same repo has different memories in
+`delivery` and in `scouting`, because the lessons of delivering aren't the
+lessons of exploring.
+
 ## MCP: few, and at the right level
 
 The list of MCP servers is deliberately short, and *where* matters as much
 as *what*:
 
-- **Global** (`~/.claude/mcp.json`): just `tolaria`, the server for my
-  notes app, the Markdown vault where project documentation ends up. It's
-  global because there's only one vault, whatever the context.
-- **Per client profile**: `atlassian` (Jira) lives in the profile of the
-  client who uses it, with its own authentication. In every other profile
-  that Jira simply doesn't exist: the "I posted on the wrong ticket"
-  incident becomes impossible by construction, not by discipline (ch. 16).
+- **In every profile**: `tolaria` (the server for my notes app, the
+  Markdown vault where project documentation ends up) and `atlassian`
+  (Jira). The servers are registered everywhere, but **authentication** is
+  per-profile: each profile has its own credentials, and a profile without
+  login to a given Jira can't write to it by construction, not by
+  discipline (ch. 16).
+- **Per directory**: `playwright` exists only in this guide's demo
+  directory, in the profile where I work on it: it drives the browser for
+  chapter screenshots, and no other session has any reason to have it in
+  context. It's the "lowest level" criterion taken to the extreme.
 
 The criterion is the same as the three levels: an MCP belongs **at the
-lowest level where it's needed**. And every extra server is more context
-and risk surface: a well-reasoned no (ch. 16, the web-search server I
+lowest level where it's needed**. Every extra server adds context and
+attack surface, so a well-reasoned no (ch. 16, the web-search server I
 passed on) is as much a part of the setup as the yeses.
 
 ## Everything else: plugin, statusline, model
@@ -248,9 +361,13 @@ setting you don't have to maintain.
 ## In short
 
 The most important file in this chapter isn't any of the JSON blocks: it's
-the criterion behind each one. Allow gets measured against transcripts, not
-imagined; deny gets written for sensitive strings, not lists of commands;
-ask covers the gray zone. Rules with no exceptions become hooks; agents get
-born when a role recurs, never before; MCP servers sit at the lowest level
-that justifies them. If your setup applies these criteria, it'll look like
-mine only where our jobs overlap, and that's exactly the point.
+the criterion behind each one. Allow is measured against real transcripts,
+not imagined ones. Deny targets sensitive strings, not lists of commands.
+Ask covers the gray zone in between, and rules with no exceptions become
+hooks. Agents are born when a role recurs, never before; agent and skill
+descriptions route rather than describe; orchestrations you repeat by hand
+become skills. Profiles handle isolation between contexts, and whatever
+applies everywhere travels via symlink, while MCP servers sit at the
+lowest level that justifies them. If your setup applies these criteria,
+it'll look like mine only where our jobs overlap, and that's exactly the
+point.
