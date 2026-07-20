@@ -3,7 +3,17 @@
 > Verificato il 16 luglio 2026 sulla doc ufficiale. Claude Design e Ultraplan
 > sono in research preview: comportamento e disponibilità possono cambiare.
 
+<div class="percorso" markdown>
+
 ![Ricerca, poi progettazione, poi codice: la scorciatoia si paga dopo](assets/17-ricerca-flusso.svg)
+
+<div class="percorso-step" markdown data-highlight="p-ricerca">**1 · Prima la ricerca.** Capisci il mondo prima di decidere: fonti verificate, non l'idea che ti è venuta in mente. È `/deep-research`, con le fonti citate.</div>
+<div class="percorso-step" markdown data-highlight="p-ricerca p-progettazione">**2 · Poi la progettazione.** Decidi la forma prima di costruire: plan mode, SPEC o Ultraplan a seconda della posta. È dove correggi dieci righe di piano invece di cento di codice.</div>
+<div class="percorso-step" markdown data-highlight="p-progettazione p-codice">**3 · Solo allora il codice.** L'implementazione arriva con la verifica già definita, il criterio eseguibile del cap. 11 scritto prima di iniziare.</div>
+<div class="percorso-step" markdown data-highlight="p-ricerca p-codice p-scorciatoia p-legenda">**4 · La scorciatoia esiste, e si paga dopo.** Saltare dalla ricerca dritti al codice, senza decidere la forma, sembra risparmiare tempo: la freccia tratteggiata rossa in figura è quel salto, e torna con gli interessi.</div>
+<div class="percorso-step" markdown data-highlight="p-ricerca p-progettazione p-codice p-scorciatoia p-legenda">**5 · Tre tappe, uno strumento ciascuna.** Ricerca, progettazione, codice: ognuna col suo strumento e la sua verifica. La scorciatoia è l'unica dimensione codificata a colore, perché è l'unica da evitare.</div>
+
+</div>
 
 ## Il principio
 

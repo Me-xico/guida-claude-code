@@ -6,31 +6,43 @@
   </defs>
 
   <!-- ═══ Chiedi (grigio scuro) ═══ -->
-  <rect x="15" y="70" width="195" height="100" rx="10" fill="#41465A"/>
-  <text x="112" y="112" text-anchor="middle" fill="#FFFFFF" font-size="13.5" font-weight="600">Chiedi con un criterio di</text>
-  <text x="112" y="132" text-anchor="middle" fill="#FFFFFF" font-size="13.5" font-weight="600">successo ESEGUIBILE</text>
-  <line x1="210" y1="120" x2="240" y2="120" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <g id="p-chiedi">
+    <rect x="15" y="70" width="195" height="100" rx="10" fill="#41465A"/>
+    <text x="112" y="112" text-anchor="middle" fill="#FFFFFF" font-size="13.5" font-weight="600">Chiedi con un criterio di</text>
+    <text x="112" y="132" text-anchor="middle" fill="#FFFFFF" font-size="13.5" font-weight="600">successo ESEGUIBILE</text>
+    <line x1="210" y1="120" x2="240" y2="120" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  </g>
 
   <!-- ═══ Claude lavora (blu) ═══ -->
-  <rect x="245" y="70" width="150" height="100" rx="10" fill="#2E86AB"/>
-  <text x="320" y="126" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">Claude lavora</text>
-  <line x1="395" y1="120" x2="425" y2="120" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <g id="p-lavora">
+    <rect x="245" y="70" width="150" height="100" rx="10" fill="#2E86AB"/>
+    <text x="320" y="126" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">Claude lavora</text>
+    <line x1="395" y1="120" x2="425" y2="120" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  </g>
 
   <!-- ═══ Verifica automatica (ambra) ═══ -->
-  <rect x="430" y="70" width="290" height="100" rx="10" fill="#B0763B"/>
-  <text x="575" y="108" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">Verifica automatica</text>
-  <text x="575" y="132" text-anchor="middle" fill="#F7E8D5" font-size="11.5">test · exit code · lint ·</text>
-  <text x="575" y="148" text-anchor="middle" fill="#F7E8D5" font-size="11.5">screenshot-diff</text>
-  <line x1="720" y1="120" x2="750" y2="120" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <g id="p-verifica">
+    <rect x="430" y="70" width="290" height="100" rx="10" fill="#B0763B"/>
+    <text x="575" y="108" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">Verifica automatica</text>
+    <text x="575" y="132" text-anchor="middle" fill="#F7E8D5" font-size="11.5">test · exit code · lint ·</text>
+    <text x="575" y="148" text-anchor="middle" fill="#F7E8D5" font-size="11.5">screenshot-diff</text>
+    <line x1="720" y1="120" x2="750" y2="120" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  </g>
 
   <!-- ═══ Passa → consegna (verde) ═══ -->
-  <rect x="755" y="70" width="190" height="100" rx="10" fill="#4F9153"/>
-  <text x="850" y="126" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">passa → consegna</text>
+  <g id="p-consegna">
+    <rect x="755" y="70" width="190" height="100" rx="10" fill="#4F9153"/>
+    <text x="850" y="126" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">passa → consegna</text>
+  </g>
 
   <!-- ═══ Ritorno: fallisce → torna a Claude lavora (tratteggiato) ═══ -->
-  <path d="M 480 170 C 480 240 320 240 320 170" fill="none" stroke="#8A8FA3" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arr)"/>
-  <text x="400" y="262" text-anchor="middle" fill="#8A8FA3" font-size="12.5">fallisce → l'errore torna a Claude, che corregge</text>
+  <g id="p-ritorno">
+    <path d="M 480 170 C 480 240 320 240 320 170" fill="none" stroke="#8A8FA3" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+    <text x="400" y="262" text-anchor="middle" fill="#8A8FA3" font-size="12.5">fallisce → l'errore torna a Claude, che corregge</text>
+  </g>
 
   <!-- ═══ Riga di chiusura ═══ -->
-  <text x="480" y="392" text-anchor="middle" fill="#8A8FA3" font-size="13.5">il criterio lo scrivi prima: senza, la verifica non esiste</text>
+  <g id="p-morale">
+    <text x="480" y="392" text-anchor="middle" fill="#8A8FA3" font-size="13.5">il criterio lo scrivi prima: senza, la verifica non esiste</text>
+  </g>
 </svg>

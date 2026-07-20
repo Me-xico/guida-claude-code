@@ -67,7 +67,18 @@ ricorda", ma perché non può succedere altrimenti.
 
 ## Come funziona, passo passo
 
+<div class="percorso" markdown>
+
 ![Il ciclo di vita di un hook: bloccare prima, correggere dopo](assets/07-ciclo-hook.svg)
+
+<div class="percorso-step" markdown data-highlight="p-propone">**1 · Il modello propone.** Claude decide di usare un tool e ne propone la chiamata, per esempio un comando Bash. È solo una proposta: non è ancora successo nulla.</div>
+<div class="percorso-step" markdown data-highlight="p-propone p-pre">**2 · PreToolUse controlla prima.** L'hook riceve il JSON dell'evento su stdin e decide: `exit 2` blocca l'azione (lo stderr torna a Claude come spiegazione), oppure riscrive l'input al volo.</div>
+<div class="percorso-step" markdown data-highlight="p-pre p-tool">**3 · Il tool esegue.** Se PreToolUse non ha bloccato, il tool gira per davvero: legge, scrive, lancia il comando.</div>
+<div class="percorso-step" markdown data-highlight="p-tool p-post">**4 · PostToolUse corregge e segnala.** Dopo l'esecuzione un altro hook interviene: autoformat, lint, log del comando appena girato.</div>
+<div class="percorso-step" markdown data-highlight="p-pre p-loop">**5 · Il loop del blocco torna al modello.** Quando PreToolUse blocca, lo stderr non si perde: arriva a Claude, che legge il motivo e si corregge da solo, senza che tu debba intervenire.</div>
+<div class="percorso-step" markdown data-highlight="p-propone p-pre p-tool p-post p-risposta p-loop p-nota">**6 · La risposta è garantita, non sperata.** Passata diretta o corretta nel giro, la regola vale comunque: non perché Claude se la ricorda, ma perché il tornello l'ha imposta.</div>
+
+</div>
 
 1. Claude sta per usare (o ha appena usato) un tool → l'evento
    corrispondente scatta.

@@ -9,34 +9,42 @@
   </defs>
 
   <!-- ═══ Legenda: la scorciatoia è l'unica dimensione codificata a colore ═══ -->
-  <g font-size="12">
+  <g id="p-legenda" font-size="12">
     <rect x="676" y="18" width="14" height="14" rx="3" fill="#B33B3B"/>
     <text x="696" y="30" fill="#8A8FA3">scorciatoia (salta una fase)</text>
   </g>
 
   <!-- ═══ Tappa 1: Ricerca ═══ -->
-  <rect x="60" y="100" width="220" height="100" rx="12" fill="#41465A"/>
-  <text x="170" y="140" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700">Ricerca</text>
-  <text x="170" y="162" text-anchor="middle" fill="#D6D8E0" font-size="12">capire il mondo</text>
-  <text x="170" y="179" text-anchor="middle" fill="#D6D8E0" font-size="12">prima di decidere</text>
+  <g id="p-ricerca">
+    <rect x="60" y="100" width="220" height="100" rx="12" fill="#41465A"/>
+    <text x="170" y="140" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700">Ricerca</text>
+    <text x="170" y="162" text-anchor="middle" fill="#D6D8E0" font-size="12">capire il mondo</text>
+    <text x="170" y="179" text-anchor="middle" fill="#D6D8E0" font-size="12">prima di decidere</text>
 
-  <line x1="280" y1="150" x2="370" y2="150" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="280" y1="150" x2="370" y2="150" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  </g>
 
   <!-- ═══ Tappa 2: Progettazione ═══ -->
-  <rect x="370" y="100" width="220" height="100" rx="12" fill="#41465A"/>
-  <text x="480" y="140" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700">Progettazione</text>
-  <text x="480" y="162" text-anchor="middle" fill="#D6D8E0" font-size="12">decidere la forma</text>
-  <text x="480" y="179" text-anchor="middle" fill="#D6D8E0" font-size="12">prima di costruire</text>
+  <g id="p-progettazione">
+    <rect x="370" y="100" width="220" height="100" rx="12" fill="#41465A"/>
+    <text x="480" y="140" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700">Progettazione</text>
+    <text x="480" y="162" text-anchor="middle" fill="#D6D8E0" font-size="12">decidere la forma</text>
+    <text x="480" y="179" text-anchor="middle" fill="#D6D8E0" font-size="12">prima di costruire</text>
 
-  <line x1="590" y1="150" x2="680" y2="150" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="590" y1="150" x2="680" y2="150" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  </g>
 
   <!-- ═══ Tappa 3: Codice ═══ -->
-  <rect x="680" y="100" width="220" height="100" rx="12" fill="#41465A"/>
-  <text x="790" y="140" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700">Codice</text>
-  <text x="790" y="162" text-anchor="middle" fill="#D6D8E0" font-size="12">implementazione</text>
-  <text x="790" y="179" text-anchor="middle" fill="#D6D8E0" font-size="12">verificata (cap. 11)</text>
+  <g id="p-codice">
+    <rect x="680" y="100" width="220" height="100" rx="12" fill="#41465A"/>
+    <text x="790" y="140" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700">Codice</text>
+    <text x="790" y="162" text-anchor="middle" fill="#D6D8E0" font-size="12">implementazione</text>
+    <text x="790" y="179" text-anchor="middle" fill="#D6D8E0" font-size="12">verificata (cap. 11)</text>
+  </g>
 
   <!-- ═══ Scorciatoia: Ricerca → Codice, saltando la Progettazione ═══ -->
-  <path d="M 170 204 C 170 288 790 288 790 204" fill="none" stroke="#B33B3B" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrWarn)"/>
-  <text x="480" y="318" text-anchor="middle" fill="#B33B3B" font-size="13" font-weight="600">la scorciatoia si paga dopo, con gli interessi</text>
+  <g id="p-scorciatoia">
+    <path d="M 170 204 C 170 288 790 288 790 204" fill="none" stroke="#B33B3B" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrWarn)"/>
+    <text x="480" y="318" text-anchor="middle" fill="#B33B3B" font-size="13" font-weight="600">la scorciatoia si paga dopo, con gli interessi</text>
+  </g>
 </svg>

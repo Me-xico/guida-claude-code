@@ -3,7 +3,17 @@
 > Verified July 16, 2026 against the official docs. Claude Design and
 > Ultraplan are in research preview: behavior and availability may change.
 
+<div class="percorso" markdown>
+
 ![Research, then design, then code: the shortcut gets paid for later](assets/17-ricerca-flusso.svg)
+
+<div class="percorso-step" markdown data-highlight="p-ricerca">**1 · Research first.** Understand the world before deciding: verified sources, not whatever idea came to mind. This is `/deep-research`, with cited sources.</div>
+<div class="percorso-step" markdown data-highlight="p-ricerca p-progettazione">**2 · Then design.** Decide the shape before building: plan mode, a SPEC, or Ultraplan depending on the stakes. This is where you correct ten lines of plan instead of a hundred lines of code.</div>
+<div class="percorso-step" markdown data-highlight="p-progettazione p-codice">**3 · Only then, code.** Implementation arrives with the check already defined, the executable criterion from ch. 11 written before you start.</div>
+<div class="percorso-step" markdown data-highlight="p-ricerca p-codice p-scorciatoia p-legenda">**4 · The shortcut exists, and it gets paid for later.** Jumping from research straight to code, without deciding the shape, looks like it saves time: the dashed red arrow in the figure is that jump, and it comes back with interest.</div>
+<div class="percorso-step" markdown data-highlight="p-ricerca p-progettazione p-codice p-scorciatoia p-legenda">**5 · Three stages, one tool each.** Research, design, code: each with its own tool and its own check. The shortcut is the only dimension coded in color, because it's the only one to avoid.</div>
+
+</div>
 
 ## The principle
 

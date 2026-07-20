@@ -102,7 +102,17 @@ To invoke it explicitly: name it in the prompt ("use the code-reviewer on
 the new components") or guarantee the delegation with an @-mention:
 `@"code-reviewer (agent)"`.
 
+<div class="percorso" markdown>
+
 ![The three delegation gateways and the return of the conclusions](assets/06-delega-agenti.svg)
+
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita">**1 · The three entry gateways.** Delegation triggers for a specific reason: the description read as a routing rule, the case map in CLAUDE.md, or an explicit request from you.</div>
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega">**2 · The session delegates.** It decides to hand off the task and writes the delegation prompt: self-sufficient, with exact paths and constraints.</div>
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent">**3 · The subagent works in isolation.** Separate context, restricted tools, tier-appropriate model: the noise (greps, logs, files read) stays there.</div>
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent p-ritorno">**4 · Only the conclusion comes back.** A verdict, a diff, a diagnosis: never the noise, never the files it took to get there.</div>
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent p-ritorno">**5 · The full loop.** Three entry gateways, a session that delegates, an isolated subagent, a conclusion that comes back: this is the pattern to reuse whenever the work is noisy.</div>
+
+</div>
 
 ### Foreground and background
 

@@ -17,7 +17,17 @@ verify its own work?** If yes, the loop becomes work → check → fix →
 repeat until it passes, without you in the middle. If no, you are the test
 runner, and you're also the bottleneck.
 
+<div class="percorso" markdown>
+
 ![The verification cycle: executable criterion, work, check, fix](assets/11-loop-verifica.svg)
+
+<div class="percorso-step" markdown data-highlight="p-chiedi">**1 · The criterion comes first.** Your prompt already states how the result gets checked: a test, a command, an exit code. Without this step, the rest of the cycle doesn't exist.</div>
+<div class="percorso-step" markdown data-highlight="p-chiedi p-lavora">**2 · Claude works.** It reads, edits, runs. You're not supervising line by line: you're waiting for the verdict.</div>
+<div class="percorso-step" markdown data-highlight="p-lavora p-verifica">**3 · Verification runs on its own.** Tests, exit codes, lint, screenshot diffs: it's the criterion from step 1 turned into a machine.</div>
+<div class="percorso-step" markdown data-highlight="p-lavora p-verifica p-ritorno">**4 · On failure, the error goes back to Claude.** It fixes and retries: the loop is closed and doesn't need you in the middle.</div>
+<div class="percorso-step" markdown data-highlight="p-chiedi p-lavora p-verifica p-ritorno p-consegna p-morale">**5 · When it passes, ship.** The full cycle: criterion first, automatic verification, correction in between.</div>
+
+</div>
 
 ## How to apply it: give Claude an executable criterion
 

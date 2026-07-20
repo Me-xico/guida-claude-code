@@ -100,7 +100,17 @@ Per invocarlo esplicitamente: nominalo nel prompt ("usa il code-reviewer sui
 componenti nuovi") o garantisci la delega con la @-mention:
 `@"code-reviewer (agent)"`.
 
+<div class="percorso" markdown>
+
 ![Le tre porte della delega e il ritorno delle conclusioni](assets/06-delega-agenti.svg)
+
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita">**1 · Le tre porte d'ingresso.** La delega scatta per un motivo preciso: la description letta come regola di routing, la mappa dei casi nel CLAUDE.md, oppure una richiesta esplicita tua.</div>
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega">**2 · La sessione delega.** Decide di affidare il task e scrive il prompt di delega: autosufficiente, con path esatti e vincoli.</div>
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent">**3 · Il subagent lavora isolato.** Contesto separato, tool ristretti, modello per tier: il rumore (grep, log, file letti) resta lì.</div>
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent p-ritorno">**4 · Torna solo la conclusione.** Verdetto, diff o diagnosi: mai il rumore, mai i file letti per arrivarci.</div>
+<div class="percorso-step" markdown data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent p-ritorno">**5 · Il giro completo.** Tre porte d'ingresso, una sessione che delega, un subagent isolato, una conclusione che torna: questo è il pattern da riusare ogni volta che il lavoro è rumoroso.</div>
+
+</div>
 
 ### Foreground e background
 

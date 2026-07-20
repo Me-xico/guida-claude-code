@@ -17,7 +17,17 @@ il proprio lavoro?** Se sì, il loop diventa lavora → controlla → correggi �
 ripeti finché passa, senza di te nel mezzo. Se no, il test runner sei tu, e
 sei anche il collo di bottiglia.
 
+<div class="percorso" markdown>
+
 ![Il ciclo della verifica: criterio eseguibile, lavoro, controllo, correzione](assets/11-loop-verifica.svg)
+
+<div class="percorso-step" markdown data-highlight="p-chiedi">**1 · Il criterio viene prima.** Nel prompt scrivi già come si controlla il risultato: un test, un comando, un exit code. Senza questo passo, il resto del giro non esiste.</div>
+<div class="percorso-step" markdown data-highlight="p-chiedi p-lavora">**2 · Claude lavora.** Legge, modifica, esegue. Tu non stai sorvegliando riga per riga: aspetti il verdetto.</div>
+<div class="percorso-step" markdown data-highlight="p-lavora p-verifica">**3 · La verifica gira da sola.** Test, exit code, lint, screenshot-diff: è il criterio del passo 1 trasformato in macchina.</div>
+<div class="percorso-step" markdown data-highlight="p-lavora p-verifica p-ritorno">**4 · Se fallisce, l'errore torna a Claude.** Corregge e riprova: il loop è chiuso e non richiede te nel mezzo.</div>
+<div class="percorso-step" markdown data-highlight="p-chiedi p-lavora p-verifica p-ritorno p-consegna p-morale">**5 · Quando passa, consegna.** Il giro completo: criterio prima, verifica automatica, correzione nel mezzo.</div>
+
+</div>
 
 ## Come si applica: dai a Claude un criterio eseguibile
 

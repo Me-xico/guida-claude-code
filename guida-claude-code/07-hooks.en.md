@@ -68,7 +68,18 @@ The result: CI will never fail on formatting again. Not because Claude
 
 ## How it works, step by step
 
+<div class="percorso" markdown>
+
 ![A hook's lifecycle: block first, fix afterward](assets/07-ciclo-hook.svg)
+
+<div class="percorso-step" markdown data-highlight="p-propone">**1 · The model proposes.** Claude decides to use a tool and proposes the call, say a Bash command. It's only a proposal: nothing has happened yet.</div>
+<div class="percorso-step" markdown data-highlight="p-propone p-pre">**2 · PreToolUse checks first.** The hook gets the event's JSON on stdin and decides: `exit 2` blocks the action (stderr goes back to Claude as the explanation), or it rewrites the input on the fly.</div>
+<div class="percorso-step" markdown data-highlight="p-pre p-tool">**3 · The tool runs.** If PreToolUse didn't block it, the tool actually executes: it reads, writes, runs the command.</div>
+<div class="percorso-step" markdown data-highlight="p-tool p-post">**4 · PostToolUse fixes and flags.** After execution another hook steps in: autoformat, lint, logging the command that just ran.</div>
+<div class="percorso-step" markdown data-highlight="p-pre p-loop">**5 · The block loop returns to the model.** When PreToolUse blocks, stderr isn't lost: it reaches Claude, which reads the reason and corrects itself, no need for you to step in.</div>
+<div class="percorso-step" markdown data-highlight="p-propone p-pre p-tool p-post p-risposta p-loop p-nota">**6 · The response is guaranteed, not hoped for.** Passed straight through or fixed along the way, the rule holds either way: not because Claude remembers, but because the turnstile enforced it.</div>
+
+</div>
 
 1. Claude is about to use (or has just used) a tool → the matching event
    fires.
