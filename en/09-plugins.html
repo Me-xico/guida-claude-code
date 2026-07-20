@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -455,6 +465,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -623,6 +643,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -959,6 +993,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -1254,6 +1298,11 @@ in chapters 5–8. Here they travel together, versioned as one thing. When
 the plugin is installed, Claude Code loads those contents at session
 startup as if they were yours: the skills show up among the slash
 commands, the hooks attach to their events, the MCP servers start up.</p>
+<div class="admonition note">
+<p class="admonition-title">What travels inside a plugin</p>
+<p>Skills, agents, hooks, MCP servers: exactly chapters 5-8, but versioned
+and distributed as a single package.</p>
+</div>
 <h2 id="how-to-install-and-manage-it">How to install and manage it<a class="headerlink" href="#how-to-install-and-manage-it" title="Permanent link">&para;</a></h2>
 <p>Everything happens in a session, starting from <code>/plugin</code>:</p>
 <div class="highlight"><pre><span></span><code>/plugin                              # browse marketplaces and installed plugins
@@ -1306,6 +1355,12 @@ add third-party ones as above, including one of your own.</p>
 servers, which means <strong>code running with your credentials</strong>. Install from
 sources you trust, and read what's inside. That's exactly why the
 <code>/plugin</code> panel shows it to you.</p>
+<div class="admonition warning">
+<p class="admonition-title">Same risk as hooks</p>
+<p>A plugin can bring hooks and MCP servers, meaning code and connections
+running with your credentials. Install from trusted sources and check
+what's inside before saying yes.</p>
+</div>
 <h2 id="a-live-example">A live example<a class="headerlink" href="#a-live-example" title="Permanent link">&para;</a></h2>
 <p>This guide was written on a machine with a plugin installed from a
 third-party GitHub marketplace: it brings a review persona ("lazy senior
@@ -1334,6 +1389,8 @@ workflow with a real browser.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1416,7 +1473,7 @@ workflow with a real browser.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

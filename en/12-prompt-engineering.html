@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -457,6 +467,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -737,6 +757,20 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -958,6 +992,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1241,19 +1285,25 @@ given a vague request, produces a vague result, exactly like a real junior
 handed a ticket that just says "fix the login".</p>
 <p>You're the PM: the clearer the brief, the better the delivery. This entire
 chapter is that sentence, unpacked.</p>
+<div class="admonition note">
+<p class="admonition-title">The chapter's mental model</p>
+<p>Claude Code is a bright junior you manage: extremely fast, never
+offended, but a vague request produces a vague result. You're the PM:
+the clearer the brief, the better the delivery.</p>
+</div>
 <h2 id="specificity-success-criteria-not-adjectives">Specificity: success criteria, not adjectives<a class="headerlink" href="#specificity-success-criteria-not-adjectives" title="Permanent link">&para;</a></h2>
 <p>The pain: you ask "improve this component", you get a refactor that
 touches twenty unrelated lines, and the real problem, the re-renders, is
 still there. It's not the model's fault: "improve" doesn't say <em>what</em> has
 to be true at the end.</p>
+<p><img alt="Anatomy of a prompt that succeeds: context, task, constraints, verification" src="../assets/12-anatomia-prompt.svg" /></p>
 <p>Weak: "improve this component".
 Strong:</p>
-<blockquote>
-<p>"Reduce <code>ProductList</code> re-renders: memoize the callbacks passed to
-children, move the filter into a <code>useMemo</code>, and verify with the Profiler
-that when <code>query</code> changes only the list re-renders. Don't change the
-public API."</p>
-</blockquote>
+<div class="highlight"><pre><span></span><code>&quot;Reduce `ProductList` re-renders: memoize the callbacks passed to
+children, move the filter into a `useMemo`, and verify with the Profiler
+that when `query` changes only the list re-renders. Don&#39;t change the
+public API.&quot;
+</code></pre></div>
 <p>The difference isn't length: it's that the second one has <strong>verifiable
 criteria</strong> (ch. 11, "verify with the Profiler that…") and <strong>constraints</strong>
 (what not to touch, "don't change the public API"). Adjectives like
@@ -1267,46 +1317,61 @@ but not what you wanted. The problem was in the brief.</p>
 by line. There's no need: that's what the model is for; it knows how to
 write code. What you need to provide instead is what the model <strong>cannot
 know</strong> by looking at the repo:</p>
-<ul>
-<li>the <em>why</em>: "this form is the payment funnel: the priority is not
-  breaking the tracking", which changes every downstream decision</li>
-<li>the <strong>constraints</strong>: "Node 18, no new dependencies"</li>
-<li>the <strong>references</strong>: "<code>@src/components/Form.tsx</code> is the pattern to
-  follow"</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>What to give</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the <em>why</em></td>
+<td>"this form is the payment funnel: the priority is not breaking the tracking" — it changes every decision downstream</td>
+</tr>
+<tr>
+<td>the <strong>constraints</strong></td>
+<td>"Node 18, no new dependencies"</td>
+</tr>
+<tr>
+<td>the <strong>references</strong></td>
+<td>"<code>@src/components/Form.tsx</code> is the pattern to follow"</td>
+</tr>
+</tbody>
+</table>
 <p>And pass the context in the richest form available: reference files with
 <code>@</code> (instead of describing them), paste errors <strong>in full</strong> (the stack
 trace contains the answer more often than you'd think), attach screenshots
 (<code>Ctrl+V</code>) when the problem is visual. A prompt that puts the pieces
 together:</p>
-<blockquote>
-<p>"The funnel tracking broke after the latest refactor. This form is the
+<div class="admonition tip">
+<p class="admonition-title">A prompt that puts the pieces together</p>
+<div class="highlight"><pre><span></span><code>&quot;The funnel tracking broke after the latest refactor. This form is the
 payment funnel: top priority is not losing events. Console error:
 [pasted in full]. The correct event-sending pattern is in
-<code>@src/analytics/track.ts</code>. Constraint: no new dependencies."</p>
-</blockquote>
+`@src/analytics/track.ts`. Constraint: no new dependencies.&quot;
+</code></pre></div>
+</div>
 <p>Why it works: the model reasons over what's in its context. The why,
 constraints and references are exactly the information it can't deduce on
 its own: everything else it can.</p>
 <h2 id="decomposition-ask-for-the-first-step-not-the-journey">Decomposition: ask for the first step, not the journey<a class="headerlink" href="#decomposition-ask-for-the-first-step-not-the-journey" title="Permanent link">&para;</a></h2>
 <p>Asking for a whole feature in one prompt is the greed mistake, mistake 2
 in ch. 13. Instead:</p>
-<blockquote>
-<p>"Let's build the cart in steps. Step 1: the data layer only — a
-<code>useCart</code> hook with add, remove, quantity, and the Vitest tests. No UI,
-no persistence for now. Then we meet back here and decide on step 2."</p>
-</blockquote>
+<div class="highlight"><pre><span></span><code>&quot;Let&#39;s build the cart in steps. Step 1: the data layer only — a
+`useCart` hook with add, remove, quantity, and the Vitest tests. No UI,
+no persistence for now. Then we meet back here and decide on step 2.&quot;
+</code></pre></div>
 <p>Each finished and verified step is a checkpoint (in the literal sense:
 ch. 03) to build the next one on. If step 2 goes wrong, you return to
 solid ground instead of untangling a mess.</p>
 <p>For large features, the official pattern is <strong>having Claude interview
 you</strong>, useful precisely because the requirements you <em>think</em> are clear
 aren't:</p>
-<blockquote>
-<p>"I need to build X. Before writing code, interview me: ask the questions
+<div class="highlight"><pre><span></span><code>&quot;I need to build X. Before writing code, interview me: ask the questions
 needed to clarify requirements and edge cases, then write a spec in
-SPEC.md."</p>
-</blockquote>
+SPEC.md.&quot;
+</code></pre></div>
 <p>Claude's questions surface edge cases you hadn't thought of (what happens
 to the cart when the user logs out? do discounts stack?). Review the spec,
 <code>/clear</code>, and in a fresh session: "implement SPEC.md, step 1". The spec
@@ -1321,11 +1386,10 @@ again. Repeating yourself louder adds no information. Provide <strong>new
 material</strong> instead: the exact error, the test output, the screenshot of
 what's actually on screen. "It doesn't work" gives Claude nothing to work
 with; a stack trace does:</p>
-<blockquote>
-<p>"The fix isn't enough: on submit I now get this — [full stack trace].
-Here's also a screenshot of the form's state [Ctrl+V]. Note that it
-only happens when the email field is empty."</p>
-</blockquote>
+<div class="highlight"><pre><span></span><code>&quot;The fix isn&#39;t enough: on submit I now get this — [full stack trace].
+Here&#39;s also a screenshot of the form&#39;s state [Ctrl+V]. Note that it
+only happens when the email field is empty.&quot;
+</code></pre></div>
 <p>And remember the 2-attempt rule (ch. 03): after the second failed round,
 <code>/clear</code> and rephrase from scratch, folding in what you've learned. The
 reason is mechanical: every failed correction stays in the context and
@@ -1382,6 +1446,8 @@ prompt: researching and designing before building.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1464,7 +1530,7 @@ prompt: researching and designing before building.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

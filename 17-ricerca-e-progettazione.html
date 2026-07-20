@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -457,6 +467,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -726,6 +746,20 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -947,6 +981,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1209,6 +1253,7 @@
 <p>Verificato il 16 luglio 2026 sulla doc ufficiale. Claude Design e Ultraplan
 sono in research preview: comportamento e disponibilità possono cambiare.</p>
 </blockquote>
+<p><img alt="Ricerca, poi progettazione, poi codice: la scorciatoia si paga dopo" src="assets/17-ricerca-flusso.svg" /></p>
 <h2 id="il-principio">Il principio<a class="headerlink" href="#il-principio" title="Permanent link">&para;</a></h2>
 <p>Il capitolo 11 insegna a verificare il lavoro <em>fatto</em>. Questo capitolo
 applica la stessa idea un passo prima: <strong>il codice più costoso è quello
@@ -1298,8 +1343,48 @@ codice → canvas Figma per il team di design.</p>
 strumento e la verifica giusti: <strong>ricerca</strong> (<code>/deep-research</code>, fonti
 citate) → <strong>decisione</strong> → <strong>piano</strong> (plan mode → SPEC → Ultraplan, revisione
 proporzionata alla posta) → <strong>implementazione</strong> (cap. 03 e 10, col criterio
-di "finito" del cap. 11). Ogni tappa saltata si ripresenta più avanti, con
-gli interessi. A chiudere il Metodo resta il capitolo sugli errori comuni
+di "finito" del cap. 11).</p>
+<table>
+<thead>
+<tr>
+<th>Strumento</th>
+<th>Quando</th>
+<th>Cosa produce</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/deep-research</code></td>
+<td>decisione difficile da invertire su un terreno che non conosci</td>
+<td>un report con le fonti citate</td>
+</tr>
+<tr>
+<td>Plan mode (cap. 03)</td>
+<td>il gradino quotidiano</td>
+<td>dieci righe di piano da correggere, invece di cento di codice</td>
+</tr>
+<tr>
+<td>Intervista → SPEC (cap. 12)</td>
+<td>per le feature grandi</td>
+<td>una spec scritta che sopravvive alla sessione</td>
+</tr>
+<tr>
+<td><code>/ultraplan</code></td>
+<td>il piano merita una revisione da documento, non da terminale</td>
+<td>piano in cloud, revisione nel browser con commenti inline; poi PR in cloud o teleport in locale</td>
+</tr>
+<tr>
+<td>Claude Design</td>
+<td>progettare l'interfaccia, specie con un design system nel repo</td>
+<td>design, prototipi interattivi, mockup già conformi ai componenti reali</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Il costo di saltare una fase</p>
+<p>Ogni tappa saltata si ripresenta più avanti, con gli interessi.</p>
+</div>
+<p>A chiudere il Metodo resta il capitolo sugli errori comuni
 (cap. 13): la checklist dei sintomi, prima di passare agli attrezzi.</p>
 
 
@@ -1318,6 +1403,8 @@ gli interessi. A chiudere il Metodo resta il capitolo sugli errori comuni
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1400,7 +1487,7 @@ gli interessi. A chiudere il Metodo resta il capitolo sugli errori comuni
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

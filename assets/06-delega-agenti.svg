@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A8FA3"/>
+    </marker>
+  </defs>
+
+  <!-- ═══ tre porte d'ingresso ═══ -->
+  <rect x="30" y="25" width="280" height="84" rx="10" fill="#B0763B"/>
+  <text x="170" y="58" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">description dell'agente</text>
+  <text x="170" y="88" text-anchor="middle" fill="#F7E8D5" font-size="11.5">regole di routing, confini espliciti</text>
+
+  <rect x="340" y="25" width="280" height="84" rx="10" fill="#41465A"/>
+  <text x="480" y="58" text-anchor="middle" fill="#FFFFFF" font-size="13" font-weight="700">mappa dei casi nel CLAUDE.md</text>
+  <text x="480" y="80" text-anchor="middle" fill="#FFFFFF" font-size="11.5">bug → debugger, stack →</text>
+  <text x="480" y="96" text-anchor="middle" fill="#FFFFFF" font-size="11.5">architect…</text>
+
+  <rect x="650" y="25" width="280" height="84" rx="10" fill="#41465A"/>
+  <text x="790" y="58" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">richiesta esplicita</text>
+  <text x="790" y="88" text-anchor="middle" fill="#FFFFFF" font-size="11.5">«fai girare il debugger»</text>
+
+  <!-- ═══ frecce verso il nodo centrale ═══ -->
+  <path d="M 170 109 L 420 160" fill="none" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M 480 109 L 480 160" fill="none" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M 790 109 L 540 160" fill="none" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ═══ la sessione delega ═══ -->
+  <rect x="380" y="160" width="200" height="64" rx="12" fill="#6D5BD0"/>
+  <text x="480" y="198" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">la sessione delega</text>
+
+  <path d="M 480 224 L 480 300" fill="none" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ═══ nota di ritorno (nella fascia tra i due nodi) ═══ -->
+  <text x="480" y="250" text-anchor="middle" fill="#8A8FA3" font-size="11.5">torna una CONCLUSIONE (verdetto, diff, diagnosi),</text>
+  <text x="480" y="264" text-anchor="middle" fill="#8A8FA3" font-size="11.5">mai il rumore</text>
+
+  <!-- ═══ subagent ═══ -->
+  <rect x="300" y="300" width="360" height="100" rx="12" fill="#2E86AB"/>
+  <text x="480" y="334" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">subagent</text>
+  <text x="480" y="358" text-anchor="middle" fill="#D9EDF7" font-size="12">contesto ISOLATO, tool ristretti,</text>
+  <text x="480" y="374" text-anchor="middle" fill="#D9EDF7" font-size="12">modello per tier</text>
+
+  <!-- ═══ freccia di ritorno tratteggiata ═══ -->
+  <path d="M 660 340 C 880 340 880 192 580 192" fill="none" stroke="#8A8FA3" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+</svg>

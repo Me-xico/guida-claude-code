@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -455,6 +465,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -623,6 +643,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -959,6 +993,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -1254,6 +1298,11 @@ mettevi in <code>.claude/</code>. Qui viaggiano insieme, versionati come un'unic
 cosa. Quando il plugin è installato, Claude Code carica quei contenuti
 all'avvio della sessione come se fossero tuoi: le skill compaiono tra le
 slash command, gli hook si agganciano agli eventi, i server MCP si avviano.</p>
+<div class="admonition note">
+<p class="admonition-title">Cosa viaggia dentro un plugin</p>
+<p>Skill, agenti, hook, server MCP: esattamente i capitoli 5-8, ma
+versionati e distribuiti come un pacchetto solo.</p>
+</div>
 <h2 id="come-si-installa-e-si-gestisce">Come si installa e si gestisce<a class="headerlink" href="#come-si-installa-e-si-gestisce" title="Permanent link">&para;</a></h2>
 <p>Tutto in sessione, a partire da <code>/plugin</code>:</p>
 <div class="highlight"><pre><span></span><code>/plugin                              # sfoglia marketplace e plugin installati
@@ -1302,6 +1351,12 @@ cap. 05), e puoi aggiungerne di terze parti come sopra, anche uno tuo.</p>
 hook e MCP server, cioè <strong>codice che gira con le tue credenziali</strong>.
 Installa da fonti di cui ti fidi, e leggi cosa contiene. Il pannello
 <code>/plugin</code> lo mostra proprio per questo.</p>
+<div class="admonition warning">
+<p class="admonition-title">Stesso rischio degli hook</p>
+<p>Un plugin può portare hook e server MCP: codice e connessioni che girano
+con le tue credenziali. Installa da fonti fidate e guarda cosa contiene
+prima di dire sì.</p>
+</div>
 <h2 id="esempio-dal-vivo">Esempio dal vivo<a class="headerlink" href="#esempio-dal-vivo" title="Permanent link">&para;</a></h2>
 <p>Questa guida è stata scritta su una macchina con un plugin installato da un
 marketplace GitHub di terze parti: porta una persona di review ("lazy
@@ -1330,6 +1385,8 @@ workflow frontend con un browser vero.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1412,7 +1469,7 @@ workflow frontend con un browser vero.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

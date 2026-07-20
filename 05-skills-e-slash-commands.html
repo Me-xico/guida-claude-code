@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -455,6 +465,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -623,6 +643,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -970,6 +1004,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -1270,6 +1314,12 @@ di ripartizione ufficiale:</p>
   stanno accanto al componente");</li>
 <li><strong>procedure → skill</strong>: caricate on-demand, zero costo quando non le usi.</li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Il segnale per scriverne una</p>
+<p>Te ne accorgi quando ti risenti mentre ripeti la stessa spiegazione:
+se un'operazione ti riesce due volte a mano, la terza scrivila come
+skill.</p>
+</div>
 <h2 id="dove-sta-e-chi-la-crea">Dove sta e chi la crea<a class="headerlink" href="#dove-sta-e-chi-la-crea" title="Permanent link">&para;</a></h2>
 <p>Una skill è una directory che contiene almeno un <code>SKILL.md</code>:</p>
 <table>
@@ -1354,6 +1404,7 @@ Esegui in ordine, fermandoti al primo problema:
 </tr>
 </tbody>
 </table>
+<p><img alt="Anatomia di una skill: il grilletto nella description, la procedura nel corpo" src="assets/05-anatomia-skill.svg" /></p>
 <p>Sulla description vale la pena fermarsi, perché è il punto dove le skill
 falliscono. Claude non legge il corpo per decidere: legge <em>solo</em> la
 description. Quindi scrivici dentro tre cose: <strong>cosa fa</strong> la skill, <strong>le
@@ -1441,6 +1492,12 @@ invocazione <code>/nome</code>. Ma è il formato legacy, un file singolo, senza
 <code>references/</code> né <code>assets/</code>. Se esistono entrambi con lo stesso nome, vince la
 skill. Per cose nuove usa le skill; i command esistenti non vanno riscritti,
 migrali solo quando ti serve la struttura in più.</p>
+<div class="admonition note">
+<p class="admonition-title">Skill o slash command legacy?</p>
+<p>Stesso frontmatter, stessa invocazione <code>/nome</code>: la differenza è solo la
+struttura. Il command legacy è un file singolo, la skill è una directory
+che può crescere con <code>references/</code> e <code>assets/</code>.</p>
+</div>
 <h2 id="skill-di-serie-e-come-crearne-di-buone">Skill di serie e come crearne di buone<a class="headerlink" href="#skill-di-serie-e-come-crearne-di-buone" title="Permanent link">&para;</a></h2>
 <p>Claude Code ne porta alcune built-in: <code>/code-review</code>, <code>/verify</code>, <code>/run</code>,
 <code>/debug</code>, <code>/loop</code>, <code>/batch</code>. Aprirle e leggerle è il modo più rapido per
@@ -1477,6 +1534,8 @@ skill che vuole nascere. Description = trigger, corpo = ricetta, lazy loading
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1559,7 +1618,7 @@ skill che vuole nascere. Description = trigger, corpo = ricetta, lazy loading
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

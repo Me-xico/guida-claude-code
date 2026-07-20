@@ -288,6 +288,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -454,6 +464,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -619,6 +639,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -843,6 +877,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1511,9 +1555,13 @@ tre atti:</p>
 largo come "qualunque comando che tocca un <code>.env</code>" in deny farebbe danni:
 <code>cp .env.example .env</code> è un'operazione legittima che i miei fixture fanno di
 mestiere. In ask, invece, il comando si ferma e chiede: l'uso sospetto lo
-nego io a mano, quello legittimo passa con un invio. Il criterio che ne ho
-ricavato: <strong>deny solo dove un falso positivo è quasi impossibile; ask dove il
-pattern è largo</strong>. Con deny non c'è appello, e una regola che combatte contro
+nego io a mano, quello legittimo passa con un invio.</p>
+<div class="admonition tip">
+<p class="admonition-title">Deny o ask?</p>
+<p>Il criterio che ne ho ricavato: <strong>deny solo dove un falso positivo è
+quasi impossibile; ask dove il pattern è largo</strong>.</p>
+</div>
+<p>Con deny non c'è appello, e una regola che combatte contro
 di te finisce cancellata, il che è peggio di una regola che chiede.</p>
 <h2 id="hook-le-regole-che-valgono-sempre">Hook: le regole che valgono sempre<a class="headerlink" href="#hook-le-regole-che-valgono-sempre" title="Permanent link">&para;</a></h2>
 <p>Quattro hook globali e uno di progetto, tutti figli dello stesso criterio
@@ -1537,16 +1585,24 @@ esempio preferito di hook piccolo fatto bene:</p>
 <span class="nv">cmd</span><span class="o">=</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.tool_input.command // empty&#39;</span><span class="k">)</span>
 <span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
 <span class="w">  </span>*<span class="s2">&quot;git commit&quot;</span>*<span class="o">)</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">  </span>*<span class="o">)</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">  </span>*<span class="o">)</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="c1"># (1)!</span>
 <span class="k">esac</span>
 <span class="c1"># Narrow patterns on purpose — &quot;anthropic&quot; alone would block legitimate</span>
 <span class="c1"># commits about Anthropic SDK code; widen only if something slips.</span>
-<span class="k">if</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-qiE<span class="w"> </span><span class="s1">&#39;co-authored-by:[^&quot;]*\b(claude|anthropic)|generated with|noreply@anthropic\.com|🤖&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-qiE<span class="w"> </span><span class="s1">&#39;co-authored-by:[^&quot;]*\b(claude|anthropic)|generated with|noreply@anthropic\.com|🤖&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c1"># (2)!</span>
 <span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Commit bloccato: il messaggio viola le regole del CLAUDE.md. Riscrivilo.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
-<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="c1"># (3)!</span>
 <span class="k">fi</span>
 <span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
 </code></pre></div>
+<ol>
+<li>Esce subito se il comando non è un commit: zero costo sul 99% dei casi.</li>
+<li>I pattern sono volutamente stretti (<code>anthropic</code> da solo bloccherebbe
+   commit legittimi su codice che usa l'SDK Anthropic), perché un guardiano
+   che grida ai falsi positivi finisce disattivato.</li>
+<li>L'exit code 2 blocca il tool <strong>e</strong> spiega al modello il perché, così si
+   corregge da solo al colpo dopo.</li>
+</ol>
 <p>Le scelte che contano: esce subito se il comando non è un commit (zero costo
 sul 99% dei casi); l'exit code 2 blocca il tool <strong>e</strong> spiega al modello il
 perché, così si corregge da solo al colpo dopo; i pattern sono volutamente
@@ -1619,8 +1675,12 @@ Glob, Bash), "consiglia e disegna diff, non applica edit di massa", e una
 description che delimita il confine con gli agenti affini ("NOT for
 Terraform → usa terraform-expert"): è quella delimitazione che permette alla
 sessione di scegliere l'agente giusto senza sbagliare.</p>
-<p>Una domanda sola riassume il criterio dei tre tier: <em>questo ruolo giudica,
-lavora o esegue?</em> La sessione principale resta l'orchestratore sul modello di punta;
+<div class="admonition note">
+<p class="admonition-title">I tre tier</p>
+<p>Una domanda sola riassume il criterio dei tre tier: <em>questo ruolo
+giudica, lavora o esegue?</em></p>
+</div>
+<p>La sessione principale resta l'orchestratore sul modello di punta;
 chi giudica lo affianca alla pari, chi lavora e chi esegue scala di tier. E
 l'altitudine risolve il buco che i language expert da soli lasciavano
 scoperto: scrivere in un linguaggio ormai è la parte facile, <em>scegliere come
@@ -1824,6 +1884,8 @@ coincidono, ed è esattamente il punto.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1890,7 +1952,7 @@ coincidono, ed è esattamente il punto.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

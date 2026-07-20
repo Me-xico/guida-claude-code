@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -457,6 +467,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -726,6 +746,20 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -947,6 +981,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1209,6 +1253,7 @@
 <p>Verified July 16, 2026 against the official docs. Claude Design and
 Ultraplan are in research preview: behavior and availability may change.</p>
 </blockquote>
+<p><img alt="Research, then design, then code: the shortcut gets paid for later" src="../assets/17-ricerca-flusso.svg" /></p>
 <h2 id="the-principle">The principle<a class="headerlink" href="#the-principle" title="Permanent link">&para;</a></h2>
 <p>Chapter 11 teaches you to verify work <em>after</em> it's done. This chapter
 applies the same idea one step earlier: <strong>the most expensive code is the
@@ -1307,8 +1352,48 @@ team.</p>
 tool and the right check: <strong>research</strong> (<code>/deep-research</code>, cited
 sources) → <strong>decision</strong> → <strong>plan</strong> (plan mode → SPEC → Ultraplan, review
 scaled to the stakes) → <strong>implementation</strong> (ch. 03 and 10, with the
-"done" criterion from ch. 11). Skip a stage and it comes back later,
-with interest. Closing out the Method is the chapter on common mistakes
+"done" criterion from ch. 11).</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>When</th>
+<th>What it produces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/deep-research</code></td>
+<td>a hard-to-reverse decision made on unfamiliar ground</td>
+<td>a report with cited sources</td>
+</tr>
+<tr>
+<td>Plan mode (ch. 03)</td>
+<td>the everyday rung</td>
+<td>ten lines of plan to correct, instead of a hundred lines of code</td>
+</tr>
+<tr>
+<td>Interview → SPEC (ch. 12)</td>
+<td>for big features</td>
+<td>a written spec that outlives the session</td>
+</tr>
+<tr>
+<td><code>/ultraplan</code></td>
+<td>the plan deserves a document-style review instead of a terminal one</td>
+<td>plan in the cloud, review in the browser with inline comments; then a cloud PR or local teleport</td>
+</tr>
+<tr>
+<td>Claude Design</td>
+<td>designing the interface, especially with a design system in the repo</td>
+<td>designs, interactive prototypes, mockups already matching the real components</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">The cost of skipping a stage</p>
+<p>Every skipped stage comes back later, with interest.</p>
+</div>
+<p>Closing out the Method is the chapter on common mistakes
 (ch. 13): the checklist of symptoms, before we move on to the tools.</p>
 
 
@@ -1327,6 +1412,8 @@ with interest. Closing out the Method is the chapter on common mistakes
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1409,7 +1496,7 @@ with interest. Closing out the Method is the chapter on common mistakes
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -457,6 +467,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -759,6 +779,20 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -980,6 +1014,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1279,13 +1323,14 @@ ufficiali + errori più segnalati dalla community, luglio 2026.</p>
 cosa sta succedendo davvero (la meccanica), e la cura. Il valore del
 capitolo non è la lista in sé: è imparare a riconoscere il sintomo <em>mentre
 ti capita</em>, non tre ore dopo.</p>
+<p><img alt="La mappa degli otto errori: sintomo e cura a colpo d'occhio" src="assets/13-errori-mappa.svg" /></p>
 <h2 id="1-usarlo-come-chatgpt">1. Usarlo come ChatGPT<a class="headerlink" href="#1-usarlo-come-chatgpt" title="Permanent link">&para;</a></h2>
 <p><em>Sintomo</em>: domande secche, zero contesto, nessun file riferito, e poi
 "non capisce niente".
 <em>Cosa succede</em>: stai usando il 10% dello strumento. Claude Code è un agente
 col tuo repo davanti: può aprire file, lanciare comandi, verificare i
 risultati. Se gli fai solo domande, hai una chat costosa.
-<em>Cura</em>: dagli file (<code>@src/components/Modal.tsx</code>), comandi da eseguire
+<strong>Cura</strong>: dagli file (<code>@src/components/Modal.tsx</code>), comandi da eseguire
 ("lancia <code>npm test</code> e guarda cosa fallisce"), criteri di successo. Il
 valore sta nel loop agentico (esplora, modifica, verifica), non nella
 risposta singola. Confronta: "come si centra un div?" contro "il modal in
@@ -1298,13 +1343,13 @@ e non puoi nemmeno fare revert pulito, perché le otto cose sono
 intrecciate negli stessi file.
 <em>Cosa succede</em>: ogni obiettivo in più diluisce l'attenzione su tutti gli
 altri, e nessuno arriva alla soglia del "finito e verificato".
-<em>Cura</em>: un obiettivo per prompt, verificato prima del successivo (cap. 12).
+<strong>Cura</strong>: un obiettivo per prompt, verificato prima del successivo (cap. 12).
 Il momento per accorgersene è <strong>mentre scrivi il prompt</strong>: alla prima
 "e già che ci sei", taglia e metti il resto in un appunto per dopo.</p>
 <h2 id="3-correggere-in-loop">3. Correggere in loop<a class="headerlink" href="#3-correggere-in-loop" title="Permanent link">&para;</a></h2>
 <p><em>Sintomo</em>: "no, non così… no, intendevo… ancora sbagliato…": sei al quinto
 tentativo sullo stesso punto e ognuno è peggio del precedente.
-<em>Cura</em>: <strong>regola dei 2 tentativi</strong>. Due correzioni andate male → <code>/clear</code> →
+<strong>Cura</strong>: <strong>regola dei 2 tentativi</strong>. Due correzioni andate male → <code>/clear</code> →
 prompt nuovo che incorpora ciò che hai imparato dai fallimenti ("attenzione:
 l'approccio con X non funziona perché Y"). La sessione pulita capisce al
 primo colpo quello che quella inquinata non capiva al quinto (il perché
@@ -1316,7 +1361,7 @@ importante.
 modello: ogni riga in più diluisce tutte le altre. Un file gonfio non è
 "più completo": è un file dove le regole che contano annegano tra quelle
 che non servono.
-<em>Cura</em>: test della riga ("questa riga ha mai cambiato un comportamento?")
+<strong>Cura</strong>: test della riga ("questa riga ha mai cambiato un comportamento?")
 e ~200 righe massimo (cap. 04).
 <em>Il segnale</em>: quando ti scopri ad aggiungere una riga al CLAUDE.md per un
 problema successo una volta sola. Aspetta la seconda.</p>
@@ -1325,7 +1370,7 @@ problema successo una volta sola. Aspetta la seconda.</p>
 <em>Cosa succede</em>: hai accettato un'asserzione come se fosse un'evidenza. Il
 modello che dichiara "funziona" sta esprimendo fiducia nel proprio codice,
 la stessa fiducia mal riposta di qualunque autore.
-<em>Cura</em>: mai accettare un'asserzione senza evidenza (cap. 11). "Mostrami
+<strong>Cura</strong>: mai accettare un'asserzione senza evidenza (cap. 11). "Mostrami
 l'output dei test" è la frase più redditizia della guida: cinque secondi
 per chiederla, e trasforma una speranza in un fatto.</p>
 <h2 id="6-non-revisionare-tra-un-prompt-e-laltro">6. Non revisionare tra un prompt e l'altro<a class="headerlink" href="#6-non-revisionare-tra-un-prompt-e-laltro" title="Permanent link">&para;</a></h2>
@@ -1334,7 +1379,7 @@ era sbagliata, e le altre due la usano.
 <em>Cosa succede</em>: l'errore non costa quanto costa quando lo fai. Costa
 quanto ci hai costruito sopra. Ogni blocco non verificato è un debito che
 matura interessi a ogni prompt successivo.
-<em>Cura</em>: rivedi (o fai verificare: test, review, screenshot) ogni blocco
+<strong>Cura</strong>: rivedi (o fai verificare: test, review, screenshot) ogni blocco
 prima di costruirci sopra. I checkpoint (cap. 03) esistono per questo:
 torna indietro finché è gratis.</p>
 <h2 id="7-investigazioni-senza-scope">7. Investigazioni senza scope<a class="headerlink" href="#7-investigazioni-senza-scope" title="Permanent link">&para;</a></h2>
@@ -1344,7 +1389,7 @@ dopo il contesto è pieno di file letti a caso e la sessione è rincitrullita.
 venti irrilevanti. L'esplorazione libera è il modo più rapido di riempire
 il contesto di rumore, e il rumore degrada tutte le risposte successive,
 anche quelle sul task vero.
-<em>Cura</em>: scope esplicito ("solo <code>src/auth/</code>, rispondi in 10 righe") oppure
+<strong>Cura</strong>: scope esplicito ("solo <code>src/auth/</code>, rispondi in 10 righe") oppure
 delega a un subagent Explore che esplora nel <em>suo</em> contesto e ti riporta
 solo la sintesi (cap. 06). Un prompt fatto bene:</p>
 <blockquote>
@@ -1360,7 +1405,7 @@ d'occhio.
 meccanica, con l'immagine di <code>/context</code>, è nel cap. 03). È la causa radice
 di metà di questa lista: il loop di correzioni del punto 3, l'esplorazione
 del punto 7, tutti affluenti dello stesso fiume.
-<em>Cura</em>: <code>/clear</code> tra task diversi, sempre. Costa zero e la sessione resta
+<strong>Cura</strong>: <code>/clear</code> tra task diversi, sempre. Costa zero e la sessione resta
 recuperabile con <code>/resume</code>: stai solo dando al task nuovo un contesto che
 parla solo di lui.
 <em>Il segnale</em>: ti accorgi che stai per fare una domanda che non c'entra col
@@ -1389,6 +1434,8 @@ non li fai più.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1471,7 +1518,7 @@ non li fai più.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

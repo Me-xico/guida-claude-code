@@ -292,6 +292,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -560,6 +570,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -725,6 +745,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -947,6 +981,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1219,12 +1263,20 @@ preciso: il binario installato così <strong>si aggiorna da solo in background</
 come fa un browser moderno, quindi dopo l'installazione non dovrai più
 pensarci.</p>
 <p><strong>Come si installa.</strong> Un comando, a seconda del sistema:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">macOS / Linux</label><label for="__tabbed_1_2">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux / WSL</span>
 curl<span class="w"> </span>-fsSL<span class="w"> </span>https://claude.ai/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="c"># Windows (PowerShell)</span>
 <span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">claude</span><span class="p">.</span><span class="n">ai</span><span class="p">/</span><span class="n">install</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
 </code></pre></div>
+</div>
+</div>
+</div>
 <p><strong>Dove finisce.</strong> Il binario viene messo in <code>~/.local/bin/claude</code>. È un
 eseguibile autonomo: <strong>non serve Node.js</strong>, né nessun altro runtime. Se hai
 già visto in giro il pacchetto npm (<code>npm install -g @anthropic-ai/claude-code</code>)
@@ -1237,6 +1289,11 @@ scaricare lo stesso binario nativo. Non c'è motivo di preferirlo.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>claude<span class="w"> </span>--version
 <span class="go">2.1.210 (Claude Code)</span>
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Aggiornamenti automatici</p>
+<p>Il binario installato così si aggiorna da solo in background, come fa
+un browser moderno: dopo questa verifica non dovrai più pensarci.</p>
+</div>
 <p>Se il comando non viene trovato, quasi sempre il problema è che
 <code>~/.local/bin</code> non è nel <code>PATH</code> della tua shell.</p>
 <p><strong>Requisiti e note per piattaforma.</strong> Serve macOS 13+ / Windows 10 1809+ /
@@ -1370,6 +1427,8 @@ progetto.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1452,7 +1511,7 @@ progetto.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

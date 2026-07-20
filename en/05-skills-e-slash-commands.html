@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -455,6 +465,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -623,6 +643,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -970,6 +1004,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -1270,6 +1314,12 @@ split:</p>
   live next to the component");</li>
 <li><strong>procedures → skills</strong>: loaded on demand, zero cost when unused.</li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">The signal to write one</p>
+<p>You'll notice it when you catch yourself getting annoyed at repeating
+the same explanation: if an operation takes you twice by hand, the
+third time write it as a skill.</p>
+</div>
 <h2 id="where-it-lives-and-who-creates-it">Where it lives and who creates it<a class="headerlink" href="#where-it-lives-and-who-creates-it" title="Permanent link">&para;</a></h2>
 <p>A skill is a directory containing at least a <code>SKILL.md</code>:</p>
 <table>
@@ -1354,6 +1404,7 @@ Esegui in ordine, fermandoti al primo problema:
 </tr>
 </tbody>
 </table>
+<p><img alt="Anatomy of a skill: the trigger in the description, the procedure in the body" src="../assets/05-anatomia-skill.svg" /></p>
 <p>The description deserves a pause, because it's where skills fail. Claude
 doesn't read the body to decide: it reads <em>only</em> the description. So put
 three things in it: <strong>what the skill does</strong>, <strong>the phrases that should
@@ -1444,6 +1495,12 @@ invocation. But it's the legacy format, a single file, with no
 <code>references/</code> or <code>assets/</code>. If both exist with the same name, the skill
 wins. Use skills for anything new; existing commands don't need rewriting,
 migrate them only when you need the extra structure.</p>
+<div class="admonition note">
+<p class="admonition-title">Skill or legacy slash command?</p>
+<p>Same frontmatter, same <code>/name</code> invocation: the only difference is the
+structure. The legacy command is a single file, the skill is a
+directory that can grow with <code>references/</code> and <code>assets/</code>.</p>
+</div>
 <h2 id="built-in-skills-and-how-to-create-good-ones">Built-in skills and how to create good ones<a class="headerlink" href="#built-in-skills-and-how-to-create-good-ones" title="Permanent link">&para;</a></h2>
 <p>Claude Code ships with a few built in: <code>/code-review</code>, <code>/verify</code>, <code>/run</code>,
 <code>/debug</code>, <code>/loop</code>, <code>/batch</code>. Opening and reading them is the quickest way
@@ -1480,6 +1537,8 @@ lazy loading = clean context. Next chapter: agents, or who to delegate to.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1562,7 +1621,7 @@ lazy loading = clean context. Next chapter: agents, or who to delegate to.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

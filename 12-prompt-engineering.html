@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -457,6 +467,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -737,6 +757,20 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -958,6 +992,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1241,19 +1285,25 @@ con una richiesta vaga produce un risultato vago, esattamente come farebbe
 un junior vero con un ticket che dice solo "sistemare il login".</p>
 <p>Tu sei il PM: più chiaro il brief, migliore la consegna. Tutto questo
 capitolo è declinazione di questa frase.</p>
+<div class="admonition note">
+<p class="admonition-title">Il modello mentale del capitolo</p>
+<p>Claude Code è un junior brillante che gestisci: velocissimo, mai
+permaloso, ma con una richiesta vaga produce un risultato vago. Tu sei
+il PM: più chiaro il brief, migliore la consegna.</p>
+</div>
 <h2 id="specificita-criteri-di-successo-non-aggettivi">Specificità: criteri di successo, non aggettivi<a class="headerlink" href="#specificita-criteri-di-successo-non-aggettivi" title="Permanent link">&para;</a></h2>
 <p>Il dolore: chiedi "migliora questo componente", ottieni un refactor che
 tocca venti righe che non c'entrano, e il problema vero, i re-render, è
 ancora lì. Non è colpa del modello: "migliora" non dice <em>cosa</em> dev'essere
 vero alla fine.</p>
+<p><img alt="Anatomia di un prompt che riesce: contesto, compito, vincoli, verifica" src="assets/12-anatomia-prompt.svg" /></p>
 <p>Debole: "migliora questo componente".
 Forte:</p>
-<blockquote>
-<p>"Riduci i re-render di <code>ProductList</code>: memoizza le callback passate ai
-figli, sposta il filtro in un <code>useMemo</code>, e verifica con il Profiler che al
-cambio di <code>query</code> re-renderizzi solo la lista. Non cambiare l'API
-pubblica."</p>
-</blockquote>
+<div class="highlight"><pre><span></span><code>&quot;Riduci i re-render di `ProductList`: memoizza le callback passate ai
+figli, sposta il filtro in un `useMemo`, e verifica con il Profiler che al
+cambio di `query` re-renderizzi solo la lista. Non cambiare l&#39;API
+pubblica.&quot;
+</code></pre></div>
 <p>La differenza non è la lunghezza: è che il secondo ha <strong>criteri
 verificabili</strong> (cap. 11, "verifica col Profiler che…") e <strong>vincoli</strong> (cosa
 non toccare, "non cambiare l'API pubblica"). Aggettivi come "migliore",
@@ -1266,43 +1316,59 @@ chiesto" ma non quello che volevi. Il problema era nel brief.</p>
 <p>L'errore opposto alla vaghezza: dettare <em>come</em> fare ogni passo, riga per
 riga. Non serve: per quello c'è il modello, che il codice lo sa scrivere.
 Serve invece dare ciò che il modello <strong>non può sapere</strong> guardando il repo:</p>
-<ul>
-<li>il <em>perché</em>: "questo form è il funnel di pagamento: la priorità è non
-  rompere il tracking", cambia ogni decisione a valle</li>
-<li>i <strong>vincoli</strong>: "Node 18, niente dipendenze nuove"</li>
-<li>i <strong>riferimenti</strong>: "<code>@src/components/Form.tsx</code> è il pattern da seguire"</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Cosa dare</th>
+<th>Esempio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>il <em>perché</em></td>
+<td>"questo form è il funnel di pagamento: la priorità è non rompere il tracking", cambia ogni decisione a valle</td>
+</tr>
+<tr>
+<td>i <strong>vincoli</strong></td>
+<td>"Node 18, niente dipendenze nuove"</td>
+</tr>
+<tr>
+<td>i <strong>riferimenti</strong></td>
+<td>"<code>@src/components/Form.tsx</code> è il pattern da seguire"</td>
+</tr>
+</tbody>
+</table>
 <p>E il contesto passalo nella forma più ricca disponibile: riferisci i file
 con <code>@</code> (invece di descriverli), incolla gli errori <strong>interi</strong> (lo stack
 trace contiene la risposta più spesso di quanto pensi), allega screenshot
 (<code>Ctrl+V</code>) quando il problema è visivo. Un prompt che mette insieme i pezzi:</p>
-<blockquote>
-<p>"Il tracking del funnel si è rotto dopo l'ultimo refactor. Questo form è
+<div class="admonition tip">
+<p class="admonition-title">Un prompt che mette insieme i pezzi</p>
+<div class="highlight"><pre><span></span><code>&quot;Il tracking del funnel si è rotto dopo l&#39;ultimo refactor. Questo form è
 il funnel di pagamento: priorità assoluta non perdere eventi. Errore in
 console: [incollato intero]. Il pattern corretto di invio eventi è in
-<code>@src/analytics/track.ts</code>. Vincolo: niente dipendenze nuove."</p>
-</blockquote>
+`@src/analytics/track.ts`. Vincolo: niente dipendenze nuove.&quot;
+</code></pre></div>
+</div>
 <p>Perché funziona: il modello ragiona su quello che ha nel contesto. Perché,
 vincoli e riferimenti sono esattamente le informazioni che non può dedurre
 da solo: tutto il resto sì.</p>
 <h2 id="decomposizione-chiedi-il-primo-passo-non-il-viaggio">Decomposizione: chiedi il primo passo, non il viaggio<a class="headerlink" href="#decomposizione-chiedi-il-primo-passo-non-il-viaggio" title="Permanent link">&para;</a></h2>
 <p>Chiedere in un prompt solo una feature intera è il greed mistake, l'errore
 2 del cap. 13. Al contrario:</p>
-<blockquote>
-<p>"Costruiamo il carrello a passi. Step 1: solo il data-layer — hook
-<code>useCart</code> con aggiunta, rimozione, quantità, e i test Vitest. Niente UI,
-niente persistenza per ora. Poi ci vediamo qui e decidiamo lo step 2."</p>
-</blockquote>
+<div class="highlight"><pre><span></span><code>&quot;Costruiamo il carrello a passi. Step 1: solo il data-layer — hook
+`useCart` con aggiunta, rimozione, quantità, e i test Vitest. Niente UI,
+niente persistenza per ora. Poi ci vediamo qui e decidiamo lo step 2.&quot;
+</code></pre></div>
 <p>Ogni passo finito e verificato è un checkpoint (in senso letterale: cap. 03)
 su cui costruire il successivo. Se lo step 2 va male, torni a un punto
 solido invece di dover disfare una matassa.</p>
 <p>Per le feature grandi, il pattern ufficiale è <strong>farsi intervistare</strong>, utile
 proprio perché i requisiti che <em>credi</em> di avere chiari non lo sono:</p>
-<blockquote>
-<p>"Devo costruire X. Prima di scrivere codice, intervistami: fammi le domande
+<div class="highlight"><pre><span></span><code>&quot;Devo costruire X. Prima di scrivere codice, intervistami: fammi le domande
 che servono a chiarire requisiti e edge case, poi scrivi una spec in
-SPEC.md."</p>
-</blockquote>
+SPEC.md.&quot;
+</code></pre></div>
 <p>Le domande di Claude fanno emergere gli edge case a cui non avevi pensato
 (cosa succede al carrello se l'utente fa logout? gli sconti si sommano?).
 Rivedi la spec, <code>/clear</code>, e in una sessione fresca: "implementa SPEC.md,
@@ -1316,11 +1382,10 @@ enfasi ("no, il bottone deve stare A DESTRA"), e va male di nuovo. Ripetere
 più forte non aggiunge informazione. Dai invece <strong>materiale nuovo</strong>:
 l'errore esatto, l'output del test, lo screenshot di cosa si vede davvero.
 "Non funziona" non dà a Claude nulla su cui lavorare; uno stack trace sì:</p>
-<blockquote>
-<p>"Il fix non basta: al submit ora arriva questo — [stack trace intero].
+<div class="highlight"><pre><span></span><code>&quot;Il fix non basta: al submit ora arriva questo — [stack trace intero].
 Ecco anche lo screenshot dello stato del form [Ctrl+V]. Nota che succede
-solo quando il campo email è vuoto."</p>
-</blockquote>
+solo quando il campo email è vuoto.&quot;
+</code></pre></div>
 <p>E ricorda la regola dei 2 tentativi (cap. 03): al secondo giro andato male,
 <code>/clear</code> e riformula da zero incorporando quello che hai imparato. Il
 motivo è meccanico: ogni correzione fallita resta nel contesto e pesa sulle
@@ -1376,6 +1441,8 @@ progettare prima di costruire.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1458,7 +1525,7 @@ progettare prima di costruire.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

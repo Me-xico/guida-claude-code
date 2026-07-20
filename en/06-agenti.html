@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -455,6 +465,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -623,6 +643,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -987,6 +1021,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -1297,6 +1341,13 @@ test suite can burn half your session's context window with output you
 have no reason to keep. The subagent does the dirty work in its own
 context and brings back only the conclusion. You keep the summary, not the
 logs.</p>
+<div class="admonition note">
+<p class="admonition-title">Isolated context</p>
+<p>The noise (greps, test logs, files read) stays in the subagent's
+context and disappears with it at the end of the task. Only the
+summary reaches your session: it's worth delegating even a short task
+if it produces verbose output.</p>
+</div>
 <p>Second reason: <strong>narrowing powers</strong>. A reviewer with read-only tools can't
 "fix" things on its own initiative while it's judging.</p>
 <h2 id="where-it-lives-and-who-creates-it">Where it lives and who creates it<a class="headerlink" href="#where-it-lives-and-who-creates-it" title="Permanent link">&para;</a></h2>
@@ -1371,6 +1422,13 @@ You are a senior frontend reviewer. When invoked:
 </tr>
 </tbody>
 </table>
+<div class="admonition tip">
+<p class="admonition-title">The description is the routing rule</p>
+<p>Just as with skills, the main agent decides who to delegate to by
+reading the descriptions of all available agents. Write it thinking
+about <em>when</em> the delegation should trigger, not just what the agent
+does.</p>
+</div>
 <p>Note the example's body: it defines the role, the steps, the output format
 and the boundary ("you do NOT edit"). That's the pattern to copy.</p>
 <p>Advanced fields when you need them: <code>maxTurns</code> (a cap on turns), <code>memory</code>
@@ -1395,6 +1453,7 @@ stepping on each other), <code>permissionMode</code>, <code>effort</code>.</p>
 <p>To invoke it explicitly: name it in the prompt ("use the code-reviewer on
 the new components") or guarantee the delegation with an @-mention:
 <code>@"code-reviewer (agent)"</code>.</p>
+<p><img alt="The three delegation gateways and the return of the conclusions" src="../assets/06-delega-agenti.svg" /></p>
 <h3 id="foreground-and-background">Foreground and background<a class="headerlink" href="#foreground-and-background" title="Permanent link">&para;</a></h3>
 <p>Since 2.1.198, subagents run in the <strong>background by default</strong>: your
 session keeps going while they work, and you get notified when they
@@ -1467,6 +1526,8 @@ stop being suggestions.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1549,7 +1610,7 @@ stop being suggestions.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

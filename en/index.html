@@ -357,6 +357,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -523,6 +533,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -688,6 +708,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -910,6 +944,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1147,40 +1191,67 @@ teaches you how to make it work <strong>well</strong>.</p>
 from the TUI, and the facts were verified against the
 <a href="https://code.claude.com/docs">official documentation</a> — still the place to
 look once this guide starts to age.</p>
+<p><img alt="The guide map: four parts, three reading paths" src="../assets/00-mappa-guida.svg" /></p>
 <h2 id="how-to-read-it">How to read it<a class="headerlink" href="#how-to-read-it" title="Permanent link">&para;</a></h2>
 <p>A note on numbering: the number in a chapter's name is a stable
 identifier, not the reading order — the guide grows by section and new
 chapters get appended at the end. The right order is this index.</p>
-<p><strong>Basics - starting right (day 1):</strong></p>
+<div class="admonition tip">
+<p class="admonition-title">Three paths, depending on where you are</p>
+<ul>
+<li><strong>Starting from zero</strong> → Basics in order, then Method.</li>
+<li><strong>Already using it, want to use it better</strong> → Method (starting from
+  Verification), then Power where you need it.</li>
+<li><strong>Want to copy a proven setup</strong> → Reference, especially ch. 16 (the
+  philosophy) and ch. 18 (the real files).</li>
+</ul>
+</div>
+<div class="grid cards">
+<ul>
+<li>
+<p><strong>Basics — starting right (day 1)</strong></p>
+<hr />
 <ol>
 <li><a href="01-installazione.html">Installation and first run</a> - from <code>curl</code> to your first prompt</li>
 <li><a href="02-setup-e-config.html">Setup and configuration</a> - where config lives, permissions, deny rules for secrets</li>
 <li><a href="03-uso-quotidiano.html">Day-to-day use</a> - the workflow, undo, session management</li>
 <li><a href="04-claude-md-e-rules.html">CLAUDE.md and rules</a> - the project's permanent instructions</li>
 </ol>
-<p><strong>Method - what makes the difference:</strong></p>
+</li>
+<li>
+<p><strong>Method — what makes the difference</strong></p>
+<hr />
 <ol>
 <li><a href="11-verifica.html">Verification</a> - <em>if you read only one chapter, make it this one</em></li>
 <li><a href="12-prompt-engineering.html">Prompt engineering</a> - asking for things in a way that works</li>
-<li><a href="17-ricerca-e-progettazione.html">Research and design</a> - deep research, SPEC, Ultraplan and Claude Design: decide well before you build</li>
-<li><a href="13-errori-comuni.html">Common mistakes</a> - the checklist that closes the Method</li>
+<li><a href="17-ricerca-e-progettazione.html">Research and design</a> - deciding well before you build</li>
+<li><a href="13-errori-comuni.html">Common mistakes</a> - recognizing them before you make them</li>
 </ol>
-<p><strong>Power - once the basics are running:</strong></p>
+</li>
+<li>
+<p><strong>Power — once the basics are running</strong></p>
+<hr />
 <ol>
 <li><a href="05-skills-e-slash-commands.html">Skills and slash commands</a> - reusable procedures</li>
 <li><a href="06-agenti.html">Agents</a> - who to delegate the noisy work to</li>
 <li><a href="07-hooks.html">Hooks</a> - rules that always hold, not almost always</li>
 <li><a href="08-mcp.html">MCP</a> - connecting browsers, Figma, GitHub</li>
 <li><a href="09-plugins.html">Plugins</a> - your setup in a package</li>
-<li><a href="10-workflow-frontend.html">Frontend workflow</a> - <em>for frontend devs: Claude with a real browser</em></li>
+<li><a href="10-workflow-frontend.html">Frontend workflow</a> - Claude with a real browser</li>
 </ol>
-<p><strong>Reference:</strong></p>
+</li>
+<li>
+<p><strong>Reference — the setup, all the way through</strong></p>
+<hr />
 <ol>
-<li><a href="14-must-have-e-costi.html">Must-haves and costs</a> - the first 30 minutes of setup, the plans, the money-saving habits</li>
-<li><a href="15-risparmiare-token.html">Saving tokens</a> - the tools for longer work windows on the Pro plan</li>
-<li><a href="16-setup-a-tre-livelli.html">A real setup: global, per client, per repo</a> - how the author actually organizes it, three levels at a time</li>
-<li><a href="18-setup-in-chiaro.html">The setup in plain sight</a> - the actual files line by line: permissions, hooks, agents, skills, MCP</li>
+<li><a href="14-must-have-e-costi.html">Must-haves and costs</a> - the first 30 minutes, the plans</li>
+<li><a href="15-risparmiare-token.html">Saving tokens</a> - longer work windows</li>
+<li><a href="16-setup-a-tre-livelli.html">A real setup</a> - global, per activity, per repo</li>
+<li><a href="18-setup-in-chiaro.html">The setup in plain sight</a> - the real files, line by line</li>
 </ol>
+</li>
+</ul>
+</div>
 <h2 id="what-you-need-to-follow-along">What you need to follow along<a class="headerlink" href="#what-you-need-to-follow-along" title="Permanent link">&para;</a></h2>
 <p>A terminal, a Claude subscription (Pro is enough: ch. 01) and half an hour
 for the Basics section. Chapters 02 and 04 use a small React/TS project as
@@ -1203,6 +1274,8 @@ shown in full within the chapters themselves: there's nothing to download.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1269,7 +1342,7 @@ shown in full within the chapters themselves: there's nothing to download.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

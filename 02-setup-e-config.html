@@ -292,6 +292,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -571,6 +581,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -736,6 +756,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -958,6 +992,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1333,11 +1377,15 @@ dei file markdown, <code>Edit(.github/**)</code> le modifiche sotto <code>.githu
 <p><strong>Come funziona in pratica.</strong> Quando Claude sta per usare un tool, la
 richiesta viene confrontata con le regole: se matcha un <code>deny</code> viene
 bloccata, se matcha un <code>allow</code> passa senza prompt, altrimenti si applica il
-permission mode corrente (sezione successiva). Il pattern più importante da
-copiare subito è <strong>il deny sui segreti</strong>: <code>.env</code> e simili non devono essere
-leggibili nemmeno per sbaglio. Nota come il deny della demo chiude entrambe
-le porte: il tool <code>Read</code> (le prime due regole) e la lettura via shell con
-<code>cat</code> (la terza). Bloccarne solo una lascerebbe l'altra aperta.</p>
+permission mode corrente (sezione successiva).</p>
+<div class="admonition warning">
+<p class="admonition-title">Il deny sui segreti</p>
+<p>Il pattern più importante da copiare subito è <strong>il deny sui segreti</strong>:
+<code>.env</code> e simili non devono essere leggibili nemmeno per sbaglio. Nota
+come il deny della demo chiude entrambe le porte: il tool <code>Read</code> (le
+prime due regole) e la lettura via shell con <code>cat</code> (la terza). Bloccarne
+solo una lascerebbe l'altra aperta.</p>
+</div>
 <p>C'è un momento in cui questo file ti passa davanti agli occhi: la prima
 volta che apri un progetto che contiene permessi pre-approvati, Claude Code
 te li elenca e ti chiede se ti fidi. È una tutela sensata, quel file arriva
@@ -1396,11 +1444,14 @@ scritto, decidi guardando il contenuto reale, non una descrizione, e che
 tra le opzioni c'è la scorciatoia per passare direttamente ad <code>acceptEdits</code>
 se ti sei stancato di confermare ogni edit:</p>
 <p><img alt="Richiesta di permesso per la creazione di un file" src="assets/02-permission-prompt.svg" /></p>
-<p>La progressione consigliata: <code>default</code> finché non hai preso confidenza, poi
-<code>acceptEdits</code> per il lavoro quotidiano, <code>plan</code> quando affronti task grossi
-in cui vuoi vedere il piano prima del codice (cap. 03). Qualunque mode tu
-scelga, i percorsi protetti (<code>.git/</code>, <code>.claude/</code>, i dotfile della shell) non
-vengono mai auto-approvati: quelli te li chiede sempre.</p>
+<div class="admonition tip">
+<p class="admonition-title">Progressione consigliata</p>
+<p><code>default</code> finché non hai preso confidenza, poi <code>acceptEdits</code> per il
+lavoro quotidiano, <code>plan</code> quando affronti task grossi in cui vuoi vedere
+il piano prima del codice (cap. 03). Qualunque mode tu scelga, i percorsi
+protetti (<code>.git/</code>, <code>.claude/</code>, i dotfile della shell) non vengono mai
+auto-approvati: quelli te li chiede sempre.</p>
+</div>
 <p>Per vedere e modificare le regole senza toccare il JSON a mano c'è il
 pannello <code>/permissions</code>. Qui sotto lo vedi aperto sul progetto demo: nota i
 tab in alto, <strong>Allow / Ask / Deny / Workspace</strong> (le tre liste, più le
@@ -1543,6 +1594,8 @@ lavora davvero tutti i giorni.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1625,7 +1678,7 @@ lavora davvero tutti i giorni.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

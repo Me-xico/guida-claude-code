@@ -292,6 +292,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -571,6 +581,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -736,6 +756,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -958,6 +992,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1281,12 +1325,15 @@ componente, stile con CSS modules (niente styled-components).
 </code></pre></div>
 <p>Note the style: imperative, specific sentences, no explanations. Every line
 is an instruction that changes a behavior.</p>
-<p><strong>The line test</strong>: for each line, ask yourself "if I remove this, would
-Claude get something wrong?". If not, cut it. Target: <strong>under ~200 lines</strong>.
-The reason isn't aesthetic: models reliably follow a limited number of
+<div class="admonition tip">
+<p class="admonition-title">The line test</p>
+<p>For each line, ask yourself "if I remove this, would Claude get
+something wrong?". If not, cut it. Target: <strong>under ~200 lines</strong>. The
+reason isn't aesthetic: models reliably follow a limited number of
 instructions, and in a bloated CLAUDE.md the important rules drown among
-the useless ones. The file stops working exactly where you needed it. Since
-v2.1.206, <code>/doctor</code> will suggest the cuts itself.</p>
+the useless ones. The file stops working exactly where you needed it.
+Since v2.1.206, <code>/doctor</code> will suggest the cuts itself.</p>
+</div>
 <h2 id="the-pattern-that-keeps-the-file-alive-the-error-log">The pattern that keeps the file alive: the error log<a class="headerlink" href="#the-pattern-that-keeps-the-file-alive-the-error-log" title="Permanent link">&para;</a></h2>
 <p>The best CLAUDE.md isn't written in one afternoon: <strong>it grows every time
 Claude gets something wrong</strong>. The cycle goes like this:</p>
@@ -1341,11 +1388,14 @@ machine → <code>CLAUDE.local.md</code> or the user-level file.</p>
 <p><strong>Imports</strong>: <code>@docs/css-conventions.md</code> at the start of a line includes
 that file in the CLAUDE.md, like an <code>import</code> (recursive, max 4 levels).
 It's for modularizing: the main file stays short and the bulky sections
-live in dedicated files. Watch out for the special case: if an import
-points <strong>outside</strong> the project, Claude Code stops and asks for
-confirmation, because a malicious CLAUDE.md in a third-party repo could use
-imports to inject instructions into your session. This is the dialog, and
-on a repo you don't know the answer is no:</p>
+live in dedicated files.</p>
+<div class="admonition warning">
+<p class="admonition-title">External imports</p>
+<p>If an import points <strong>outside</strong> the project, Claude Code stops and
+asks for confirmation, because a malicious CLAUDE.md in a third-party
+repo could use imports to inject instructions into you.</p>
+</div>
+<p>This is the dialog, and on a repo you don't know the answer is no:</p>
 <p><img alt="Confirmation prompt for external CLAUDE.md imports" src="../assets/04-import-dialog.svg" /></p>
 <h2 id="rules-instructions-with-a-scope">Rules: instructions with a scope<a class="headerlink" href="#rules-instructions-with-a-scope" title="Permanent link">&para;</a></h2>
 <p><strong>What it is</strong>: a rule is an instruction file with a <em>scope</em> delimited by
@@ -1405,6 +1455,8 @@ once you have the method in hand.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1487,7 +1539,7 @@ once you have the method in hand.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

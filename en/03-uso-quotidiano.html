@@ -292,6 +292,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -604,6 +614,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -769,6 +789,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -991,6 +1025,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1320,7 +1364,7 @@ ten-line plan instead of on a hundred lines of already-written code.</p>
 <li><strong>Explore</strong> (in plan mode): "read <code>src/auth</code> and explain how the login
    works". Claude reads, searches, summarizes, but modifies nothing.</li>
 <li><strong>Plan</strong>: "prepare a detailed implementation plan". Claude produces the
-   plan; with <code>Ctrl+G</code> you open it in your editor and fix it <em>before</em> a
+   plan; with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-g">G</kbd></span> you open it in your editor and fix it <em>before</em> a
    single line of code gets written: it's the moment when review is
    cheapest.</li>
 <li><strong>Code</strong>: you approve the plan and Claude implements. On approval it
@@ -1330,20 +1374,23 @@ ten-line plan instead of on a hundred lines of already-written code.</p>
 </ol>
 <p><strong>Plan mode, concretely</strong>: it's one of the permission modes, Claude can
 only read and explore, never write. You activate it by cycling with
-<strong>Shift+Tab</strong> (the same key cycles through all the modes) or at startup
+<span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-tab">Tab</kbd></span> (the same key cycles through all the modes) or at startup
 with <code>claude --permission-mode plan</code>. You know you're in it because the
 status bar under the prompt says so, like here:</p>
 <p><img alt="Plan mode active, shown in the bar under the prompt" src="../assets/03-plan-mode.svg" /></p>
 <p>It's also a great way to explore a new codebase risk-free: "it
 can't touch anything" is guaranteed by the permission system, not by the
 model's good intentions.</p>
-<p><strong>When to skip the plan</strong>: if the diff can be described in one sentence (a
-typo, a rename, one log line), plan mode is pure overhead. Go direct.</p>
+<div class="admonition tip">
+<p class="admonition-title">When to skip the plan</p>
+<p>If the diff can be described in one sentence (a typo, a rename, one log
+line), plan mode is pure overhead. Go direct.</p>
+</div>
 <h2 id="checkpoints-and-rewind-the-safety-net">Checkpoints and /rewind: the safety net<a class="headerlink" href="#checkpoints-and-rewind-the-safety-net" title="Permanent link">&para;</a></h2>
 <p><strong>What it is</strong>: Claude Code's undo. Every time Claude modifies a file, a
 checkpoint is saved, a snapshot you can return to, like git restore points
 but automatic and per-change.</p>
-<p><strong>Where it is</strong>: press <strong>Esc twice</strong> (with an empty input) or type
+<p><strong>Where it is</strong>: press <span class="keys"><kbd class="key-escape">Esc</kbd></span> <span class="keys"><kbd class="key-escape">Esc</kbd></span> (with an empty input) or type
 <code>/rewind</code>. The restore menu opens with the list of checkpoints:</p>
 <p><img alt="The Rewind menu: every change is a restore point" src="../assets/03-rewind-menu.svg" /></p>
 <p><strong>How to use it</strong>: pick the point to go back to and <em>what</em> to restore.</p>
@@ -1357,9 +1404,12 @@ but automatic and per-change.</p>
 </ul>
 <p><strong>How it changes the way you work</strong>: you can let Claude <em>attempt</em> a risky
 route ("rewrite the store with Zustand, let's see") knowing the way back
-costs two keystrokes. Two limits to know: it tracks <strong>only the edits Claude
-makes</strong>, not bash commands (<code>rm</code>, <code>mv</code>), not your manual changes, and it
-keeps the last 100 checkpoints.</p>
+costs two keystrokes.</p>
+<div class="admonition warning">
+<p class="admonition-title">Two limits to know</p>
+<p>It tracks <strong>only the edits Claude makes</strong>, not bash commands (<code>rm</code>,
+<code>mv</code>), not your manual changes, and it keeps the last 100 checkpoints.</p>
+</div>
 <h2 id="the-2-attempt-rule">The 2-attempt rule<a class="headerlink" href="#the-2-attempt-rule" title="Permanent link">&para;</a></h2>
 <p>If you've corrected Claude twice on the same point and it's still getting
 it wrong, <strong>don't push for a third correction</strong>. The reason is mechanical:
@@ -1417,10 +1467,14 @@ category: it's the session's X-ray. Look at it: each cell is a slice of the
 window, the categories in the legend tell you who's occupying it, and the
 free space is what's left for the actual work:</p>
 <p><img alt="Output of /context: the context usage grid by category" src="../assets/03-context.svg" /></p>
-<p><strong>Why it matters to you</strong>: the context fills up as you work, and the fuller
-it gets the more performance degrades: Claude "forgets" the instructions
-given at the start, repeats mistakes already fixed. Almost every good habit
-in this guide stems from this. The tools:</p>
+<div class="admonition note">
+<p class="admonition-title">Why it matters to you</p>
+<p>The context fills up as you work, and the fuller it gets the more
+performance degrades: Claude "forgets" the instructions given at the
+start, repeats mistakes already fixed. Almost every good habit in this
+guide stems from this.</p>
+</div>
+<p>The tools:</p>
 <ul>
 <li><code>/clear</code>: empties the conversation. Use it <strong>between one task and the
   next, always</strong>: the new task doesn't need the previous one's history. No
@@ -1446,19 +1500,19 @@ in this guide stems from this. The tools:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>Esc</code></td>
+<td><span class="keys"><kbd class="key-escape">Esc</kbd></span></td>
 <td>interrupts Claude (your queued messages stay)</td>
 </tr>
 <tr>
-<td><code>Esc Esc</code></td>
+<td><span class="keys"><kbd class="key-escape">Esc</kbd></span> <span class="keys"><kbd class="key-escape">Esc</kbd></span></td>
 <td>input full: clears the line; input empty: opens <code>/rewind</code></td>
 </tr>
 <tr>
-<td><code>Ctrl+C</code></td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span></td>
 <td>first press: clears the input; second: exits</td>
 </tr>
 <tr>
-<td><code>Shift+Tab</code></td>
+<td><span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-tab">Tab</kbd></span></td>
 <td>cycles the permission modes (ch. 02)</td>
 </tr>
 <tr>
@@ -1470,23 +1524,23 @@ in this guide stems from this. The tools:</p>
 <td>reference a file (autocomplete)</td>
 </tr>
 <tr>
-<td><code>Ctrl+V</code></td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-v">V</kbd></span></td>
 <td>pastes an image from the clipboard (essential for frontend: screenshot → "reproduce this layout")</td>
 </tr>
 <tr>
-<td><code>Ctrl+O</code></td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-o">O</kbd></span></td>
 <td>detailed transcript (tool calls, timings, model)</td>
 </tr>
 <tr>
-<td><code>Ctrl+R</code></td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-r">R</kbd></span></td>
 <td>search the history</td>
 </tr>
 <tr>
-<td><code>Ctrl+B</code></td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-b">B</kbd></span></td>
 <td>sends the running command to the background</td>
 </tr>
 <tr>
-<td><code>Alt+T</code> / <code>Option+T</code></td>
+<td><span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-t">T</kbd></span> / <span class="keys"><kbd class="key-option">Option</kbd><span>+</span><kbd class="key-t">T</kbd></span></td>
 <td>toggles extended thinking (for the hard problems; on some models it's always on)</td>
 </tr>
 </tbody>
@@ -1523,8 +1577,8 @@ picker:</p>
   it's one rung of the verification ladder).</li>
 </ul>
 <hr />
-<p><strong>In short</strong>: plan mode for big tasks, double Esc as the universal undo,
-<code>/clear</code> between tasks, and the 2-attempt rule when you get stuck. The next
+<p><strong>In short</strong>: plan mode for big tasks, <span class="keys"><kbd class="key-escape">Esc</kbd></span> <span class="keys"><kbd class="key-escape">Esc</kbd></span> as the universal
+undo, <code>/clear</code> between tasks, and the 2-attempt rule when you get stuck. The next
 chapter digs into the most important file in your setup: the CLAUDE.md.</p>
 
 
@@ -1543,6 +1597,8 @@ chapter digs into the most important file in your setup: the CLAUDE.md.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1625,7 +1681,7 @@ chapter digs into the most important file in your setup: the CLAUDE.md.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

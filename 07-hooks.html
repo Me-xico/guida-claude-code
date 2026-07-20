@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -455,6 +465,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -623,6 +643,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -981,6 +1015,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -1281,8 +1325,11 @@ script che il <em>sistema</em> esegue a un evento preciso, ogni volta, che Claud
 voglia o no. L'analogia: CLAUDE.md è il cartello "si prega di timbrare", un
 hook è il <strong>tornello</strong>: non si passa senza. Regola di ripartizione:
 preferenze e conoscenza → CLAUDE.md; <strong>garanzie → hook</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Regole che valgono sempre, non quasi sempre</p>
 <p>Bonus non ovvio: un <code>deny</code> imposto da un hook <code>PreToolUse</code> vale anche in
 <code>bypassPermissions</code>: è l'unico guardrail che nessuna modalità scavalca.</p>
+</div>
 <h2 id="dove-sta-e-chi-lo-crea">Dove sta e chi lo crea<a class="headerlink" href="#dove-sta-e-chi-lo-crea" title="Permanent link">&para;</a></h2>
 <p>Gli hook si dichiarano nella chiave <code>"hooks"</code> dei <code>settings.json</code> che già
 conosci dal cap. 02: utente (<code>~/.claude/settings.json</code>), progetto
@@ -1346,6 +1393,7 @@ di Claude, Prettier formatta il file.</p>
 <p>Risultato: la CI non fallirà mai più per il formato. Non perché Claude "si
 ricorda", ma perché non può succedere altrimenti.</p>
 <h2 id="come-funziona-passo-passo">Come funziona, passo passo<a class="headerlink" href="#come-funziona-passo-passo" title="Permanent link">&para;</a></h2>
+<p><img alt="Il ciclo di vita di un hook: bloccare prima, correggere dopo" src="assets/07-ciclo-hook.svg" /></p>
 <ol>
 <li>Claude sta per usare (o ha appena usato) un tool → l'evento
    corrispondente scatta.</li>
@@ -1455,6 +1503,8 @@ ovvero dare occhi e mani nuove a Claude.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1537,7 +1587,7 @@ ovvero dare occhi e mani nuove a Claude.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

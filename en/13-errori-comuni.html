@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -457,6 +467,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -759,6 +779,20 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -980,6 +1014,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1279,13 +1323,14 @@ practices + the mistakes most reported by the community, July 2026.</p>
 what's really going on (the mechanics), and the fix. The value of this
 chapter isn't the list itself: it's learning to recognize the symptom <em>while
 it's happening to you</em>, not three hours later.</p>
+<p><img alt="The map of the eight mistakes: symptom and fix at a glance" src="../assets/13-errori-mappa.svg" /></p>
 <h2 id="1-using-it-like-chatgpt">1. Using it like ChatGPT<a class="headerlink" href="#1-using-it-like-chatgpt" title="Permanent link">&para;</a></h2>
 <p><em>Symptom</em>: terse questions, zero context, no files referenced, and then
 "it doesn't understand anything".
 <em>What's happening</em>: you're using 10% of the tool. Claude Code is an agent
 with your repo in front of it: it can open files, run commands, verify
 results. If all you do is ask questions, you have an expensive chat.
-<em>Fix</em>: give it files (<code>@src/components/Modal.tsx</code>), commands to run
+<strong>Fix</strong>: give it files (<code>@src/components/Modal.tsx</code>), commands to run
 ("run <code>npm test</code> and look at what fails"), success criteria. The value is
 in the agentic loop (explore, edit, verify), not in the single answer.
 Compare: "how do I center a div?" versus "the modal in
@@ -1299,13 +1344,13 @@ and you can't even do a clean revert, because the eight things are
 tangled together in the same files.
 <em>What's happening</em>: every extra goal dilutes attention across all the
 others, and none of them reaches the "done and verified" threshold.
-<em>Fix</em>: one goal per prompt, verified before the next one (ch. 12).
+<strong>Fix</strong>: one goal per prompt, verified before the next one (ch. 12).
 The moment to catch it is <strong>while you're writing the prompt</strong>: at the first
 "and while you're at it", cut it and put the rest in a note for later.</p>
 <h2 id="3-correcting-in-a-loop">3. Correcting in a loop<a class="headerlink" href="#3-correcting-in-a-loop" title="Permanent link">&para;</a></h2>
 <p><em>Symptom</em>: "no, not like that… no, I meant… still wrong…": you're on the
 fifth attempt at the same spot and each one is worse than the last.
-<em>Fix</em>: <strong>the 2-attempt rule</strong>. Two corrections gone wrong → <code>/clear</code> →
+<strong>Fix</strong>: <strong>the 2-attempt rule</strong>. Two corrections gone wrong → <code>/clear</code> →
 a fresh prompt that folds in what you learned from the failures ("note:
 the approach using X doesn't work because Y"). The clean session gets on
 the first try what the polluted one couldn't get on the fifth (the
@@ -1317,7 +1362,7 @@ one that matters.
 attention: every extra line dilutes all the others. A bloated file isn't
 "more complete": it's a file where the rules that matter drown among the
 ones that don't.
-<em>Fix</em>: the line test ("has this line ever changed a behavior?")
+<strong>Fix</strong>: the line test ("has this line ever changed a behavior?")
 and ~200 lines max (ch. 04).
 <em>The signal</em>: when you catch yourself adding a line to CLAUDE.md for a
 problem that happened exactly once. Wait for the second time.</p>
@@ -1326,7 +1371,7 @@ problem that happened exactly once. Wait for the second time.</p>
 <em>What's happening</em>: you accepted an assertion as if it were evidence. A
 model declaring "it works" is expressing confidence in its own code,
 the same misplaced confidence any author has in their own work.
-<em>Fix</em>: never accept an assertion without evidence (ch. 11). "Show me
+<strong>Fix</strong>: never accept an assertion without evidence (ch. 11). "Show me
 the test output" is the most profitable sentence in this guide: five
 seconds to ask, and it turns a hope into a fact.</p>
 <h2 id="6-not-reviewing-between-prompts">6. Not reviewing between prompts<a class="headerlink" href="#6-not-reviewing-between-prompts" title="Permanent link">&para;</a></h2>
@@ -1335,7 +1380,7 @@ first one was wrong, and the other two depend on it.
 <em>What's happening</em>: a mistake doesn't cost what it costs when you make it.
 It costs whatever you built on top of it. Every unverified block is a debt
 that accrues interest with every subsequent prompt.
-<em>Fix</em>: review (or have verified: tests, review, screenshots) every block
+<strong>Fix</strong>: review (or have verified: tests, review, screenshots) every block
 before building on it. Checkpoints (ch. 03) exist for exactly this:
 go back while it's still free.</p>
 <h2 id="7-unscoped-investigations">7. Unscoped investigations<a class="headerlink" href="#7-unscoped-investigations" title="Permanent link">&para;</a></h2>
@@ -1346,7 +1391,7 @@ session has gone dumb.
 including the twenty irrelevant ones. Free-form exploration is the fastest
 way to fill the context with noise, and noise degrades every subsequent
 answer, including the ones about the actual task.
-<em>Fix</em>: explicit scope ("only <code>src/auth/</code>, answer in 10 lines") or
+<strong>Fix</strong>: explicit scope ("only <code>src/auth/</code>, answer in 10 lines") or
 delegate to an Explore subagent that explores in <em>its own</em> context and
 brings back only the summary (ch. 06). A well-made prompt:</p>
 <blockquote>
@@ -1362,9 +1407,9 @@ worse.
 mechanics, with the <code>/context</code> screenshot, are in ch. 03). It's the root
 cause of half this list: the correction loop of point 3, the exploration
 of point 7, all tributaries of the same river.
-<em>Fix</em>: <code>/clear</code> between different tasks, always. It costs nothing: the
-session stays recoverable with <code>/resume</code>, so you're not "throwing away"
-anything: you're just giving the new task a context that's only about it.
+<strong>Fix</strong>: <code>/clear</code> between different tasks, always. It costs nothing: the
+session stays recoverable with <code>/resume</code>. You're not "throwing away"
+anything, just giving the new task a context that's only about it.
 <em>The signal</em>: you notice you're about to ask a question unrelated to the
 task at hand. That question deserves a session of its own.</p>
 <hr />
@@ -1391,6 +1436,8 @@ you stop making these mistakes.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1473,7 +1520,7 @@ you stop making these mistakes.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

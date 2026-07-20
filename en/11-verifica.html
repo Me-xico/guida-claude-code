@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -457,6 +467,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -748,6 +768,20 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -969,6 +1003,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1264,30 +1308,53 @@ you can walk away from comes down to one thing: <strong>does Claude have a way t
 verify its own work?</strong> If yes, the loop becomes work → check → fix →
 repeat until it passes, without you in the middle. If no, you are the test
 runner, and you're also the bottleneck.</p>
+<p><img alt="The verification cycle: executable criterion, work, check, fix" src="../assets/11-loop-verifica.svg" /></p>
 <h2 id="how-to-apply-it-give-claude-an-executable-criterion">How to apply it: give Claude an executable criterion<a class="headerlink" href="#how-to-apply-it-give-claude-an-executable-criterion" title="Permanent link">&para;</a></h2>
 <p>For a frontend dev, the "ways to verify" are concrete and almost always
 already in the project:</p>
-<ul>
-<li><strong>tests</strong>: "write the tests first (they must fail), then implement until
-  they pass". TDD pairs with Claude better than it does with humans,
-  because a failing test is a signal the model can read and chase on its
-  own</li>
-<li>the <strong>build's exit code</strong>: <code>npm run build</code> exiting 0</li>
-<li><strong>lint/typecheck</strong>: <code>tsc --noEmit</code></li>
-<li>a <strong>screenshot compared against the mock</strong>: "here's the design;
-  implement it, take a screenshot, compare, list the differences, fix
-  them" (ch. 10)</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>When to use it</th>
+<th>What it catches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tests</strong></td>
+<td>write the tests first (they must fail), then implement until they pass</td>
+<td>functional regressions; TDD pairs with Claude better than it does with humans, because a failing test is a signal the model can read and chase on its own</td>
+</tr>
+<tr>
+<td><strong>Build's exit code</strong></td>
+<td><code>npm run build</code> exiting 0</td>
+<td>a broken build before it reaches deploy</td>
+</tr>
+<tr>
+<td><strong>Lint/typecheck</strong></td>
+<td><code>tsc --noEmit</code></td>
+<td>type errors, before the code even runs</td>
+</tr>
+<tr>
+<td><strong>Screenshot compared against the mock</strong></td>
+<td>"here's the design; implement it, take a screenshot, compare, list the differences, fix them" (ch. 10)</td>
+<td>visual deviations from the design that tests don't see</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">An executable success criterion</p>
 <p>A complete prompt, to pin down the shape:</p>
-<blockquote>
-<p>"Add validation to <code>@src/components/CheckoutForm.tsx</code>: email required
+<div class="highlight"><span class="filename">Prompt</span><pre><span></span><code>Add validation to @src/components/CheckoutForm.tsx: email required
 and in a valid format, ZIP code with 5 digits. First write the Vitest
-tests for these cases (they must fail), then implement. Consider it done
-only when <code>npm test</code> passes and <code>tsc --noEmit</code> exits clean."</p>
-</blockquote>
+tests for these cases (they must fail), then implement. Consider it
+done only when npm test passes and tsc --noEmit exits clean.
+</code></pre></div>
 <p>Note the structure: what to do, how to verify it, when to stop. The
-verification criterion costs one extra line and changes everything that
-comes before it.</p>
+verification criterion costs one extra line and changes everything
+that comes before it.</p>
+</div>
 <h2 id="why-it-works">Why it works<a class="headerlink" href="#why-it-works" title="Permanent link">&para;</a></h2>
 <p>Without a criterion, "done" is the model's judgment about itself, and the
 model, like anyone who has just written some code, tends to believe it.
@@ -1295,8 +1362,11 @@ With an executable criterion, "done" becomes an observable fact: the test
 passes or it doesn't. Claude can iterate against that fact on its own, and
 every iteration burns <em>its</em> time, not yours.</p>
 <h2 id="ask-for-evidence-not-assertions">Ask for evidence, not assertions<a class="headerlink" href="#ask-for-evidence-not-assertions" title="Permanent link">&para;</a></h2>
-<p>"Done, it works now" is not information: it's a hope. The countermove is
-always the same question, in three variants:</p>
+<div class="admonition warning">
+<p class="admonition-title">Trust without verification</p>
+<p>"Done, it works now" is not information: it's a hope.</p>
+</div>
+<p>The countermove is always the same question, in three variants:</p>
 <blockquote>
 <p>"Show me the test output."
 "Paste the build's exit code."
@@ -1338,19 +1408,23 @@ it's the same session. The pattern: write with one session, have a
 <strong>second</strong> session (or the built-in <code>/code-review</code>) with a clean context
 do the review: whoever didn't write the code sees what the author can no
 longer see.</p>
-<p><strong>But watch out for the documented side effect</strong>: a reviewer instructed to
-find problems will <em>always</em> find some: that's its mandate. If you obey
-every finding, after three rounds of review you end up with abstractions,
-guard clauses and configurability nobody asked for: review-driven
-over-engineering. The antidote is to limit the mandate up front:</p>
+<details class="note">
+<summary>The documented side effect of adversarial review</summary>
+<p><strong>But there's a catch, and it's a known one</strong>: a reviewer instructed
+to find problems will <em>always</em> find some: that's its mandate. If you
+obey every finding, after three rounds of review you end up with
+abstractions, guard clauses and configurability nobody asked for:
+review-driven over-engineering. The antidote is to limit the mandate up
+front:</p>
 <blockquote>
 <p>"Review this diff. Report <strong>only</strong> real bugs and requirements missed
 against SPEC.md. Don't propose style improvements, refactoring or
 abstractions: if something works and is within the requirements, it
 passes."</p>
 </blockquote>
-<p>The extra suggestions that show up anyway: treat them as optional, not as
-to-dos.</p>
+<p>The extra suggestions that show up anyway: treat them as optional, not
+as to-dos.</p>
+</details>
 <h2 id="the-no-tests-case">The no-tests case<a class="headerlink" href="#the-no-tests-case" title="Permanent link">&para;</a></h2>
 <p>Legacy codebase with no tests? That's the case where verification matters
 <em>more</em>, not less: you're about to touch code whose intended behavior
@@ -1387,6 +1461,8 @@ missing.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1469,7 +1545,7 @@ missing.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>

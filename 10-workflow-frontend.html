@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -455,6 +465,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -623,6 +643,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -970,6 +1004,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -1294,6 +1338,12 @@ per: verificare flussi, compilare form, leggere errori console, e come
 base dei test e2e. Bonus non piccolo: se la tua UI è illeggibile per
 l'accessibility tree, hai appena scoperto un problema di a11y, lo stesso
 che avrebbe uno screen reader.</p>
+<div class="admonition note">
+<p class="admonition-title">Effetto collaterale utile</p>
+<p>Se l'accessibility tree non riesce a leggere un elemento della tua UI,
+è lo stesso ostacolo che troverebbe uno screen reader: un problema di
+a11y scoperto gratis.</p>
+</div>
 <h2 id="strada-2-lestensione-chrome-ufficiale-anthropic-per-gli-abbonati">Strada 2: l'estensione Chrome ufficiale (Anthropic, per gli abbonati)<a class="headerlink" href="#strada-2-lestensione-chrome-ufficiale-anthropic-per-gli-abbonati" title="Permanent link">&para;</a></h2>
 <p><strong>Cos'è</strong>: Claude dentro il <em>tuo</em> Chrome, non in un browser a parte. La
 differenza pratica: le tue sessioni già autenticate, il tuo stato reale,
@@ -1326,6 +1376,12 @@ da design. Tre mosse:</p>
 <li>Claude itera da solo: implementa → guarda (screenshot vero, dal browser
    vero) → confronta → corregge → riguarda.</li>
 </ol>
+<div class="admonition tip">
+<p class="admonition-title">Il criterio che chiude il loop</p>
+<p>"Ripeti finché non corrispondono" è la frase che serve: senza un
+bersaglio verificabile (il mock, i test) il loop non si ferma da solo,
+va sempre chiesto esplicitamente.</p>
+</div>
 <p>Cosa aspettarsi: la prima iterazione sarà al 70%; la terza, quasi
 indistinguibile dal mock. Il tuo lavoro si sposta da "descrivere le
 differenze a parole" ad "approvare il risultato", che è esattamente il
@@ -1381,6 +1437,8 @@ Qui si chiude la Potenza; nel Riferimento trovi le cinque mosse dei primi
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1463,7 +1521,7 @@ Qui si chiude la Potenza; nel Riferimento trovi le cinque mosse dei primi
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

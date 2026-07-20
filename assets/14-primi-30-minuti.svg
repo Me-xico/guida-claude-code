@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A8FA3"/>
+    </marker>
+  </defs>
+
+  <!-- ═══ Linea di collegamento a segmenti con frecce ═══ -->
+  <line x1="140" y1="130" x2="268" y2="130" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="330" y1="130" x2="458" y2="130" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="520" y1="130" x2="648" y2="130" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="710" y1="130" x2="838" y2="130" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ═══ Nodo 1 ═══ -->
+  <circle cx="110" cy="130" r="30" fill="#B0763B"/>
+  <text x="110" y="137" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700">1</text>
+  <text x="110" y="185" text-anchor="middle" fill="#8A8FA3" font-size="12">1 · /init nel progetto</text>
+  <text x="110" y="201" text-anchor="middle" fill="#8A8FA3" font-size="12">(5 min)</text>
+
+  <!-- ═══ Nodo 2 ═══ -->
+  <circle cx="300" cy="130" r="30" fill="#B0763B"/>
+  <text x="300" y="137" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700">2</text>
+  <text x="300" y="185" text-anchor="middle" fill="#8A8FA3" font-size="12">2 · Deny sui segreti</text>
+  <text x="300" y="201" text-anchor="middle" fill="#8A8FA3" font-size="12">(2 min)</text>
+
+  <!-- ═══ Nodo 3 ═══ -->
+  <circle cx="490" cy="130" r="30" fill="#B0763B"/>
+  <text x="490" y="137" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700">3</text>
+  <text x="490" y="185" text-anchor="middle" fill="#8A8FA3" font-size="12">3 · Hook Prettier</text>
+  <text x="490" y="201" text-anchor="middle" fill="#8A8FA3" font-size="12">(8 min)</text>
+
+  <!-- ═══ Nodo 4 ═══ -->
+  <circle cx="680" cy="130" r="30" fill="#B0763B"/>
+  <text x="680" y="137" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700">4</text>
+  <text x="680" y="185" text-anchor="middle" fill="#8A8FA3" font-size="12">4 · /statusline</text>
+  <text x="680" y="201" text-anchor="middle" fill="#8A8FA3" font-size="12">(5 min)</text>
+
+  <!-- ═══ Nodo 5 (verde, esito) ═══ -->
+  <circle cx="870" cy="130" r="30" fill="#4F9153"/>
+  <text x="870" y="137" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700">5</text>
+  <text x="870" y="185" text-anchor="middle" fill="#8A8FA3" font-size="12">5 · Allow comandi</text>
+  <text x="870" y="201" text-anchor="middle" fill="#8A8FA3" font-size="12">fidati (10 min)</text>
+  <text x="870" y="221" text-anchor="middle" fill="#8A8FA3" font-size="12" font-weight="600">poi è routine</text>
+</svg>

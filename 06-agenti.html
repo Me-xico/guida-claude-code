@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -455,6 +465,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -623,6 +643,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -987,6 +1021,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -1297,6 +1341,13 @@ codebase o una suite di test verbosa possono bruciare metà della finestra di
 contesto della tua sessione con output che non ti serve conservare. Il
 subagent fa il lavoro sporco nel suo contesto e riporta indietro solo la
 conclusione. Tu tieni la sintesi, non i log.</p>
+<div class="admonition note">
+<p class="admonition-title">Contesto isolato</p>
+<p>Il rumore (grep, log di test, file letti) resta nel contesto del
+subagent e sparisce con lui a fine task. Nella tua sessione arriva solo
+la sintesi: vale la pena delegare anche un compito breve, se produce
+output verboso.</p>
+</div>
 <p>Secondo motivo: <strong>restringere i poteri</strong>. Un reviewer con soli tool di
 lettura non può "aggiustare" le cose di sua iniziativa mentre giudica.</p>
 <h2 id="dove-sta-e-chi-lo-crea">Dove sta e chi lo crea<a class="headerlink" href="#dove-sta-e-chi-lo-crea" title="Permanent link">&para;</a></h2>
@@ -1370,6 +1421,12 @@ You are a senior frontend reviewer. When invoked:
 </tr>
 </tbody>
 </table>
+<div class="admonition tip">
+<p class="admonition-title">La description è la regola di routing</p>
+<p>Come per le skill, il main agent decide a chi delegare leggendo le
+description di tutti gli agenti disponibili. Scrivila pensando a
+<em>quando</em> dovrebbe scattare la delega, non solo a cosa fa l'agente.</p>
+</div>
 <p>Nota il corpo dell'esempio: definisce il ruolo, i passi, il formato
 dell'output e il confine ("you do NOT edit"). È il pattern da copiare.</p>
 <p>Campi avanzati quando servono: <code>maxTurns</code> (tetto ai giri), <code>memory</code> (l'agente
@@ -1394,6 +1451,7 @@ separato: più agenti che <em>scrivono</em> in parallelo senza pestarsi),
 <p>Per invocarlo esplicitamente: nominalo nel prompt ("usa il code-reviewer sui
 componenti nuovi") o garantisci la delega con la @-mention:
 <code>@"code-reviewer (agent)"</code>.</p>
+<p><img alt="Le tre porte della delega e il ritorno delle conclusioni" src="assets/06-delega-agenti.svg" /></p>
 <h3 id="foreground-e-background">Foreground e background<a class="headerlink" href="#foreground-e-background" title="Permanent link">&para;</a></h3>
 <p>Dal 2.1.198 i subagent girano in <strong>background di default</strong>: la tua sessione
 continua mentre loro lavorano, e vieni notificato al termine. <code>/tasks</code> (o
@@ -1465,6 +1523,8 @@ di essere consigli.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1547,7 +1607,7 @@ di essere consigli.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

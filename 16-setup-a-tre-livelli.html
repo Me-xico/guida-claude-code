@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -456,6 +466,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -621,6 +641,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -845,6 +879,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1311,9 +1355,13 @@ La risposta è organizzare il setup su tre livelli, ognuno col suo mestiere:</p>
 </tr>
 </tbody>
 </table>
-<p>La regola per decidere dove va una cosa: <strong>al livello più alto in cui è vera
-per tutto ciò che sta sotto</strong>. Vale sempre → globale. Vale per un cliente →
+<div class="admonition tip">
+<p class="admonition-title">Dove va una cosa</p>
+<p>La regola per decidere: <strong>al livello più alto in cui è vera per tutto
+ciò che sta sotto</strong>. Vale sempre → globale. Vale per un cliente →
 profilo. Vale per un repo → repo.</p>
+</div>
+<p><img alt="I tre livelli: globale, attività, repo, e il verso di symlink e override" src="assets/16-tre-livelli.svg" /></p>
 <h2 id="livello-globale-chi-sei-tu">Livello globale: chi sei tu<a class="headerlink" href="#livello-globale-chi-sei-tu" title="Permanent link">&para;</a></h2>
 <p>Nel mio <code>~/.claude/</code> vivono le cose che non cambiano mai, chiunque sia il
 cliente del giorno:</p>
@@ -1372,11 +1420,14 @@ decisioni che questo livello richiede, con le lezioni che si porta dietro:</p>
   allargare a intuito, ho usato la skill built-in <code>/fewer-permission-prompts</code>
   per analizzare i transcript recenti: il verdetto onesto è che quasi tutto
   era già coperto tra auto-allow e regole esistenti, e sono uscite solo tre
-  aggiunte reali. Due paletti non negoziabili: mai
-  allowlistare interpreti (<code>python</code>, <code>node</code>… è esecuzione arbitraria con un
-  altro nome) e mai <code>curl</code> generico (può fare POST ed esfiltrare quanto
-  legge).</li>
+  aggiunte reali.</li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Due paletti non negoziabili</p>
+<p>Mai allowlistare interpreti (<code>python</code>, <code>node</code>… è esecuzione arbitraria
+con un altro nome) e mai <code>curl</code> generico (può fare POST ed esfiltrare
+quanto legge).</p>
+</div>
 <p>La manutenzione include anche i no: nella stessa revisione ho valutato un
 MCP server di ricerca web keyless e ho scelto di <em>non</em> adottarlo — troppo
 giovane, e i tool nativi coprono già il grosso. Anche un no motivato, con
@@ -1473,6 +1524,8 @@ l'ha chiesto due volte.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1555,7 +1608,7 @@ l'ha chiesto due volte.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

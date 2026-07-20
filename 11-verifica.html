@@ -290,6 +290,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -457,6 +467,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -748,6 +768,20 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -969,6 +1003,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1264,27 +1308,53 @@ cui puoi allontanarti è una sola: <strong>Claude ha un modo per verificare da s
 il proprio lavoro?</strong> Se sì, il loop diventa lavora → controlla → correggi →
 ripeti finché passa, senza di te nel mezzo. Se no, il test runner sei tu, e
 sei anche il collo di bottiglia.</p>
+<p><img alt="Il ciclo della verifica: criterio eseguibile, lavoro, controllo, correzione" src="assets/11-loop-verifica.svg" /></p>
 <h2 id="come-si-applica-dai-a-claude-un-criterio-eseguibile">Come si applica: dai a Claude un criterio eseguibile<a class="headerlink" href="#come-si-applica-dai-a-claude-un-criterio-eseguibile" title="Permanent link">&para;</a></h2>
 <p>Per un frontend dev i "modi per verificare" sono concreti e quasi sempre già
 nel progetto:</p>
-<ul>
-<li>i <strong>test</strong>: "scrivi prima i test (devono fallire), poi implementa finché
-  passano". Il TDD si sposa con Claude meglio che con gli umani, perché il
-  test fallito è un segnale che il modello può leggere e inseguire da solo</li>
-<li>l'<strong>exit code della build</strong>: <code>npm run build</code> che esce 0</li>
-<li>il <strong>lint/typecheck</strong>: <code>tsc --noEmit</code></li>
-<li>lo <strong>screenshot confrontato col mock</strong>: "ecco il design; implementa, fai lo
-  screenshot, confronta, elenca le differenze, correggi" (cap. 10)</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Metodo</th>
+<th>Quando usarlo</th>
+<th>Cosa intercetta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Test</strong></td>
+<td>scrivi prima i test (devono fallire), poi implementa finché passano</td>
+<td>regressioni funzionali; il TDD si sposa con Claude meglio che con gli umani, perché il test fallito è un segnale che il modello può leggere e inseguire da solo</td>
+</tr>
+<tr>
+<td><strong>Exit code della build</strong></td>
+<td><code>npm run build</code> che esce 0</td>
+<td>una build rotta prima che arrivi al deploy</td>
+</tr>
+<tr>
+<td><strong>Lint/typecheck</strong></td>
+<td><code>tsc --noEmit</code></td>
+<td>errori di tipo, prima ancora di eseguire il codice</td>
+</tr>
+<tr>
+<td><strong>Screenshot confrontato col mock</strong></td>
+<td>"ecco il design; implementa, fai lo screenshot, confronta, elenca le differenze, correggi" (cap. 10)</td>
+<td>scostamenti visivi dal design che i test non vedono</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Un criterio di successo eseguibile</p>
 <p>Un prompt completo, per fissare la forma:</p>
-<blockquote>
-<p>"Aggiungi la validazione a <code>@src/components/CheckoutForm.tsx</code>: email
+<div class="highlight"><span class="filename">Prompt</span><pre><span></span><code>Aggiungi la validazione a @src/components/CheckoutForm.tsx: email
 obbligatoria e formato valido, CAP a 5 cifre. Prima scrivi i test Vitest
 per questi casi (devono fallire), poi implementa. Considera finito solo
-quando <code>npm test</code> passa e <code>tsc --noEmit</code> esce pulito."</p>
-</blockquote>
-<p>Nota la struttura: cosa fare, come verificarlo, quando fermarsi. Il criterio
-di verifica costa una riga in più e cambia tutto quello che viene prima.</p>
+quando npm test passa e tsc --noEmit esce pulito.
+</code></pre></div>
+<p>Nota la struttura: cosa fare, come verificarlo, quando fermarsi. Il
+criterio di verifica costa una riga in più e cambia tutto quello che
+viene prima.</p>
+</div>
 <h2 id="perche-funziona">Perché funziona<a class="headerlink" href="#perche-funziona" title="Permanent link">&para;</a></h2>
 <p>Senza un criterio, "finito" è un giudizio del modello su sé stesso, e il
 modello, come chiunque abbia appena scritto del codice, tende a crederci.
@@ -1292,8 +1362,11 @@ Con un criterio eseguibile, "finito" diventa un fatto osservabile: il test
 passa o non passa. Claude può iterare contro quel fatto in autonomia, e ogni
 iterazione consuma il <em>suo</em> tempo, non il tuo.</p>
 <h2 id="chiedi-evidenze-non-asserzioni">Chiedi evidenze, non asserzioni<a class="headerlink" href="#chiedi-evidenze-non-asserzioni" title="Permanent link">&para;</a></h2>
-<p>"Fatto, ora funziona" non è informazione: è una speranza. La contromossa è
-sempre la stessa domanda, in tre varianti:</p>
+<div class="admonition warning">
+<p class="admonition-title">Fiducia senza verifica</p>
+<p>"Fatto, ora funziona" non è informazione: è una speranza.</p>
+</div>
+<p>La contromossa è sempre la stessa domanda, in tre varianti:</p>
 <blockquote>
 <p>"Mostrami l'output dei test."
 "Incolla l'exit code della build."
@@ -1335,6 +1408,8 @@ se è la stessa sessione. Il pattern: scrivi con una sessione, fai
 revisionare a una <strong>seconda</strong> sessione (o al <code>/code-review</code> built-in) a
 contesto pulito: chi non ha scritto il codice vede quello che l'autore non
 vede più.</p>
+<details class="note">
+<summary>L'effetto collaterale documentato della review avversaria</summary>
 <p><strong>Ma attenzione all'effetto collaterale documentato</strong>: un reviewer istruito
 a trovare problemi ne troverà <em>sempre</em>: è il suo mandato. Se ubbidisci a
 ogni finding, dopo tre giri di review ti ritrovi con astrazioni, guard
@@ -1347,6 +1422,7 @@ o astrazioni: se qualcosa funziona ed è nei requisiti, passa."</p>
 </blockquote>
 <p>I suggerimenti extra che arrivano comunque: trattali come opzionali, non
 come to-do.</p>
+</details>
 <h2 id="il-caso-senza-test">Il caso senza test<a class="headerlink" href="#il-caso-senza-test" title="Permanent link">&para;</a></h2>
 <p>Codebase legacy senza test? È il caso in cui la verifica serve <em>di più</em>,
 non di meno: stai per toccare codice di cui nessuno ricorda il
@@ -1383,6 +1459,8 @@ altri sembrano non funzionare, perché di solito è questo che manca.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1465,7 +1543,7 @@ altri sembrano non funzionare, perché di solito è questo che manca.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

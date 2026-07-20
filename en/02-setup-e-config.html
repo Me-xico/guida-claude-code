@@ -292,6 +292,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -571,6 +581,16 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -736,6 +756,20 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -958,6 +992,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1334,11 +1378,15 @@ markdown files, <code>Edit(.github/**)</code> covers edits under <code>.github/<
 <p><strong>How it works in practice.</strong> When Claude is about to use a tool, the
 request is matched against the rules: if it matches a <code>deny</code> it's blocked,
 if it matches an <code>allow</code> it goes through without a prompt, otherwise the
-current permission mode applies (next section). The most important pattern
-to copy right away is <strong>the deny on secrets</strong>: <code>.env</code> and friends must not
-be readable even by accident. Note how the demo's deny closes both doors:
-the <code>Read</code> tool (the first two rules) and reading via the shell with <code>cat</code>
-(the third). Blocking only one would leave the other open.</p>
+current permission mode applies (next section).</p>
+<div class="admonition warning">
+<p class="admonition-title">The deny on secrets</p>
+<p>The most important pattern to copy right away is <strong>the deny on
+secrets</strong>: <code>.env</code> and friends must not be readable even by accident.
+Note how the demo's deny closes both doors: the <code>Read</code> tool (the first
+two rules) and reading via the shell with <code>cat</code> (the third). Blocking
+only one would leave the other open.</p>
+</div>
 <p>There's one moment when this file gets put in front of you: the first time
 you open a project that contains pre-approved permissions, Claude Code
 lists them and asks whether you trust them. It's a sensible safeguard, that
@@ -1397,11 +1445,14 @@ looking at the actual content, not a description, and that among the
 options there's a shortcut to switch straight to <code>acceptEdits</code> if you're
 tired of confirming every edit:</p>
 <p><img alt="Permission prompt for creating a file" src="../assets/02-permission-prompt.svg" /></p>
-<p>The recommended progression: <code>default</code> until you've built up confidence,
-then <code>acceptEdits</code> for day-to-day work, <code>plan</code> when you tackle big tasks
-where you want to see the plan before the code (ch. 03). Whatever mode you
-pick, the protected paths (<code>.git/</code>, <code>.claude/</code>, your shell dotfiles) are
-never auto-approved: those it always asks about.</p>
+<div class="admonition tip">
+<p class="admonition-title">Recommended progression</p>
+<p><code>default</code> until you've built up confidence, then <code>acceptEdits</code> for
+day-to-day work, <code>plan</code> when you tackle big tasks where you want to see
+the plan before the code (ch. 03). Whatever mode you pick, the
+protected paths (<code>.git/</code>, <code>.claude/</code>, your shell dotfiles) are never
+auto-approved: those it always asks about.</p>
+</div>
 <p>To view and edit the rules without touching the JSON by hand there's the
 <code>/permissions</code> panel. Below you see it open on the demo project: note the
 tabs at the top, <strong>Allow / Ask / Deny / Workspace</strong> (the three lists, plus
@@ -1545,6 +1596,8 @@ chapter: how you actually work day to day.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1627,7 +1680,7 @@ chapter: how you actually work day to day.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.footer", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
