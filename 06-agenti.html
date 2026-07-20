@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="assets/percorso.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1451,7 +1453,24 @@ separato: più agenti che <em>scrivono</em> in parallelo senza pestarsi),
 <p>Per invocarlo esplicitamente: nominalo nel prompt ("usa il code-reviewer sui
 componenti nuovi") o garantisci la delega con la @-mention:
 <code>@"code-reviewer (agent)"</code>.</p>
+<div class="percorso">
 <p><img alt="Le tre porte della delega e il ritorno delle conclusioni" src="assets/06-delega-agenti.svg" /></p>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita">
+<p><strong>1 · Le tre porte d'ingresso.</strong> La delega scatta per un motivo preciso: la description letta come regola di routing, la mappa dei casi nel CLAUDE.md, oppure una richiesta esplicita tua.</p>
+</div>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega">
+<p><strong>2 · La sessione delega.</strong> Decide di affidare il task e scrive il prompt di delega: autosufficiente, con path esatti e vincoli.</p>
+</div>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent">
+<p><strong>3 · Il subagent lavora isolato.</strong> Contesto separato, tool ristretti, modello per tier: il rumore (grep, log, file letti) resta lì.</p>
+</div>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent p-ritorno">
+<p><strong>4 · Torna solo la conclusione.</strong> Verdetto, diff o diagnosi: mai il rumore, mai i file letti per arrivarci.</p>
+</div>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent p-ritorno">
+<p><strong>5 · Il giro completo.</strong> Tre porte d'ingresso, una sessione che delega, un subagent isolato, una conclusione che torna: questo è il pattern da riusare ogni volta che il lavoro è rumoroso.</p>
+</div>
+</div>
 <h3 id="foreground-e-background">Foreground e background<a class="headerlink" href="#foreground-e-background" title="Permanent link">&para;</a></h3>
 <p>Dal 2.1.198 i subagent girano in <strong>background di default</strong>: la tua sessione
 continua mentre loro lavorano, e vieni notificato al termine. <code>/tasks</code> (o
@@ -1611,6 +1630,8 @@ di essere consigli.</p>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="assets/percorso.js"></script>
       
     
   </body>

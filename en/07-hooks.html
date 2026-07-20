@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/percorso.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1394,7 +1396,27 @@ every edit Claude makes, Prettier formats the file.</p>
 <p>The result: CI will never fail on formatting again. Not because Claude
 "remembers", but because there's no other way it can go.</p>
 <h2 id="how-it-works-step-by-step">How it works, step by step<a class="headerlink" href="#how-it-works-step-by-step" title="Permanent link">&para;</a></h2>
+<div class="percorso">
 <p><img alt="A hook's lifecycle: block first, fix afterward" src="../assets/07-ciclo-hook.svg" /></p>
+<div class="percorso-step" data-highlight="p-propone">
+<p><strong>1 · The model proposes.</strong> Claude decides to use a tool and proposes the call, say a Bash command. It's only a proposal: nothing has happened yet.</p>
+</div>
+<div class="percorso-step" data-highlight="p-propone p-pre">
+<p><strong>2 · PreToolUse checks first.</strong> The hook gets the event's JSON on stdin and decides: <code>exit 2</code> blocks the action (stderr goes back to Claude as the explanation), or it rewrites the input on the fly.</p>
+</div>
+<div class="percorso-step" data-highlight="p-pre p-tool">
+<p><strong>3 · The tool runs.</strong> If PreToolUse didn't block it, the tool actually executes: it reads, writes, runs the command.</p>
+</div>
+<div class="percorso-step" data-highlight="p-tool p-post">
+<p><strong>4 · PostToolUse fixes and flags.</strong> After execution another hook steps in: autoformat, lint, logging the command that just ran.</p>
+</div>
+<div class="percorso-step" data-highlight="p-pre p-loop">
+<p><strong>5 · The block loop returns to the model.</strong> When PreToolUse blocks, stderr isn't lost: it reaches Claude, which reads the reason and corrects itself, no need for you to step in.</p>
+</div>
+<div class="percorso-step" data-highlight="p-propone p-pre p-tool p-post p-risposta p-loop p-nota">
+<p><strong>6 · The response is guaranteed, not hoped for.</strong> Passed straight through or fixed along the way, the rule holds either way: not because Claude remembers, but because the turnstile enforced it.</p>
+</div>
+</div>
 <ol>
 <li>Claude is about to use (or has just used) a tool → the matching event
    fires.</li>
@@ -1593,6 +1615,8 @@ chapter: MCP, or giving Claude new eyes and hands.</p>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../assets/percorso.js"></script>
       
     
   </body>

@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/percorso.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1253,7 +1255,24 @@
 <p>Verified July 16, 2026 against the official docs. Claude Design and
 Ultraplan are in research preview: behavior and availability may change.</p>
 </blockquote>
+<div class="percorso">
 <p><img alt="Research, then design, then code: the shortcut gets paid for later" src="../assets/17-ricerca-flusso.svg" /></p>
+<div class="percorso-step" data-highlight="p-ricerca">
+<p><strong>1 · Research first.</strong> Understand the world before deciding: verified sources, not whatever idea came to mind. This is <code>/deep-research</code>, with cited sources.</p>
+</div>
+<div class="percorso-step" data-highlight="p-ricerca p-progettazione">
+<p><strong>2 · Then design.</strong> Decide the shape before building: plan mode, a SPEC, or Ultraplan depending on the stakes. This is where you correct ten lines of plan instead of a hundred lines of code.</p>
+</div>
+<div class="percorso-step" data-highlight="p-progettazione p-codice">
+<p><strong>3 · Only then, code.</strong> Implementation arrives with the check already defined, the executable criterion from ch. 11 written before you start.</p>
+</div>
+<div class="percorso-step" data-highlight="p-ricerca p-codice p-scorciatoia p-legenda">
+<p><strong>4 · The shortcut exists, and it gets paid for later.</strong> Jumping from research straight to code, without deciding the shape, looks like it saves time: the dashed red arrow in the figure is that jump, and it comes back with interest.</p>
+</div>
+<div class="percorso-step" data-highlight="p-ricerca p-progettazione p-codice p-scorciatoia p-legenda">
+<p><strong>5 · Three stages, one tool each.</strong> Research, design, code: each with its own tool and its own check. The shortcut is the only dimension coded in color, because it's the only one to avoid.</p>
+</div>
+</div>
 <h2 id="the-principle">The principle<a class="headerlink" href="#the-principle" title="Permanent link">&para;</a></h2>
 <p>Chapter 11 teaches you to verify work <em>after</em> it's done. This chapter
 applies the same idea one step earlier: <strong>the most expensive code is the
@@ -1500,6 +1519,8 @@ scaled to the stakes) → <strong>implementation</strong> (ch. 03 and 10, with t
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../assets/percorso.js"></script>
       
     
   </body>

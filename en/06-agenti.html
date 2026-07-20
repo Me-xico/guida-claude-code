@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/percorso.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1453,7 +1455,24 @@ stepping on each other), <code>permissionMode</code>, <code>effort</code>.</p>
 <p>To invoke it explicitly: name it in the prompt ("use the code-reviewer on
 the new components") or guarantee the delegation with an @-mention:
 <code>@"code-reviewer (agent)"</code>.</p>
+<div class="percorso">
 <p><img alt="The three delegation gateways and the return of the conclusions" src="../assets/06-delega-agenti.svg" /></p>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita">
+<p><strong>1 · The three entry gateways.</strong> Delegation triggers for a specific reason: the description read as a routing rule, the case map in CLAUDE.md, or an explicit request from you.</p>
+</div>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega">
+<p><strong>2 · The session delegates.</strong> It decides to hand off the task and writes the delegation prompt: self-sufficient, with exact paths and constraints.</p>
+</div>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent">
+<p><strong>3 · The subagent works in isolation.</strong> Separate context, restricted tools, tier-appropriate model: the noise (greps, logs, files read) stays there.</p>
+</div>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent p-ritorno">
+<p><strong>4 · Only the conclusion comes back.</strong> A verdict, a diff, a diagnosis: never the noise, never the files it took to get there.</p>
+</div>
+<div class="percorso-step" data-highlight="p-porta-description p-porta-mappa p-porta-esplicita p-delega p-subagent p-ritorno">
+<p><strong>5 · The full loop.</strong> Three entry gateways, a session that delegates, an isolated subagent, a conclusion that comes back: this is the pattern to reuse whenever the work is noisy.</p>
+</div>
+</div>
 <h3 id="foreground-and-background">Foreground and background<a class="headerlink" href="#foreground-and-background" title="Permanent link">&para;</a></h3>
 <p>Since 2.1.198, subagents run in the <strong>background by default</strong>: your
 session keeps going while they work, and you get notified when they
@@ -1614,6 +1633,8 @@ stop being suggestions.</p>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../assets/percorso.js"></script>
       
     
   </body>

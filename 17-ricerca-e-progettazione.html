@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="assets/percorso.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1253,7 +1255,24 @@
 <p>Verificato il 16 luglio 2026 sulla doc ufficiale. Claude Design e Ultraplan
 sono in research preview: comportamento e disponibilità possono cambiare.</p>
 </blockquote>
+<div class="percorso">
 <p><img alt="Ricerca, poi progettazione, poi codice: la scorciatoia si paga dopo" src="assets/17-ricerca-flusso.svg" /></p>
+<div class="percorso-step" data-highlight="p-ricerca">
+<p><strong>1 · Prima la ricerca.</strong> Capisci il mondo prima di decidere: fonti verificate, non l'idea che ti è venuta in mente. È <code>/deep-research</code>, con le fonti citate.</p>
+</div>
+<div class="percorso-step" data-highlight="p-ricerca p-progettazione">
+<p><strong>2 · Poi la progettazione.</strong> Decidi la forma prima di costruire: plan mode, SPEC o Ultraplan a seconda della posta. È dove correggi dieci righe di piano invece di cento di codice.</p>
+</div>
+<div class="percorso-step" data-highlight="p-progettazione p-codice">
+<p><strong>3 · Solo allora il codice.</strong> L'implementazione arriva con la verifica già definita, il criterio eseguibile del cap. 11 scritto prima di iniziare.</p>
+</div>
+<div class="percorso-step" data-highlight="p-ricerca p-codice p-scorciatoia p-legenda">
+<p><strong>4 · La scorciatoia esiste, e si paga dopo.</strong> Saltare dalla ricerca dritti al codice, senza decidere la forma, sembra risparmiare tempo: la freccia tratteggiata rossa in figura è quel salto, e torna con gli interessi.</p>
+</div>
+<div class="percorso-step" data-highlight="p-ricerca p-progettazione p-codice p-scorciatoia p-legenda">
+<p><strong>5 · Tre tappe, uno strumento ciascuna.</strong> Ricerca, progettazione, codice: ognuna col suo strumento e la sua verifica. La scorciatoia è l'unica dimensione codificata a colore, perché è l'unica da evitare.</p>
+</div>
+</div>
 <h2 id="il-principio">Il principio<a class="headerlink" href="#il-principio" title="Permanent link">&para;</a></h2>
 <p>Il capitolo 11 insegna a verificare il lavoro <em>fatto</em>. Questo capitolo
 applica la stessa idea un passo prima: <strong>il codice più costoso è quello
@@ -1491,6 +1510,8 @@ di "finito" del cap. 11).</p>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="assets/percorso.js"></script>
       
     
   </body>

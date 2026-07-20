@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/percorso.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1308,7 +1310,24 @@ you can walk away from comes down to one thing: <strong>does Claude have a way t
 verify its own work?</strong> If yes, the loop becomes work → check → fix →
 repeat until it passes, without you in the middle. If no, you are the test
 runner, and you're also the bottleneck.</p>
+<div class="percorso">
 <p><img alt="The verification cycle: executable criterion, work, check, fix" src="../assets/11-loop-verifica.svg" /></p>
+<div class="percorso-step" data-highlight="p-chiedi">
+<p><strong>1 · The criterion comes first.</strong> Your prompt already states how the result gets checked: a test, a command, an exit code. Without this step, the rest of the cycle doesn't exist.</p>
+</div>
+<div class="percorso-step" data-highlight="p-chiedi p-lavora">
+<p><strong>2 · Claude works.</strong> It reads, edits, runs. You're not supervising line by line: you're waiting for the verdict.</p>
+</div>
+<div class="percorso-step" data-highlight="p-lavora p-verifica">
+<p><strong>3 · Verification runs on its own.</strong> Tests, exit codes, lint, screenshot diffs: it's the criterion from step 1 turned into a machine.</p>
+</div>
+<div class="percorso-step" data-highlight="p-lavora p-verifica p-ritorno">
+<p><strong>4 · On failure, the error goes back to Claude.</strong> It fixes and retries: the loop is closed and doesn't need you in the middle.</p>
+</div>
+<div class="percorso-step" data-highlight="p-chiedi p-lavora p-verifica p-ritorno p-consegna p-morale">
+<p><strong>5 · When it passes, ship.</strong> The full cycle: criterion first, automatic verification, correction in between.</p>
+</div>
+</div>
 <h2 id="how-to-apply-it-give-claude-an-executable-criterion">How to apply it: give Claude an executable criterion<a class="headerlink" href="#how-to-apply-it-give-claude-an-executable-criterion" title="Permanent link">&para;</a></h2>
 <p>For a frontend dev, the "ways to verify" are concrete and almost always
 already in the project:</p>
@@ -1549,6 +1568,8 @@ missing.</p>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../assets/percorso.js"></script>
       
     
   </body>

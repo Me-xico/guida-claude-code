@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="assets/percorso.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1393,7 +1395,27 @@ di Claude, Prettier formatta il file.</p>
 <p>Risultato: la CI non fallirà mai più per il formato. Non perché Claude "si
 ricorda", ma perché non può succedere altrimenti.</p>
 <h2 id="come-funziona-passo-passo">Come funziona, passo passo<a class="headerlink" href="#come-funziona-passo-passo" title="Permanent link">&para;</a></h2>
+<div class="percorso">
 <p><img alt="Il ciclo di vita di un hook: bloccare prima, correggere dopo" src="assets/07-ciclo-hook.svg" /></p>
+<div class="percorso-step" data-highlight="p-propone">
+<p><strong>1 · Il modello propone.</strong> Claude decide di usare un tool e ne propone la chiamata, per esempio un comando Bash. È solo una proposta: non è ancora successo nulla.</p>
+</div>
+<div class="percorso-step" data-highlight="p-propone p-pre">
+<p><strong>2 · PreToolUse controlla prima.</strong> L'hook riceve il JSON dell'evento su stdin e decide: <code>exit 2</code> blocca l'azione (lo stderr torna a Claude come spiegazione), oppure riscrive l'input al volo.</p>
+</div>
+<div class="percorso-step" data-highlight="p-pre p-tool">
+<p><strong>3 · Il tool esegue.</strong> Se PreToolUse non ha bloccato, il tool gira per davvero: legge, scrive, lancia il comando.</p>
+</div>
+<div class="percorso-step" data-highlight="p-tool p-post">
+<p><strong>4 · PostToolUse corregge e segnala.</strong> Dopo l'esecuzione un altro hook interviene: autoformat, lint, log del comando appena girato.</p>
+</div>
+<div class="percorso-step" data-highlight="p-pre p-loop">
+<p><strong>5 · Il loop del blocco torna al modello.</strong> Quando PreToolUse blocca, lo stderr non si perde: arriva a Claude, che legge il motivo e si corregge da solo, senza che tu debba intervenire.</p>
+</div>
+<div class="percorso-step" data-highlight="p-propone p-pre p-tool p-post p-risposta p-loop p-nota">
+<p><strong>6 · La risposta è garantita, non sperata.</strong> Passata diretta o corretta nel giro, la regola vale comunque: non perché Claude se la ricorda, ma perché il tornello l'ha imposta.</p>
+</div>
+</div>
 <ol>
 <li>Claude sta per usare (o ha appena usato) un tool → l'evento
    corrispondente scatta.</li>
@@ -1591,6 +1613,8 @@ ovvero dare occhi e mani nuove a Claude.</p>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="assets/percorso.js"></script>
       
     
   </body>
