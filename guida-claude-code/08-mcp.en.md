@@ -102,6 +102,12 @@ in the project root**, meant to be committed: that's how you share the
 stack with the team. Whoever clones the repo gets the servers already
 configured.
 
+!!! tip "The right scope is the lowest one that fits"
+    `local` for your own experiments, `project` only when the server truly
+    needs to be shared with the team, `user` only for what you use
+    everywhere. The default (`local`) is already the cautious choice: raise
+    it only when you need to.
+
 Here's a complete `.mcp.json`:
 
 ```json
@@ -164,6 +170,11 @@ permissions**. So: add what you use, remove what you don't (an occasional
 tool returns huge outputs (it happens, with web pages),
 `MAX_MCP_OUTPUT_TOKENS` in the settings caps how much of it enters the
 context.
+
+!!! warning "Risk surface"
+    An MCP server is code running on your machine with your permissions.
+    The same caution as with hooks (ch. 07) applies: install only what you
+    use, from sources you know, and clean up what you no longer need.
 
 ---
 

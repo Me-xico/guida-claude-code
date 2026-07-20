@@ -52,6 +52,10 @@ also doubles as the foundation for e2e tests. A bonus that isn't small:
 if your UI is unreadable to the accessibility tree, you've just found an
 a11y problem, the same one a screen reader would have.
 
+!!! note "A useful side effect"
+    If the accessibility tree can't read an element of your UI, that's the
+    same obstacle a screen reader would hit: an a11y problem found for free.
+
 ## Route 2: the official Chrome extension (Anthropic, for subscribers)
 
 **What it is**: Claude inside *your* Chrome, not in a separate browser.
@@ -92,6 +96,11 @@ design becomes available. Three moves:
    a single attempt into a cycle.
 3. Claude iterates on its own: implement → look (a real screenshot, from a
    real browser) → compare → fix → look again.
+
+!!! tip "The criterion that closes the loop"
+    "Repeat until they match" is the phrase you need: without a verifiable
+    target (the mock, the tests) the loop doesn't stop on its own, it always
+    has to be asked for explicitly.
 
 What to expect: the first iteration will be at 70%; the third, nearly
 indistinguishable from the mock. Your job shifts from "describing the

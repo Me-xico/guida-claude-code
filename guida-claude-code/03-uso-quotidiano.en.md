@@ -35,7 +35,7 @@ The four phases in practice:
 1. **Explore** (in plan mode): "read `src/auth` and explain how the login
    works". Claude reads, searches, summarizes, but modifies nothing.
 2. **Plan**: "prepare a detailed implementation plan". Claude produces the
-   plan; with `Ctrl+G` you open it in your editor and fix it *before* a
+   plan; with ++ctrl+g++ you open it in your editor and fix it *before* a
    single line of code gets written: it's the moment when review is
    cheapest.
 3. **Code**: you approve the plan and Claude implements. On approval it
@@ -45,7 +45,7 @@ The four phases in practice:
 
 **Plan mode, concretely**: it's one of the permission modes, Claude can
 only read and explore, never write. You activate it by cycling with
-**Shift+Tab** (the same key cycles through all the modes) or at startup
+++shift+tab++ (the same key cycles through all the modes) or at startup
 with `claude --permission-mode plan`. You know you're in it because the
 status bar under the prompt says so, like here:
 
@@ -55,8 +55,9 @@ It's also a great way to explore a new codebase risk-free: "it
 can't touch anything" is guaranteed by the permission system, not by the
 model's good intentions.
 
-**When to skip the plan**: if the diff can be described in one sentence (a
-typo, a rename, one log line), plan mode is pure overhead. Go direct.
+!!! tip "When to skip the plan"
+    If the diff can be described in one sentence (a typo, a rename, one log
+    line), plan mode is pure overhead. Go direct.
 
 ## Checkpoints and /rewind: the safety net
 
@@ -64,7 +65,7 @@ typo, a rename, one log line), plan mode is pure overhead. Go direct.
 checkpoint is saved, a snapshot you can return to, like git restore points
 but automatic and per-change.
 
-**Where it is**: press **Esc twice** (with an empty input) or type
+**Where it is**: press ++esc++ ++esc++ (with an empty input) or type
 `/rewind`. The restore menu opens with the list of checkpoints:
 
 ![The Rewind menu: every change is a restore point](assets/03-rewind-menu.svg)
@@ -80,9 +81,11 @@ but automatic and per-change.
 
 **How it changes the way you work**: you can let Claude *attempt* a risky
 route ("rewrite the store with Zustand, let's see") knowing the way back
-costs two keystrokes. Two limits to know: it tracks **only the edits Claude
-makes**, not bash commands (`rm`, `mv`), not your manual changes, and it
-keeps the last 100 checkpoints.
+costs two keystrokes.
+
+!!! warning "Two limits to know"
+    It tracks **only the edits Claude makes**, not bash commands (`rm`,
+    `mv`), not your manual changes, and it keeps the last 100 checkpoints.
 
 ## The 2-attempt rule
 
@@ -128,10 +131,13 @@ free space is what's left for the actual work:
 
 ![Output of /context: the context usage grid by category](assets/03-context.svg)
 
-**Why it matters to you**: the context fills up as you work, and the fuller
-it gets the more performance degrades: Claude "forgets" the instructions
-given at the start, repeats mistakes already fixed. Almost every good habit
-in this guide stems from this. The tools:
+!!! note "Why it matters to you"
+    The context fills up as you work, and the fuller it gets the more
+    performance degrades: Claude "forgets" the instructions given at the
+    start, repeats mistakes already fixed. Almost every good habit in this
+    guide stems from this.
+
+The tools:
 
 - `/clear`: empties the conversation. Use it **between one task and the
   next, always**: the new task doesn't need the previous one's history. No
@@ -152,17 +158,17 @@ The reference table, then the three tricks that deserve detail:
 
 | Key | Effect |
 |---|---|
-| `Esc` | interrupts Claude (your queued messages stay) |
-| `Esc Esc` | input full: clears the line; input empty: opens `/rewind` |
-| `Ctrl+C` | first press: clears the input; second: exits |
-| `Shift+Tab` | cycles the permission modes (ch. 02) |
+| ++esc++ | interrupts Claude (your queued messages stay) |
+| ++esc++ ++esc++ | input full: clears the line; input empty: opens `/rewind` |
+| ++ctrl+c++ | first press: clears the input; second: exits |
+| ++shift+tab++ | cycles the permission modes (ch. 02) |
 | `!command` | shell mode: runs the command, output goes into the context |
 | `@path` | reference a file (autocomplete) |
-| `Ctrl+V` | pastes an image from the clipboard (essential for frontend: screenshot → "reproduce this layout") |
-| `Ctrl+O` | detailed transcript (tool calls, timings, model) |
-| `Ctrl+R` | search the history |
-| `Ctrl+B` | sends the running command to the background |
-| `Alt+T` / `Option+T` | toggles extended thinking (for the hard problems; on some models it's always on) |
+| ++ctrl+v++ | pastes an image from the clipboard (essential for frontend: screenshot → "reproduce this layout") |
+| ++ctrl+o++ | detailed transcript (tool calls, timings, model) |
+| ++ctrl+r++ | search the history |
+| ++ctrl+b++ | sends the running command to the background |
+| ++alt+t++ / ++option+t++ | toggles extended thinking (for the hard problems; on some models it's always on) |
 
 **Shell mode (`!`)**: type `!` as the first character and the input changes
 appearance, pink prompt, "! for shell mode" hint at the bottom: you're no
@@ -206,6 +212,6 @@ picker:
 
 ---
 
-**In short**: plan mode for big tasks, double Esc as the universal undo,
-`/clear` between tasks, and the 2-attempt rule when you get stuck. The next
+**In short**: plan mode for big tasks, ++esc++ ++esc++ as the universal
+undo, `/clear` between tasks, and the 2-attempt rule when you get stuck. The next
 chapter digs into the most important file in your setup: the CLAUDE.md.

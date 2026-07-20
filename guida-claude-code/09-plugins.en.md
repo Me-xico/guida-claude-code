@@ -33,11 +33,15 @@ the plugin is installed, Claude Code loads those contents at session
 startup as if they were yours: the skills show up among the slash
 commands, the hooks attach to their events, the MCP servers start up.
 
+!!! note "What travels inside a plugin"
+    Skills, agents, hooks, MCP servers: exactly chapters 5-8, but versioned
+    and distributed as a single package.
+
 ## How to install and manage it
 
 Everything happens in a session, starting from `/plugin`:
 
-```
+```text
 /plugin                              # browse marketplaces and installed plugins
 /plugin install name@marketplace
 /reload-plugins                      # reload after changes to plugin files
@@ -98,6 +102,11 @@ The same caution as with hooks (ch. 07): a plugin can bring hooks and MCP
 servers, which means **code running with your credentials**. Install from
 sources you trust, and read what's inside. That's exactly why the
 `/plugin` panel shows it to you.
+
+!!! warning "Same risk as hooks"
+    A plugin can bring hooks and MCP servers, meaning code and connections
+    running with your credentials. Install from trusted sources and check
+    what's inside before saying yes.
 
 ## A live example
 

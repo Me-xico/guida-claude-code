@@ -17,31 +17,33 @@ verify its own work?** If yes, the loop becomes work → check → fix →
 repeat until it passes, without you in the middle. If no, you are the test
 runner, and you're also the bottleneck.
 
+![The verification cycle: executable criterion, work, check, fix](assets/11-loop-verifica.svg)
+
 ## How to apply it: give Claude an executable criterion
 
 For a frontend dev, the "ways to verify" are concrete and almost always
 already in the project:
 
-- **tests**: "write the tests first (they must fail), then implement until
-  they pass". TDD pairs with Claude better than it does with humans,
-  because a failing test is a signal the model can read and chase on its
-  own
-- the **build's exit code**: `npm run build` exiting 0
-- **lint/typecheck**: `tsc --noEmit`
-- a **screenshot compared against the mock**: "here's the design;
-  implement it, take a screenshot, compare, list the differences, fix
-  them" (ch. 10)
+| Method | When to use it | What it catches |
+|---|---|---|
+| **Tests** | write the tests first (they must fail), then implement until they pass | functional regressions; TDD pairs with Claude better than it does with humans, because a failing test is a signal the model can read and chase on its own |
+| **Build's exit code** | `npm run build` exiting 0 | a broken build before it reaches deploy |
+| **Lint/typecheck** | `tsc --noEmit` | type errors, before the code even runs |
+| **Screenshot compared against the mock** | "here's the design; implement it, take a screenshot, compare, list the differences, fix them" (ch. 10) | visual deviations from the design that tests don't see |
 
-A complete prompt, to pin down the shape:
+!!! tip "An executable success criterion"
+    A complete prompt, to pin down the shape:
 
-> "Add validation to `@src/components/CheckoutForm.tsx`: email required
-> and in a valid format, ZIP code with 5 digits. First write the Vitest
-> tests for these cases (they must fail), then implement. Consider it done
-> only when `npm test` passes and `tsc --noEmit` exits clean."
+    ```text title="Prompt"
+    Add validation to @src/components/CheckoutForm.tsx: email required
+    and in a valid format, ZIP code with 5 digits. First write the Vitest
+    tests for these cases (they must fail), then implement. Consider it
+    done only when npm test passes and tsc --noEmit exits clean.
+    ```
 
-Note the structure: what to do, how to verify it, when to stop. The
-verification criterion costs one extra line and changes everything that
-comes before it.
+    Note the structure: what to do, how to verify it, when to stop. The
+    verification criterion costs one extra line and changes everything
+    that comes before it.
 
 ## Why it works
 
@@ -53,8 +55,10 @@ every iteration burns *its* time, not yours.
 
 ## Ask for evidence, not assertions
 
-"Done, it works now" is not information: it's a hope. The countermove is
-always the same question, in three variants:
+!!! warning "Trust without verification"
+    "Done, it works now" is not information: it's a hope.
+
+The countermove is always the same question, in three variants:
 
 > "Show me the test output."
 > "Paste the build's exit code."
@@ -102,19 +106,21 @@ it's the same session. The pattern: write with one session, have a
 do the review: whoever didn't write the code sees what the author can no
 longer see.
 
-**But watch out for the documented side effect**: a reviewer instructed to
-find problems will *always* find some: that's its mandate. If you obey
-every finding, after three rounds of review you end up with abstractions,
-guard clauses and configurability nobody asked for: review-driven
-over-engineering. The antidote is to limit the mandate up front:
+??? note "The documented side effect of adversarial review"
+    **But there's a catch, and it's a known one**: a reviewer instructed
+    to find problems will *always* find some: that's its mandate. If you
+    obey every finding, after three rounds of review you end up with
+    abstractions, guard clauses and configurability nobody asked for:
+    review-driven over-engineering. The antidote is to limit the mandate up
+    front:
 
-> "Review this diff. Report **only** real bugs and requirements missed
-> against SPEC.md. Don't propose style improvements, refactoring or
-> abstractions: if something works and is within the requirements, it
-> passes."
+    > "Review this diff. Report **only** real bugs and requirements missed
+    > against SPEC.md. Don't propose style improvements, refactoring or
+    > abstractions: if something works and is within the requirements, it
+    > passes."
 
-The extra suggestions that show up anyway: treat them as optional, not as
-to-dos.
+    The extra suggestions that show up anyway: treat them as optional, not
+    as to-dos.
 
 ## The no-tests case
 

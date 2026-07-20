@@ -29,6 +29,8 @@ the right order, so they pay off by the first afternoon? Here they are:
    obvious. Every confirmation prompt on a harmless command is friction
    that keeps you supervising instead of working.
 
+![The first 30 minutes: five steps, then it's routine](assets/14-primi-30-minuti.svg)
+
 And when the time comes, the sixth move adds itself: the Chrome extension
 or Playwright MCP (ch. 10).
 
@@ -92,10 +94,12 @@ Four tools, from most to least frequent:
 - `/usage`: where you stand against your plan limits (Pro/Max)
 - `/cost`: session spend (API users)
 
-Orders of magnitude: the full table of plans is in ch. 01; the practical
-point is that if Claude Code becomes your main tool, the Pro limit (~200
-messages every 5 hours) bites quickly: it sounds like a lot until you spend
-a whole day in session.
+Orders of magnitude: the full table of plans is in ch. 01.
+
+!!! note "The limit bites quickly"
+    If Claude Code becomes your main tool, the Pro limit (~200 messages
+    every 5 hours) bites quickly: it sounds like a lot until you spend a
+    whole day in session.
 
 ## Going further (a glimpse)
 

@@ -12,8 +12,9 @@ punch your ticket" sign, a hook is the **turnstile**: nobody gets through
 without it. Rule of thumb for splitting things up: preferences and knowledge
 → CLAUDE.md; **guarantees → hooks**.
 
-A non-obvious bonus: a `deny` enforced by a `PreToolUse` hook holds even in
-`bypassPermissions`: it's the one guardrail no mode can override.
+!!! warning "Rules that always apply, not almost always"
+    A non-obvious bonus: a `deny` enforced by a `PreToolUse` hook holds even
+    in `bypassPermissions`: it's the one guardrail no mode can override.
 
 ## Where it lives and who creates it
 
@@ -66,6 +67,8 @@ The result: CI will never fail on formatting again. Not because Claude
 "remembers", but because there's no other way it can go.
 
 ## How it works, step by step
+
+![A hook's lifecycle: block first, fix afterward](assets/07-ciclo-hook.svg)
 
 1. Claude is about to use (or has just used) a tool → the matching event
    fires.

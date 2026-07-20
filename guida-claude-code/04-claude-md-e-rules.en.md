@@ -64,12 +64,13 @@ componente, stile con CSS modules (niente styled-components).
 Note the style: imperative, specific sentences, no explanations. Every line
 is an instruction that changes a behavior.
 
-**The line test**: for each line, ask yourself "if I remove this, would
-Claude get something wrong?". If not, cut it. Target: **under ~200 lines**.
-The reason isn't aesthetic: models reliably follow a limited number of
-instructions, and in a bloated CLAUDE.md the important rules drown among
-the useless ones. The file stops working exactly where you needed it. Since
-v2.1.206, `/doctor` will suggest the cuts itself.
+!!! tip "The line test"
+    For each line, ask yourself "if I remove this, would Claude get
+    something wrong?". If not, cut it. Target: **under ~200 lines**. The
+    reason isn't aesthetic: models reliably follow a limited number of
+    instructions, and in a bloated CLAUDE.md the important rules drown among
+    the useless ones. The file stops working exactly where you needed it.
+    Since v2.1.206, `/doctor` will suggest the cuts itself.
 
 ## The pattern that keeps the file alive: the error log
 
@@ -112,11 +113,14 @@ machine → `CLAUDE.local.md` or the user-level file.
 **Imports**: `@docs/css-conventions.md` at the start of a line includes
 that file in the CLAUDE.md, like an `import` (recursive, max 4 levels).
 It's for modularizing: the main file stays short and the bulky sections
-live in dedicated files. Watch out for the special case: if an import
-points **outside** the project, Claude Code stops and asks for
-confirmation, because a malicious CLAUDE.md in a third-party repo could use
-imports to inject instructions into your session. This is the dialog, and
-on a repo you don't know the answer is no:
+live in dedicated files.
+
+!!! warning "External imports"
+    If an import points **outside** the project, Claude Code stops and
+    asks for confirmation, because a malicious CLAUDE.md in a third-party
+    repo could use imports to inject instructions into you.
+
+This is the dialog, and on a repo you don't know the answer is no:
 
 ![Confirmation prompt for external CLAUDE.md imports](assets/04-import-dialog.svg)
 

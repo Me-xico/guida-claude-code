@@ -48,11 +48,12 @@ Total commands:    6812
 Tokens saved:      2.1M (54.3%)
 ```
 
-Half the tokens from command outputs, gone. On a Pro plan that's the
-difference between a window that runs out mid-afternoon and one that lasts
-until evening. It's the tool with the best benefit-to-risk ratio in this
-chapter: it doesn't change *what* Claude does, only the size of what it
-reads.
+!!! tip "When rtk really pays off"
+    Half the tokens from command outputs, gone. On a Pro plan that's the
+    difference between a window that runs out mid-afternoon and one that
+    lasts until evening. It's the tool with the best benefit-to-risk ratio
+    in this chapter: it doesn't change *what* Claude does, only the size of
+    what it reads.
 
 ## ponytail - less generated code
 
@@ -94,13 +95,14 @@ claude plugin marketplace add JuliusBrussee/caveman
 claude plugin install caveman@caveman
 ```
 
-**The asterisk**: the project claims ~65% savings on *prose output*
-tokens; but ponytail's independent benchmark (which uses it as a point of
-comparison) measures it at **+7% total tokens** on coding tasks, because
-on real tasks prose is a small slice, and the "caveman" style sometimes
-makes the round-trip longer. The practical verdict: take it for
-*readability* (replies you can scan in two seconds), not for savings.
-For your budget, rtk and ponytail are what count.
+!!! warning "The asterisk"
+    The project claims ~65% savings on *prose output* tokens; but
+    ponytail's independent benchmark (which uses it as a point of
+    comparison) measures it at **+7% total tokens** on coding tasks,
+    because on real tasks prose is a small slice, and the "caveman" style
+    sometimes makes the round-trip longer. The practical verdict: take it
+    for *readability* (replies you can scan in two seconds), not for
+    savings. For your budget, rtk and ponytail are what count.
 
 ## The right order for a Pro plan
 

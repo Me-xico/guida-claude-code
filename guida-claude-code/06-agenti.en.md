@@ -16,6 +16,12 @@ have no reason to keep. The subagent does the dirty work in its own
 context and brings back only the conclusion. You keep the summary, not the
 logs.
 
+!!! note "Isolated context"
+    The noise (greps, test logs, files read) stays in the subagent's
+    context and disappears with it at the end of the task. Only the
+    summary reaches your session: it's worth delegating even a short task
+    if it produces verbose output.
+
 Second reason: **narrowing powers**. A reviewer with read-only tools can't
 "fix" things on its own initiative while it's judging.
 
@@ -63,6 +69,12 @@ You are a senior frontend reviewer. When invoked:
 | `model` | `haiku` for mechanical work (lint, running tests), `sonnet` for reviews; omit to inherit from the main agent |
 | body | the agent's **system prompt**: who it is, what it does when invoked, what format it answers in |
 
+!!! tip "The description is the routing rule"
+    Just as with skills, the main agent decides who to delegate to by
+    reading the descriptions of all available agents. Write it thinking
+    about *when* the delegation should trigger, not just what the agent
+    does.
+
 Note the example's body: it defines the role, the steps, the output format
 and the boundary ("you do NOT edit"). That's the pattern to copy.
 
@@ -89,6 +101,8 @@ stepping on each other), `permissionMode`, `effort`.
 To invoke it explicitly: name it in the prompt ("use the code-reviewer on
 the new components") or guarantee the delegation with an @-mention:
 `@"code-reviewer (agent)"`.
+
+![The three delegation gateways and the return of the conclusions](assets/06-delega-agenti.svg)
 
 ### Foreground and background
 

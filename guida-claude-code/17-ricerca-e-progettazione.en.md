@@ -3,6 +3,8 @@
 > Verified July 16, 2026 against the official docs. Claude Design and
 > Ultraplan are in research preview: behavior and availability may change.
 
+![Research, then design, then code: the shortcut gets paid for later](assets/17-ricerca-flusso.svg)
+
 ## The principle
 
 Chapter 11 teaches you to verify work *after* it's done. This chapter
@@ -114,6 +116,18 @@ The full flow of a job done well has four stages, each with the right
 tool and the right check: **research** (`/deep-research`, cited
 sources) → **decision** → **plan** (plan mode → SPEC → Ultraplan, review
 scaled to the stakes) → **implementation** (ch. 03 and 10, with the
-"done" criterion from ch. 11). Skip a stage and it comes back later,
-with interest. Closing out the Method is the chapter on common mistakes
+"done" criterion from ch. 11).
+
+| Tool | When | What it produces |
+|---|---|---|
+| `/deep-research` | a hard-to-reverse decision made on unfamiliar ground | a report with cited sources |
+| Plan mode (ch. 03) | the everyday rung | ten lines of plan to correct, instead of a hundred lines of code |
+| Interview → SPEC (ch. 12) | for big features | a written spec that outlives the session |
+| `/ultraplan` | the plan deserves a document-style review instead of a terminal one | plan in the cloud, review in the browser with inline comments; then a cloud PR or local teleport |
+| Claude Design | designing the interface, especially with a design system in the repo | designs, interactive prototypes, mockups already matching the real components |
+
+!!! warning "The cost of skipping a stage"
+    Every skipped stage comes back later, with interest.
+
+Closing out the Method is the chapter on common mistakes
 (ch. 13): the checklist of symptoms, before we move on to the tools.

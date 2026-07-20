@@ -23,6 +23,11 @@ split:
   live next to the component");
 - **procedures → skills**: loaded on demand, zero cost when unused.
 
+!!! tip "The signal to write one"
+    You'll notice it when you catch yourself getting annoyed at repeating
+    the same explanation: if an operation takes you twice by hand, the
+    third time write it as a skill.
+
 ## Where it lives and who creates it
 
 A skill is a directory containing at least a `SKILL.md`:
@@ -77,6 +82,8 @@ Esegui in ordine, fermandoti al primo problema:
 | `name` | identifies the skill: it's the directory name and becomes the `/release-check` command |
 | `description` | **the trigger**: the only thing Claude sees when deciding whether to activate it |
 | body | the recipe: the instructions Claude follows once the skill activates |
+
+![Anatomy of a skill: the trigger in the description, the procedure in the body](assets/05-anatomia-skill.svg)
 
 The description deserves a pause, because it's where skills fail. Claude
 doesn't read the body to decide: it reads *only* the description. So put
@@ -157,6 +164,11 @@ invocation. But it's the legacy format, a single file, with no
 `references/` or `assets/`. If both exist with the same name, the skill
 wins. Use skills for anything new; existing commands don't need rewriting,
 migrate them only when you need the extra structure.
+
+!!! note "Skill or legacy slash command?"
+    Same frontmatter, same `/name` invocation: the only difference is the
+    structure. The legacy command is a single file, the skill is a
+    directory that can grow with `references/` and `assets/`.
 
 ## Built-in skills and how to create good ones
 

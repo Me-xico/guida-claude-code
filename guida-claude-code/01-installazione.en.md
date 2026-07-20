@@ -17,15 +17,19 @@ have to think about it again.
 
 **How to install it.** One command, depending on your system:
 
-```bash
-# macOS / Linux / WSL
-curl -fsSL https://claude.ai/install.sh | bash
-```
+=== "macOS / Linux"
 
-```powershell
-# Windows (PowerShell)
-irm https://claude.ai/install.ps1 | iex
-```
+    ```bash
+    # macOS / Linux / WSL
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+
+=== "Windows"
+
+    ```powershell
+    # Windows (PowerShell)
+    irm https://claude.ai/install.ps1 | iex
+    ```
 
 **Where it ends up.** The binary goes into `~/.local/bin/claude`. It's a
 self-contained executable: **no Node.js required**, nor any other runtime.
@@ -44,6 +48,11 @@ repositories.
 $ claude --version
 2.1.210 (Claude Code)
 ```
+
+!!! tip "Automatic updates"
+    A binary installed this way updates itself in the background, like a
+    modern browser does: after this check you never have to think about it
+    again.
 
 If the command isn't found, the problem is almost always that
 `~/.local/bin` is not on your shell's `PATH`.

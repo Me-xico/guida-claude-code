@@ -116,11 +116,14 @@ whatever it just read).
 as broad as "any command that touches a `.env`" in deny would cause real
 damage: `cp .env.example .env` is a legitimate operation my fixtures do
 routinely. With ask, the command pauses instead and asks: I deny suspicious
-uses by hand, legitimate ones go through with a keystroke. The criterion I
-distilled from this: **deny only where a false positive is nearly
-impossible; ask where the pattern is broad**. There's no appeal with deny,
-and a rule that fights you ends up deleted, which is worse than a rule that
-asks.
+uses by hand, legitimate ones go through with a keystroke.
+
+!!! tip "Deny or ask?"
+    The criterion I distilled from this: **deny only where a false
+    positive is nearly impossible; ask where the pattern is broad**.
+
+There's no appeal with deny, and a rule that fights you ends up deleted,
+which is worse than a rule that asks.
 
 ## Hooks: the rules that always hold
 
@@ -149,16 +152,24 @@ it's my favorite example of a small hook done well:
 cmd=$(jq -r '.tool_input.command // empty')
 case "$cmd" in
   *"git commit"*) ;;
-  *) exit 0 ;;
+  *) exit 0 ;; # (1)!
 esac
 # Narrow patterns on purpose — "anthropic" alone would block legitimate
 # commits about Anthropic SDK code; widen only if something slips.
-if printf '%s' "$cmd" | grep -qiE 'co-authored-by:[^"]*\b(claude|anthropic)|generated with|noreply@anthropic\.com|🤖'; then
+if printf '%s' "$cmd" | grep -qiE 'co-authored-by:[^"]*\b(claude|anthropic)|generated with|noreply@anthropic\.com|🤖'; then # (2)!
   echo "Commit bloccato: il messaggio viola le regole del CLAUDE.md. Riscrivilo." >&2
-  exit 2
+  exit 2 # (3)!
 fi
 exit 0
 ```
+
+1. Exits immediately if the command isn't a commit: zero cost on 99% of
+   cases.
+2. The patterns are deliberately narrow (`anthropic` alone would block
+   legitimate commits on code that uses the Anthropic SDK), because a
+   guardian that cries wolf on false positives ends up disabled.
+3. Exit code 2 blocks the tool **and** explains to the model why, so it
+   corrects itself on the next try.
 
 The choices that matter: it exits immediately if the command isn't a commit
 (zero cost on 99% of cases); exit code 2 blocks the tool **and** explains to
@@ -244,8 +255,11 @@ description that marks the boundary against related agents ("NOT for
 Terraform → use terraform-expert"): that boundary is what lets the session
 pick the right agent without guessing wrong.
 
-One question sums up the three-tier criterion: *does this role judge, work,
-or execute?* The main session stays the orchestrator on the flagship model;
+!!! note "The three tiers"
+    One question sums up the three-tier criterion: *does this role judge,
+    work, or execute?*
+
+The main session stays the orchestrator on the flagship model;
 whoever judges sits beside it as a peer, whoever works and whoever executes
 scale down a tier. And altitude closes a gap the language experts couldn't
 close on their own: writing in a given language is the easy part by now,

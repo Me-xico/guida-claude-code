@@ -16,6 +16,11 @@ handed a ticket that just says "fix the login".
 You're the PM: the clearer the brief, the better the delivery. This entire
 chapter is that sentence, unpacked.
 
+!!! note "The chapter's mental model"
+    Claude Code is a bright junior you manage: extremely fast, never
+    offended, but a vague request produces a vague result. You're the PM:
+    the clearer the brief, the better the delivery.
+
 ## Specificity: success criteria, not adjectives
 
 The pain: you ask "improve this component", you get a refactor that
@@ -23,13 +28,17 @@ touches twenty unrelated lines, and the real problem, the re-renders, is
 still there. It's not the model's fault: "improve" doesn't say *what* has
 to be true at the end.
 
+![Anatomy of a prompt that succeeds: context, task, constraints, verification](assets/12-anatomia-prompt.svg)
+
 Weak: "improve this component".
 Strong:
 
-> "Reduce `ProductList` re-renders: memoize the callbacks passed to
-> children, move the filter into a `useMemo`, and verify with the Profiler
-> that when `query` changes only the list re-renders. Don't change the
-> public API."
+```text
+"Reduce `ProductList` re-renders: memoize the callbacks passed to
+children, move the filter into a `useMemo`, and verify with the Profiler
+that when `query` changes only the list re-renders. Don't change the
+public API."
+```
 
 The difference isn't length: it's that the second one has **verifiable
 criteria** (ch. 11, "verify with the Profiler that…") and **constraints**
@@ -48,11 +57,11 @@ by line. There's no need: that's what the model is for; it knows how to
 write code. What you need to provide instead is what the model **cannot
 know** by looking at the repo:
 
-- the *why*: "this form is the payment funnel: the priority is not
-  breaking the tracking", which changes every downstream decision
-- the **constraints**: "Node 18, no new dependencies"
-- the **references**: "`@src/components/Form.tsx` is the pattern to
-  follow"
+| What to give | Example |
+|---|---|
+| the *why* | "this form is the payment funnel: the priority is not breaking the tracking" — it changes every decision downstream |
+| the **constraints** | "Node 18, no new dependencies" |
+| the **references** | "`@src/components/Form.tsx` is the pattern to follow" |
 
 And pass the context in the richest form available: reference files with
 `@` (instead of describing them), paste errors **in full** (the stack
@@ -60,10 +69,13 @@ trace contains the answer more often than you'd think), attach screenshots
 (`Ctrl+V`) when the problem is visual. A prompt that puts the pieces
 together:
 
-> "The funnel tracking broke after the latest refactor. This form is the
-> payment funnel: top priority is not losing events. Console error:
-> [pasted in full]. The correct event-sending pattern is in
-> `@src/analytics/track.ts`. Constraint: no new dependencies."
+!!! tip "A prompt that puts the pieces together"
+    ```text
+    "The funnel tracking broke after the latest refactor. This form is the
+    payment funnel: top priority is not losing events. Console error:
+    [pasted in full]. The correct event-sending pattern is in
+    `@src/analytics/track.ts`. Constraint: no new dependencies."
+    ```
 
 Why it works: the model reasons over what's in its context. The why,
 constraints and references are exactly the information it can't deduce on
@@ -74,9 +86,11 @@ its own: everything else it can.
 Asking for a whole feature in one prompt is the greed mistake, mistake 2
 in ch. 13. Instead:
 
-> "Let's build the cart in steps. Step 1: the data layer only — a
-> `useCart` hook with add, remove, quantity, and the Vitest tests. No UI,
-> no persistence for now. Then we meet back here and decide on step 2."
+```text
+"Let's build the cart in steps. Step 1: the data layer only — a
+`useCart` hook with add, remove, quantity, and the Vitest tests. No UI,
+no persistence for now. Then we meet back here and decide on step 2."
+```
 
 Each finished and verified step is a checkpoint (in the literal sense:
 ch. 03) to build the next one on. If step 2 goes wrong, you return to
@@ -86,9 +100,11 @@ For large features, the official pattern is **having Claude interview
 you**, useful precisely because the requirements you *think* are clear
 aren't:
 
-> "I need to build X. Before writing code, interview me: ask the questions
-> needed to clarify requirements and edge cases, then write a spec in
-> SPEC.md."
+```text
+"I need to build X. Before writing code, interview me: ask the questions
+needed to clarify requirements and edge cases, then write a spec in
+SPEC.md."
+```
 
 Claude's questions surface edge cases you hadn't thought of (what happens
 to the cart when the user logs out? do discounts stack?). Review the spec,
@@ -108,9 +124,11 @@ material** instead: the exact error, the test output, the screenshot of
 what's actually on screen. "It doesn't work" gives Claude nothing to work
 with; a stack trace does:
 
-> "The fix isn't enough: on submit I now get this — [full stack trace].
-> Here's also a screenshot of the form's state [Ctrl+V]. Note that it
-> only happens when the email field is empty."
+```text
+"The fix isn't enough: on submit I now get this — [full stack trace].
+Here's also a screenshot of the form's state [Ctrl+V]. Note that it
+only happens when the email field is empty."
+```
 
 And remember the 2-attempt rule (ch. 03): after the second failed round,
 `/clear` and rephrase from scratch, folding in what you've learned. The

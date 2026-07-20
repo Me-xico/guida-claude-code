@@ -90,11 +90,14 @@ There are three lists, and they answer three different questions:
 **How it works in practice.** When Claude is about to use a tool, the
 request is matched against the rules: if it matches a `deny` it's blocked,
 if it matches an `allow` it goes through without a prompt, otherwise the
-current permission mode applies (next section). The most important pattern
-to copy right away is **the deny on secrets**: `.env` and friends must not
-be readable even by accident. Note how the demo's deny closes both doors:
-the `Read` tool (the first two rules) and reading via the shell with `cat`
-(the third). Blocking only one would leave the other open.
+current permission mode applies (next section).
+
+!!! warning "The deny on secrets"
+    The most important pattern to copy right away is **the deny on
+    secrets**: `.env` and friends must not be readable even by accident.
+    Note how the demo's deny closes both doors: the `Read` tool (the first
+    two rules) and reading via the shell with `cat` (the third). Blocking
+    only one would leave the other open.
 
 There's one moment when this file gets put in front of you: the first time
 you open a project that contains pre-approved permissions, Claude Code
@@ -136,11 +139,12 @@ tired of confirming every edit:
 
 ![Permission prompt for creating a file](assets/02-permission-prompt.svg)
 
-The recommended progression: `default` until you've built up confidence,
-then `acceptEdits` for day-to-day work, `plan` when you tackle big tasks
-where you want to see the plan before the code (ch. 03). Whatever mode you
-pick, the protected paths (`.git/`, `.claude/`, your shell dotfiles) are
-never auto-approved: those it always asks about.
+!!! tip "Recommended progression"
+    `default` until you've built up confidence, then `acceptEdits` for
+    day-to-day work, `plan` when you tackle big tasks where you want to see
+    the plan before the code (ch. 03). Whatever mode you pick, the
+    protected paths (`.git/`, `.claude/`, your shell dotfiles) are never
+    auto-approved: those it always asks about.
 
 To view and edit the rules without touching the JSON by hand there's the
 `/permissions` panel. Below you see it open on the demo project: note the

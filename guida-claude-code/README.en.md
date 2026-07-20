@@ -14,41 +14,62 @@ from the TUI, and the facts were verified against the
 [official documentation](https://code.claude.com/docs) — still the place to
 look once this guide starts to age.
 
+![The guide map: four parts, three reading paths](assets/00-mappa-guida.svg)
+
 ## How to read it
 
 A note on numbering: the number in a chapter's name is a stable
 identifier, not the reading order — the guide grows by section and new
 chapters get appended at the end. The right order is this index.
 
-**Basics - starting right (day 1):**
+!!! tip "Three paths, depending on where you are"
+    - **Starting from zero** → Basics in order, then Method.
+    - **Already using it, want to use it better** → Method (starting from
+      Verification), then Power where you need it.
+    - **Want to copy a proven setup** → Reference, especially ch. 16 (the
+      philosophy) and ch. 18 (the real files).
 
-1. [Installation and first run](01-installazione.md) - from `curl` to your first prompt
-2. [Setup and configuration](02-setup-e-config.md) - where config lives, permissions, deny rules for secrets
-3. [Day-to-day use](03-uso-quotidiano.md) - the workflow, undo, session management
-4. [CLAUDE.md and rules](04-claude-md-e-rules.md) - the project's permanent instructions
+<div class="grid cards" markdown>
 
-**Method - what makes the difference:**
+-   **Basics — starting right (day 1)**
 
-5. [Verification](11-verifica.md) - *if you read only one chapter, make it this one*
-6. [Prompt engineering](12-prompt-engineering.md) - asking for things in a way that works
-7. [Research and design](17-ricerca-e-progettazione.md) - deep research, SPEC, Ultraplan and Claude Design: decide well before you build
-8. [Common mistakes](13-errori-comuni.md) - the checklist that closes the Method
+    ---
 
-**Power - once the basics are running:**
+    1. [Installation and first run](01-installazione.md) - from `curl` to your first prompt
+    2. [Setup and configuration](02-setup-e-config.md) - where config lives, permissions, deny rules for secrets
+    3. [Day-to-day use](03-uso-quotidiano.md) - the workflow, undo, session management
+    4. [CLAUDE.md and rules](04-claude-md-e-rules.md) - the project's permanent instructions
 
-9. [Skills and slash commands](05-skills-e-slash-commands.md) - reusable procedures
-10. [Agents](06-agenti.md) - who to delegate the noisy work to
-11. [Hooks](07-hooks.md) - rules that always hold, not almost always
-12. [MCP](08-mcp.md) - connecting browsers, Figma, GitHub
-13. [Plugins](09-plugins.md) - your setup in a package
-14. [Frontend workflow](10-workflow-frontend.md) - *for frontend devs: Claude with a real browser*
+-   **Method — what makes the difference**
 
-**Reference:**
+    ---
 
-15. [Must-haves and costs](14-must-have-e-costi.md) - the first 30 minutes of setup, the plans, the money-saving habits
-16. [Saving tokens](15-risparmiare-token.md) - the tools for longer work windows on the Pro plan
-17. [A real setup: global, per client, per repo](16-setup-a-tre-livelli.md) - how the author actually organizes it, three levels at a time
-18. [The setup in plain sight](18-setup-in-chiaro.md) - the actual files line by line: permissions, hooks, agents, skills, MCP
+    5. [Verification](11-verifica.md) - *if you read only one chapter, make it this one*
+    6. [Prompt engineering](12-prompt-engineering.md) - asking for things in a way that works
+    7. [Research and design](17-ricerca-e-progettazione.md) - deciding well before you build
+    8. [Common mistakes](13-errori-comuni.md) - recognizing them before you make them
+
+-   **Power — once the basics are running**
+
+    ---
+
+    9. [Skills and slash commands](05-skills-e-slash-commands.md) - reusable procedures
+    10. [Agents](06-agenti.md) - who to delegate the noisy work to
+    11. [Hooks](07-hooks.md) - rules that always hold, not almost always
+    12. [MCP](08-mcp.md) - connecting browsers, Figma, GitHub
+    13. [Plugins](09-plugins.md) - your setup in a package
+    14. [Frontend workflow](10-workflow-frontend.md) - Claude with a real browser
+
+-   **Reference — the setup, all the way through**
+
+    ---
+
+    15. [Must-haves and costs](14-must-have-e-costi.md) - the first 30 minutes, the plans
+    16. [Saving tokens](15-risparmiare-token.md) - longer work windows
+    17. [A real setup](16-setup-a-tre-livelli.md) - global, per activity, per repo
+    18. [The setup in plain sight](18-setup-in-chiaro.md) - the real files, line by line
+
+</div>
 
 ## What you need to follow along
 

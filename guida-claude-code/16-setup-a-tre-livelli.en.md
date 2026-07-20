@@ -19,9 +19,12 @@ levels, each with its own job:
 | Client | an isolated profile per client | the context: memory, permissions, integrations, domain skills |
 | Repo | `.claude/` in the project | the code: conventions, hooks, agents and maps for that codebase |
 
-The rule for deciding where something belongs: **put it at the highest
-level where it holds true for everything underneath**. Always true → global.
-True for one client → profile. True for one repo → repo.
+!!! tip "Where something belongs"
+    The rule for deciding: **put it at the highest level where it holds
+    true for everything underneath**. Always true → global. True for one
+    client → profile. True for one repo → repo.
+
+![The three levels: global, activity, repo, and the direction of symlinks and overrides](assets/16-tre-livelli.svg)
 
 ## Global level: who you are
 
@@ -83,10 +86,12 @@ decisions this level demands, along with the lessons they carry:
   widening the list by gut feel, I used the built-in
   `/fewer-permission-prompts` skill to analyze recent transcripts: turns out
   most of it was already covered by auto-allow and existing rules, with only
-  three real additions to show for it. Two non-negotiable limits: never
-  allowlist interpreters (`python`, `node`…
-  that's arbitrary execution under another name) and never a generic `curl`
-  (it can POST and exfiltrate anything it reads).
+  three real additions to show for it.
+
+!!! warning "Two non-negotiable limits"
+    Never allowlist interpreters (`python`, `node`… that's arbitrary
+    execution under another name) and never a generic `curl` (it can POST
+    and exfiltrate anything it reads).
 
 Maintenance also includes the no's: in the same review I evaluated a keyless
 web-search MCP server and chose *not* to adopt it — too immature, and the
