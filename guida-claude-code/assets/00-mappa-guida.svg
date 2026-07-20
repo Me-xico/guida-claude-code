@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A8FA3"/>
+    </marker>
+  </defs>
+
+  <!-- ═══ Riga dei quattro blocchi ═══ -->
+  <!-- BASE -->
+  <rect x="15" y="50" width="210" height="130" rx="10" fill="#41465A"/>
+  <text x="120" y="78" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">BASE</text>
+  <text x="120" y="96" text-anchor="middle" fill="#FFFFFF" font-size="12">(cap. 01-04)</text>
+  <text x="120" y="118" text-anchor="middle" fill="#C8CCD8" font-size="11">installazione · setup ·</text>
+  <text x="120" y="134" text-anchor="middle" fill="#C8CCD8" font-size="11">uso quotidiano · CLAUDE.md</text>
+
+  <!-- METODO -->
+  <rect x="255" y="50" width="210" height="130" rx="10" fill="#41465A"/>
+  <text x="360" y="78" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">METODO</text>
+  <text x="360" y="96" text-anchor="middle" fill="#FFFFFF" font-size="12">(cap. 11-13, 17)</text>
+  <text x="360" y="118" text-anchor="middle" fill="#C8CCD8" font-size="11">verifica · prompt ·</text>
+  <text x="360" y="134" text-anchor="middle" fill="#C8CCD8" font-size="11">ricerca e progettazione ·</text>
+  <text x="360" y="150" text-anchor="middle" fill="#C8CCD8" font-size="11">errori comuni</text>
+
+  <!-- POTENZA -->
+  <rect x="495" y="50" width="210" height="130" rx="10" fill="#41465A"/>
+  <text x="600" y="78" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">POTENZA</text>
+  <text x="600" y="96" text-anchor="middle" fill="#FFFFFF" font-size="12">(cap. 05-10)</text>
+  <text x="600" y="118" text-anchor="middle" fill="#C8CCD8" font-size="11">skill · agenti · hook ·</text>
+  <text x="600" y="134" text-anchor="middle" fill="#C8CCD8" font-size="11">MCP · plugin · frontend</text>
+
+  <!-- RIFERIMENTO -->
+  <rect x="735" y="50" width="210" height="130" rx="10" fill="#41465A"/>
+  <text x="840" y="78" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">RIFERIMENTO</text>
+  <text x="840" y="96" text-anchor="middle" fill="#FFFFFF" font-size="12">(cap. 14-16, 18)</text>
+  <text x="840" y="118" text-anchor="middle" fill="#C8CCD8" font-size="11">costi · token ·</text>
+  <text x="840" y="134" text-anchor="middle" fill="#C8CCD8" font-size="11">tre livelli · setup in chiaro</text>
+
+  <!-- frecce di collegamento tra i box -->
+  <line x1="225" y1="115" x2="253" y2="115" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="465" y1="115" x2="493" y2="115" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="705" y1="115" x2="733" y2="115" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ═══ Percorsi di lettura ═══ -->
+  <line x1="15" y1="216" x2="463" y2="216" stroke="#8A8FA3" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+  <text x="240" y="238" text-anchor="middle" fill="#8A8FA3" font-size="12">parto da zero → Base, poi Metodo</text>
+
+  <line x1="495" y1="216" x2="703" y2="216" stroke="#8A8FA3" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+  <text x="600" y="238" text-anchor="middle" fill="#8A8FA3" font-size="12">voglio potenziare → Potenza</text>
+
+  <line x1="735" y1="216" x2="943" y2="216" stroke="#8A8FA3" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+  <text x="840" y="238" text-anchor="middle" fill="#8A8FA3" font-size="12">copio il setup → Riferimento</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A8FA3"/>
+    </marker>
+  </defs>
+
+  <!-- ═══ Colonna sinistra: prompt vago ═══ -->
+  <rect x="40" y="170" width="280" height="140" rx="10" fill="#41465A" stroke="#8A8FA3" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="180" y="228" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700">«migliora questo</text>
+  <text x="180" y="248" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700">componente»</text>
+  <text x="180" y="272" text-anchor="middle" fill="#FFFFFF" font-size="11.5" opacity="0.85">vago: Claude riempie i buchi con supposizioni</text>
+
+  <!-- ═══ Freccia verso la colonna destra ═══ -->
+  <line x1="320" y1="240" x2="550" y2="230" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="435" y="222" text-anchor="middle" fill="#8A8FA3" font-size="12.5">stesso bisogno, esiti opposti</text>
+
+  <!-- ═══ Colonna destra: quattro box impilati ═══ -->
+  <!-- CONTESTO -->
+  <rect x="560" y="40" width="360" height="80" rx="9" fill="#41465A"/>
+  <text x="580" y="64" fill="#FFFFFF" font-size="14" font-weight="700">CONTESTO</text>
+  <text x="580" y="86" fill="#FFFFFF" font-size="11.5" opacity="0.9">dove: componente</text>
+  <text x="580" y="102" fill="#FFFFFF" font-size="11.5" opacity="0.9">ProductList, re-render eccessivi</text>
+  <line x1="740" y1="120" x2="740" y2="140" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- COMPITO -->
+  <rect x="560" y="140" width="360" height="80" rx="9" fill="#2E86AB"/>
+  <text x="580" y="164" fill="#FFFFFF" font-size="14" font-weight="700">COMPITO</text>
+  <text x="580" y="186" fill="#D9EDF7" font-size="11.5">memoizza le callback, sposta</text>
+  <text x="580" y="202" fill="#D9EDF7" font-size="11.5">il filtro in un useMemo</text>
+  <line x1="740" y1="220" x2="740" y2="240" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- VINCOLI -->
+  <rect x="560" y="240" width="360" height="80" rx="9" fill="#B0763B"/>
+  <text x="580" y="264" fill="#FFFFFF" font-size="14" font-weight="700">VINCOLI</text>
+  <text x="580" y="286" fill="#F7E8D5" font-size="11.5">non cambiare l'API pubblica</text>
+  <text x="580" y="302" fill="#F7E8D5" font-size="11.5">del componente</text>
+  <line x1="740" y1="320" x2="740" y2="340" stroke="#8A8FA3" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- VERIFICA -->
+  <rect x="560" y="340" width="360" height="80" rx="9" fill="#4F9153"/>
+  <text x="580" y="364" fill="#FFFFFF" font-size="14" font-weight="700">VERIFICA</text>
+  <text x="580" y="386" fill="#DDEEDD" font-size="11.5">col Profiler: al cambio di</text>
+  <text x="580" y="402" fill="#DDEEDD" font-size="11.5">query, re-render solo la lista</text>
+</svg>
