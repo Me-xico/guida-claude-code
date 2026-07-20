@@ -7,6 +7,26 @@
 > It's not a template to copy wholesale: it's a working example to steal the
 > pieces you need from.
 
+## The map of the files
+
+Before the blocks, the tree: the whole global setup lives in `~/.claude/`,
+and every line below has its own section in this chapter.
+
+```
+~/.claude/
+├── CLAUDE.md                 always-on rules (imports RTK.md)
+├── settings.json             permissions, hooks, model, plugins
+├── agents/                   17 .md files: the standing team
+├── skills/                   12 folders: the procedures
+├── commands/                 /commit, /standup
+├── hooks/                    4 sh scripts: the guardrails
+└── workflows/                deep-research.js: multi-agent orchestrations
+```
+
+The profiles (at the end of the chapter) mount this base via symlink and add
+their own state on top; repos overlay their project-level `.claude/`. Three
+levels, a single place where everything is defined.
+
 ## Permissions: allow, deny, ask
 
 The `permissions` block in my global `~/.claude/settings.json` uses all
@@ -104,13 +124,19 @@ asks.
 
 ## Hooks: the rules that always hold
 
-Two global hooks and one project hook, all born from the same criterion
+Four global hooks and one project hook, all born from the same criterion
 (ch. 07 and 16): if an "almost never" violation is still one too many, the
 rule deserves a hook.
 
-**PreToolUse on Bash, first hook: rtk.** One line, `rtk hook claude`, that
-transparently rewrites commands into their compressed variant (ch. 15). No
-semantics involved, just token savings on every project.
+**PreToolUse on Bash, first hook: rtk.** One line that transparently rewrites
+commands into their compressed variant (ch. 15). No semantics involved, just
+token savings on every project. Two recent hardenings, both from a design
+review on hooks: the hook points to the binary by **absolute path** (it's
+first in the chain, so rtk sees every command; resolving it via `$PATH` was
+the vector behind the name collision documented in its own README), and it's
+wrapped in `timeout 5`. If it hangs, the hook fails non-blocking and the
+command goes through unrewritten: you lose the token savings on one call,
+not the session.
 
 **PreToolUse on Bash, second hook: the commit guardian.** The file is
 `~/.claude/hooks/block-ai-commit.sh`, and I'm quoting it in full because
@@ -142,6 +168,30 @@ code that uses the Anthropic SDK), because a guardian that cries wolf on
 false positives ends up disabled. The prose in CLAUDE.md explains the
 intent; the hook *guarantees* it.
 
+**PreToolUse on Bash, third hook: the uv enforcer.** The "Python only through
+uv" rule lived for months in CLAUDE.md as prose; `uv-enforce.sh` promoted it
+to a guarantee, the same jump as the commit guardian. It blocks bare
+`python`, `pip` and `pytest` in command position and suggests the equivalent
+(`uv run`, `uv add`, `uv run pytest`); it lets through anything already
+`uv`/`uvx` and commands where those words are just arguments (`git log
+--grep pytest` is left alone). A note on method: before consolidating these
+scripts into a single dispatcher, I ran the choice past a panel of four
+lenses (the `/design` skill, more on it below). Unanimous verdict for
+separate scripts: the settings' `hooks[]` array *is already* the dispatcher,
+provided by the platform, with a property a merged script would lose: one
+rule's bug can't take down the others.
+
+**Global PostToolUse: ruff after every edit.** `ruff-after-edit.sh`: after
+every edit to a `.py` file, `ruff check --fix` plus `ruff format`, then a
+re-check; if errors remain it shows them to the model with exit 2, and the
+model fixes them on the next try. Three details of a grown-up hook: a
+failed *format* gets reported instead of vanishing silently (a write
+interrupted halfway through must never slip by unnoticed); a `flock` on the
+file serializes parallel subagents touching the same module; `uvx ruff`
+still reads the project's config from its pyproject. It lives globally,
+unlike the autoformat below, because the rule is mine and holds on every
+Python repo I touch.
+
 **Project-level PostToolUse: the autoformat.** In the main repo's
 `.claude/settings.json`, on `Edit|Write`:
 
@@ -163,28 +213,47 @@ work if it fails.
 
 ## Agents: the standing team
 
-Fifteen global agents in `~/.claude/agents/`, all born from the
-just-in-time rule in ch. 16 (a role comes up twice → it gets persisted).
-They split into two families, and the difference also governs the model:
+Seventeen global agents in `~/.claude/agents/`, all born from the
+just-in-time rule in ch. 16 (a role comes up twice → it gets persisted). The
+split that matters is **altitude of the decision**, and it also governs the
+model assigned to each one:
 
-- **Advisors** (they reason, they don't touch code): `architect`,
-  `debugger`, `python-expert`, `web-fullstack`, `terraform-expert`,
-  `cdk-python-expert`, `devops-hosting`, `data-engineer`, `data-scientist`,
-  `data-analyst`, `cloud-ml-ai-engineer`. Common pattern: read-only tools
-  (Read, Grep, Glob, Bash), "advise and sketch a diff, don't apply bulk
-  edits", and a description that explicitly marks the boundary against
-  neighboring agents ("NOT for Terraform → use terraform-expert"): that
-  boundary is what lets the session pick the right agent without guessing
-  wrong. No declared model: they inherit the session's, whichever is best
-  available.
-- **Executors** (they do one mechanical thing): `test-runner` (runs the
-  suite in an isolated context, reports only the verdict: noise stays out
-  of the session), `semantica-it`/`semantica-en` (prose reviewers, the only
-  ones with Edit/Write) and `traduttore-it-en` (the `.en.md` twins of this
-  guide). These do declare a model, small and pinned: whoever *thinks*
-  inherits the best, whoever *executes* stays cheap.
+![The agentic flow: tiers and roles](assets/18-flusso-agentico.svg)
 
-At the repo level, specific ones get added. In the main repo: a
+- **Whoever judges inherits the session model**, the best one available:
+  `architect` for the system (boundaries, stack, expensive-to-reverse
+  choices), `design-reviewer` for the module (contracts, error strategy,
+  concurrency: the question "how is it right to write this?") and
+  `delivery-red-team`, the adversarial validator that combs the diff before
+  every delivery. These are the roles whose judgment *is* the product: deep
+  reasoning pays for itself there.
+- **Whoever works sits on a mid-tier, pinned model**: the language experts
+  (`python-expert`, `web-fullstack`, `terraform-expert`,
+  `cdk-python-expert`), the domain experts (`data-engineer`,
+  `data-scientist`, `data-analyst`, `cloud-ml-ai-engineer`,
+  `devops-hosting`), `debugger` (reproduce → isolate → root cause), and the
+  three prose agents (`semantica-it`/`semantica-en`, the only ones with
+  Edit/Write, and `traduttore-it-en`, the `.en.md` twins of this guide).
+- **Whoever executes mechanically sits on the small model**: `test-runner`
+  runs the suite in an isolated context and reports only the verdict; the
+  noise stays out of the session.
+
+The pattern across the advisors stays the same: read-only tools (Read,
+Grep, Glob, Bash), "advise and sketch a diff, don't apply bulk edits", and a
+description that marks the boundary against related agents ("NOT for
+Terraform → use terraform-expert"): that boundary is what lets the session
+pick the right agent without guessing wrong.
+
+One question sums up the three-tier criterion: *does this role judge, work,
+or execute?* The main session stays the orchestrator on the flagship model;
+whoever judges sits beside it as a peer, whoever works and whoever executes
+scale down a tier. And altitude closes a gap the language experts couldn't
+close on their own: writing in a given language is the easy part by now,
+*choosing how to write it* is the challenge. That band now has its own
+roles: `design-reviewer` for the daily consult, the `/design` skill (below)
+when the decision is contested.
+
+At the repo level, project-specific ones get added. In the main repo: a
 *gate-runner* that runs the build gate, and a read-only *guardian* that
 reviews diffs against architectural invariants (ch. 16). Both are committed
 under `.claude/agents/`, so they apply to anyone who clones the repo.
@@ -208,10 +277,11 @@ The second is the **global CLAUDE.md**, which turns the principle into a
 reflex. The rule "delegate to agents by default" carried little weight on
 its own; what works is the map of cases next to it: *non-trivial bug →
 debugger before touching code; noisy suites → test-runner; stack choices →
-architect before implementing; broad exploration → Explore; text to
-humanize → semantica-*.* When the case comes up, the session doesn't decide
-*whether* to delegate: it recognizes the row in the map and delegates
-(ch. 16: examples beat precepts).
+architect before implementing; module design → design-reviewer before
+implementing; contested design decision → /design; broad exploration →
+Explore; text to humanize → semantica-it/semantica-en.* When the case comes
+up, the session doesn't decide *whether* to delegate: it recognizes the row
+in the map and delegates (ch. 16: examples beat precepts).
 
 And then there's the third way, the simplest one: I ask by name ("run the
 debugger on this"). It always applies, and it wins over the other two.
@@ -255,10 +325,15 @@ Twelve global skills in `~/.claude/skills/`, grouped by job:
   choice.
 - **Browser**: `playwright-browser`, the generic core other domain-specific
   skills (demos, visual documentation) build on.
-- **Knowledge**: `documenta-progetto` (writes project notes into the right
-  vault, routing between personal and work), `graphify` (ch. 16),
-  `llm-council` (five advisors on different models for business decisions
-  with real stakes).
+- **Knowledge**: `graphify` (ch. 16).
+- **Decisions**: `llm-council` (five advisors on different models for
+  business decisions with real stakes) and its engineering twin `design`: a
+  contested design decision goes through four parallel lenses
+  (simplicity/YAGNI, robustness, security at the boundaries,
+  evolution/operability), each forced to judge from its own angle alone,
+  with the synthesis deciding conflicts instead of splitting the
+  difference. The lenses are prompts inside the skill, not standing agents:
+  the taxonomy stays lean and a new lens costs one paragraph.
 - **Hygiene**: `clean-conversations` and `purge-project` (per-project
   history cleanup), `new-agent` (the scaffolding for the just-in-time rule:
   when a role recurs, this skill persists it).
@@ -333,9 +408,8 @@ lessons of exploring.
 The list of MCP servers is deliberately short, and *where* matters as much
 as *what*:
 
-- **In every profile**: `tolaria` (the server for my notes app, the
-  Markdown vault where project documentation ends up) and `atlassian`
-  (Jira). The servers are registered everywhere, but **authentication** is
+- **In every profile**: `tolaria` (the server for my notes app) and
+  `atlassian` (Jira). The servers are registered everywhere, but **authentication** is
   per-profile: each profile has its own credentials, and a profile without
   login to a given Jira can't write to it by construction, not by
   discipline (ch. 16).
@@ -349,14 +423,32 @@ lowest level where it's needed**. Every extra server adds context and
 attack surface, so a well-reasoned no (ch. 16, the web-search server I
 passed on) is as much a part of the setup as the yeses.
 
-## Everything else: plugin, statusline, model
+## Workflows: the orchestration written all the way through
 
-Three lines round out the picture. A plugin (`ponytail`, an output style
-that enforces the laziest solution that works, YAGNI as a permanent mode);
-a custom statusline (`statusline.sh`: branch, model and remaining context
-at a glance); the model pinned in settings with the extended context
-window. Everything else is default: every setting you don't write is a
-setting you don't have to maintain.
+Skills orchestrate agents; **workflows** orchestrate whole multi-agent
+harnesses with deterministic flow control (fan-out, voted checks,
+synthesis). I keep exactly one, but customized:
+`~/.claude/workflows/deep-research.js`, my copy of the research workflow
+(fan-out of web searches, adversarial 3-vote verification per claim, a
+cited report) with one modification worth mentioning: **the model is
+assigned per phase**. The mechanical, wide phases (fetching sources,
+verifying claims: dozens of agents) run on the mid-tier model; question
+decomposition and the final synthesis (few agents, all judgment) inherit the
+session's model. It's the agent-tier rule applied inside a single workflow,
+and I learned it the hard way: the first run threw everything at the
+flagship model, and it wasn't needed.
+
+## Everything else: plugins, statusline, model
+
+A few lines round out the picture. Two plugins: `ponytail` (an output style
+that enforces the laziest solution that works, YAGNI as a permanent mode)
+and `langfuse` from the official marketplace (tracing and evals for the LLM
+systems I work on); I've also registered Anthropic's community marketplace:
+third-party plugins with automatic screening, browsable with `/plugin`.
+There's also a custom statusline (`statusline.sh`: branch, model and
+remaining context at a glance), plus the model pinned in settings with the
+extended context window. Everything else is default: every setting you
+don't write is a setting you don't have to maintain.
 
 ## In short
 
@@ -364,7 +456,8 @@ The most important file in this chapter isn't any of the JSON blocks: it's
 the criterion behind each one. Allow is measured against real transcripts,
 not imagined ones. Deny targets sensitive strings, not lists of commands.
 Ask covers the gray zone in between, and rules with no exceptions become
-hooks. Agents are born when a role recurs, never before; agent and skill
+hooks. Agents are born when a role recurs, never before; each one's model
+follows the question "does it judge, work, or execute?"; agent and skill
 descriptions route rather than describe; orchestrations you repeat by hand
 become skills. Profiles handle isolation between contexts, and whatever
 applies everywhere travels via symlink, while MCP servers sit at the

@@ -7,6 +7,26 @@
 > Non è un modello da copiare intero: è un esempio funzionante da cui rubare
 > i pezzi che servono a te.
 
+## La mappa dei file
+
+Prima dei blocchi, l'albero: tutto il setup globale vive in `~/.claude/`, e
+ogni riga qui sotto ha la sua sezione in questo capitolo.
+
+```
+~/.claude/
+├── CLAUDE.md                 regole sempre attive (importa RTK.md)
+├── settings.json             permessi, hook, modello, plugin
+├── agents/                   17 file .md: la squadra fissa
+├── skills/                   12 cartelle: le procedure
+├── commands/                 /commit, /standup
+├── hooks/                    4 script sh: i guard-rail
+└── workflows/                deep-research.js: orchestrazioni multi-agente
+```
+
+I profili (in fondo al capitolo) montano questa base in symlink e ci
+aggiungono il loro stato; i repo ci sovrappongono il loro `.claude/` di
+progetto. Tre livelli, un solo posto in cui ogni cosa è definita.
+
 ## Permessi: allow, deny, ask
 
 Il blocco `permissions` del mio `~/.claude/settings.json` globale usa tutte e
@@ -104,13 +124,19 @@ di te finisce cancellata, il che è peggio di una regola che chiede.
 
 ## Hook: le regole che valgono sempre
 
-Due hook globali e uno di progetto, tutti figli dello stesso criterio (cap.
-07 e 16): se una violazione "quasi mai" è comunque troppo, la regola merita
-un hook.
+Quattro hook globali e uno di progetto, tutti figli dello stesso criterio
+(cap. 07 e 16): se una violazione "quasi mai" è comunque troppo, la regola
+merita un hook.
 
-**PreToolUse su Bash, primo hook: rtk.** Una riga, `rtk hook claude`, che
-riscrive in trasparenza i comandi nella loro variante compressa (cap. 15).
-Nessuna semantica, solo risparmio di token su ogni progetto.
+**PreToolUse su Bash, primo hook: rtk.** Una riga che riscrive in trasparenza
+i comandi nella loro variante compressa (cap. 15). Nessuna semantica, solo
+risparmio di token su ogni progetto. Due irrobustimenti recenti, usciti da
+una design review sugli hook: il binario è puntato per **path assoluto**
+(primo della catena, rtk vede ogni comando; risolverlo via `$PATH` era il
+vettore della name-collision documentata nel suo stesso README) ed è avvolto
+in `timeout 5`. Se si blocca, l'hook fallisce non-bloccante e il comando
+passa senza riscrittura: si perde il risparmio token di una chiamata, non la
+sessione.
 
 **PreToolUse su Bash, secondo hook: il guardiano dei commit.** Il file è
 `~/.claude/hooks/block-ai-commit.sh`, e lo riporto intero perché è il mio
@@ -141,6 +167,29 @@ stretti (`anthropic` da solo bloccherebbe commit legittimi su codice che usa
 l'SDK Anthropic), perché un guardiano che grida ai falsi positivi finisce
 disattivato. La prosa nel CLAUDE.md spiega l'intento; l'hook lo *garantisce*.
 
+**PreToolUse su Bash, terzo hook: l'esattore di uv.** La regola "Python solo
+con uv" ha vissuto mesi nel CLAUDE.md come prosa; `uv-enforce.sh` l'ha
+promossa a garanzia, lo stesso salto del guardiano dei commit. Blocca
+`python`, `pip` e `pytest` nudi in posizione di comando e suggerisce
+l'equivalente (`uv run`, `uv add`, `uv run pytest`); lascia passare ciò che è
+già `uv`/`uvx` e i comandi dove quelle parole sono solo argomenti (`git log
+--grep pytest` non si tocca). Nota di metodo: prima di consolidare questi
+script in un dispatcher unico ho fatto passare la scelta da un panel di
+quattro lenti (la skill `/design`, più avanti). Verdetto unanime per gli
+script separati: l'array `hooks[]` dei settings *è già* il dispatcher,
+fornito dalla piattaforma, con una proprietà che una fusione perderebbe: il
+bug di una regola non può spegnere le altre.
+
+**PostToolUse globale: ruff dopo ogni edit.** `ruff-after-edit.sh`: dopo ogni
+modifica a un file `.py`, `ruff check --fix` più `ruff format`, poi un
+re-check; se restano errori li mostra al modello con exit 2, e il modello li
+corregge al colpo dopo. Tre dettagli da hook adulto: il fallimento del
+*format* viene segnalato invece di sparire (una scrittura interrotta a metà
+non deve passare in silenzio); un `flock` sul file serializza i subagent
+paralleli che toccano lo stesso modulo; `uvx ruff` legge comunque la config
+del progetto dal suo pyproject. Vive globale, a differenza dell'autoformat
+qui sotto, perché la regola è mia e vale su ogni repo Python che tocco.
+
 **PostToolUse di progetto: l'autoformat.** Nel `.claude/settings.json` del
 repo principale, su `Edit|Write`:
 
@@ -162,26 +211,45 @@ se fallisce.
 
 ## Agenti: la squadra fissa
 
-Quindici agenti globali in `~/.claude/agents/`, tutti nati con la regola
-just-in-time del cap. 16 (un ruolo ricorre due volte → si persiste). Si
-dividono in due famiglie, e la differenza governa anche il modello:
+Diciassette agenti globali in `~/.claude/agents/`, tutti nati con la regola
+just-in-time del cap. 16 (un ruolo ricorre due volte → si persiste). La
+divisione che conta è per **altitudine della decisione**, e governa anche il
+modello assegnato a ciascuno:
 
-- **Advisor** (ragionano, non toccano il codice): `architect`, `debugger`,
-  `python-expert`, `web-fullstack`, `terraform-expert`, `cdk-python-expert`,
-  `devops-hosting`, `data-engineer`, `data-scientist`, `data-analyst`,
-  `cloud-ml-ai-engineer`. Pattern comune: tool in sola lettura (Read, Grep,
-  Glob, Bash), "consiglia e disegna diff, non applica edit di massa", e una
-  description che delimita esplicitamente il confine con gli agenti affini
-  ("NOT for Terraform → usa terraform-expert"): è quella delimitazione che
-  permette alla sessione di scegliere l'agente giusto senza sbagliare.
-  Nessun modello dichiarato: ereditano quello di sessione, il migliore
-  disponibile.
-- **Esecutori** (fanno una cosa meccanica): `test-runner` (esegue la suite in
-  contesto isolato, riporta solo il verdetto: il rumore resta fuori dalla
-  sessione), `semantica-it`/`semantica-en` (revisori di prosa, gli unici con
-  Edit/Write) e `traduttore-it-en` (i gemelli `.en.md` di questa guida).
-  Questi un modello ce l'hanno, piccolo e pinnato: chi *pensa* eredita il
-  meglio, chi *esegue* resta economico.
+![Il flusso agentico: livelli e ruoli](assets/18-flusso-agentico.svg)
+
+- **Chi giudica eredita il modello di sessione**, il migliore disponibile:
+  `architect` per il sistema (confini, stack, scelte costose da invertire),
+  `design-reviewer` per il modulo (contratti, strategia errori, concorrenza:
+  la domanda "come è giusto scrivere questa cosa?") e `delivery-red-team`, il
+  validatore adversariale che passa il diff al setaccio prima di ogni
+  consegna. Sono i ruoli il cui giudizio *è* il prodotto: lì il ragionamento
+  profondo paga il suo prezzo.
+- **Chi lavora sta su un modello medio, pinnato**: i language expert
+  (`python-expert`, `web-fullstack`, `terraform-expert`,
+  `cdk-python-expert`), gli esperti di dominio (`data-engineer`,
+  `data-scientist`, `data-analyst`, `cloud-ml-ai-engineer`,
+  `devops-hosting`), il `debugger` (riproduce → isola → root cause) e i tre
+  di prosa (`semantica-it`/`semantica-en`, gli unici con Edit/Write, e
+  `traduttore-it-en`, i gemelli `.en.md` di questa guida).
+- **Chi esegue meccanicamente sta sul modello piccolo**: `test-runner` fa
+  girare la suite in contesto isolato e riporta solo il verdetto; il rumore
+  resta fuori dalla sessione.
+
+Il pattern comune agli advisor non cambia: tool in sola lettura (Read, Grep,
+Glob, Bash), "consiglia e disegna diff, non applica edit di massa", e una
+description che delimita il confine con gli agenti affini ("NOT for
+Terraform → usa terraform-expert"): è quella delimitazione che permette alla
+sessione di scegliere l'agente giusto senza sbagliare.
+
+Una domanda sola riassume il criterio dei tre tier: *questo ruolo giudica,
+lavora o esegue?* La sessione principale resta l'orchestratore sul modello di punta;
+chi giudica lo affianca alla pari, chi lavora e chi esegue scala di tier. E
+l'altitudine risolve il buco che i language expert da soli lasciavano
+scoperto: scrivere in un linguaggio ormai è la parte facile, *scegliere come
+scrivere* è la sfida. Ora quella fascia ha i suoi ruoli: `design-reviewer`
+per il consulto quotidiano, la skill `/design` (sotto) quando la decisione è
+contesa.
 
 A livello repo se ne aggiungono di specifici: nel repo principale un
 *gate-runner* che esegue il build gate e un *guardiano* read-only che rivede
@@ -206,10 +274,11 @@ Il secondo è il **CLAUDE.md globale**, che trasforma il principio in
 riflesso. La regola "delega agli agenti come default" da sola pesava poco;
 quello che funziona è la mappa dei casi accanto: *bug non banale → debugger
 prima di toccare codice; suite rumorose → test-runner; scelte di stack →
-architect prima di implementare; esplorazione ampia → Explore; testi da
-umanizzare → semantica-*.* Quando il caso si presenta, la sessione non
-decide *se* delegare: riconosce la riga della mappa e delega (cap. 16: gli
-esempi battono i precetti).
+architect prima di implementare; design di modulo → design-reviewer prima di
+implementare; decisione di design contesa → /design; esplorazione ampia →
+Explore; testi da umanizzare → semantica-it/semantica-en.* Quando il caso si
+presenta, la sessione non decide *se* delegare: riconosce la riga della
+mappa e delega (cap. 16: gli esempi battono i precetti).
 
 E poi c'è la terza via, la più semplice: lo chiedo io per nome ("fai girare
 il debugger su questo"). Vale sempre, e vince sulle altre due.
@@ -251,10 +320,15 @@ Dodici skill globali in `~/.claude/skills/`, raggruppabili per mestiere:
   metterle insieme confondeva la scelta.
 - **Browser**: `playwright-browser`, il nucleo generico su cui altre skill di
   dominio (demo, documentazione visuale) si appoggiano.
-- **Conoscenza**: `documenta-progetto` (scrive le note di progetto nel vault
-  giusto, instradando tra personale e lavoro), `graphify` (cap. 16),
-  `llm-council` (cinque advisor su modelli diversi per le decisioni di
-  business con posta in gioco vera).
+- **Conoscenza**: `graphify` (cap. 16).
+- **Decisioni**: `llm-council` (cinque advisor su modelli diversi per le
+  decisioni di business con posta in gioco vera) e il suo gemello
+  ingegneristico `design`: una decisione di design contesa passa da quattro
+  lenti parallele (semplicità/YAGNI, robustezza, sicurezza ai confini,
+  evoluzione/operabilità), ognuna forzata a giudicare solo dal suo punto di
+  vista, e la sintesi decide i conflitti invece di mediarli. Le lenti sono
+  prompt dentro la skill, non agenti permanenti: la tassonomia resta magra e
+  una lente nuova costa un paragrafo.
 - **Igiene**: `clean-conversations` e `purge-project` (pulizia della storia
   per progetto), `new-agent` (lo scaffolding della regola just-in-time:
   quando un ruolo ricorre, questa skill lo persiste).
@@ -328,8 +402,8 @@ perché le lezioni del consegnare non sono le lezioni dell'esplorare.
 La lista dei server MCP è volutamente corta, e il *dove* conta quanto il
 *cosa*:
 
-- **In ogni profilo**: `tolaria` (il server della mia app di note, il vault
-  Markdown dove finisce la documentazione dei progetti) e `atlassian` (Jira).
+- **In ogni profilo**: `tolaria` (il server della mia app di note) e
+  `atlassian` (Jira).
   I server sono registrati ovunque, ma l'**autenticazione** è per-profilo:
   ogni profilo ha le sue credenziali, e un profilo senza login a un Jira non
   può scriverci per costruzione, non per disciplina (cap. 16).
@@ -343,11 +417,29 @@ cui serve**. E ogni server in più è superficie di contesto e di rischio: il
 no motivato (cap. 16, il server di ricerca web scartato) fa parte del setup
 quanto i sì.
 
+## Workflow: l'orchestrazione scritta fino in fondo
+
+Le skill orchestrano agenti; i **workflow** orchestrano interi harness
+multi-agente con controllo di flusso deterministico (fan-out, verifiche a
+voti, sintesi). Ne tengo uno solo, ma personalizzato:
+`~/.claude/workflows/deep-research.js`, la mia copia del workflow di ricerca
+(fan-out di ricerche web, verifica adversariale a 3 voti per claim, report
+citato) con una modifica che vale la pena raccontare: **il modello è
+assegnato per fase**. Le fasi meccaniche e larghe (fetch delle fonti,
+verifica dei claim: decine di agenti) girano sul modello medio; la
+decomposizione della domanda e la sintesi finale (pochi agenti, tutto il
+giudizio) ereditano quello di sessione. È la regola dei tier degli agenti
+applicata dentro un singolo workflow, e l'ho imparata nel modo giusto: la
+prima esecuzione lanciava tutto sul modello di punta, e non serviva.
+
 ## Il resto: plugin, statusline, modello
 
-Tre righe chiudono il quadro. Un plugin (`ponytail`, un output style che
-impone la soluzione più pigra che funziona, YAGNI come modalità permanente);
-una statusline custom (`statusline.sh`: branch, modello e contesto residuo a
+Poche righe chiudono il quadro. Due plugin: `ponytail` (un output style che
+impone la soluzione più pigra che funziona, YAGNI come modalità permanente) e
+`langfuse` dal marketplace ufficiale (tracing e evals per i sistemi LLM su
+cui lavoro); registrato anche il marketplace community di Anthropic, plugin
+di terze parti con screening automatico, che si esplora con `/plugin`. Una
+statusline custom (`statusline.sh`: branch, modello e contesto residuo a
 colpo d'occhio); il modello pinnato in settings con la finestra di contesto
 estesa. Tutto il resto è default: ogni impostazione non scritta è
 un'impostazione che non va mantenuta.
@@ -358,7 +450,8 @@ Il file più importante di questo capitolo non è nessuno dei blocchi JSON: è
 il criterio dietro ognuno. L'allow si misura sui transcript, non si immagina;
 il deny si scrive per stringhe sensibili, non per elenchi di comandi; l'ask
 copre la zona grigia; le regole inderogabili diventano hook. Gli agenti
-nascono quando un ruolo ricorre, mai prima; le description di agenti e skill
+nascono quando un ruolo ricorre, mai prima; il modello di ciascuno segue la
+domanda "giudica, lavora o esegue?"; le description di agenti e skill
 instradano, non descrivono; le orchestrazioni che ripeti diventano skill.
 L'isolamento tra contesti lo fanno i profili, e ciò che vale ovunque viaggia
 in symlink; gli MCP stanno al livello più basso che li giustifica. Se il tuo
