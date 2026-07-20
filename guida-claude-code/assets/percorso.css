@@ -1,0 +1,60 @@
+/* Percorso guidato: step-through dei diagrammi di workflow.
+   Senza JS il blocco degrada a: immagine statica + didascalie in elenco. */
+
+.percorso {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin: 1.2rem 0;
+}
+
+.percorso-svg svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Elementi del diagramma durante il percorso */
+.percorso-attivo g[id^="p-"] {
+  opacity: 0.15;
+  transition: opacity 0.35s ease;
+}
+.percorso-attivo g[id^="p-"].percorso-on {
+  opacity: 1;
+}
+
+/* Didascalie: con JS ne è visibile una sola */
+.percorso-js .percorso-step { display: none; }
+.percorso-js .percorso-step.percorso-corrente {
+  display: block;
+  min-height: 3.2em;
+  padding: 0.4rem 0.2rem;
+  color: var(--md-default-fg-color);
+}
+
+/* Controlli */
+.percorso-controlli {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+.percorso-controlli button {
+  border: 1px solid var(--md-default-fg-color--lighter);
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  border-radius: 6px;
+  padding: 0.25rem 0.9rem;
+  cursor: pointer;
+  font: inherit;
+}
+.percorso-controlli button:hover:not(:disabled) {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+.percorso-controlli button:disabled { opacity: 0.4; cursor: default; }
+.percorso-contatore {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--md-default-fg-color--light);
+}

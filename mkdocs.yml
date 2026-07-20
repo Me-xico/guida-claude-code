@@ -93,6 +93,11 @@ plugins:
             16 · Un setup reale: 16 · A real-world setup
             18 · Il setup in chiaro: 18 · The setup in plain sight
 
+extra_css:
+  - assets/percorso.css
+extra_javascript:
+  - assets/percorso.js
+
 markdown_extensions:
   - admonition
   - attr_list
