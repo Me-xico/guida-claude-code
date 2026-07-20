@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1034,6 +1034,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#la-mappa-dei-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La mappa dei file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#permessi-allow-deny-ask" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1138,6 +1149,17 @@
     <span class="md-ellipsis">
       
         MCP: pochi, e al livello giusto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-lorchestrazione-scritta-fino-in-fondo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow: l'orchestrazione scritta fino in fondo
       
     </span>
   </a>
@@ -1209,6 +1231,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#la-mappa-dei-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La mappa dei file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#permessi-allow-deny-ask" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1320,6 +1353,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#workflow-lorchestrazione-scritta-fino-in-fondo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow: l'orchestrazione scritta fino in fondo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#il-resto-plugin-statusline-modello" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1367,6 +1411,21 @@ dei progetti di lavoro sono sostituiti da equivalenti generici (<code>acme</code
 Non è un modello da copiare intero: è un esempio funzionante da cui rubare
 i pezzi che servono a te.</p>
 </blockquote>
+<h2 id="la-mappa-dei-file">La mappa dei file<a class="headerlink" href="#la-mappa-dei-file" title="Permanent link">&para;</a></h2>
+<p>Prima dei blocchi, l'albero: tutto il setup globale vive in <code>~/.claude/</code>, e
+ogni riga qui sotto ha la sua sezione in questo capitolo.</p>
+<div class="highlight"><pre><span></span><code>~/.claude/
+├── CLAUDE.md                 regole sempre attive (importa RTK.md)
+├── settings.json             permessi, hook, modello, plugin
+├── agents/                   17 file .md: la squadra fissa
+├── skills/                   12 cartelle: le procedure
+├── commands/                 /commit, /standup
+├── hooks/                    4 script sh: i guard-rail
+└── workflows/                deep-research.js: orchestrazioni multi-agente
+</code></pre></div>
+<p>I profili (in fondo al capitolo) montano questa base in symlink e ci
+aggiungono il loro stato; i repo ci sovrappongono il loro <code>.claude/</code> di
+progetto. Tre livelli, un solo posto in cui ogni cosa è definita.</p>
 <h2 id="permessi-allow-deny-ask">Permessi: allow, deny, ask<a class="headerlink" href="#permessi-allow-deny-ask" title="Permanent link">&para;</a></h2>
 <p>Il blocco <code>permissions</code> del mio <code>~/.claude/settings.json</code> globale usa tutte e
 tre le liste, e ognuna ha un mestiere diverso:</p>
@@ -1457,12 +1516,18 @@ ricavato: <strong>deny solo dove un falso positivo è quasi impossibile; ask dov
 pattern è largo</strong>. Con deny non c'è appello, e una regola che combatte contro
 di te finisce cancellata, il che è peggio di una regola che chiede.</p>
 <h2 id="hook-le-regole-che-valgono-sempre">Hook: le regole che valgono sempre<a class="headerlink" href="#hook-le-regole-che-valgono-sempre" title="Permanent link">&para;</a></h2>
-<p>Due hook globali e uno di progetto, tutti figli dello stesso criterio (cap.
-07 e 16): se una violazione "quasi mai" è comunque troppo, la regola merita
-un hook.</p>
-<p><strong>PreToolUse su Bash, primo hook: rtk.</strong> Una riga, <code>rtk hook claude</code>, che
-riscrive in trasparenza i comandi nella loro variante compressa (cap. 15).
-Nessuna semantica, solo risparmio di token su ogni progetto.</p>
+<p>Quattro hook globali e uno di progetto, tutti figli dello stesso criterio
+(cap. 07 e 16): se una violazione "quasi mai" è comunque troppo, la regola
+merita un hook.</p>
+<p><strong>PreToolUse su Bash, primo hook: rtk.</strong> Una riga che riscrive in trasparenza
+i comandi nella loro variante compressa (cap. 15). Nessuna semantica, solo
+risparmio di token su ogni progetto. Due irrobustimenti recenti, usciti da
+una design review sugli hook: il binario è puntato per <strong>path assoluto</strong>
+(primo della catena, rtk vede ogni comando; risolverlo via <code>$PATH</code> era il
+vettore della name-collision documentata nel suo stesso README) ed è avvolto
+in <code>timeout 5</code>. Se si blocca, l'hook fallisce non-bloccante e il comando
+passa senza riscrittura: si perde il risparmio token di una chiamata, non la
+sessione.</p>
 <p><strong>PreToolUse su Bash, secondo hook: il guardiano dei commit.</strong> Il file è
 <code>~/.claude/hooks/block-ai-commit.sh</code>, e lo riporto intero perché è il mio
 esempio preferito di hook piccolo fatto bene:</p>
@@ -1488,6 +1553,27 @@ perché, così si corregge da solo al colpo dopo; i pattern sono volutamente
 stretti (<code>anthropic</code> da solo bloccherebbe commit legittimi su codice che usa
 l'SDK Anthropic), perché un guardiano che grida ai falsi positivi finisce
 disattivato. La prosa nel CLAUDE.md spiega l'intento; l'hook lo <em>garantisce</em>.</p>
+<p><strong>PreToolUse su Bash, terzo hook: l'esattore di uv.</strong> La regola "Python solo
+con uv" ha vissuto mesi nel CLAUDE.md come prosa; <code>uv-enforce.sh</code> l'ha
+promossa a garanzia, lo stesso salto del guardiano dei commit. Blocca
+<code>python</code>, <code>pip</code> e <code>pytest</code> nudi in posizione di comando e suggerisce
+l'equivalente (<code>uv run</code>, <code>uv add</code>, <code>uv run pytest</code>); lascia passare ciò che è
+già <code>uv</code>/<code>uvx</code> e i comandi dove quelle parole sono solo argomenti (<code>git log
+--grep pytest</code> non si tocca). Nota di metodo: prima di consolidare questi
+script in un dispatcher unico ho fatto passare la scelta da un panel di
+quattro lenti (la skill <code>/design</code>, più avanti). Verdetto unanime per gli
+script separati: l'array <code>hooks[]</code> dei settings <em>è già</em> il dispatcher,
+fornito dalla piattaforma, con una proprietà che una fusione perderebbe: il
+bug di una regola non può spegnere le altre.</p>
+<p><strong>PostToolUse globale: ruff dopo ogni edit.</strong> <code>ruff-after-edit.sh</code>: dopo ogni
+modifica a un file <code>.py</code>, <code>ruff check --fix</code> più <code>ruff format</code>, poi un
+re-check; se restano errori li mostra al modello con exit 2, e il modello li
+corregge al colpo dopo. Tre dettagli da hook adulto: il fallimento del
+<em>format</em> viene segnalato invece di sparire (una scrittura interrotta a metà
+non deve passare in silenzio); un <code>flock</code> sul file serializza i subagent
+paralleli che toccano lo stesso modulo; <code>uvx ruff</code> legge comunque la config
+del progetto dal suo pyproject. Vive globale, a differenza dell'autoformat
+qui sotto, perché la regola è mia e vale su ogni repo Python che tocco.</p>
 <p><strong>PostToolUse di progetto: l'autoformat.</strong> Nel <code>.claude/settings.json</code> del
 repo principale, su <code>Edit|Write</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -1504,27 +1590,43 @@ repo principale, su <code>Edit|Write</code>:</p>
 <code>|| true</code> è essenziale: un hook di comodità non deve mai bloccare il lavoro
 se fallisce.</p>
 <h2 id="agenti-la-squadra-fissa">Agenti: la squadra fissa<a class="headerlink" href="#agenti-la-squadra-fissa" title="Permanent link">&para;</a></h2>
-<p>Quindici agenti globali in <code>~/.claude/agents/</code>, tutti nati con la regola
-just-in-time del cap. 16 (un ruolo ricorre due volte → si persiste). Si
-dividono in due famiglie, e la differenza governa anche il modello:</p>
+<p>Diciassette agenti globali in <code>~/.claude/agents/</code>, tutti nati con la regola
+just-in-time del cap. 16 (un ruolo ricorre due volte → si persiste). La
+divisione che conta è per <strong>altitudine della decisione</strong>, e governa anche il
+modello assegnato a ciascuno:</p>
+<p><img alt="Il flusso agentico: livelli e ruoli" src="assets/18-flusso-agentico.svg" /></p>
 <ul>
-<li><strong>Advisor</strong> (ragionano, non toccano il codice): <code>architect</code>, <code>debugger</code>,
-  <code>python-expert</code>, <code>web-fullstack</code>, <code>terraform-expert</code>, <code>cdk-python-expert</code>,
-  <code>devops-hosting</code>, <code>data-engineer</code>, <code>data-scientist</code>, <code>data-analyst</code>,
-  <code>cloud-ml-ai-engineer</code>. Pattern comune: tool in sola lettura (Read, Grep,
-  Glob, Bash), "consiglia e disegna diff, non applica edit di massa", e una
-  description che delimita esplicitamente il confine con gli agenti affini
-  ("NOT for Terraform → usa terraform-expert"): è quella delimitazione che
-  permette alla sessione di scegliere l'agente giusto senza sbagliare.
-  Nessun modello dichiarato: ereditano quello di sessione, il migliore
-  disponibile.</li>
-<li><strong>Esecutori</strong> (fanno una cosa meccanica): <code>test-runner</code> (esegue la suite in
-  contesto isolato, riporta solo il verdetto: il rumore resta fuori dalla
-  sessione), <code>semantica-it</code>/<code>semantica-en</code> (revisori di prosa, gli unici con
-  Edit/Write) e <code>traduttore-it-en</code> (i gemelli <code>.en.md</code> di questa guida).
-  Questi un modello ce l'hanno, piccolo e pinnato: chi <em>pensa</em> eredita il
-  meglio, chi <em>esegue</em> resta economico.</li>
+<li><strong>Chi giudica eredita il modello di sessione</strong>, il migliore disponibile:
+  <code>architect</code> per il sistema (confini, stack, scelte costose da invertire),
+  <code>design-reviewer</code> per il modulo (contratti, strategia errori, concorrenza:
+  la domanda "come è giusto scrivere questa cosa?") e <code>delivery-red-team</code>, il
+  validatore adversariale che passa il diff al setaccio prima di ogni
+  consegna. Sono i ruoli il cui giudizio <em>è</em> il prodotto: lì il ragionamento
+  profondo paga il suo prezzo.</li>
+<li><strong>Chi lavora sta su un modello medio, pinnato</strong>: i language expert
+  (<code>python-expert</code>, <code>web-fullstack</code>, <code>terraform-expert</code>,
+  <code>cdk-python-expert</code>), gli esperti di dominio (<code>data-engineer</code>,
+  <code>data-scientist</code>, <code>data-analyst</code>, <code>cloud-ml-ai-engineer</code>,
+  <code>devops-hosting</code>), il <code>debugger</code> (riproduce → isola → root cause) e i tre
+  di prosa (<code>semantica-it</code>/<code>semantica-en</code>, gli unici con Edit/Write, e
+  <code>traduttore-it-en</code>, i gemelli <code>.en.md</code> di questa guida).</li>
+<li><strong>Chi esegue meccanicamente sta sul modello piccolo</strong>: <code>test-runner</code> fa
+  girare la suite in contesto isolato e riporta solo il verdetto; il rumore
+  resta fuori dalla sessione.</li>
 </ul>
+<p>Il pattern comune agli advisor non cambia: tool in sola lettura (Read, Grep,
+Glob, Bash), "consiglia e disegna diff, non applica edit di massa", e una
+description che delimita il confine con gli agenti affini ("NOT for
+Terraform → usa terraform-expert"): è quella delimitazione che permette alla
+sessione di scegliere l'agente giusto senza sbagliare.</p>
+<p>Una domanda sola riassume il criterio dei tre tier: <em>questo ruolo giudica,
+lavora o esegue?</em> La sessione principale resta l'orchestratore sul modello di punta;
+chi giudica lo affianca alla pari, chi lavora e chi esegue scala di tier. E
+l'altitudine risolve il buco che i language expert da soli lasciavano
+scoperto: scrivere in un linguaggio ormai è la parte facile, <em>scegliere come
+scrivere</em> è la sfida. Ora quella fascia ha i suoi ruoli: <code>design-reviewer</code>
+per il consulto quotidiano, la skill <code>/design</code> (sotto) quando la decisione è
+contesa.</p>
 <p>A livello repo se ne aggiungono di specifici: nel repo principale un
 <em>gate-runner</em> che esegue il build gate e un <em>guardiano</em> read-only che rivede
 i diff sulle invarianti architetturali (cap. 16), committati in
@@ -1544,10 +1646,11 @@ il campo più importante del file, e lo riscrivo più spesso del prompt.</p>
 riflesso. La regola "delega agli agenti come default" da sola pesava poco;
 quello che funziona è la mappa dei casi accanto: <em>bug non banale → debugger
 prima di toccare codice; suite rumorose → test-runner; scelte di stack →
-architect prima di implementare; esplorazione ampia → Explore; testi da
-umanizzare → semantica-</em>.<em> Quando il caso si presenta, la sessione non
-decide </em>se* delegare: riconosce la riga della mappa e delega (cap. 16: gli
-esempi battono i precetti).</p>
+architect prima di implementare; design di modulo → design-reviewer prima di
+implementare; decisione di design contesa → /design; esplorazione ampia →
+Explore; testi da umanizzare → semantica-it/semantica-en.</em> Quando il caso si
+presenta, la sessione non decide <em>se</em> delegare: riconosce la riga della
+mappa e delega (cap. 16: gli esempi battono i precetti).</p>
 <p>E poi c'è la terza via, la più semplice: lo chiedo io per nome ("fai girare
 il debugger su questo"). Vale sempre, e vince sulle altre due.</p>
 <h3 id="come-li-orchestro">Come li orchestro<a class="headerlink" href="#come-li-orchestro" title="Permanent link">&para;</a></h3>
@@ -1584,10 +1687,15 @@ sorveglianza.</p>
   metterle insieme confondeva la scelta.</li>
 <li><strong>Browser</strong>: <code>playwright-browser</code>, il nucleo generico su cui altre skill di
   dominio (demo, documentazione visuale) si appoggiano.</li>
-<li><strong>Conoscenza</strong>: <code>documenta-progetto</code> (scrive le note di progetto nel vault
-  giusto, instradando tra personale e lavoro), <code>graphify</code> (cap. 16),
-  <code>llm-council</code> (cinque advisor su modelli diversi per le decisioni di
-  business con posta in gioco vera).</li>
+<li><strong>Conoscenza</strong>: <code>graphify</code> (cap. 16).</li>
+<li><strong>Decisioni</strong>: <code>llm-council</code> (cinque advisor su modelli diversi per le
+  decisioni di business con posta in gioco vera) e il suo gemello
+  ingegneristico <code>design</code>: una decisione di design contesa passa da quattro
+  lenti parallele (semplicità/YAGNI, robustezza, sicurezza ai confini,
+  evoluzione/operabilità), ognuna forzata a giudicare solo dal suo punto di
+  vista, e la sintesi decide i conflitti invece di mediarli. Le lenti sono
+  prompt dentro la skill, non agenti permanenti: la tassonomia resta magra e
+  una lente nuova costa un paragrafo.</li>
 <li><strong>Igiene</strong>: <code>clean-conversations</code> e <code>purge-project</code> (pulizia della storia
   per progetto), <code>new-agent</code> (lo scaffolding della regola just-in-time:
   quando un ruolo ricorre, questa skill lo persiste).</li>
@@ -1650,8 +1758,8 @@ perché le lezioni del consegnare non sono le lezioni dell'esplorare.</p>
 <p>La lista dei server MCP è volutamente corta, e il <em>dove</em> conta quanto il
 <em>cosa</em>:</p>
 <ul>
-<li><strong>In ogni profilo</strong>: <code>tolaria</code> (il server della mia app di note, il vault
-  Markdown dove finisce la documentazione dei progetti) e <code>atlassian</code> (Jira).
+<li><strong>In ogni profilo</strong>: <code>tolaria</code> (il server della mia app di note) e
+  <code>atlassian</code> (Jira).
   I server sono registrati ovunque, ma l'<strong>autenticazione</strong> è per-profilo:
   ogni profilo ha le sue credenziali, e un profilo senza login a un Jira non
   può scriverci per costruzione, non per disciplina (cap. 16).</li>
@@ -1664,10 +1772,26 @@ perché le lezioni del consegnare non sono le lezioni dell'esplorare.</p>
 cui serve</strong>. E ogni server in più è superficie di contesto e di rischio: il
 no motivato (cap. 16, il server di ricerca web scartato) fa parte del setup
 quanto i sì.</p>
+<h2 id="workflow-lorchestrazione-scritta-fino-in-fondo">Workflow: l'orchestrazione scritta fino in fondo<a class="headerlink" href="#workflow-lorchestrazione-scritta-fino-in-fondo" title="Permanent link">&para;</a></h2>
+<p>Le skill orchestrano agenti; i <strong>workflow</strong> orchestrano interi harness
+multi-agente con controllo di flusso deterministico (fan-out, verifiche a
+voti, sintesi). Ne tengo uno solo, ma personalizzato:
+<code>~/.claude/workflows/deep-research.js</code>, la mia copia del workflow di ricerca
+(fan-out di ricerche web, verifica adversariale a 3 voti per claim, report
+citato) con una modifica che vale la pena raccontare: <strong>il modello è
+assegnato per fase</strong>. Le fasi meccaniche e larghe (fetch delle fonti,
+verifica dei claim: decine di agenti) girano sul modello medio; la
+decomposizione della domanda e la sintesi finale (pochi agenti, tutto il
+giudizio) ereditano quello di sessione. È la regola dei tier degli agenti
+applicata dentro un singolo workflow, e l'ho imparata nel modo giusto: la
+prima esecuzione lanciava tutto sul modello di punta, e non serviva.</p>
 <h2 id="il-resto-plugin-statusline-modello">Il resto: plugin, statusline, modello<a class="headerlink" href="#il-resto-plugin-statusline-modello" title="Permanent link">&para;</a></h2>
-<p>Tre righe chiudono il quadro. Un plugin (<code>ponytail</code>, un output style che
-impone la soluzione più pigra che funziona, YAGNI come modalità permanente);
-una statusline custom (<code>statusline.sh</code>: branch, modello e contesto residuo a
+<p>Poche righe chiudono il quadro. Due plugin: <code>ponytail</code> (un output style che
+impone la soluzione più pigra che funziona, YAGNI come modalità permanente) e
+<code>langfuse</code> dal marketplace ufficiale (tracing e evals per i sistemi LLM su
+cui lavoro); registrato anche il marketplace community di Anthropic, plugin
+di terze parti con screening automatico, che si esplora con <code>/plugin</code>. Una
+statusline custom (<code>statusline.sh</code>: branch, modello e contesto residuo a
 colpo d'occhio); il modello pinnato in settings con la finestra di contesto
 estesa. Tutto il resto è default: ogni impostazione non scritta è
 un'impostazione che non va mantenuta.</p>
@@ -1676,7 +1800,8 @@ un'impostazione che non va mantenuta.</p>
 il criterio dietro ognuno. L'allow si misura sui transcript, non si immagina;
 il deny si scrive per stringhe sensibili, non per elenchi di comandi; l'ask
 copre la zona grigia; le regole inderogabili diventano hook. Gli agenti
-nascono quando un ruolo ricorre, mai prima; le description di agenti e skill
+nascono quando un ruolo ricorre, mai prima; il modello di ciascuno segue la
+domanda "giudica, lavora o esegue?"; le description di agenti e skill
 instradano, non descrivono; le orchestrazioni che ripeti diventano skill.
 L'isolamento tra contesti lo fanno i profili, e ciò che vale ovunque viaggia
 in symlink; gli MCP stanno al livello più basso che li giustifica. Se il tuo
@@ -1768,7 +1893,7 @@ coincidono, ed è esattamente il punto.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.footer", "navigation.top", "content.code.copy", "search.suggest"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
