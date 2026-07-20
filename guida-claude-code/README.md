@@ -13,41 +13,62 @@ stato eseguito davvero, ogni schermata è reale e ogni fatto è controllato
 sulla [documentazione ufficiale](https://code.claude.com/docs), che resta la
 fonte da consultare quando questa guida invecchierà.
 
+![La mappa della guida: quattro parti, tre percorsi di lettura](assets/00-mappa-guida.svg)
+
 ## Come leggerla
 
 Una nota sulla numerazione: il numero nel nome dei capitoli è un
 identificatore stabile, non l'ordine di lettura — la guida cresce per
 sezioni e i capitoli nuovi si accodano. L'ordine giusto è questo indice.
 
-**Base - partire bene (giorno 1):**
+!!! tip "Tre percorsi, a seconda di dove sei"
+    - **Parto da zero** → Base in ordine, poi Metodo.
+    - **Lo uso già, voglio usarlo meglio** → Metodo (a partire dalla
+      Verifica), poi Potenza dove ti serve.
+    - **Voglio copiare un setup collaudato** → Riferimento, in particolare
+      i cap. 16 (la filosofia) e 18 (i file veri).
 
-1. [Installazione e primo avvio](01-installazione.md) - dal `curl` al primo prompt
-2. [Setup e configurazione](02-setup-e-config.md) - dove vive la config, i permessi, il deny sui segreti
-3. [Uso quotidiano](03-uso-quotidiano.md) - il flusso di lavoro, l'undo, la gestione delle sessioni
-4. [CLAUDE.md e rules](04-claude-md-e-rules.md) - le istruzioni permanenti del progetto
+<div class="grid cards" markdown>
 
-**Metodo - quello che fa la differenza:**
+-   **Base — partire bene (giorno 1)**
 
-5. [Verifica](11-verifica.md) - *se leggi un solo capitolo, questo*
-6. [Prompt engineering](12-prompt-engineering.md) - chiedere le cose in modo che riescano
-7. [Ricerca e progettazione](17-ricerca-e-progettazione.md) - deep research, SPEC, Ultraplan e Claude Design: decidere bene prima di costruire
-8. [Errori comuni](13-errori-comuni.md) - riconoscerli prima di farli, la checklist che chiude il Metodo
+    ---
 
-**Potenza - quando le basi girano:**
+    1. [Installazione e primo avvio](01-installazione.md) — dal `curl` al primo prompt
+    2. [Setup e configurazione](02-setup-e-config.md) — dove vive la config, i permessi, il deny sui segreti
+    3. [Uso quotidiano](03-uso-quotidiano.md) — il flusso di lavoro, l'undo, le sessioni
+    4. [CLAUDE.md e rules](04-claude-md-e-rules.md) — le istruzioni permanenti del progetto
 
-9. [Skill e slash command](05-skills-e-slash-commands.md) - procedure riusabili
-10. [Agenti](06-agenti.md) - a chi delegare il lavoro rumoroso
-11. [Hook](07-hooks.md) - regole che valgono sempre, non quasi sempre
-12. [MCP](08-mcp.md) - collegare browser, Figma, GitHub
-13. [Plugin](09-plugins.md) - il setup in un pacchetto
-14. [Workflow frontend](10-workflow-frontend.md) - *per chi fa frontend: Claude con un browser vero*
+-   **Metodo — quello che fa la differenza**
 
-**Riferimento:**
+    ---
 
-15. [Must-have e costi](14-must-have-e-costi.md) - il setup dei primi 30 minuti, i piani, le abitudini di risparmio
-16. [Risparmiare token](15-risparmiare-token.md) - gli strumenti per finestre di lavoro più lunghe sul piano Pro
-17. [Un setup reale](16-setup-a-tre-livelli.md) - globale, per cliente, per repo: dove si può arrivare
-18. [Il setup in chiaro](18-setup-in-chiaro.md) - i file veri riga per riga: permessi, hook, agenti, skill, MCP
+    5. [Verifica](11-verifica.md) — *se leggi un solo capitolo, questo*
+    6. [Prompt engineering](12-prompt-engineering.md) — chiedere le cose in modo che riescano
+    7. [Ricerca e progettazione](17-ricerca-e-progettazione.md) — decidere bene prima di costruire
+    8. [Errori comuni](13-errori-comuni.md) — riconoscerli prima di farli
+
+-   **Potenza — quando le basi girano**
+
+    ---
+
+    9. [Skill e slash command](05-skills-e-slash-commands.md) — procedure riusabili
+    10. [Agenti](06-agenti.md) — a chi delegare il lavoro rumoroso
+    11. [Hook](07-hooks.md) — regole che valgono sempre, non quasi sempre
+    12. [MCP](08-mcp.md) — collegare browser, Figma, GitHub
+    13. [Plugin](09-plugins.md) — il setup in un pacchetto
+    14. [Workflow frontend](10-workflow-frontend.md) — Claude con un browser vero
+
+-   **Riferimento — il setup, fino in fondo**
+
+    ---
+
+    15. [Must-have e costi](14-must-have-e-costi.md) — i primi 30 minuti, i piani
+    16. [Risparmiare token](15-risparmiare-token.md) — finestre di lavoro più lunghe
+    17. [Un setup reale](16-setup-a-tre-livelli.md) — globale, per attività, per repo
+    18. [Il setup in chiaro](18-setup-in-chiaro.md) — i file veri, riga per riga
+
+</div>
 
 ## Cosa ti serve per seguirla
 

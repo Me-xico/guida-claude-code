@@ -33,11 +33,15 @@ cosa. Quando il plugin è installato, Claude Code carica quei contenuti
 all'avvio della sessione come se fossero tuoi: le skill compaiono tra le
 slash command, gli hook si agganciano agli eventi, i server MCP si avviano.
 
+!!! note "Cosa viaggia dentro un plugin"
+    Skill, agenti, hook, server MCP: esattamente i capitoli 5-8, ma
+    versionati e distribuiti come un pacchetto solo.
+
 ## Come si installa e si gestisce
 
 Tutto in sessione, a partire da `/plugin`:
 
-```
+```text
 /plugin                              # sfoglia marketplace e plugin installati
 /plugin install nome@marketplace
 /reload-plugins                      # ricarica dopo modifiche ai file del plugin
@@ -94,6 +98,11 @@ Attenzione simmetrica a quella degli hook (cap. 07): un plugin può portare
 hook e MCP server, cioè **codice che gira con le tue credenziali**.
 Installa da fonti di cui ti fidi, e leggi cosa contiene. Il pannello
 `/plugin` lo mostra proprio per questo.
+
+!!! warning "Stesso rischio degli hook"
+    Un plugin può portare hook e server MCP: codice e connessioni che girano
+    con le tue credenziali. Installa da fonti fidate e guarda cosa contiene
+    prima di dire sì.
 
 ## Esempio dal vivo
 

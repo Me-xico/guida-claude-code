@@ -101,6 +101,11 @@ affari tuoi. `project` invece scrive un file **`.mcp.json` nella root del
 progetto**, pensato per essere committato: è così che si condivide lo
 stack col team. Chi clona il repo si ritrova i server già configurati.
 
+!!! tip "Lo scope giusto è il più basso che serve"
+    `local` per gli esperimenti tuoi, `project` solo quando il server va
+    davvero condiviso col team, `user` solo per quello che usi ovunque. Il
+    default (`local`) è già la scelta prudente: alzalo solo se serve.
+
 Ecco un `.mcp.json` completo:
 
 ```json
@@ -164,6 +169,11 @@ permessi**. Quindi: aggiungi quello che usi, rimuovi quello che non usi
 E se un tool restituisce output enormi (capita, con le pagine web),
 `MAX_MCP_OUTPUT_TOKENS` nei settings mette un tetto a quanto ne entra nel
 contesto.
+
+!!! warning "Superficie di rischio"
+    Un server MCP è codice che gira sulla tua macchina con i tuoi permessi.
+    Vale la stessa cautela degli hook (cap. 07): installa solo quello che
+    usi, da fonti che conosci, e ripulisci quello che non serve più.
 
 ---
 

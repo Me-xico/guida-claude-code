@@ -19,9 +19,12 @@ La risposta è organizzare il setup su tre livelli, ognuno col suo mestiere:
 | Cliente | un profilo isolato per cliente | il contesto: memoria, permessi, integrazioni, skill di dominio |
 | Repo | `.claude/` nel progetto | il codice: convenzioni, hook, agenti e mappe di quel codebase |
 
-La regola per decidere dove va una cosa: **al livello più alto in cui è vera
-per tutto ciò che sta sotto**. Vale sempre → globale. Vale per un cliente →
-profilo. Vale per un repo → repo.
+!!! tip "Dove va una cosa"
+    La regola per decidere: **al livello più alto in cui è vera per tutto
+    ciò che sta sotto**. Vale sempre → globale. Vale per un cliente →
+    profilo. Vale per un repo → repo.
+
+![I tre livelli: globale, attività, repo, e il verso di symlink e override](assets/16-tre-livelli.svg)
 
 ## Livello globale: chi sei tu
 
@@ -84,10 +87,12 @@ decisioni che questo livello richiede, con le lezioni che si porta dietro:
   allargare a intuito, ho usato la skill built-in `/fewer-permission-prompts`
   per analizzare i transcript recenti: il verdetto onesto è che quasi tutto
   era già coperto tra auto-allow e regole esistenti, e sono uscite solo tre
-  aggiunte reali. Due paletti non negoziabili: mai
-  allowlistare interpreti (`python`, `node`… è esecuzione arbitraria con un
-  altro nome) e mai `curl` generico (può fare POST ed esfiltrare quanto
-  legge).
+  aggiunte reali.
+
+!!! warning "Due paletti non negoziabili"
+    Mai allowlistare interpreti (`python`, `node`… è esecuzione arbitraria
+    con un altro nome) e mai `curl` generico (può fare POST ed esfiltrare
+    quanto legge).
 
 La manutenzione include anche i no: nella stessa revisione ho valutato un
 MCP server di ricerca web keyless e ho scelto di *non* adottarlo — troppo

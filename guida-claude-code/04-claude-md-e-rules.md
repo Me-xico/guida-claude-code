@@ -61,12 +61,13 @@ componente, stile con CSS modules (niente styled-components).
 Nota lo stile: frasi imperative e specifiche, niente prosa. Ogni riga è
 un'istruzione che cambia un comportamento.
 
-**Il test della riga**: per ogni riga chiediti "se la tolgo, Claude
-sbaglierebbe qualcosa?". Se no, tagliala. Obiettivo: **sotto le ~200 righe**.
-Il motivo non è estetico: i modelli seguono in modo affidabile un numero
-limitato di istruzioni, e in un CLAUDE.md gonfio le regole importanti
-annegano tra quelle inutili. Il file smette di funzionare proprio dove
-serviva. Da v2.1.206, `/doctor` propone lui stesso i tagli.
+!!! tip "Il test della riga"
+    Per ogni riga chiediti "se la tolgo, Claude sbaglierebbe qualcosa?". Se
+    no, tagliala. Obiettivo: **sotto le ~200 righe**. Il motivo non è
+    estetico: i modelli seguono in modo affidabile un numero limitato di
+    istruzioni, e in un CLAUDE.md gonfio le regole importanti annegano tra
+    quelle inutili. Il file smette di funzionare proprio dove serviva. Da
+    v2.1.206, `/doctor` propone lui stesso i tagli.
 
 ## Il pattern che rende il file vivo: il log degli errori
 
@@ -107,10 +108,14 @@ della tua macchina → `CLAUDE.local.md` o il file utente.
 **Gli import**: `@docs/convenzioni-css.md` a inizio riga include quel file
 nel CLAUDE.md, come un `import` (ricorsivo, max 4 livelli). Serve a
 modularizzare: il file principale resta corto e le sezioni corpose vivono in
-file dedicati. Attenzione al caso speciale: se un import punta **fuori** dal
-progetto, Claude Code si ferma e chiede conferma, perché un CLAUDE.md
-malevolo in un repo di terzi potrebbe usare gli import per iniettarti
-istruzioni. Il dialog è questo, e su repo che non conosci la risposta è no:
+file dedicati.
+
+!!! warning "Import esterni"
+    Se un import punta **fuori** dal progetto, Claude Code si ferma e chiede
+    conferma, perché un CLAUDE.md malevolo in un repo di terzi potrebbe
+    usare gli import per iniettarti istruzioni.
+
+Il dialog è questo, e su repo che non conosci la risposta è no:
 
 ![Conferma per gli import esterni del CLAUDE.md](assets/04-import-dialog.svg)
 

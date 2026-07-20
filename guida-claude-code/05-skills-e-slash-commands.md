@@ -23,6 +23,11 @@ di ripartizione ufficiale:
   stanno accanto al componente");
 - **procedure → skill**: caricate on-demand, zero costo quando non le usi.
 
+!!! tip "Il segnale per scriverne una"
+    Te ne accorgi quando ti risenti mentre ripeti la stessa spiegazione:
+    se un'operazione ti riesce due volte a mano, la terza scrivila come
+    skill.
+
 ## Dove sta e chi la crea
 
 Una skill è una directory che contiene almeno un `SKILL.md`:
@@ -77,6 +82,8 @@ Esegui in ordine, fermandoti al primo problema:
 | `name` | identifica la skill: è il nome della directory e diventa il comando `/release-check` |
 | `description` | **il trigger**: l'unica cosa che Claude vede per decidere se attivarla |
 | corpo | la ricetta: le istruzioni che Claude segue quando la skill si attiva |
+
+![Anatomia di una skill: il grilletto nella description, la procedura nel corpo](assets/05-anatomia-skill.svg)
 
 Sulla description vale la pena fermarsi, perché è il punto dove le skill
 falliscono. Claude non legge il corpo per decidere: legge *solo* la
@@ -154,6 +161,11 @@ invocazione `/nome`. Ma è il formato legacy, un file singolo, senza
 `references/` né `assets/`. Se esistono entrambi con lo stesso nome, vince la
 skill. Per cose nuove usa le skill; i command esistenti non vanno riscritti,
 migrali solo quando ti serve la struttura in più.
+
+!!! note "Skill o slash command legacy?"
+    Stesso frontmatter, stessa invocazione `/nome`: la differenza è solo la
+    struttura. Il command legacy è un file singolo, la skill è una directory
+    che può crescere con `references/` e `assets/`.
 
 ## Skill di serie e come crearne di buone
 

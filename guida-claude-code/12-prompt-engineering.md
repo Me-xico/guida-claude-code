@@ -16,6 +16,11 @@ un junior vero con un ticket che dice solo "sistemare il login".
 Tu sei il PM: più chiaro il brief, migliore la consegna. Tutto questo
 capitolo è declinazione di questa frase.
 
+!!! note "Il modello mentale del capitolo"
+    Claude Code è un junior brillante che gestisci: velocissimo, mai
+    permaloso, ma con una richiesta vaga produce un risultato vago. Tu sei
+    il PM: più chiaro il brief, migliore la consegna.
+
 ## Specificità: criteri di successo, non aggettivi
 
 Il dolore: chiedi "migliora questo componente", ottieni un refactor che
@@ -23,13 +28,17 @@ tocca venti righe che non c'entrano, e il problema vero, i re-render, è
 ancora lì. Non è colpa del modello: "migliora" non dice *cosa* dev'essere
 vero alla fine.
 
+![Anatomia di un prompt che riesce: contesto, compito, vincoli, verifica](assets/12-anatomia-prompt.svg)
+
 Debole: "migliora questo componente".
 Forte:
 
-> "Riduci i re-render di `ProductList`: memoizza le callback passate ai
-> figli, sposta il filtro in un `useMemo`, e verifica con il Profiler che al
-> cambio di `query` re-renderizzi solo la lista. Non cambiare l'API
-> pubblica."
+```text
+"Riduci i re-render di `ProductList`: memoizza le callback passate ai
+figli, sposta il filtro in un `useMemo`, e verifica con il Profiler che al
+cambio di `query` re-renderizzi solo la lista. Non cambiare l'API
+pubblica."
+```
 
 La differenza non è la lunghezza: è che il secondo ha **criteri
 verificabili** (cap. 11, "verifica col Profiler che…") e **vincoli** (cosa
@@ -47,20 +56,24 @@ L'errore opposto alla vaghezza: dettare *come* fare ogni passo, riga per
 riga. Non serve: per quello c'è il modello, che il codice lo sa scrivere.
 Serve invece dare ciò che il modello **non può sapere** guardando il repo:
 
-- il *perché*: "questo form è il funnel di pagamento: la priorità è non
-  rompere il tracking", cambia ogni decisione a valle
-- i **vincoli**: "Node 18, niente dipendenze nuove"
-- i **riferimenti**: "`@src/components/Form.tsx` è il pattern da seguire"
+| Cosa dare | Esempio |
+|---|---|
+| il *perché* | "questo form è il funnel di pagamento: la priorità è non rompere il tracking", cambia ogni decisione a valle |
+| i **vincoli** | "Node 18, niente dipendenze nuove" |
+| i **riferimenti** | "`@src/components/Form.tsx` è il pattern da seguire" |
 
 E il contesto passalo nella forma più ricca disponibile: riferisci i file
 con `@` (invece di descriverli), incolla gli errori **interi** (lo stack
 trace contiene la risposta più spesso di quanto pensi), allega screenshot
 (`Ctrl+V`) quando il problema è visivo. Un prompt che mette insieme i pezzi:
 
-> "Il tracking del funnel si è rotto dopo l'ultimo refactor. Questo form è
-> il funnel di pagamento: priorità assoluta non perdere eventi. Errore in
-> console: [incollato intero]. Il pattern corretto di invio eventi è in
-> `@src/analytics/track.ts`. Vincolo: niente dipendenze nuove."
+!!! tip "Un prompt che mette insieme i pezzi"
+    ```text
+    "Il tracking del funnel si è rotto dopo l'ultimo refactor. Questo form è
+    il funnel di pagamento: priorità assoluta non perdere eventi. Errore in
+    console: [incollato intero]. Il pattern corretto di invio eventi è in
+    `@src/analytics/track.ts`. Vincolo: niente dipendenze nuove."
+    ```
 
 Perché funziona: il modello ragiona su quello che ha nel contesto. Perché,
 vincoli e riferimenti sono esattamente le informazioni che non può dedurre
@@ -71,9 +84,11 @@ da solo: tutto il resto sì.
 Chiedere in un prompt solo una feature intera è il greed mistake, l'errore
 2 del cap. 13. Al contrario:
 
-> "Costruiamo il carrello a passi. Step 1: solo il data-layer — hook
-> `useCart` con aggiunta, rimozione, quantità, e i test Vitest. Niente UI,
-> niente persistenza per ora. Poi ci vediamo qui e decidiamo lo step 2."
+```text
+"Costruiamo il carrello a passi. Step 1: solo il data-layer — hook
+`useCart` con aggiunta, rimozione, quantità, e i test Vitest. Niente UI,
+niente persistenza per ora. Poi ci vediamo qui e decidiamo lo step 2."
+```
 
 Ogni passo finito e verificato è un checkpoint (in senso letterale: cap. 03)
 su cui costruire il successivo. Se lo step 2 va male, torni a un punto
@@ -82,9 +97,11 @@ solido invece di dover disfare una matassa.
 Per le feature grandi, il pattern ufficiale è **farsi intervistare**, utile
 proprio perché i requisiti che *credi* di avere chiari non lo sono:
 
-> "Devo costruire X. Prima di scrivere codice, intervistami: fammi le domande
-> che servono a chiarire requisiti e edge case, poi scrivi una spec in
-> SPEC.md."
+```text
+"Devo costruire X. Prima di scrivere codice, intervistami: fammi le domande
+che servono a chiarire requisiti e edge case, poi scrivi una spec in
+SPEC.md."
+```
 
 Le domande di Claude fanno emergere gli edge case a cui non avevi pensato
 (cosa succede al carrello se l'utente fa logout? gli sconti si sommano?).
@@ -103,9 +120,11 @@ più forte non aggiunge informazione. Dai invece **materiale nuovo**:
 l'errore esatto, l'output del test, lo screenshot di cosa si vede davvero.
 "Non funziona" non dà a Claude nulla su cui lavorare; uno stack trace sì:
 
-> "Il fix non basta: al submit ora arriva questo — [stack trace intero].
-> Ecco anche lo screenshot dello stato del form [Ctrl+V]. Nota che succede
-> solo quando il campo email è vuoto."
+```text
+"Il fix non basta: al submit ora arriva questo — [stack trace intero].
+Ecco anche lo screenshot dello stato del form [Ctrl+V]. Nota che succede
+solo quando il campo email è vuoto."
+```
 
 E ricorda la regola dei 2 tentativi (cap. 03): al secondo giro andato male,
 `/clear` e riformula da zero incorporando quello che hai imparato. Il

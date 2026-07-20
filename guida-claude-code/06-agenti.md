@@ -16,6 +16,12 @@ contesto della tua sessione con output che non ti serve conservare. Il
 subagent fa il lavoro sporco nel suo contesto e riporta indietro solo la
 conclusione. Tu tieni la sintesi, non i log.
 
+!!! note "Contesto isolato"
+    Il rumore (grep, log di test, file letti) resta nel contesto del
+    subagent e sparisce con lui a fine task. Nella tua sessione arriva solo
+    la sintesi: vale la pena delegare anche un compito breve, se produce
+    output verboso.
+
 Secondo motivo: **restringere i poteri**. Un reviewer con soli tool di
 lettura non può "aggiustare" le cose di sua iniziativa mentre giudica.
 
@@ -62,6 +68,11 @@ You are a senior frontend reviewer. When invoked:
 | `model` | `haiku` per lavoro meccanico (lint, esecuzione test), `sonnet` per review; ometti per ereditare dal main |
 | corpo | il **system prompt** dell'agente: chi è, cosa fa quando viene invocato, in che formato risponde |
 
+!!! tip "La description è la regola di routing"
+    Come per le skill, il main agent decide a chi delegare leggendo le
+    description di tutti gli agenti disponibili. Scrivila pensando a
+    *quando* dovrebbe scattare la delega, non solo a cosa fa l'agente.
+
 Nota il corpo dell'esempio: definisce il ruolo, i passi, il formato
 dell'output e il confine ("you do NOT edit"). È il pattern da copiare.
 
@@ -88,6 +99,8 @@ separato: più agenti che *scrivono* in parallelo senza pestarsi),
 Per invocarlo esplicitamente: nominalo nel prompt ("usa il code-reviewer sui
 componenti nuovi") o garantisci la delega con la @-mention:
 `@"code-reviewer (agent)"`.
+
+![Le tre porte della delega e il ritorno delle conclusioni](assets/06-delega-agenti.svg)
 
 ### Foreground e background
 

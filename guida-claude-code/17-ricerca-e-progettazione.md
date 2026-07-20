@@ -3,6 +3,8 @@
 > Verificato il 16 luglio 2026 sulla doc ufficiale. Claude Design e Ultraplan
 > sono in research preview: comportamento e disponibilità possono cambiare.
 
+![Ricerca, poi progettazione, poi codice: la scorciatoia si paga dopo](assets/17-ricerca-flusso.svg)
+
 ## Il principio
 
 Il capitolo 11 insegna a verificare il lavoro *fatto*. Questo capitolo
@@ -105,6 +107,18 @@ Il flusso completo di un lavoro ben fatto ha quattro tappe, ognuna con lo
 strumento e la verifica giusti: **ricerca** (`/deep-research`, fonti
 citate) → **decisione** → **piano** (plan mode → SPEC → Ultraplan, revisione
 proporzionata alla posta) → **implementazione** (cap. 03 e 10, col criterio
-di "finito" del cap. 11). Ogni tappa saltata si ripresenta più avanti, con
-gli interessi. A chiudere il Metodo resta il capitolo sugli errori comuni
+di "finito" del cap. 11).
+
+| Strumento | Quando | Cosa produce |
+|---|---|---|
+| `/deep-research` | decisione difficile da invertire su un terreno che non conosci | un report con le fonti citate |
+| Plan mode (cap. 03) | il gradino quotidiano | dieci righe di piano da correggere, invece di cento di codice |
+| Intervista → SPEC (cap. 12) | per le feature grandi | una spec scritta che sopravvive alla sessione |
+| `/ultraplan` | il piano merita una revisione da documento, non da terminale | piano in cloud, revisione nel browser con commenti inline; poi PR in cloud o teleport in locale |
+| Claude Design | progettare l'interfaccia, specie con un design system nel repo | design, prototipi interattivi, mockup già conformi ai componenti reali |
+
+!!! warning "Il costo di saltare una fase"
+    Ogni tappa saltata si ripresenta più avanti, con gli interessi.
+
+A chiudere il Metodo resta il capitolo sugli errori comuni
 (cap. 13): la checklist dei sintomi, prima di passare agli attrezzi.

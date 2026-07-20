@@ -52,6 +52,11 @@ base dei test e2e. Bonus non piccolo: se la tua UI è illeggibile per
 l'accessibility tree, hai appena scoperto un problema di a11y, lo stesso
 che avrebbe uno screen reader.
 
+!!! note "Effetto collaterale utile"
+    Se l'accessibility tree non riesce a leggere un elemento della tua UI,
+    è lo stesso ostacolo che troverebbe uno screen reader: un problema di
+    a11y scoperto gratis.
+
 ## Strada 2: l'estensione Chrome ufficiale (Anthropic, per gli abbonati)
 
 **Cos'è**: Claude dentro il *tuo* Chrome, non in un browser a parte. La
@@ -92,6 +97,11 @@ da design. Tre mosse:
    quello che trasforma un tentativo unico in un ciclo.
 3. Claude itera da solo: implementa → guarda (screenshot vero, dal browser
    vero) → confronta → corregge → riguarda.
+
+!!! tip "Il criterio che chiude il loop"
+    "Ripeti finché non corrispondono" è la frase che serve: senza un
+    bersaglio verificabile (il mock, i test) il loop non si ferma da solo,
+    va sempre chiesto esplicitamente.
 
 Cosa aspettarsi: la prima iterazione sarà al 70%; la terza, quasi
 indistinguibile dal mock. Il tuo lavoro si sposta da "descrivere le

@@ -17,28 +17,33 @@ il proprio lavoro?** Se sì, il loop diventa lavora → controlla → correggi �
 ripeti finché passa, senza di te nel mezzo. Se no, il test runner sei tu, e
 sei anche il collo di bottiglia.
 
+![Il ciclo della verifica: criterio eseguibile, lavoro, controllo, correzione](assets/11-loop-verifica.svg)
+
 ## Come si applica: dai a Claude un criterio eseguibile
 
 Per un frontend dev i "modi per verificare" sono concreti e quasi sempre già
 nel progetto:
 
-- i **test**: "scrivi prima i test (devono fallire), poi implementa finché
-  passano". Il TDD si sposa con Claude meglio che con gli umani, perché il
-  test fallito è un segnale che il modello può leggere e inseguire da solo
-- l'**exit code della build**: `npm run build` che esce 0
-- il **lint/typecheck**: `tsc --noEmit`
-- lo **screenshot confrontato col mock**: "ecco il design; implementa, fai lo
-  screenshot, confronta, elenca le differenze, correggi" (cap. 10)
+| Metodo | Quando usarlo | Cosa intercetta |
+|---|---|---|
+| **Test** | scrivi prima i test (devono fallire), poi implementa finché passano | regressioni funzionali; il TDD si sposa con Claude meglio che con gli umani, perché il test fallito è un segnale che il modello può leggere e inseguire da solo |
+| **Exit code della build** | `npm run build` che esce 0 | una build rotta prima che arrivi al deploy |
+| **Lint/typecheck** | `tsc --noEmit` | errori di tipo, prima ancora di eseguire il codice |
+| **Screenshot confrontato col mock** | "ecco il design; implementa, fai lo screenshot, confronta, elenca le differenze, correggi" (cap. 10) | scostamenti visivi dal design che i test non vedono |
 
-Un prompt completo, per fissare la forma:
+!!! tip "Un criterio di successo eseguibile"
+    Un prompt completo, per fissare la forma:
 
-> "Aggiungi la validazione a `@src/components/CheckoutForm.tsx`: email
-> obbligatoria e formato valido, CAP a 5 cifre. Prima scrivi i test Vitest
-> per questi casi (devono fallire), poi implementa. Considera finito solo
-> quando `npm test` passa e `tsc --noEmit` esce pulito."
+    ```text title="Prompt"
+    Aggiungi la validazione a @src/components/CheckoutForm.tsx: email
+    obbligatoria e formato valido, CAP a 5 cifre. Prima scrivi i test Vitest
+    per questi casi (devono fallire), poi implementa. Considera finito solo
+    quando npm test passa e tsc --noEmit esce pulito.
+    ```
 
-Nota la struttura: cosa fare, come verificarlo, quando fermarsi. Il criterio
-di verifica costa una riga in più e cambia tutto quello che viene prima.
+    Nota la struttura: cosa fare, come verificarlo, quando fermarsi. Il
+    criterio di verifica costa una riga in più e cambia tutto quello che
+    viene prima.
 
 ## Perché funziona
 
@@ -50,8 +55,10 @@ iterazione consuma il *suo* tempo, non il tuo.
 
 ## Chiedi evidenze, non asserzioni
 
-"Fatto, ora funziona" non è informazione: è una speranza. La contromossa è
-sempre la stessa domanda, in tre varianti:
+!!! warning "Fiducia senza verifica"
+    "Fatto, ora funziona" non è informazione: è una speranza.
+
+La contromossa è sempre la stessa domanda, in tre varianti:
 
 > "Mostrami l'output dei test."
 > "Incolla l'exit code della build."
@@ -99,18 +106,19 @@ revisionare a una **seconda** sessione (o al `/code-review` built-in) a
 contesto pulito: chi non ha scritto il codice vede quello che l'autore non
 vede più.
 
-**Ma attenzione all'effetto collaterale documentato**: un reviewer istruito
-a trovare problemi ne troverà *sempre*: è il suo mandato. Se ubbidisci a
-ogni finding, dopo tre giri di review ti ritrovi con astrazioni, guard
-clause e configurabilità che nessuno ha chiesto: l'over-engineering da
-review. L'antidoto è limitare il mandato in partenza:
+??? note "L'effetto collaterale documentato della review avversaria"
+    **Ma attenzione all'effetto collaterale documentato**: un reviewer istruito
+    a trovare problemi ne troverà *sempre*: è il suo mandato. Se ubbidisci a
+    ogni finding, dopo tre giri di review ti ritrovi con astrazioni, guard
+    clause e configurabilità che nessuno ha chiesto: l'over-engineering da
+    review. L'antidoto è limitare il mandato in partenza:
 
-> "Fai la review di questo diff. Segnala **solo** bug reali e requisiti
-> mancati rispetto a SPEC.md. Non proporre migliorie di stile, refactoring
-> o astrazioni: se qualcosa funziona ed è nei requisiti, passa."
+    > "Fai la review di questo diff. Segnala **solo** bug reali e requisiti
+    > mancati rispetto a SPEC.md. Non proporre migliorie di stile, refactoring
+    > o astrazioni: se qualcosa funziona ed è nei requisiti, passa."
 
-I suggerimenti extra che arrivano comunque: trattali come opzionali, non
-come to-do.
+    I suggerimenti extra che arrivano comunque: trattali come opzionali, non
+    come to-do.
 
 ## Il caso senza test
 

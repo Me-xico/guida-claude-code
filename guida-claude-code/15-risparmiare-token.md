@@ -46,10 +46,11 @@ Total commands:    6812
 Tokens saved:      2.1M (54.3%)
 ```
 
-Metà dei token degli output di comando, spariti. Per un piano Pro è la
-differenza tra una finestra che finisce a metà pomeriggio e una che arriva
-a sera. È lo strumento col miglior rapporto beneficio/rischio del capitolo:
-non cambia *cosa* fa Claude, solo quanto pesa quello che legge.
+!!! tip "Quando rtk conviene davvero"
+    Metà dei token degli output di comando, spariti. Per un piano Pro è la
+    differenza tra una finestra che finisce a metà pomeriggio e una che
+    arriva a sera. È lo strumento col miglior rapporto beneficio/rischio del
+    capitolo: non cambia *cosa* fa Claude, solo quanto pesa quello che legge.
 
 ## ponytail - meno codice generato
 
@@ -91,13 +92,14 @@ claude plugin marketplace add JuliusBrussee/caveman
 claude plugin install caveman@caveman
 ```
 
-**L'asterisco**: il progetto dichiara ~65% di risparmio sui token di
-*output in prosa*; ma il benchmark indipendente di ponytail (che lo usa come
-termine di paragone) lo misura a **+7% di token totali** sui task di
-coding, perché nei task veri la prosa è una fetta piccola, e lo stile
-"caveman" a volte allunga il giro. Verdetto pratico: prendilo per la
-*leggibilità* (risposte che si scorrono in due secondi), non per il
-risparmio. Sul budget contano rtk e ponytail.
+!!! warning "L'asterisco"
+    Il progetto dichiara ~65% di risparmio sui token di *output in prosa*;
+    ma il benchmark indipendente di ponytail (che lo usa come termine di
+    paragone) lo misura a **+7% di token totali** sui task di coding, perché
+    nei task veri la prosa è una fetta piccola, e lo stile "caveman" a volte
+    allunga il giro. Verdetto pratico: prendilo per la *leggibilità*
+    (risposte che si scorrono in due secondi), non per il risparmio. Sul
+    budget contano rtk e ponytail.
 
 ## L'ordine giusto per un piano Pro
 

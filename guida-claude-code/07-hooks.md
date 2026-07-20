@@ -11,8 +11,9 @@ voglia o no. L'analogia: CLAUDE.md è il cartello "si prega di timbrare", un
 hook è il **tornello**: non si passa senza. Regola di ripartizione:
 preferenze e conoscenza → CLAUDE.md; **garanzie → hook**.
 
-Bonus non ovvio: un `deny` imposto da un hook `PreToolUse` vale anche in
-`bypassPermissions`: è l'unico guardrail che nessuna modalità scavalca.
+!!! warning "Regole che valgono sempre, non quasi sempre"
+    Bonus non ovvio: un `deny` imposto da un hook `PreToolUse` vale anche in
+    `bypassPermissions`: è l'unico guardrail che nessuna modalità scavalca.
 
 ## Dove sta e chi lo crea
 
@@ -65,6 +66,8 @@ Risultato: la CI non fallirà mai più per il formato. Non perché Claude "si
 ricorda", ma perché non può succedere altrimenti.
 
 ## Come funziona, passo passo
+
+![Il ciclo di vita di un hook: bloccare prima, correggere dopo](assets/07-ciclo-hook.svg)
 
 1. Claude sta per usare (o ha appena usato) un tool → l'evento
    corrispondente scatta.

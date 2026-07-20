@@ -35,7 +35,7 @@ Le quattro fasi in pratica:
 1. **Explore** (in plan mode): "leggi `src/auth` e spiegami come funziona il
    login". Claude legge, cerca, riassume, ma non modifica nulla.
 2. **Plan**: "prepara un piano di implementazione dettagliato". Claude
-   produce il piano; con `Ctrl+G` lo apri nel tuo editor e lo correggi
+   produce il piano; con ++ctrl+g++ lo apri nel tuo editor e lo correggi
    *prima* che parta una sola riga di codice: è il momento in cui la
    revisione costa meno.
 3. **Code**: approvi il piano e Claude implementa. All'approvazione ti chiede
@@ -44,7 +44,7 @@ Le quattro fasi in pratica:
 4. **Commit**: "committa con un messaggio descrittivo".
 
 **Il plan mode, in concreto**: è uno dei permission mode, Claude può solo
-leggere ed esplorare, mai scrivere. Si attiva ciclando con **Shift+Tab** (lo
+leggere ed esplorare, mai scrivere. Si attiva ciclando con ++shift+tab++ (lo
 stesso tasto cicla tutti i mode) oppure all'avvio con
 `claude --permission-mode plan`. Sai di esserci perché lo dice la barra di
 stato sotto il prompt, come qui:
@@ -55,8 +55,9 @@ stato sotto il prompt, come qui:
 "non può toccare nulla" è garantito dal permission system, non dalla buona
 volontà del modello.
 
-**Quando saltare il piano**: se il diff si descrive in una frase (typo,
-rename, una riga di log), il plan mode è solo overhead. Vai diretto.
+!!! tip "Quando saltare il piano"
+    Se il diff si descrive in una frase (typo, rename, una riga di log), il
+    plan mode è solo overhead. Vai diretto.
 
 ## Checkpoint e /rewind: la rete di sicurezza
 
@@ -64,7 +65,7 @@ rename, una riga di log), il plan mode è solo overhead. Vai diretto.
 viene salvato un checkpoint, uno snapshot a cui puoi tornare, come i
 restore point di git ma automatici e per-intervento.
 
-**Dove sta**: premi **doppio Esc** (a input vuoto) oppure digita `/rewind`.
+**Dove sta**: premi ++esc++ ++esc++ (a input vuoto) oppure digita `/rewind`.
 Si apre il menu di ripristino con la lista dei checkpoint:
 
 ![Il menu Rewind: ogni intervento è un punto di ripristino](assets/03-rewind-menu.svg)
@@ -80,9 +81,11 @@ Si apre il menu di ripristino con la lista dei checkpoint:
 
 **Come cambia il modo di lavorare**: puoi far *tentare* a Claude una strada
 rischiosa ("riscrivi lo store con Zustand, vediamo") sapendo che il ritorno
-costa due tasti. Due limiti da conoscere: traccia **solo gli edit fatti da
-Claude**, non i comandi bash (`rm`, `mv`), non le tue modifiche a mano, e
-tiene gli ultimi 100 checkpoint.
+costa due tasti.
+
+!!! warning "Due limiti da conoscere"
+    Traccia **solo gli edit fatti da Claude**, non i comandi bash (`rm`,
+    `mv`), non le tue modifiche a mano, e tiene gli ultimi 100 checkpoint.
 
 ## La regola dei 2 tentativi
 
@@ -128,10 +131,13 @@ libero è quello che resta per il lavoro vero:
 
 ![Output di /context: la griglia dell'uso del contesto per categoria](assets/03-context.svg)
 
-**Perché ti riguarda**: il contesto si riempie man mano che lavori, e più è
-pieno più le prestazioni degradano: Claude "dimentica" le istruzioni date
-all'inizio, ripete errori già corretti. Quasi tutte le buone abitudini di
-questa guida derivano da qui. Gli strumenti:
+!!! note "Perché ti riguarda"
+    Il contesto si riempie man mano che lavori, e più è pieno più le
+    prestazioni degradano: Claude "dimentica" le istruzioni date all'inizio,
+    ripete errori già corretti. Quasi tutte le buone abitudini di questa
+    guida derivano da qui.
+
+Gli strumenti:
 
 - `/clear`: svuota la conversazione. Da usare **tra un task e l'altro,
   sempre**: il task nuovo non ha bisogno della storia del precedente. Niente
@@ -152,17 +158,17 @@ La tabella di riferimento, poi i tre trucchi che meritano il dettaglio:
 
 | Tasto | Effetto |
 |---|---|
-| `Esc` | interrompe Claude (i tuoi messaggi in coda restano) |
-| `Esc Esc` | input pieno: svuota la riga; input vuoto: apre `/rewind` |
-| `Ctrl+C` | primo: pulisce l'input; secondo: esce |
-| `Shift+Tab` | cicla i permission mode (cap. 02) |
+| ++esc++ | interrompe Claude (i tuoi messaggi in coda restano) |
+| ++esc++ ++esc++ | input pieno: svuota la riga; input vuoto: apre `/rewind` |
+| ++ctrl+c++ | primo: pulisce l'input; secondo: esce |
+| ++shift+tab++ | cicla i permission mode (cap. 02) |
 | `!comando` | shell mode: esegue il comando, output nel contesto |
 | `@path` | riferisci un file (autocomplete) |
-| `Ctrl+V` | incolla un'immagine dagli appunti (fondamentale per il frontend: screenshot → "riproduci questo layout") |
-| `Ctrl+O` | transcript dettagliato (tool call, tempi, modello) |
-| `Ctrl+R` | ricerca nella storia |
-| `Ctrl+B` | manda in background il comando in corso |
-| `Alt+T` / `Option+T` | toggle extended thinking (per i problemi difficili; su alcuni modelli è sempre attivo) |
+| ++ctrl+v++ | incolla un'immagine dagli appunti (fondamentale per il frontend: screenshot → "riproduci questo layout") |
+| ++ctrl+o++ | transcript dettagliato (tool call, tempi, modello) |
+| ++ctrl+r++ | ricerca nella storia |
+| ++ctrl+b++ | manda in background il comando in corso |
+| ++alt+t++ / ++option+t++ | toggle extended thinking (per i problemi difficili; su alcuni modelli è sempre attivo) |
 
 **Shell mode (`!`)**: digita `!` come primo carattere e l'input cambia
 aspetto, prompt rosa, hint "! for shell mode" in basso: non stai più
@@ -204,6 +210,7 @@ modello per quale task, e cosa costa, è il tema del cap. 14. Il picker:
 
 ---
 
-**In sintesi**: plan mode per i task grossi, doppio Esc come undo universale,
-`/clear` tra i task e la regola dei 2 tentativi quando ti impantani. Il
-prossimo capitolo entra nel file più importante del tuo setup: il CLAUDE.md.
+**In sintesi**: plan mode per i task grossi, ++esc++ ++esc++ come undo
+universale, `/clear` tra i task e la regola dei 2 tentativi quando ti
+impantani. Il prossimo capitolo entra nel file più importante del tuo
+setup: il CLAUDE.md.

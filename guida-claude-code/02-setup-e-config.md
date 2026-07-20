@@ -89,11 +89,14 @@ Le liste sono tre, e rispondono a tre domande diverse:
 **Come funziona in pratica.** Quando Claude sta per usare un tool, la
 richiesta viene confrontata con le regole: se matcha un `deny` viene
 bloccata, se matcha un `allow` passa senza prompt, altrimenti si applica il
-permission mode corrente (sezione successiva). Il pattern più importante da
-copiare subito è **il deny sui segreti**: `.env` e simili non devono essere
-leggibili nemmeno per sbaglio. Nota come il deny della demo chiude entrambe
-le porte: il tool `Read` (le prime due regole) e la lettura via shell con
-`cat` (la terza). Bloccarne solo una lascerebbe l'altra aperta.
+permission mode corrente (sezione successiva).
+
+!!! warning "Il deny sui segreti"
+    Il pattern più importante da copiare subito è **il deny sui segreti**:
+    `.env` e simili non devono essere leggibili nemmeno per sbaglio. Nota
+    come il deny della demo chiude entrambe le porte: il tool `Read` (le
+    prime due regole) e la lettura via shell con `cat` (la terza). Bloccarne
+    solo una lascerebbe l'altra aperta.
 
 C'è un momento in cui questo file ti passa davanti agli occhi: la prima
 volta che apri un progetto che contiene permessi pre-approvati, Claude Code
@@ -135,11 +138,12 @@ se ti sei stancato di confermare ogni edit:
 
 ![Richiesta di permesso per la creazione di un file](assets/02-permission-prompt.svg)
 
-La progressione consigliata: `default` finché non hai preso confidenza, poi
-`acceptEdits` per il lavoro quotidiano, `plan` quando affronti task grossi
-in cui vuoi vedere il piano prima del codice (cap. 03). Qualunque mode tu
-scelga, i percorsi protetti (`.git/`, `.claude/`, i dotfile della shell) non
-vengono mai auto-approvati: quelli te li chiede sempre.
+!!! tip "Progressione consigliata"
+    `default` finché non hai preso confidenza, poi `acceptEdits` per il
+    lavoro quotidiano, `plan` quando affronti task grossi in cui vuoi vedere
+    il piano prima del codice (cap. 03). Qualunque mode tu scelga, i percorsi
+    protetti (`.git/`, `.claude/`, i dotfile della shell) non vengono mai
+    auto-approvati: quelli te li chiede sempre.
 
 Per vedere e modificare le regole senza toccare il JSON a mano c'è il
 pannello `/permissions`. Qui sotto lo vedi aperto sul progetto demo: nota i

@@ -17,15 +17,19 @@ pensarci.
 
 **Come si installa.** Un comando, a seconda del sistema:
 
-```bash
-# macOS / Linux / WSL
-curl -fsSL https://claude.ai/install.sh | bash
-```
+=== "macOS / Linux"
 
-```powershell
-# Windows (PowerShell)
-irm https://claude.ai/install.ps1 | iex
-```
+    ```bash
+    # macOS / Linux / WSL
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+
+=== "Windows"
+
+    ```powershell
+    # Windows (PowerShell)
+    irm https://claude.ai/install.ps1 | iex
+    ```
 
 **Dove finisce.** Il binario viene messo in `~/.local/bin/claude`. È un
 eseguibile autonomo: **non serve Node.js**, né nessun altro runtime. Se hai
@@ -43,6 +47,10 @@ Se invece vuoi che sia il tuo package manager a governare gli aggiornamenti
 $ claude --version
 2.1.210 (Claude Code)
 ```
+
+!!! tip "Aggiornamenti automatici"
+    Il binario installato così si aggiorna da solo in background, come fa
+    un browser moderno: dopo questa verifica non dovrai più pensarci.
 
 Se il comando non viene trovato, quasi sempre il problema è che
 `~/.local/bin` non è nel `PATH` della tua shell.

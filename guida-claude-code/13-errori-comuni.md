@@ -8,6 +8,8 @@ cosa sta succedendo davvero (la meccanica), e la cura. Il valore del
 capitolo non è la lista in sé: è imparare a riconoscere il sintomo *mentre
 ti capita*, non tre ore dopo.
 
+![La mappa degli otto errori: sintomo e cura a colpo d'occhio](assets/13-errori-mappa.svg)
+
 ## 1. Usarlo come ChatGPT
 
 *Sintomo*: domande secche, zero contesto, nessun file riferito, e poi
@@ -15,7 +17,7 @@ ti capita*, non tre ore dopo.
 *Cosa succede*: stai usando il 10% dello strumento. Claude Code è un agente
 col tuo repo davanti: può aprire file, lanciare comandi, verificare i
 risultati. Se gli fai solo domande, hai una chat costosa.
-*Cura*: dagli file (`@src/components/Modal.tsx`), comandi da eseguire
+**Cura**: dagli file (`@src/components/Modal.tsx`), comandi da eseguire
 ("lancia `npm test` e guarda cosa fallisce"), criteri di successo. Il
 valore sta nel loop agentico (esplora, modifica, verifica), non nella
 risposta singola. Confronta: "come si centra un div?" contro "il modal in
@@ -30,7 +32,7 @@ e non puoi nemmeno fare revert pulito, perché le otto cose sono
 intrecciate negli stessi file.
 *Cosa succede*: ogni obiettivo in più diluisce l'attenzione su tutti gli
 altri, e nessuno arriva alla soglia del "finito e verificato".
-*Cura*: un obiettivo per prompt, verificato prima del successivo (cap. 12).
+**Cura**: un obiettivo per prompt, verificato prima del successivo (cap. 12).
 Il momento per accorgersene è **mentre scrivi il prompt**: alla prima
 "e già che ci sei", taglia e metti il resto in un appunto per dopo.
 
@@ -38,7 +40,7 @@ Il momento per accorgersene è **mentre scrivi il prompt**: alla prima
 
 *Sintomo*: "no, non così… no, intendevo… ancora sbagliato…": sei al quinto
 tentativo sullo stesso punto e ognuno è peggio del precedente.
-*Cura*: **regola dei 2 tentativi**. Due correzioni andate male → `/clear` →
+**Cura**: **regola dei 2 tentativi**. Due correzioni andate male → `/clear` →
 prompt nuovo che incorpora ciò che hai imparato dai fallimenti ("attenzione:
 l'approccio con X non funziona perché Y"). La sessione pulita capisce al
 primo colpo quello che quella inquinata non capiva al quinto (il perché
@@ -52,7 +54,7 @@ importante.
 modello: ogni riga in più diluisce tutte le altre. Un file gonfio non è
 "più completo": è un file dove le regole che contano annegano tra quelle
 che non servono.
-*Cura*: test della riga ("questa riga ha mai cambiato un comportamento?")
+**Cura**: test della riga ("questa riga ha mai cambiato un comportamento?")
 e ~200 righe massimo (cap. 04).
 *Il segnale*: quando ti scopri ad aggiungere una riga al CLAUDE.md per un
 problema successo una volta sola. Aspetta la seconda.
@@ -63,7 +65,7 @@ problema successo una volta sola. Aspetta la seconda.
 *Cosa succede*: hai accettato un'asserzione come se fosse un'evidenza. Il
 modello che dichiara "funziona" sta esprimendo fiducia nel proprio codice,
 la stessa fiducia mal riposta di qualunque autore.
-*Cura*: mai accettare un'asserzione senza evidenza (cap. 11). "Mostrami
+**Cura**: mai accettare un'asserzione senza evidenza (cap. 11). "Mostrami
 l'output dei test" è la frase più redditizia della guida: cinque secondi
 per chiederla, e trasforma una speranza in un fatto.
 
@@ -74,7 +76,7 @@ era sbagliata, e le altre due la usano.
 *Cosa succede*: l'errore non costa quanto costa quando lo fai. Costa
 quanto ci hai costruito sopra. Ogni blocco non verificato è un debito che
 matura interessi a ogni prompt successivo.
-*Cura*: rivedi (o fai verificare: test, review, screenshot) ogni blocco
+**Cura**: rivedi (o fai verificare: test, review, screenshot) ogni blocco
 prima di costruirci sopra. I checkpoint (cap. 03) esistono per questo:
 torna indietro finché è gratis.
 
@@ -86,7 +88,7 @@ dopo il contesto è pieno di file letti a caso e la sessione è rincitrullita.
 venti irrilevanti. L'esplorazione libera è il modo più rapido di riempire
 il contesto di rumore, e il rumore degrada tutte le risposte successive,
 anche quelle sul task vero.
-*Cura*: scope esplicito ("solo `src/auth/`, rispondi in 10 righe") oppure
+**Cura**: scope esplicito ("solo `src/auth/`, rispondi in 10 righe") oppure
 delega a un subagent Explore che esplora nel *suo* contesto e ti riporta
 solo la sintesi (cap. 06). Un prompt fatto bene:
 
@@ -103,7 +105,7 @@ d'occhio.
 meccanica, con l'immagine di `/context`, è nel cap. 03). È la causa radice
 di metà di questa lista: il loop di correzioni del punto 3, l'esplorazione
 del punto 7, tutti affluenti dello stesso fiume.
-*Cura*: `/clear` tra task diversi, sempre. Costa zero e la sessione resta
+**Cura**: `/clear` tra task diversi, sempre. Costa zero e la sessione resta
 recuperabile con `/resume`: stai solo dando al task nuovo un contesto che
 parla solo di lui.
 *Il segnale*: ti accorgi che stai per fare una domanda che non c'entra col

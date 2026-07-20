@@ -29,6 +29,8 @@ giusto, perché ripagano dal primo pomeriggio? Eccole:
    prompt di conferma su un comando innocuo è attrito che ti fa sorvegliare
    invece di lavorare.
 
+![I primi 30 minuti: cinque passi e poi è routine](assets/14-primi-30-minuti.svg)
+
 E quando arriva il momento, la sesta mossa si aggiunge da sola: estensione
 Chrome o Playwright MCP (cap. 10).
 
@@ -91,10 +93,12 @@ Quattro strumenti, dal più al meno frequente:
 - `/usage`: dove sei coi limiti del piano (Pro/Max)
 - `/cost`: spesa della sessione (utenti API)
 
-Ordini di grandezza: la tabella completa dei piani è nel cap. 01; il punto
-pratico è che se Claude Code diventa lo strumento principale, il limite del
-Pro (~200 messaggi ogni 5 ore) si sente in fretta: sembrano tanti finché
-non passi una giornata intera in sessione.
+Ordini di grandezza: la tabella completa dei piani è nel cap. 01.
+
+!!! note "Il limite si sente in fretta"
+    Se Claude Code diventa lo strumento principale, il limite del Pro
+    (~200 messaggi ogni 5 ore) si sente in fretta: sembrano tanti finché
+    non passi una giornata intera in sessione.
 
 ## Per andare oltre (cenni)
 

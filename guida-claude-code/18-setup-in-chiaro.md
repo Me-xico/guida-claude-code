@@ -117,9 +117,13 @@ tre atti:
 largo come "qualunque comando che tocca un `.env`" in deny farebbe danni:
 `cp .env.example .env` è un'operazione legittima che i miei fixture fanno di
 mestiere. In ask, invece, il comando si ferma e chiede: l'uso sospetto lo
-nego io a mano, quello legittimo passa con un invio. Il criterio che ne ho
-ricavato: **deny solo dove un falso positivo è quasi impossibile; ask dove il
-pattern è largo**. Con deny non c'è appello, e una regola che combatte contro
+nego io a mano, quello legittimo passa con un invio.
+
+!!! tip "Deny o ask?"
+    Il criterio che ne ho ricavato: **deny solo dove un falso positivo è
+    quasi impossibile; ask dove il pattern è largo**.
+
+Con deny non c'è appello, e una regola che combatte contro
 di te finisce cancellata, il che è peggio di una regola che chiede.
 
 ## Hook: le regole che valgono sempre
@@ -149,16 +153,23 @@ esempio preferito di hook piccolo fatto bene:
 cmd=$(jq -r '.tool_input.command // empty')
 case "$cmd" in
   *"git commit"*) ;;
-  *) exit 0 ;;
+  *) exit 0 ;; # (1)!
 esac
 # Narrow patterns on purpose — "anthropic" alone would block legitimate
 # commits about Anthropic SDK code; widen only if something slips.
-if printf '%s' "$cmd" | grep -qiE 'co-authored-by:[^"]*\b(claude|anthropic)|generated with|noreply@anthropic\.com|🤖'; then
+if printf '%s' "$cmd" | grep -qiE 'co-authored-by:[^"]*\b(claude|anthropic)|generated with|noreply@anthropic\.com|🤖'; then # (2)!
   echo "Commit bloccato: il messaggio viola le regole del CLAUDE.md. Riscrivilo." >&2
-  exit 2
+  exit 2 # (3)!
 fi
 exit 0
 ```
+
+1. Esce subito se il comando non è un commit: zero costo sul 99% dei casi.
+2. I pattern sono volutamente stretti (`anthropic` da solo bloccherebbe
+   commit legittimi su codice che usa l'SDK Anthropic), perché un guardiano
+   che grida ai falsi positivi finisce disattivato.
+3. L'exit code 2 blocca il tool **e** spiega al modello il perché, così si
+   corregge da solo al colpo dopo.
 
 Le scelte che contano: esce subito se il comando non è un commit (zero costo
 sul 99% dei casi); l'exit code 2 blocca il tool **e** spiega al modello il
@@ -242,8 +253,11 @@ description che delimita il confine con gli agenti affini ("NOT for
 Terraform → usa terraform-expert"): è quella delimitazione che permette alla
 sessione di scegliere l'agente giusto senza sbagliare.
 
-Una domanda sola riassume il criterio dei tre tier: *questo ruolo giudica,
-lavora o esegue?* La sessione principale resta l'orchestratore sul modello di punta;
+!!! note "I tre tier"
+    Una domanda sola riassume il criterio dei tre tier: *questo ruolo
+    giudica, lavora o esegue?*
+
+La sessione principale resta l'orchestratore sul modello di punta;
 chi giudica lo affianca alla pari, chi lavora e chi esegue scala di tier. E
 l'altitudine risolve il buco che i language expert da soli lasciavano
 scoperto: scrivere in un linguaggio ormai è la parte facile, *scegliere come
